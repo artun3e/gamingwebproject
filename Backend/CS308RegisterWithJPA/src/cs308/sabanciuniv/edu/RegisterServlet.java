@@ -70,16 +70,31 @@ public class RegisterServlet extends HttpServlet {
 			}
 			else
 			{
-				User temp = new User(name, lastname, email, new String(hash, "UTF-8"));
-				EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
-				EntityManager entityManager = emf.createEntityManager();
-				entityManager.getTransaction().begin();
+				//validate email address
+				Validations validations = new Validations(); // new object
+				// maybe add try catch later
+				//out.println(validations.validateEmailAddress(email));
+				if(validations.validateEmailAddress(email).contentEquals("Valid Email Address"))
+				{
+					User temp = new User(name, lastname, email, new String(hash, "UTF-8"));
+					EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
+					EntityManager entityManager = emf.createEntityManager();
+					entityManager.getTransaction().begin();
+					
+					entityManager.persist(temp);
+					
+					entityManager.getTransaction().commit();
+					
+					response.sendRedirect("secure.html");
+				}
 				
-				entityManager.persist(temp);
-				
-				entityManager.getTransaction().commit();
-				
-				response.sendRedirect("secure.html");
+				else
+				{
+					// trial purposes
+					out.println("invalid email!!!");
+				}
+	
+			
 			}
 		} catch (Exception e) {
 			PrintWriter out = response.getWriter();
