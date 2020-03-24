@@ -53,7 +53,7 @@ public class verifyEmail extends HttpServlet {
 			
 			if(correctCode.contentEquals(userInput))
 			{
-				User temp = new User(session.getAttribute("name").toString(), session.getAttribute("lastname").toString(), session.getAttribute("email").toString(), new String(hash, "UTF-8"));
+				User temp = new User(session.getAttribute("name").toString(), session.getAttribute("email").toString(), new String(hash, "UTF-8"));
 				
 				EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
 				EntityManager entityManager = emf.createEntityManager();

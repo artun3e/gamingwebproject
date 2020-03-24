@@ -3,6 +3,8 @@ package cs308.sabanciuniv.edu;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.SecureRandom;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -41,46 +43,29 @@ public class RegisterServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String name = request.getParameter("name");
-			String lastname = request.getParameter("lastname");
 			String password = request.getParameter("pass");
 			String email = request.getParameter("email");
 			User searchResult = User.findByEmail(email);
+			List linkedlist = new LinkedList();
+			if(name.length() == 0)
+			{
+				linkedlist.add("Name cannot be empty");
+			}
+			if(password.length() == 0)
+			{
+				linkedlist.add("Password cannot be empty");
+			}
 			if(searchResult != null)
 			{
+				linkedlist.add("Email already in use...");
 				PrintWriter out = response.getWriter();
-				out.println("<meta http-equiv='refresh' content='2;URL=login.html'>"); 
-				out.println("<p style='color:green;'>The email is already in use...</p>");
+				//out.println("<h3 style=\"color: green\">\r\n" + "Email already in use!!!\r\n" + "</h3>");
+				out.println("<html><meta http-equiv='refresh' content='2;URL=login.html'>"); 
+				out.println("<p style='color:green;'>The email is already in use...</p></html>");
 				return;
 			}
 			else
 			{
-<<<<<<< HEAD
-				//validate email address
-				Validations validations = new Validations(); // new object
-				// maybe add try catch later
-				//out.println(validations.validateEmailAddress(email));
-				if(validations.validateEmailAddress(email).contentEquals("Valid Email Address"))
-				{
-					User temp = new User(name, lastname, email, new String(hash, "UTF-8"));
-					EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
-					EntityManager entityManager = emf.createEntityManager();
-					entityManager.getTransaction().begin();
-					
-					entityManager.persist(temp);
-					
-					entityManager.getTransaction().commit();
-					
-					response.sendRedirect("secure.html");
-				}
-				
-				else
-				{
-					// trial purposes
-					out.println("invalid email!!!");
-				}
-	
-			
-=======
 				/*
 				User temp = new User(name, lastname, email, new String(hash, "UTF-8"));
 				EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
@@ -103,7 +88,6 @@ public class RegisterServlet extends HttpServlet {
 				session.setAttribute("mycode", formatted);
 				session.setAttribute("name", name);
 				session.setAttribute("email", email);
-				session.setAttribute("lastname", lastname);
 				session.setAttribute("password", password);
 				
 				response.sendRedirect("verify.html");
@@ -111,13 +95,11 @@ public class RegisterServlet extends HttpServlet {
 				//RequestDispatcher rd = request.getRequestDispatcher("verify.html");
 				
 				//rd.forward(request, response);
-				
->>>>>>> Aybars
 			}
 		} catch (Exception e) {
 			PrintWriter out = response.getWriter();
-			out.println("<meta http-equiv='refresh' content='2;URL=register.html'>"); 
-			out.println("<p style='color:orange;'>Please make sure to fill all the entries...</p>");
+			out.println("<html><meta http-equiv='refresh' content='2;URL=register.html'>"); 
+			out.println("<p style='color:orange;'>Please make sure to fill all the entries...</p></html>");
 			e.printStackTrace();
 		}
 	}
