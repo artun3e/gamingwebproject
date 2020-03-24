@@ -2,22 +2,15 @@ package cs308.sabanciuniv.edu;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.text.SimpleDateFormat;
+import java.security.SecureRandom;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class RegisterServlet
@@ -50,10 +43,7 @@ public class RegisterServlet extends HttpServlet {
 			String name = request.getParameter("name");
 			String lastname = request.getParameter("lastname");
 			String password = request.getParameter("pass");
-			String passwordRepeated = request.getParameter("passRepeated");
 			String email = request.getParameter("email");
-			MessageDigest digest = MessageDigest.getInstance("SHA-256");
-			byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
 			User searchResult = User.findByEmail(email);
 			if(searchResult != null)
 			{
@@ -62,14 +52,9 @@ public class RegisterServlet extends HttpServlet {
 				out.println("<p style='color:green;'>The email is already in use...</p>");
 				return;
 			}
-			if(!password.contentEquals(passwordRepeated))
-			{
-				PrintWriter out = response.getWriter();
-				out.println("<meta http-equiv='refresh' content='2;URL=register.html'>"); //redirects after 2 seconds
-				out.println("<p style='color:red;'>Passwords don't match!!!!</p>");
-			}
 			else
 			{
+				/*
 				User temp = new User(name, lastname, email, new String(hash, "UTF-8"));
 				EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
 				EntityManager entityManager = emf.createEntityManager();
@@ -78,8 +63,28 @@ public class RegisterServlet extends HttpServlet {
 				entityManager.persist(temp);
 				
 				entityManager.getTransaction().commit();
+				*/
 				
-				response.sendRedirect("secure.html");
+				SecureRandom random = new SecureRandom();
+				int num = random.nextInt(1000000);
+				String formatted = String.format("%05d", num); 
+				
+				JavaMailUtil.sendMail(name, request.getParameter("email"), formatted);
+				
+				HttpSession session = request.getSession();
+				
+				session.setAttribute("mycode", formatted);
+				session.setAttribute("name", name);
+				session.setAttribute("email", email);
+				session.setAttribute("lastname", lastname);
+				session.setAttribute("password", password);
+				
+				response.sendRedirect("verify.html");
+				
+				//RequestDispatcher rd = request.getRequestDispatcher("verify.html");
+				
+				//rd.forward(request, response);
+				
 			}
 		} catch (Exception e) {
 			PrintWriter out = response.getWriter();
