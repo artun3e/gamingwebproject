@@ -46,20 +46,9 @@ public class RegisterServlet extends HttpServlet {
 			String password = request.getParameter("pass");
 			String email = request.getParameter("email");
 			User searchResult = User.findByEmail(email);
-			List linkedlist = new LinkedList();
-			if(name.length() == 0)
-			{
-				linkedlist.add("Name cannot be empty");
-			}
-			if(password.length() == 0)
-			{
-				linkedlist.add("Password cannot be empty");
-			}
 			if(searchResult != null)
 			{
-				linkedlist.add("Email already in use...");
 				PrintWriter out = response.getWriter();
-				//out.println("<h3 style=\"color: green\">\r\n" + "Email already in use!!!\r\n" + "</h3>");
 				out.println("<html><meta http-equiv='refresh' content='2;URL=login.html'>"); 
 				out.println("<p style='color:green;'>The email is already in use...</p></html>");
 				return;
