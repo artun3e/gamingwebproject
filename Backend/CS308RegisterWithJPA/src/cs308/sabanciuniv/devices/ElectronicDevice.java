@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -19,7 +21,15 @@ public abstract class ElectronicDevice {
 	private String Manufacturer;
 	enum deviceTypes { Laptop, Phone, Headphone, Keyboard, PC, Mouse, TV, PC_Parts, GameConsoles, Accessories, DEFAULT } //TODO add more devices here
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private deviceTypes Type = deviceTypes.DEFAULT;
+	private int id;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public deviceTypes getType() {
 		return Type;
 	}
@@ -46,6 +56,7 @@ public abstract class ElectronicDevice {
 	}
 	public ElectronicDevice(String name, int price, String manufacturer, deviceTypes type) {
 		//super();
+		this.id = 0;
 		this.name = name;
 		this.price = price;
 		Manufacturer = manufacturer;

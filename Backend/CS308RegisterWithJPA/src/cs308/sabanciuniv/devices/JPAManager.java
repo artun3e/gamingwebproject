@@ -16,6 +16,10 @@ public class JPAManager {
 		
 		entityManager.getTransaction().commit();
 		
-		System.out.println("Electronic device with the following information: " + device + " has been inserted into db");
+		System.out.println("Electronic device with the following information: ");
+		
+		System.out.println(device);
+		
+		System.out.println("has been inserted into db");
 	}
 }

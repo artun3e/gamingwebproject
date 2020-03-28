@@ -8,6 +8,7 @@ import java.security.MessageDigest;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,16 +17,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class verifyEmail
+ * Servlet implementation class ResetPassword
  */
-@WebServlet("/verify")
-public class verifyEmail extends HttpServlet {
+@WebServlet(name = "resetpassword", urlPatterns = { "/resetpassword" })
+public class ResetPassword extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public verifyEmail() {
+    public ResetPassword() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,37 +44,45 @@ public class verifyEmail extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			
 			HttpSession session = request.getSession();
-		
-			MessageDigest digest = MessageDigest.getInstance("SHA-256");
-			byte[] hash = digest.digest(session.getAttribute("password").toString().getBytes(StandardCharsets.UTF_8));
 			String correctCode = session.getAttribute("mycode").toString();
-			String userInput = request.getParameter("usercode");
-			
-			if(correctCode.contentEquals(userInput))
+			String useremail = session.getAttribute("email").toString();
+			String userCode = request.getParameter("usercode");
+			if(correctCode.contentEquals(userCode))
 			{
-				User temp = new User(session.getAttribute("name").toString(), session.getAttribute("email").toString(), new String(hash, "UTF-8"));
-				
 				EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
-				EntityManager entityManager = emf.createEntityManager();
-				entityManager.getTransaction().begin();
+				EntityManager em = emf.createEntityManager();
+				MessageDigest digest = MessageDigest.getInstance("SHA-256");
+				byte[] hash = digest.digest(request.getParameter("password").getBytes(StandardCharsets.UTF_8));
 				
-				entityManager.persist(temp);
+				em.getTransaction().begin();
 				
-				entityManager.getTransaction().commit();
-				response.sendRedirect("secure.html");
+				Query query = em.createQuery("UPDATE User SET password = :newpass WHERE EMAIL = :email");
+				query.setParameter("newpass", new String(hash, "UTF-8"));
+				query.setParameter("email", useremail);
+				int number = query.executeUpdate();
+				System.out.println(number + " of rows have been updated...");
+				
+				
+				em.getTransaction().commit();
+				
+				PrintWriter out = response.getWriter();
+				out.println("<html><meta http-equiv='refresh' content='3;URL=login.html'>"); 
+				out.println("<p style='color:green;'>Password changed successfully, redirecting to the login page in 3 seconds</p></html>");
 			}
 			else
 			{
 				PrintWriter out = response.getWriter();
-				out.println("<html><meta http-equiv='refresh' content='3;URL=verify.html'>"); //redirects after 3 seconds
-				out.println("<p style='color:red;'>The verification code is invalid!!!</p></html>");
+				out.println("<html><meta http-equiv='refresh' content='3;URL=forgotpassword.html'>"); 
+				out.println("<p style='color:red;'>Verification code is incorrect!!!</p></html>");
 			}
 		} 
-		catch (Exception e) {
+		catch (Exception e) 
+		{
 			e.printStackTrace();
+			// TODO: handle exception
 		}
+
 	}
 
 }

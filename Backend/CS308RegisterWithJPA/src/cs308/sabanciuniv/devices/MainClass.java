@@ -6,7 +6,7 @@ public class MainClass {
 
 	public static void main(String[] args) {
 		Laptop l1 = new Laptop("XPS 13", 5000, "DELL", deviceTypes.Laptop);
-		//ElectronicDevice e1 = new ElectronicDevice("TestElectronic", 300, "Tester", deviceTypes.DEFAULT);
+		Phone p1 = new Phone("OnePlus 5T", 3000, "Oneplus", deviceTypes.Phone, "2,45 GHz Quad Core + 1,9 GHz Quad Core", "6 GB", "1080 x 2160", "6,01", "64 GB", "3300 mAh", "16 MP + 20 MP");
 		System.out.println(l1);
 		/*#############################################################
 		 * 															  *
@@ -15,9 +15,13 @@ public class MainClass {
 		 * 															  *
 		 * 															  *
 		 *############################################################# 															 */
+		
+		
 		System.out.println("____________________Database tests below_________________");
 		
 		JPAManager.insertDeviceToDB(l1);
+		JPAManager.insertDeviceToDB(p1);
+		
 	}
 
 }

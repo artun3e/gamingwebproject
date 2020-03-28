@@ -54,15 +54,15 @@ public class LoginServlet extends HttpServlet {
 				else
 				{
 					PrintWriter out = response.getWriter();
-					out.println("<meta http-equiv='refresh' content='3;URL=register.html'>"); //redirects after 3 seconds
-					out.println("<p style='color:red;'>Wrong Password!!!!!</p>");
+					out.println("<html><meta http-equiv='refresh' content='3;URL=register.html'>"); //redirects after 3 seconds
+					out.println("<p style='color:red;'>Wrong Password!!!!!</p></html>");
 				}
 			}
 			else
 			{
 				PrintWriter out = response.getWriter();
-				out.println("<meta http-equiv='refresh' content='3;URL=register.html'>"); //redirects after 3 seconds
-				out.println("<p style='color:red;'>No such email was found, redirecting to the register page</p>");
+				out.println("<html><meta http-equiv='refresh' content='3;URL=register.html'>"); //redirects after 3 seconds
+				out.println("<p style='color:red;'>No such email was found, redirecting to the register page</p></html>");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
