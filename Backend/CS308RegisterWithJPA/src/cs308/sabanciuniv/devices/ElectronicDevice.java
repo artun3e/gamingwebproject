@@ -1,17 +1,31 @@
 package cs308.sabanciuniv.devices;
 
-public class ElectronicDevice {
-	public ElectronicDevice(String name, int price, String manufacturer) {
-		//super();
-		this.name = name;
-		this.price = price;
-		Manufacturer = manufacturer;
-	}
+import java.util.ArrayList;
+import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Persistence;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "ElectronicDevices")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public abstract class ElectronicDevice {
 	private String name;
 	private int price;
 	private String Manufacturer;
-	enum deviceTypes { Laptop, Phone, Headphone, Earphone, PC, DEFAULT } //TODO add more devices here
-	
+	enum deviceTypes { Laptop, Phone, Headphone, Keyboard, PC, Mouse, TV, PC_Parts, GameConsoles, Accessories, DEFAULT } //TODO add more devices here
+	@Id
+	private deviceTypes Type = deviceTypes.DEFAULT;
+	public deviceTypes getType() {
+		return Type;
+	}
+	public void setType(deviceTypes type) {
+		Type = type;
+	}
 	public String getName() {
 		return name;
 	}
@@ -30,4 +44,38 @@ public class ElectronicDevice {
 	public void setManufacturer(String manufacturer) {
 		Manufacturer = manufacturer;
 	}
+	public ElectronicDevice(String name, int price, String manufacturer, deviceTypes type) {
+		//super();
+		this.name = name;
+		this.price = price;
+		Manufacturer = manufacturer;
+		Type = type;
+	}
+	
+	public ElectronicDevice() {
+		//super();
+	}
+	
+	public ArrayList<ElectronicDevice> findByManufacturer(String manufacturerName)
+	{
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
+		EntityManager em = emf.createEntityManager();
+		try 
+		{
+			ArrayList<ElectronicDevice> deviceList = new ArrayList<ElectronicDevice>();
+			for(Object o:em.createQuery("From ElectronicDevices WHERE Manufacturer LIKE :manufacturerName").setParameter("manufacturerName", manufacturerName).getResultList())
+			{
+				deviceList.add((ElectronicDevice)o);
+			}
+			return deviceList;
+		} 
+		catch (Exception e) 
+		{
+			return null;
+		}
+	}	
+	
+	@Override
+	public abstract String toString();
+	
 }

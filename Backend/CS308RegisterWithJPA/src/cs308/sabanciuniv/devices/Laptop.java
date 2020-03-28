@@ -1,8 +1,11 @@
 package cs308.sabanciuniv.devices;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
+@Entity(name = "Laptop")
+@DiscriminatorValue("Laptop")
 public class Laptop extends ElectronicDevice{
-	private deviceTypes deviceType = deviceTypes.Laptop;
 	private String CPU;
 	private String GPU;
 	private String RAM;
@@ -53,29 +56,24 @@ public class Laptop extends ElectronicDevice{
 	public void setMonitorWidth(String monitorWidth) {
 		MonitorWidth = monitorWidth;
 	}
-	public deviceTypes getDeviceType() {
-		return deviceType;
-	}
-	public Laptop(String name, int price, String manufacturer, String cPU, String  gPU,
-			String rAM, String motherboard, String monitorResolution, String monitorWidth) {
-		super(name, price, manufacturer);
+
+	public Laptop(String name, int price, String manufacturer, deviceTypes type, String cPU, String gPU, String rAM,
+			String motherboard, String monitorResolution, String monitorWidth, String operatingSystem) {
+		super(name, price, manufacturer, type);
 		CPU = cPU;
 		GPU = gPU;
 		RAM = rAM;
 		Motherboard = motherboard;
 		MonitorResolution = monitorResolution;
 		MonitorWidth = monitorWidth;
+		OperatingSystem = operatingSystem;
 	}
 	
-	public Laptop(String name, int price, String manufacturer) {
-		super(name, price, manufacturer);
-		CPU = null;
-		GPU = null;
-		RAM = null;
-		Motherboard = null;
-		MonitorResolution = null;
-		MonitorWidth = null;
+	
+	public Laptop(String name, int price, String manufacturer, deviceTypes type) {
+		super(name, price, manufacturer, type);
 	}
+	
 	@Override
 	public String toString() {
 		return "Laptop Name: " + this.getName() +  "\nManufactured by: " + this.getManufacturer() + "\nPrice: "  + this.getPrice() + "$"  + "\nSpecs:" + "\n\tCPU: "+ this.getCPU() +
