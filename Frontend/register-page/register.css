@@ -1,6 +1,6 @@
 /* Add a black background color to the top navigation */
 .topnav {
-    background-color: #333;
+    background-color: white;
     /* overflow: hidden; */
     height: 115;
     display: flex;
@@ -10,7 +10,7 @@
   /* Style the links inside the navigation bar */
   .topnav .row1 a {
     /* float: left; */
-    color: #f2f2f2;
+    color: white;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -18,7 +18,7 @@
   }
   .topnav .row1 .dropdown a {
     /* float: left; */
-    color: black;
+    color: white;
   }
   .row1{
     position: relative;
@@ -34,7 +34,7 @@
 
   .row2 .dropbtn{
     width: 180px;
-    background-color: beige;
+    background-color: white;
     color: black;
     border-radius: 10px;
     border-color: white;
@@ -42,7 +42,7 @@
   
   /* Change the color of links on hover */
   .topnav a:hover {
-    background-color: green;
+    background-color: white;
     color: black;
   }
   
@@ -82,10 +82,12 @@ input.register{
     font-size: 20px;
     text-align: center;
     line-height: 40px;
-    width: 300px;
+    width: 540px;
     border-radius:10px;
     margin-bottom: 5px;
     border: black;
+    border-style: solid;
+    border-width: 1px;
 }
 
 button{
@@ -103,7 +105,8 @@ button{
 
 .register-right{
     padding-right: 10px;
-    margin-top: 15%;
+    margin-top: 10%;
+    margin-left: 2%;
     width: 40%;
 }
 
@@ -118,21 +121,30 @@ button{
   border: none;
 }
 
+
+
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
   position: relative;
   display: inline-block;
+  text-align: center !important;
+  
 }
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
   display: none;
   position: absolute; /* Makes dropdown content shown on the right of the button */
-  right: 0;
+  right: auto;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+  -o-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
   background-color: #f1f1f1;
   min-width: 150px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
+  
 }
 .row2 .dropdown-content {
   display: none;
@@ -167,7 +179,7 @@ button{
   bottom: 0;
   font-size: 20px;
   width: 100%;
-  background-color: gray;
+  background-color: white;
   color: black;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   
