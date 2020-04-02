@@ -1,6 +1,7 @@
 package cs308.sabanciuniv.devices;
 
 import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
 @Entity(name = "Tablet")
 @DiscriminatorValue("Tablet")

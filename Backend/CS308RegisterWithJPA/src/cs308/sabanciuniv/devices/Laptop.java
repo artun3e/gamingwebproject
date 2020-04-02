@@ -120,10 +120,7 @@ public class Laptop extends ElectronicDevice implements Specs{
 				"\n\tResolution: " + this.getResolution() + "\n\tMonitorWidth: " + this.getScreenWidth() + "\n\tBattery Capacity: " + this.getBattery() + "\n\tCamera: " + this.getCamera();
 	}
 	
-	/*
-	 * TODO json instead of toString for compatabilty with front end
-	 * 
-	 * 
-	 */
-	 */
+	
+	 // TODO json instead of toString for compatabilty with front end
+
 }

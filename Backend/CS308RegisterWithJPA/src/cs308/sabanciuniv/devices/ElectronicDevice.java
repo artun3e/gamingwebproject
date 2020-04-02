@@ -86,6 +86,26 @@ public abstract class ElectronicDevice {
 		}
 	}	
 	
+	// WARNING!! I DON'T KNOW IF THE COLUM NAME IS NAME IN THE DATABASE, I JUST ASSUMED IT IS SINCE I DON'T HAVE THE DATABASE.
+	public ArrayList<ElectronicDevice> findByName(String name)
+	{
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
+		EntityManager em = emf.createEntityManager();
+		try 
+		{
+			ArrayList<ElectronicDevice> deviceList = new ArrayList<ElectronicDevice>();
+			for(Object o:em.createQuery("From ElectronicDevices WHERE Manufacturer LIKE :name").setParameter("name", name).getResultList())
+			{
+				deviceList.add((ElectronicDevice)o);
+			}
+			return deviceList;
+		} 
+		catch (Exception e) 
+		{
+			return null;
+		}
+	}	
+	
 	@Override
 	public abstract String toString();
 	

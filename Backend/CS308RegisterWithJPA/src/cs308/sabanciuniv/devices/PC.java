@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 
 @Entity(name = "PC")
 @DiscriminatorValue("PC")
-public class Laptop extends ElectronicDevice implements Specs{
+public class PC extends ElectronicDevice implements Specs{
 	private String CPU;
 	private String GPU;
 	private String RAM;
@@ -17,6 +17,7 @@ public class Laptop extends ElectronicDevice implements Specs{
 	private String Battery;
 	private String Storage;
 	private String CoolerSystem;
+	
 	@Override
 	public String getStorage() {
 		return Storage;
@@ -92,16 +93,12 @@ public class Laptop extends ElectronicDevice implements Specs{
 	public void setScreenWidth(String screenWidth) {
 		this.screenWidth = screenWidth;
 	}
-	
 	public String getCoolerSystem(){
 		return this.CoolerSystem;
 	}
-	
 	public void setCoolerSystem(String CoolerSystem){
 		this.CoolerSystem = CoolerSystem;
 	}
-	
-
 	public PC(String name, int price, String manufacturer, deviceTypes type, String cPU, String gPU, String rAM,
 			String motherboard, String resolution, String screenWidth, String operatingSystem, String camera,
 			String battery, String storage,String CoolerSystem) {
@@ -118,12 +115,9 @@ public class Laptop extends ElectronicDevice implements Specs{
 		this.Storage = storage;
 		this.CoolerSystem = CoolerSystem;
 	}
-	
-	
 	public PC(String name, int price, String manufacturer, deviceTypes type) {
 		super(name, price, manufacturer, type);
 	}
-	
 	@Override // jsona cevirmemiz lazim bu datayi
 	public String toString() {
 		return "PC Name: " + this.getName() +  "\nManufactured by: " + this.getManufacturer() + "\nPrice: "  + this.getPrice() + "$"  + "\nSpecs:" + "\n\tCPU: "+ this.getCPU() +
@@ -131,11 +125,6 @@ public class Laptop extends ElectronicDevice implements Specs{
 				"\n\tResolution: " + this.getResolution() + "\n\tMonitorWidth: " + this.getScreenWidth() + "\n\tBattery Capacity: " + this.getBattery() + "\n\tCamera: " + this.getCamera()
 				+"\n\tCooler System: " + this.getCoolerSystem();
 	}
-	
-	/*
-	 * TODO json instead of toString for compatabilty with front end
-	 * 
-	 * 
-	 */
-	 */
+	 // TODO json instead of toString for compatabilty with front end
+	 
 }

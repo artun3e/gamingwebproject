@@ -1,6 +1,7 @@
 package cs308.sabanciuniv.devices;
 
 import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
 @Entity(name = "Earphone")
 @DiscriminatorValue("Earphone")
@@ -59,7 +60,7 @@ public class Earphone extends ElectronicDevice implements AudioSpecs{
 	}
 	
 	@Override
-	public string getBluetooth(){
+	public String getBluetooth(){
 		return this.Bluetooth;
 	}
 	
@@ -77,7 +78,8 @@ public class Earphone extends ElectronicDevice implements AudioSpecs{
 	//Constructor
 	public Earphone(String name, int price, String manufacturer, deviceTypes type) {
 		super(name, price, manufacturer, type);
-		
+	}
+	
 	@Override
 	public String toString() {
 		return "Earphone Name: " + this.getName() +  "\nManufactured by: " + this.getManufacturer() + "\nPrice: "  + this.getPrice() + "$"  + "\nSpecs:" + "\n\tBattery Capacity: "+ this.getBattery() +
