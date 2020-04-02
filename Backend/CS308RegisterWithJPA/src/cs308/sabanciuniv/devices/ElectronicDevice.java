@@ -19,7 +19,7 @@ public abstract class ElectronicDevice {
 	private String name;
 	private int price;
 	private String Manufacturer;
-	enum deviceTypes { Laptop, Phone, Headphone, Keyboard, PC, Mouse, TV, PC_Parts, GameConsoles, Accessories, DEFAULT } //TODO add more devices here
+	enum deviceTypes { Laptop, Phone, Tablet, Headphone,Earphone, Keyboard, PC, Mouse, TV, PC_Parts, GameConsoles, Accessories, DEFAULT } //TODO add more devices here
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private deviceTypes Type = deviceTypes.DEFAULT;

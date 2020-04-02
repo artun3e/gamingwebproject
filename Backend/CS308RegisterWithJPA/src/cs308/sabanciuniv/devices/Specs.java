@@ -1,5 +1,6 @@
 package cs308.sabanciuniv.devices;
-
+// specs class is for phone,computer and tablet for now, we inherit the common attributes of specific Electronic devices
+// from specs class
 public interface Specs {
 	public void setCPU(String CPU);
 	public String getCPU();
