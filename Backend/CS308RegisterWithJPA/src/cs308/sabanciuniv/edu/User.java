@@ -11,19 +11,20 @@ import javax.persistence.Persistence;
 
 @Entity
 public class User {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	
+	// @GeneratedValue(strategy = GenerationType.IDENTITY)
+	//private int id;
 	private String name;
+	@Id
 	@Column(name="Email")
 	private String email;
 	private String password;
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+	//public int getId() {
+	//	return id;
+	//}
+	//public void setId(int id) {
+	//	this.id = id;
+	//}
 	public String getName() {
 		return name;
 	}
@@ -38,7 +39,7 @@ public class User {
 	}
 	public User(String name, String email, String password) {
 		//super();
-		this.id = 0;
+		//this.id = 0;
 		this.name = name;
 		this.email = email;
 		this.password = password;
@@ -62,6 +63,6 @@ public class User {
 		}
 	}
 	public User() {
-		this.id = 0;
+		//this.id = 0;
 	}
 }

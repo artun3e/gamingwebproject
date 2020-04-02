@@ -6,6 +6,9 @@ import java.security.SecureRandom;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -45,7 +48,10 @@ public class RegisterServlet extends HttpServlet {
 			String name = request.getParameter("name");
 			String password = request.getParameter("pass");
 			String email = request.getParameter("email");
-			User searchResult = User.findByEmail(email);
+			EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
+			EntityManager em = emf.createEntityManager();
+			//User searchResult = User.findByEmail(email);
+			User searchResult = em.find(User.class, email);
 			if(searchResult != null)
 			{
 				PrintWriter out = response.getWriter();
