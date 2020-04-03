@@ -30,17 +30,18 @@ public class ElectronicDeviceManager {
 			while(rs.next())
 			{
 				ElectronicDeviceTemp obj = new ElectronicDeviceTemp();
+				obj.setId(rs.getInt("id"));
 				obj.setName(rs.getString("name"));
 				obj.setBrand(rs.getString("brand"));
-				obj.setCategory(rs.getString("categories"));
-				obj.setPrimaryCategory(rs.getString("primaryCategories"));
-				obj.setPrice(rs.getDouble("prices.amountMax"));
-				obj.setCurrency(rs.getString("prices.currency"));
-				obj.setOnSale(rs.getBoolean("prices.isSale"));
-				obj.setMerchant(rs.getString("prices.merchant"));
+				obj.setCategory(rs.getString("category"));
+				obj.setPrimaryCategory(rs.getString("primaryCategory"));
+				obj.setPrice(rs.getDouble("price"));
+				obj.setCurrency(rs.getString("currency"));
+				obj.setOnSale(rs.getBoolean("onSale"));
+				obj.setMerchant(rs.getString("merchant"));
 				obj.setImageURLs(rs.getString("imageURLs"));
 				obj.setManufacturer(rs.getString("manufacturer"));
-				obj.setSourceURL(rs.getString("sourceURLs"));
+				obj.setSourceURL(rs.getString("sourceURL"));
 				resultList.add(obj);
 			}
 			return resultList;

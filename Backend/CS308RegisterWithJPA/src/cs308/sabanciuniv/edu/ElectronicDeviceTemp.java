@@ -1,19 +1,32 @@
 package cs308.sabanciuniv.edu;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="ElectronicDevice")
 public class ElectronicDeviceTemp {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 	private double price;
 	private String currency;
 	private boolean onSale;
 	private String merchant;
 	private String brand;
+	@Column(length=2097152)
 	private String category;
+	@Column(length=2097152)
 	private String imageURLs;
 	private String manufacturer;
 	private String name;
 	private String primaryCategory;
+	@Column(length=2097152)
 	private String sourceURL;
 	public ElectronicDeviceTemp(double price, String currency, boolean onSale, String merchant, String brand,
 			String category, String imageURLs, String manufacturer, String name, String primaryCategory,
@@ -99,6 +112,12 @@ public class ElectronicDeviceTemp {
 	}
 	public void setSourceURL(String sourceURL) {
 		this.sourceURL = sourceURL;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	@Override
 	public String toString()
