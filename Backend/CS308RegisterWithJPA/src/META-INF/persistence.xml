@@ -7,6 +7,7 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>cs308.sabanciuniv.edu.User</class>
         <class>cs308.sabanciuniv.edu.ElectronicDeviceTemp</class>
+        <class>cs308.sabanciuniv.edu.Order</class>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://remotemysql.com:3306/XiiV7ZFMQd" />
             <property name="javax.persistence.jdbc.user" value="XiiV7ZFMQd"/>

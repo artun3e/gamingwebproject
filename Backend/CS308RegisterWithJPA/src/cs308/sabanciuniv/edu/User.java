@@ -1,5 +1,8 @@
 package cs308.sabanciuniv.edu;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -7,6 +10,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Persistence;
 
 @Entity
@@ -19,12 +23,22 @@ public class User {
 	@Column(name="Email")
 	private String email;
 	private String password;
+	@OneToMany
+	private List<Order> orders;
 	//public int getId() {
 	//	return id;
 	//}
 	//public void setId(int id) {
 	//	this.id = id;
 	//}
+	public List<Order> getOrders()
+	{
+		return orders;
+	}
+	public void addOrder(Order o)
+	{
+		orders.add(o);
+	}
 	public String getName() {
 		return name;
 	}
@@ -40,6 +54,7 @@ public class User {
 	public User(String name, String email, String password) {
 		//super();
 		//this.id = 0;
+		orders = new ArrayList<Order>();
 		this.name = name;
 		this.email = email;
 		this.password = password;
@@ -63,6 +78,7 @@ public class User {
 		}
 	}
 	public User() {
+		orders = new ArrayList<Order>();
 		//this.id = 0;
 	}
 }

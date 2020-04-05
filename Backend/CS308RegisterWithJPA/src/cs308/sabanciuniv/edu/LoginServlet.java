@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class LoginServlet
@@ -41,6 +42,7 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("Login servlet, executed!");
 		// TODO Auto-generated method stub
 		try {
 			String emailInput = request.getParameter("email");
@@ -52,6 +54,8 @@ public class LoginServlet extends HttpServlet {
 				byte[] hash = digest.digest(passInput.getBytes(StandardCharsets.UTF_8));
 				if(searchResult.getPassword().contentEquals(new String(hash, "UTF-8")))
 				{
+					HttpSession session = request.getSession();
+					session.setAttribute("loggedIn", true);
 					response.sendRedirect("secure2.html");
 				}
 				else
