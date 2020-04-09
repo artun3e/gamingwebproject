@@ -9,9 +9,9 @@
         <class>cs308.sabanciuniv.edu.ElectronicDeviceTemp</class>
         <class>cs308.sabanciuniv.edu.Order</class>
         <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://remotemysql.com:3306/XiiV7ZFMQd" />
-            <property name="javax.persistence.jdbc.user" value="XiiV7ZFMQd"/>
-            <property name="javax.persistence.jdbc.password" value="XHEMcSeLpd"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc"/>
+            <property name="javax.persistence.jdbc.user" value="MnojkxD0Cc"/>
+            <property name="javax.persistence.jdbc.password" value="O44cHM61gZ"/>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />            
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
             <property name="hibernate.hbm2ddl.auto" value="update" />

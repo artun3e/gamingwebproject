@@ -19,9 +19,9 @@ public class OrderingUserTests {
 			String name = "Aybars Yazici";
 			byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
 			String hashedPassword = new String(hash, "UTF-8");
-			User testUser = new User(name,email,hashedPassword);
-			
 
+
+			User testUser = new User(name,email,hashedPassword);
 			Order newOrder = new Order("Istanbul, Pendik, Kurtkoy", testUser);
 			
 			ElectronicDeviceTemp device1 = entityManager.find(ElectronicDeviceTemp.class, 1);
