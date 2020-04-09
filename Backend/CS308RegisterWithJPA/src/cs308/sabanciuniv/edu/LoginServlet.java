@@ -1,19 +1,15 @@
 package cs308.sabanciuniv.edu;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 
 /**
  * Servlet implementation class LoginServlet
@@ -55,8 +51,11 @@ public class LoginServlet extends HttpServlet {
 				if(searchResult.getPassword().contentEquals(new String(hash, "UTF-8")))
 				{
 					HttpSession session = request.getSession();
-					session.setAttribute("loggedIn", true);
-					response.sendRedirect("secure2.html");
+					PrintWriter out = response.getWriter();
+					session.setAttribute("user", searchResult);
+					out.println("<html><meta http-equiv='refresh' content='1;URL=home_Deniz.html'>"); //redirects after 1 second
+					out.println("<p style='color:red;'>Successfully logged in, redirecting to home page...</p></html>");
+					//response.sendRedirect("home_Deniz.html");
 				}
 				else
 				{

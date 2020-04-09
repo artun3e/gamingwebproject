@@ -1,13 +1,10 @@
 package cs308.sabanciuniv.edu;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 
 public class OrderingUserTests {
 	public static void main(String args[])
