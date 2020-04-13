@@ -1,10 +1,5 @@
 package cs308.sabanciuniv.edu;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -15,6 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 
 /**
  * Servlet implementation class ResetPassword
@@ -65,7 +64,8 @@ public class ResetPassword extends HttpServlet {
 				
 				
 				em.getTransaction().commit();
-				
+				em.close();
+				emf.close();
 				PrintWriter out = response.getWriter();
 				out.println("<html><meta http-equiv='refresh' content='3;URL=login.html'>"); 
 				out.println("<p style='color:green;'>Password changed successfully, redirecting to the login page in 3 seconds</p></html>");

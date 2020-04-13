@@ -63,8 +63,12 @@ public class User {
 		try {
 			Object obj = em.createQuery("From User WHERE EMAIL LIKE :email").setParameter("email", email).getSingleResult();
 			User user = (User)obj;
+			em.close();
+			emf.close();
 			return user;
 		} catch (Exception e) {
+			em.close();
+			emf.close();
 			return null;
 		}
 	}

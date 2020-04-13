@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="CS308RegisterWithJPA:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/CS308RegisterWithJPA_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="CS308RegisterWithJPA" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="wildfly-18.0.1" />
+          <element id="library" level="project" name="Java EE 6" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="CS308RegisterWithJPA/web/Web" />
+    </root>
+  </artifact>
+</component>

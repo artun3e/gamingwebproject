@@ -1,0 +1,20 @@
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+    version="2.1">
+    <persistence-unit name="cs308" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>cs308.sabanciuniv.edu.User</class>
+        <class>cs308.sabanciuniv.edu.ElectronicDeviceTemp</class>
+        <class>cs308.sabanciuniv.edu.Order</class>
+        <properties>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc"/>
+            <property name="javax.persistence.jdbc.user" value="MnojkxD0Cc"/>
+            <property name="javax.persistence.jdbc.password" value="O44cHM61gZ"/>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />            
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+        </properties>
+    </persistence-unit>
+</persistence>

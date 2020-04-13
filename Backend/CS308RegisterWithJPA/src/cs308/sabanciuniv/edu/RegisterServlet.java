@@ -1,21 +1,17 @@
 package cs308.sabanciuniv.edu;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.security.SecureRandom;
-import java.util.LinkedList;
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.security.SecureRandom;
 
 /**
  * Servlet implementation class RegisterServlet
@@ -44,12 +40,12 @@ public class RegisterServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
+		EntityManager em = emf.createEntityManager();
+		try{
 			String name = request.getParameter("name");
 			String password = request.getParameter("pass");
 			String email = request.getParameter("email");
-			EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
-			EntityManager em = emf.createEntityManager();
 			//User searchResult = User.findByEmail(email);
 			User searchResult = em.find(User.class, email);
 			if(searchResult != null)
@@ -90,6 +86,7 @@ public class RegisterServlet extends HttpServlet {
 				//RequestDispatcher rd = request.getRequestDispatcher("verify.html");
 				
 				//rd.forward(request, response);
+
 			}
 		} catch (Exception e) {
 			PrintWriter out = response.getWriter();
@@ -97,6 +94,8 @@ public class RegisterServlet extends HttpServlet {
 			out.println("<p style='color:orange;'>Please make sure to fill all the entries...</p></html>");
 			e.printStackTrace();
 		}
+		em.close();
+		emf.close();
 	}
 
 }

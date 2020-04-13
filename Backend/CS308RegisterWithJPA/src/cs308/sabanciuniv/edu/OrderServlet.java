@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.util.HashMap;
@@ -44,37 +45,48 @@ public class OrderServlet extends HttpServlet {
 		System.out.println("In do post of order servlet!!!!");
 		try
 		{
-			ResultSet rs = null;
-			String userEmail = request.getParameter("mail");
-			String[] itemNames = request.getParameter("list_names").split(",");
-			String[] itemQuantities = request.getParameter("list_q").split(",");
-			Map<Integer, ElectronicDeviceTemp> hashmap = new HashMap<>();
-			EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
-			EntityManager em = emf.createEntityManager();
-			int countingVariable = 0;
-			for(String itemName : itemNames)
+			HttpSession session = request.getSession();
+			User user = (User)session.getAttribute("user");
+			if(user == null)
 			{
-				System.out.println("Query is " + itemName);
-				try
-				{
-					Object obj = em.createQuery("from ElectronicDeviceTemp where name=:nameTemp").setParameter("nameTemp", itemName).setMaxResults(1).getSingleResult();
-					ElectronicDeviceTemp temp = (ElectronicDeviceTemp) obj;
-					hashmap.put(Integer.parseInt(itemQuantities[countingVariable]),temp);
-				}
-				catch(NoResultException e)
-				{
-					System.out.println("Item could not be found in the database!!!");
-				}
-				countingVariable++;
+				session.setAttribute("order-error", "Please login before placing an order!!!!");
+				response.setHeader("order-error","true");
+				return;
 			}
-			User user = em.find(User.class, userEmail);
-			Order newOrder = new Order("TODO", user);
-			newOrder.setMap(hashmap);
-			user.addOrder(newOrder);
-			em.getTransaction().begin();
-			em.persist(newOrder);
-			em.getTransaction().commit();
-			System.out.println("Done!!!!!");
+			else{
+				ResultSet rs = null;
+				String userEmail = user.getEmail();
+				String[] itemNames = request.getParameter("list_names").split(",");
+				String[] itemQuantities = request.getParameter("list_q").split(",");
+				Map<Integer, ElectronicDeviceTemp> hashmap = new HashMap<>();
+				EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
+				EntityManager em = emf.createEntityManager();
+				int countingVariable = 0;
+				for(String itemName : itemNames)
+				{
+					System.out.println("Query is " + itemName);
+					try
+					{
+						Object obj = em.createQuery("from ElectronicDeviceTemp where name=:nameTemp").setParameter("nameTemp", itemName).setMaxResults(1).getSingleResult();
+						ElectronicDeviceTemp temp = (ElectronicDeviceTemp) obj;
+						hashmap.put(Integer.parseInt(itemQuantities[countingVariable]),temp);
+					}
+					catch(NoResultException e)
+					{
+						System.out.println("Item could not be found in the database!!!");
+					}
+					countingVariable++;
+				}
+				Order newOrder = new Order("TODO", user);
+				newOrder.setMap(hashmap);
+				user.addOrder(newOrder);
+				em.getTransaction().begin();
+				em.persist(newOrder);
+				em.getTransaction().commit();
+				em.close();
+				emf.close();
+				System.out.println("Done!!!!!");
+			}
 		}
 		catch(Exception e)
 		{

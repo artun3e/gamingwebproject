@@ -2,10 +2,7 @@ package cs308.sabanciuniv.edu;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
@@ -38,8 +35,6 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Login servlet, executed!");
-		// TODO Auto-generated method stub
 		try {
 			String emailInput = request.getParameter("email");
 			String passInput = request.getParameter("pass");
@@ -53,7 +48,7 @@ public class LoginServlet extends HttpServlet {
 					HttpSession session = request.getSession();
 					PrintWriter out = response.getWriter();
 					session.setAttribute("user", searchResult);
-					out.println("<html><meta http-equiv='refresh' content='1;URL=home_Deniz.html'>"); //redirects after 1 second
+					out.println("<html><meta http-equiv='refresh' content='1;URL=home_Deniz.jsp'>"); //redirects after 1 second
 					out.println("<p style='color:red;'>Successfully logged in, redirecting to home page...</p></html>");
 					//response.sendRedirect("home_Deniz.html");
 				}

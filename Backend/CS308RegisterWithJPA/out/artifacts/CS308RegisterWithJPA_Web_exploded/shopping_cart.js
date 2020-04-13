@@ -84,8 +84,6 @@ $(document).ready(function(){
     //var checkoutButton = document.getElementsByClassName('btn_check')
     var cartItemContainer = document.getElementsByClassName('products')[0]
     var cartRows = cartItemContainer.getElementsByClassName('product')
-    var user_name_elemnent = document.getElementsByClassName('user_mail')[0]
-    var user_name = user_name_elemnent.innerText
     //if(cartRows){
     	//
     	//Orders => Table için ("User_Email) alan ve bana o eklediği insan için bir ("Order_Id") dondüren fonksiyon
@@ -113,9 +111,20 @@ $(document).ready(function(){
     var url = "placeorder";
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    
-    var data_about = JSON.stringify({ "mail": user_name, "list_names": Item_Names, "list_q": Item_Q });
-    var params = 'mail='+user_name+'&list_names='+Item_Names+'&list_q='+Item_Q;
+    xhr.addEventListener('readystatechange', function (e) {
+      if(this.readyState === 4 )
+      {
+        console.log("we are done!!!!");
+        var returnedResponse = xhr.getResponseHeader("order-error");
+        if(returnedResponse === "true")
+        {
+          console.log("No login.");
+          window.location = "login.jsp";
+        }
+      }
+    });
+    var data_about = JSON.stringify({"list_names": Item_Names, "list_q": Item_Q });
+    var params = 'list_names='+Item_Names+'&list_q='+Item_Q;
     console.log(data_about);
     xhr.send(params);
   });
