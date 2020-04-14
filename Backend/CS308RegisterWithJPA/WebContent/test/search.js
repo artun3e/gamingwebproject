@@ -1,7 +1,7 @@
-function Call(searchQuery)
+function Call()
 {
     alert("Search suggestions can come here!!");
-    var value = searchQuery.value;  
+    var value = document.getElementById('search').value;
     const url = '/CS308RegisterWithJPA/search/fromDB/byName/' + value;
     async function getData(){
     	const response = await fetch(url);
