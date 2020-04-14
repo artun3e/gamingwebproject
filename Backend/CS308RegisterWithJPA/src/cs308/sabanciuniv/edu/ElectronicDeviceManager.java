@@ -43,6 +43,10 @@ public class ElectronicDeviceManager {
 				obj.setSourceURL(rs.getString("sourceURL"));
 				resultList.add(obj);
 			}
+			conn.close();
+			conn = null;
+			ps = null;
+			rs = null;
 			return resultList;
 		} 
 		catch (Exception e) {
@@ -50,4 +54,40 @@ public class ElectronicDeviceManager {
 			return resultList;
 		}
 	}
+	public static ElectronicDeviceTemp getDeviceByName(String name)
+	{
+		try 
+		{
+			Connection conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/XiiV7ZFMQd", "XiiV7ZFMQd", "XHEMcSeLpd");
+			PreparedStatement ps = conn.prepareStatement("Select * from ElectronicDevice WHERE name = ?");
+			ps.setString(1, name);
+			ResultSet rs = ps.executeQuery();
+			ElectronicDeviceTemp obj = new ElectronicDeviceTemp();
+			while(rs.next())
+			{
+				obj.setId(rs.getInt("id"));
+				obj.setName(rs.getString("name"));
+				obj.setBrand(rs.getString("brand"));
+				obj.setCategory(rs.getString("category"));
+				obj.setPrimaryCategory(rs.getString("primaryCategory"));
+				obj.setPrice(rs.getDouble("price"));
+				obj.setCurrency(rs.getString("currency"));
+				obj.setOnSale(rs.getBoolean("onSale"));
+				obj.setMerchant(rs.getString("merchant"));
+				obj.setImageURLs(rs.getString("imageURLs"));
+				obj.setManufacturer(rs.getString("manufacturer"));
+				obj.setSourceURL(rs.getString("sourceURL"));
+			}
+			conn.close();
+			conn = null;
+			ps = null;
+			rs = null;
+			return obj;
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 }
