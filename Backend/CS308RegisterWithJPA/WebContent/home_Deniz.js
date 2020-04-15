@@ -13,5 +13,6 @@ for(var i = 0; i < addToCartButtons.length; i++){
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         var params = 'itemName='+productName;
         xhr.send(params);
+        console.log("hello world, from home_deniz.js");
     })
 }
