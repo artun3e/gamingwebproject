@@ -72,7 +72,7 @@ async function getData(){
             var price = document.getElementsByClassName("product-body")[k].getElementsByTagName('h4')[0];
             brand.innerHTML = element.brand;
             name.innerHTML = element.name;
-            price.innerHTML = element.price;
+            price.innerHTML = "$" + element.price;
             }
         
         
@@ -83,6 +83,13 @@ async function getData(){
         	};
         }
         
+
+//    (async () => {
+//  	var b = (await getData());
+//  	b.forEach(element => fillCard(element));
+//  	console.log(element.brand);
+//})()
+
 
 
 }
