@@ -8,9 +8,11 @@
 <meta name="author" content="CS308">
 
 
-
+<!-- search fonksiyonlarinin calismasi icin gerekli css ve js dosyalari bunlardir -->
 <script src="search.js"></script>
-<link rel="stylesheet" href="search.css">
+<link rel="stylesheet" href="search.css"> 
+
+
  		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
  		<!-- Bootstrap -->
@@ -34,51 +36,13 @@
 <meta charset="UTF-8">
 </head>
 <header>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<div id="container" style="margin-right: 22%;">
 			
-			<div class="collapse navbar-collapse" id="navbarNav">
-				<ul class="navbar-nav mr-auto">
-					<li style="margin-left: 5%; margin-top: 5px;"><input id="search"  type="text" placeholder="Search.."  onkeydown="if (event.keyCode == 13) { Call(); }"></li>
-				
-				</ul>
-			</div>
-		</div>
-	</nav>
-
+					<!-- //frontend dosyalarinda search kismina yerlestirilecek element budur -->
+					<li style="margin-left: 5%; margin-top: 5px;"><input id="search"  type="text" placeholder="Search.."  onkeydown="if (event.keyCode == 13) { search(); }"></li>
+			
 </header>
 <body>
-<!-- 							<div class="col-md-4 col-xs-6">
-								<div class="product">
-									<div class="product-img">
-										<img src="product01.png" alt="">
-										<div class="product-label">
-											<span class="sale"></span>
-											<span class="new"></span>
-										</div>
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-										<div class="product-rating">
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div>
-										<div class="product-btns">
-											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-											<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-										</div>
-									</div>
-									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-									</div>
-								</div>
-							</div>  -->
+
 		<div class="main">
 			<h3> Here is your results </h3>
 			<br>
