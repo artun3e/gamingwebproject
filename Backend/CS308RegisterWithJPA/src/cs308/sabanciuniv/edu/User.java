@@ -1,29 +1,34 @@
 package cs308.sabanciuniv.edu;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Persistence;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class User {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	
+	// @GeneratedValue(strategy = GenerationType.IDENTITY)
+	//private int id;
 	private String name;
-	private String lastname;
+	@Id
 	@Column(name="Email")
 	private String email;
 	private String password;
-	public int getId() {
-		return id;
+	@OneToMany
+	private List<Order> orders;
+	//public int getId() {
+	//	return id;
+	//}
+	//public void setId(int id) {
+	//	this.id = id;
+	//}
+	public List<Order> getOrders()
+	{
+		return orders;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void addOrder(Order o)
+	{
+		orders.add(o);
 	}
 	public String getName() {
 		return name;
@@ -31,23 +36,17 @@ public class User {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getLastname() {
-		return lastname;
-	}
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
-	}
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public User(String name, String lastname, String email, String password) {
+	public User(String name, String email, String password) {
 		//super();
-		this.id = 0;
+		//this.id = 0;
+		orders = new ArrayList<Order>();
 		this.name = name;
-		this.lastname = lastname;
 		this.email = email;
 		this.password = password;
 	}
@@ -64,12 +63,17 @@ public class User {
 		try {
 			Object obj = em.createQuery("From User WHERE EMAIL LIKE :email").setParameter("email", email).getSingleResult();
 			User user = (User)obj;
+			em.close();
+			emf.close();
 			return user;
 		} catch (Exception e) {
+			em.close();
+			emf.close();
 			return null;
 		}
 	}
 	public User() {
-		this.id = 0;
+		orders = new ArrayList<Order>();
+		//this.id = 0;
 	}
 }

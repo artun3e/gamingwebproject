@@ -1,15 +1,5 @@
 package cs308.sabanciuniv.edu;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.text.SimpleDateFormat;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -18,6 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.security.SecureRandom;
 
 /**
  * Servlet implementation class RegisterServlet
@@ -46,62 +40,62 @@ public class RegisterServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
+		EntityManager em = emf.createEntityManager();
+		try{
 			String name = request.getParameter("name");
-			String lastname = request.getParameter("lastname");
 			String password = request.getParameter("pass");
-			String passwordRepeated = request.getParameter("passRepeated");
 			String email = request.getParameter("email");
-			MessageDigest digest = MessageDigest.getInstance("SHA-256");
-			byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-			User searchResult = User.findByEmail(email);
+			//User searchResult = User.findByEmail(email);
+			User searchResult = em.find(User.class, email);
 			if(searchResult != null)
 			{
 				PrintWriter out = response.getWriter();
-				out.println("<meta http-equiv='refresh' content='2;URL=login.html'>"); 
-				out.println("<p style='color:green;'>The email is already in use...</p>");
+				out.println("<html><meta http-equiv='refresh' content='2;URL=login.html'>"); 
+				out.println("<p style='color:green;'>The email is already in use...</p></html>");
 				return;
-			}
-			if(!password.contentEquals(passwordRepeated))
-			{
-				PrintWriter out = response.getWriter();
-				out.println("<meta http-equiv='refresh' content='2;URL=register.html'>"); //redirects after 2 seconds
-				out.println("<p style='color:red;'>Passwords don't match!!!!</p>");
 			}
 			else
 			{
-				//validate email address
-				Validations validations = new Validations(); // new object
-				// maybe add try catch later
-				//out.println(validations.validateEmailAddress(email));
-				if(validations.validateEmailAddress(email).contentEquals("Valid Email Address"))
-				{
-					User temp = new User(name, lastname, email, new String(hash, "UTF-8"));
-					EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
-					EntityManager entityManager = emf.createEntityManager();
-					entityManager.getTransaction().begin();
-					
-					entityManager.persist(temp);
-					
-					entityManager.getTransaction().commit();
-					
-					response.sendRedirect("secure.html");
-				}
+				/*
+				User temp = new User(name, lastname, email, new String(hash, "UTF-8"));
+				EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
+				EntityManager entityManager = emf.createEntityManager();
+				entityManager.getTransaction().begin();
 				
-				else
-				{
-					// trial purposes
-					out.println("invalid email!!!");
-				}
-	
-			
+				entityManager.persist(temp);
+				
+				entityManager.getTransaction().commit();
+				*/
+				
+				SecureRandom random = new SecureRandom();
+				int num = random.nextInt(1000000);
+				String formatted = String.format("%05d", num); 
+				
+				JavaMailUtil.sendMail(name, request.getParameter("email"), formatted);
+				
+				HttpSession session = request.getSession();
+				
+				session.setAttribute("mycode", formatted);
+				session.setAttribute("name", name);
+				session.setAttribute("email", email);
+				session.setAttribute("password", password);
+				
+				response.sendRedirect("verify.html");
+				
+				//RequestDispatcher rd = request.getRequestDispatcher("verify.html");
+				
+				//rd.forward(request, response);
+
 			}
 		} catch (Exception e) {
 			PrintWriter out = response.getWriter();
-			out.println("<meta http-equiv='refresh' content='2;URL=register.html'>"); 
-			out.println("<p style='color:orange;'>Please make sure to fill all the entries...</p>");
+			out.println("<html><meta http-equiv='refresh' content='2;URL=register.html'>"); 
+			out.println("<p style='color:orange;'>Please make sure to fill all the entries...</p></html>");
 			e.printStackTrace();
 		}
+		em.close();
+		emf.close();
 	}
 
 }
