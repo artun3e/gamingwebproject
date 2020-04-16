@@ -122,7 +122,7 @@
 
                         <div class="dropdown-content">
                             <a href="login.jsp">Login</a> <a href="register.html">Register</a> <a
-                                href="#orders">My Orders</a> <a href="#account">Account</a> <a
+                                href="myOrders.jsp">My Orders</a> <a href="#account">Account</a> <a
                                 href="#liked">Liked Ones</a>
                         </div></li>
                     <p><%
