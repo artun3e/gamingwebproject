@@ -2,7 +2,7 @@ function search()
 {   
     var value = document.getElementById('search').value; //gets value from search bar
     const url = '/CS308RegisterWithJPA/search/fromDB/byName/' + value; //goes to url which returns json list
-    window.location.href = 'searchResults.html';
+    /*window.location.href = 'searchResults.html';*/
 // function to get json object
 async function getData(){
     	const response = await fetch(url);
