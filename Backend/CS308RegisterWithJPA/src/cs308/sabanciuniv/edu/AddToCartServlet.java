@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "addtocart", urlPatterns = { "/addtocart" })
 public class AddToCartServlet extends HttpServlet {
@@ -28,19 +30,25 @@ public class AddToCartServlet extends HttpServlet {
 			System.out.println("You are not logged in!!!");
 			String itemName = request.getParameter("itemName");
 			Games temp = GamesManager.getDeviceByName(itemName);
+	
 			// Add products to card variable in the session...
 			if (session.getAttribute("cart") == null) {
-				List<Games> gamesList = new ArrayList<Games>();
-				gamesList.add(temp);
-				session.setAttribute("cart", gamesList);
-				
-				
-			} else {
-				Object object = session.getAttribute("cart");
-				List<Games> gameslist = (List) object;
-				gameslist.add(temp);
+				Map<Games, Integer> cartMap = new HashMap<>();
+		        cartMap.put(temp, 1);
+				session.setAttribute("cart", cartMap);
+					
+			} else { // cart is not null, however we don't know if the game that we want to add exists in the cart. If it exists we neet to increment the count of purchased games
+				Map<Games, Integer> cartMap = (Map<Games, Integer>) session.getAttribute("cart");
+				if(cartMap.containsKey(temp)) { // the game we want 
+					int count = cartMap.get(temp);
+					count = count +1;
+					cartMap.put(temp, count);
+				}
+				else { // it is the first one
+					cartMap.put(temp, 1);
+				}
 				session.removeAttribute("cart");
-				session.setAttribute("cart", gameslist);
+				session.setAttribute("cart", cartMap);
 			}
 			// session.setAttribute("cart", id);
 		} catch (Exception e) {
