@@ -2,7 +2,7 @@
 .topnav {
     background-color: white;
     /* overflow: hidden; */
-    height: 115;
+    height: 130;
     display: flex;
     flex-direction: column;
   }
