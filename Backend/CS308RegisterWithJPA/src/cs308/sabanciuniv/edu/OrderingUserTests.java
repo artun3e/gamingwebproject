@@ -24,9 +24,9 @@ public class OrderingUserTests {
 			User testUser = new User(name,email,hashedPassword);
 			Order newOrder = new Order("Istanbul, Pendik, Kurtkoy", testUser);
 			
-			ElectronicDeviceTemp device1 = entityManager.find(ElectronicDeviceTemp.class, 1);
-			ElectronicDeviceTemp device2 = entityManager.find(ElectronicDeviceTemp.class, 50);
-			ElectronicDeviceTemp device3 = entityManager.find(ElectronicDeviceTemp.class, 87);
+			Games device1 = entityManager.find(Games.class, 1);
+			Games device2 = entityManager.find(Games.class, 50);
+			Games device3 = entityManager.find(Games.class, 87);
 			
 			newOrder.addProduct(device1, 5);
 			newOrder.addProduct(device2, 3);

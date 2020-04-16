@@ -58,7 +58,7 @@ public class OrderServlet extends HttpServlet {
 				String userEmail = user.getEmail();
 				String[] itemNames = request.getParameter("list_names").split(",");
 				String[] itemQuantities = request.getParameter("list_q").split(",");
-				Map<Integer, ElectronicDeviceTemp> hashmap = new HashMap<>();
+				Map<Integer, Games> hashmap = new HashMap<>();
 				EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
 				EntityManager em = emf.createEntityManager();
 				int countingVariable = 0;
@@ -67,8 +67,8 @@ public class OrderServlet extends HttpServlet {
 					System.out.println("Query is " + itemName);
 					try
 					{
-						Object obj = em.createQuery("from ElectronicDeviceTemp where name=:nameTemp").setParameter("nameTemp", itemName).setMaxResults(1).getSingleResult();
-						ElectronicDeviceTemp temp = (ElectronicDeviceTemp) obj;
+						Object obj = em.createQuery("from Games where name=:nameTemp").setParameter("nameTemp", itemName).setMaxResults(1).getSingleResult();
+						Games temp = (Games) obj;
 						hashmap.put(Integer.parseInt(itemQuantities[countingVariable]),temp);
 					}
 					catch(NoResultException e)

@@ -9,6 +9,7 @@ import java.util.Map;
 @Entity
 @Table(name="Orders") 
 public class Order {
+	//TODO CHANGE ELECTRONÝCDEVÝCE TEMP TO GAME
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -18,12 +19,12 @@ public class Order {
 	private User owner;
 	@ManyToMany
 	@MapKeyColumn(name="Quantity")
-	Map<Integer, ElectronicDeviceTemp> products;
-	public void addProduct(ElectronicDeviceTemp device, int howMany)
+	Map<Integer, Games> products;
+	public void addProduct(Games device, int howMany)
 	{
 		products.put(howMany, device);
 	}
-	public Map<Integer,ElectronicDeviceTemp> getProducts()
+	public Map<Integer,Games> getProducts()
 	{
 		return products;
 	}
@@ -64,7 +65,7 @@ public class Order {
 		this.date = dtf.format(now);
 		this.products = new HashMap<>();
 	}
-	public void setMap(Map<Integer,ElectronicDeviceTemp> hashmap)
+	public void setMap(Map<Integer,Games> hashmap)
 	{
 		this.products = hashmap;
 	}
