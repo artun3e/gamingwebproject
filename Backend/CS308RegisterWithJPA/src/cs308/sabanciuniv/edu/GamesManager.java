@@ -71,12 +71,13 @@ public class GamesManager {
 	{
 		try 
 		{
+			System.out.println("Hey");
 			Connection conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
-			PreparedStatement ps = conn.prepareStatement("Select * from Games WHERE name = ?");
+			PreparedStatement ps = conn.prepareStatement("Select * from Games WHERE name=?");
 			ps.setString(1, name);
 			ResultSet rs = ps.executeQuery();
 			Games obj = new Games();
-			while(rs.next())
+			if(rs.next())
 			{
 				obj.setAppID(rs.getInt("appid"));
 				obj.setName(rs.getString("name"));

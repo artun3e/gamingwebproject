@@ -253,4 +253,22 @@ public class Games {
 				", short_description='" + short_description + '\'' +
 				'}';
 	}
+	@Override
+	public boolean equals(Object o)
+	{
+		Games temp = (Games)o;
+		if(this.appID == temp.getAppID())
+		{
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = 0;
+		result = (int) (appID / 10);
+		return result;
+
+	}
 }

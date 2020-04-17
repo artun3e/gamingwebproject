@@ -12,8 +12,10 @@ $(document).ready(function() {
 		var xhr = new XMLHttpRequest();
 	    var url = "addtocart";
 	    xhr.open("POST", url, true);
+		var params = 'itemName='+itemName;
+		console.log(params);
 	    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	    
-	    xhr.send(itemName);
+	    xhr.send(params);
 	});
 });

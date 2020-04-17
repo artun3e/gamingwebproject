@@ -302,7 +302,7 @@
                         </div>
                         <div class="product-body">
                             <p class="product-category">Category</p>
-                            <h3 class="product-name"><a href="#">Overgrowth</a></h3>
+                            <h3 class="product-name"><a href="#">Counter-Strike</a></h3>
                             <h4 class="product-price">$50.00 <del class="product-old-price">$990.00</del></h4>
                         </div>
                     </div>
@@ -313,7 +313,7 @@
                         </div>
                         <div class="product-body">
                             <p class="product-category">Category</p>
-                            <h3 class="product-name"><a href="#">AirMech Strike</a></h3>
+                            <h3 class="product-name"><a href="#">Half-Life</a></h3>
                             <h4 class="product-price">$20.00 <del class="product-old-price">$990.00</del></h4>
                         </div>
                     </div>
@@ -324,7 +324,7 @@
                         </div>
                         <div class="product-body">
                             <p class="product-category">Category</p>
-                            <h3 class="product-name"><a href="#">Secret World Legends</a></h3>
+                            <h3 class="product-name"><a href="#">Company of Heroes - Legacy Edition</a></h3>
                             <h4 class="product-price">$35.00 <del class="product-old-price">$990.00</del></h4>
                         </div>
                     </div>
@@ -414,7 +414,7 @@
                             </div>
                             <div class="product-body">
                                 <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">Closers</a></h3>
+                                <h3 class="product-name"><a href="#">Counter-Strike</a></h3>
                                 <h4 class="product-price">$70.00 <del class="product-old-price">$100.00</del></h4>
                                 <div class="product-rating">
                                     <i class="fa fa-star"></i>
@@ -447,7 +447,7 @@
                             </div>
                             <div class="product-body">
                                 <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">DayZ</a></h3>
+                                <h3 class="product-name"><a href="#">Team Fortress Classic</a></h3>
                                 <h4 class="product-price">$78.00 <del class="product-old-price">$100.00</del></h4>
                                 <div class="product-rating">
                                     <i class="fa fa-star"></i>
@@ -479,7 +479,7 @@
                             </div>
                             <div class="product-body">
                                 <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">Castle Story</a></h3>
+                                <h3 class="product-name"><a href="#">Day of Defeat</a></h3>
                                 <h4 class="product-price">$42.00 <del class="product-old-price">$50.00</del></h4>
                                 <div class="product-rating">
                                 </div>
@@ -505,7 +505,7 @@
                                 <img src="./img/product04.png" alt="">
                             </div>
                             <div class="product-body">
-                                <p class="product-category">Category</p>
+                                <p class="product-category">Deathmatch Classic</p>
                                 <h3 class="product-name" id="product-name"><a href="#">Wreckfest</a></h3>
                                 <h4 class="product-price">$16.00 <del class="product-old-price">$20.00</del></h4>
                                 <div class="product-rating">
@@ -533,7 +533,7 @@
                             </div>
                             <div class="product-body">
                                 <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">Kenshi</a></h3>
+                                <h3 class="product-name"><a href="#">Half-Life: Opposing Force</a></h3>
                                 <h4 class="product-price">$20.00 <del class="product-old-price">$24.00</del></h4>
                                 <div class="product-rating">
                                 </div>
@@ -558,7 +558,7 @@
                             </div>
                             <div class="product-body">
                                 <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">Dungeon Defenders II</a></h3>
+                                <h3 class="product-name"><a href="#">Ricochet</a></h3>
                                 <h4 class="product-price">$90.00 <del class="product-old-price">$100.00</del></h4>
                                 <div class="product-rating">
                                     <i class="fa fa-star"></i>
@@ -590,7 +590,7 @@
                             </div>
                             <div class="product-body">
                                 <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">Dreamfall Chapters</a></h3>
+                                <h3 class="product-name"><a href="#">Half-Life</a></h3>
                                 <h4 class="product-price">$60.00 <del class="product-old-price">$90.00</del></h4>
                                 <div class="product-rating">
                                     <i class="fa fa-star"></i>
@@ -620,7 +620,7 @@
                             </div>
                             <div class="product-body">
                                 <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">Getting Over It</a></h3>
+                                <h3 class="product-name"><a href="#">Counter-Strike: Condition Zero</a></h3>
                                 <h4 class="product-price">$5.00 <del class="product-old-price">$10.00</del></h4>
                                 <div class="product-rating">
                                 </div>
@@ -647,7 +647,7 @@
                             </div>
                             <div class="product-body">
                                 <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">The Forest</a></h3>
+                                <h3 class="product-name"><a href="#">Half-Life: Blue Shift</a></h3>
                                 <h4 class="product-price">$40.00 <del class="product-old-price">$45.00</del></h4>
                                 <div class="product-rating">
                                 </div>
@@ -669,6 +669,21 @@
                 <!-- store bottom filter -->
                 <div class="store-filter clearfix">
                     <span class="store-qty">Showing 20-100 products</span>
+                    <%
+                        System.out.println("We are called");
+                        if(request.getSession().getAttribute("cart") != null){
+                            //The cart is NOT null. Thus there is some products in the cart. Let's display them.
+                            System.out.println("We are in");
+                            Map<Games, Integer> cartMap = (HashMap)request.getSession().getAttribute("cart");
+                            out.println("<p style=\"color:red;\">");
+                            for(Games game : cartMap.keySet())
+                            {
+                                System.out.println(game.getName() + ": " + cartMap.get(game));
+                                out.println(game.getName() + ": " + cartMap.get(game) + "</br>");
+                            }
+                            out.println("</p>");
+                        }
+                    %>
                     <ul class="store-pagination">
                         <li class="active">1</li>
                         <li><a href="#">2</a></li>
