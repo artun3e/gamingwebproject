@@ -78,23 +78,11 @@ $(document).ready(function(){
   window.setTimeout(function(){$(".is-open").removeClass("is-open")}, 1200);
   
   $(".btn_check").click(function(){
-    //check = true;
-    //$(".remove").click();
-    //var check = false;
-    //var checkoutButton = document.getElementsByClassName('btn_check')
     var cartItemContainer = document.getElementsByClassName('products')[0]
     var cartRows = cartItemContainer.getElementsByClassName('product')
-    //if(cartRows){
-    	//
-    	//Orders => Table için ("User_Email) alan ve bana o eklediği insan için bir ("Order_Id") dondüren fonksiyon
-    	//
-    //}
     Item_Names = []
     Item_Q = []
     for(var i = 0; i < cartRows.length; i++){
-    	//
-    	//Orders_ElectronicDevice => Table için ("Order_ID", "Product Name", "Quantity") Kabul eden fonksiyon
-    	//
     	var cartRow = cartRows[i]
     	
     	var product_name_element = cartRow.getElementsByClassName('product_name')[0]
@@ -105,7 +93,6 @@ $(document).ready(function(){
     	Item_Names.push(product_name)
     	Item_Q.push(quantity)
     }
-    //console.log(Item_Names, Item_Q)
     
     var xhr = new XMLHttpRequest();
     var url = "placeorder";

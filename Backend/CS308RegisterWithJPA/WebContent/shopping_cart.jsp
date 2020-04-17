@@ -127,18 +127,18 @@
     <div class="container">
         <section id="shopping_cart" class ="products" > 
         	<%
-						session = request.getSession();
-						session.getAttribute("cart");
-						if (session.getAttribute("cart") == null) {
-							HashMap<String, String> cart_items = new HashMap<String, String>();
-							session.setAttribute("cart", cart_items);
-						} else {
-							Object object = session.getAttribute("cart");
-							HashMap<String, String> cart_items = (HashMap<String, String>) object;
-							electronicdevicelist.add(temp);
-							session.removeAttribute("cart");
-							session.setAttribute("cart", electronicdevicelist);
-						}
+// 						session = request.getSession();
+// 						session.getAttribute("cart");
+// 						if (session.getAttribute("cart") == null) {
+// 							HashMap<String, String> cart_items = new HashMap<String, String>();
+// 							session.setAttribute("cart", cart_items);
+// 						} else {
+// 							Object object = session.getAttribute("cart");
+// 							HashMap<String, String> cart_items = (HashMap<String, String>) object;
+// 							electronicdevicelist.add(temp);
+// 							session.removeAttribute("cart");
+// 							session.setAttribute("cart", electronicdevicelist);
+// 						}
 			%>
             <article class="product">
                 <header>

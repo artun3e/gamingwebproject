@@ -45,7 +45,7 @@
     <script type="text/javascript" src="register.js"></script>
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+	<script type="text/javascript" src="home_Deniz.js"></script>
     <meta charset="UTF-8">
 </head>
 <header>
@@ -363,7 +363,7 @@
 				<%
 						session = request.getSession();
 						session.getAttribute("user_cart");
-						if (session.getAttribute("user_cart") == null) {
+						/* if (session.getAttribute("user_cart") == null) {
 							Map<String, String> cart_items = new HashMap<String, String>();
 							session.setAttribute("user_cart", cart_items);
 						} else {
@@ -398,7 +398,7 @@
 				            // session.setAttribute("cart", id);
 				        } catch (Exception e) {
 				            e.printStackTrace();
-				        }
+				        } */
 				%>
                 <!-- store products -->
                 <div class="row">
@@ -506,7 +506,7 @@
                             </div>
                             <div class="product-body">
                                 <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">Wreckfest</a></h3>
+                                <h3 class="product-name" id="product-name"><a href="#">Wreckfest</a></h3>
                                 <h4 class="product-price">$16.00 <del class="product-old-price">$20.00</del></h4>
                                 <div class="product-rating">
                                 </div>
