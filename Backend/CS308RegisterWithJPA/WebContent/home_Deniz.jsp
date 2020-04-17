@@ -1,11 +1,7 @@
-<%@ page import="cs308.sabanciuniv.edu.User" %><%--
-  Created by IntelliJ IDEA.
-  User: aybar
-  Date: 13/04/2020
-  Time: 17:33
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.*"%>
+<%@ page import="cs308.sabanciuniv.edu.User" %>
+<%@ page import="cs308.sabanciuniv.edu.Games" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -54,7 +50,7 @@
 </head>
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container" style="margin-right: 22%;">
+        <div class="container" style="margin-right: center;">
             <a class="navbar-brand" href="home_Deniz.jsp"> <img src="logo.png" width="34"
                                                                  height="34" class="d-inline-block align-top" alt=""> Tech
                 Market
@@ -122,7 +118,7 @@
 
                         <div class="dropdown-content">
                             <a href="login.jsp">Login</a> <a href="register.html">Register</a> <a
-                                href="myOrders.jsp">My Orders</a> <a href="#account">Account</a> <a
+                                href="#orders">My Orders</a> <a href="#account">Account</a> <a
                                 href="#liked">Liked Ones</a>
                         </div></li>
                     <p><%
@@ -306,8 +302,8 @@
                         </div>
                         <div class="product-body">
                             <p class="product-category">Category</p>
-                            <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                            <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+                            <h3 class="product-name"><a href="#">Overgrowth</a></h3>
+                            <h4 class="product-price">$50.00 <del class="product-old-price">$990.00</del></h4>
                         </div>
                     </div>
 
@@ -317,8 +313,8 @@
                         </div>
                         <div class="product-body">
                             <p class="product-category">Category</p>
-                            <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                            <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+                            <h3 class="product-name"><a href="#">AirMech Strike</a></h3>
+                            <h4 class="product-price">$20.00 <del class="product-old-price">$990.00</del></h4>
                         </div>
                     </div>
 
@@ -328,8 +324,8 @@
                         </div>
                         <div class="product-body">
                             <p class="product-category">Category</p>
-                            <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                            <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+                            <h3 class="product-name"><a href="#">Secret World Legends</a></h3>
+                            <h4 class="product-price">$35.00 <del class="product-old-price">$990.00</del></h4>
                         </div>
                     </div>
                 </div>
@@ -358,13 +354,52 @@
                             </select>
                         </label>
                     </div>
-                    <ul class="store-grid">
-                        <li class="active"><i class="fa fa-th"></i></li>
+                    <!-- <ul class="store-grid">
+                       <li class="active"><i class="fa fa-th"></i></li>
                         <li><a href="#"><i class="fa fa-th-list"></i></a></li>
-                    </ul>
+                    </ul> -->
                 </div>
                 <!-- /store top filter -->
+				<%
+						session = request.getSession();
+						session.getAttribute("user_cart");
+						if (session.getAttribute("user_cart") == null) {
+							Map<String, String> cart_items = new HashMap<String, String>();
+							session.setAttribute("user_cart", cart_items);
+						} else {
+							Object object = session.getAttribute("user_cart");
+							HashMap<String, String> cart_items = (HashMap<String, String>) object;
+							session.removeAttribute("user_cart");
+							session.setAttribute("user_cart", electronicdevicelist);
+						}
+						try {
+				            HttpSession session = request.getSession();
+				            User user = (User) session.getAttribute("user");
+				            if(user==null) {
+				            	console.log("You are not logged in!!!");
+				            }
+				            console.log("You are logged in!!!");
+				            String itemName = request.getParameter("itemName");
+				            Games temp = GamesManager.getDeviceByName(itemName);
+				            // Add products to card variable in the session...
+				            if (session.getAttribute("cart") == null) {
+				                List<Games> gamesList = new ArrayList<Games>();
+				                gamesList.add(temp);
+				                session.setAttribute("cart", gamesList);
 
+
+				            } else {
+				                Object object = session.getAttribute("cart");
+				                List<Games> gameslist = (List) object;
+				                gameslist.add(temp);
+				                session.removeAttribute("cart");
+				                session.setAttribute("cart", gameslist);
+				            }
+				            // session.setAttribute("cart", id);
+				        } catch (Exception e) {
+				            e.printStackTrace();
+				        }
+				%>
                 <!-- store products -->
                 <div class="row">
                     <!-- product -->
@@ -379,8 +414,8 @@
                             </div>
                             <div class="product-body">
                                 <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+                                <h3 class="product-name"><a href="#">Closers</a></h3>
+                                <h4 class="product-price">$70.00 <del class="product-old-price">$100.00</del></h4>
                                 <div class="product-rating">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -395,7 +430,7 @@
                                 </div>
                             </div>
                             <div class="add-to-cart">
-                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> cart</button>
                             </div>
                         </div>
                     </div>
@@ -412,8 +447,8 @@
                             </div>
                             <div class="product-body">
                                 <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+                                <h3 class="product-name"><a href="#">DayZ</a></h3>
+                                <h4 class="product-price">$78.00 <del class="product-old-price">$100.00</del></h4>
                                 <div class="product-rating">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -428,7 +463,7 @@
                                 </div>
                             </div>
                             <div class="add-to-cart">
-                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> cart</button>
                             </div>
                         </div>
                     </div>
@@ -444,8 +479,8 @@
                             </div>
                             <div class="product-body">
                                 <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+                                <h3 class="product-name"><a href="#">Castle Story</a></h3>
+                                <h4 class="product-price">$42.00 <del class="product-old-price">$50.00</del></h4>
                                 <div class="product-rating">
                                 </div>
                                 <div class="product-btns">
@@ -455,7 +490,7 @@
                                 </div>
                             </div>
                             <div class="add-to-cart">
-                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> cart</button>
                             </div>
                         </div>
                     </div>
@@ -471,8 +506,8 @@
                             </div>
                             <div class="product-body">
                                 <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+                                <h3 class="product-name"><a href="#">Wreckfest</a></h3>
+                                <h4 class="product-price">$16.00 <del class="product-old-price">$20.00</del></h4>
                                 <div class="product-rating">
                                 </div>
                                 <div class="product-btns">
@@ -482,7 +517,7 @@
                                 </div>
                             </div>
                             <div class="add-to-cart">
-                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> cart</button>
                             </div>
                         </div>
                     </div>
@@ -498,8 +533,8 @@
                             </div>
                             <div class="product-body">
                                 <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+                                <h3 class="product-name"><a href="#">Kenshi</a></h3>
+                                <h4 class="product-price">$20.00 <del class="product-old-price">$24.00</del></h4>
                                 <div class="product-rating">
                                 </div>
                                 <div class="product-btns">
@@ -509,7 +544,7 @@
                                 </div>
                             </div>
                             <div class="add-to-cart">
-                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> cart</button>
                             </div>
                         </div>
                     </div>
@@ -523,8 +558,8 @@
                             </div>
                             <div class="product-body">
                                 <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+                                <h3 class="product-name"><a href="#">Dungeon Defenders II</a></h3>
+                                <h4 class="product-price">$90.00 <del class="product-old-price">$100.00</del></h4>
                                 <div class="product-rating">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -539,7 +574,7 @@
                                 </div>
                             </div>
                             <div class="add-to-cart">
-                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> cart</button>
                             </div>
                         </div>
                     </div>
@@ -555,8 +590,8 @@
                             </div>
                             <div class="product-body">
                                 <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+                                <h3 class="product-name"><a href="#">Dreamfall Chapters</a></h3>
+                                <h4 class="product-price">$60.00 <del class="product-old-price">$90.00</del></h4>
                                 <div class="product-rating">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -571,7 +606,7 @@
                                 </div>
                             </div>
                             <div class="add-to-cart">
-                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> cart</button>
                             </div>
                         </div>
                     </div>
@@ -585,8 +620,8 @@
                             </div>
                             <div class="product-body">
                                 <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+                                <h3 class="product-name"><a href="#">Getting Over It</a></h3>
+                                <h4 class="product-price">$5.00 <del class="product-old-price">$10.00</del></h4>
                                 <div class="product-rating">
                                 </div>
                                 <div class="product-btns">
@@ -596,7 +631,7 @@
                                 </div>
                             </div>
                             <div class="add-to-cart">
-                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> cart</button>
                             </div>
                         </div>
                     </div>
@@ -612,8 +647,8 @@
                             </div>
                             <div class="product-body">
                                 <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+                                <h3 class="product-name"><a href="#">The Forest</a></h3>
+                                <h4 class="product-price">$40.00 <del class="product-old-price">$45.00</del></h4>
                                 <div class="product-rating">
                                 </div>
                                 <div class="product-btns">
@@ -623,7 +658,7 @@
                                 </div>
                             </div>
                             <div class="add-to-cart">
-                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> cart</button>
                             </div>
                         </div>
                     </div>
@@ -639,7 +674,7 @@
                         <li><a href="#">2</a></li>
                         <li><a href="#">3</a></li>
                         <li><a href="#">4</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                        <li><a href="#"><i class="fa fa-angle-right" style="margin-top: 14px;"></i></a></li>
                     </ul>
                 </div>
                 <!-- /store bottom filter -->

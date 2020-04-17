@@ -54,7 +54,7 @@
 </head>
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container" style="margin-right: 22%;">
+        <div class="container" style="margin-right: center;">
             <a class="navbar-brand" href="home_Deniz.jsp"> <img src="logo.png" width="34"
                                                                  height="34" class="d-inline-block align-top" alt=""> Tech
                 Market
