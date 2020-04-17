@@ -8,6 +8,7 @@
         <class>cs308.sabanciuniv.edu.User</class>
         <class>cs308.sabanciuniv.edu.ElectronicDeviceTemp</class>
         <class>cs308.sabanciuniv.edu.Order</class>
+        <class>cs308.sabanciuniv.edu.Games</class>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc"/>
             <property name="javax.persistence.jdbc.user" value="MnojkxD0Cc"/>
