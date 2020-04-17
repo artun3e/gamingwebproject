@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component inheritJdk="true">
+	<output-test url="file://$MODULE_DIR$/out/test/CS308RegisterWithJPA"/>
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$/../../../Backend/CS308RegisterWithJPA"/>
+	<lib name="org.eclipse.jst.j2ee.internal.web.container" scope="PROVIDED"/>
+	<lib name="org.eclipse.jst.j2ee.internal.module.container" scope="PROVIDED"/>
+	<lib name="org.eclipse.jst.server.core.container/org.jboss.ide.eclipse.as.core.server.runtime.runtimeTarget/WildFly 18.0 Runtime" scope="PROVIDED"/>
+	<levels>
+		<level name="Java EE 6-Java EE 6" value="project"/>
+		<level name="antlr-2.7.7" value="project"/>
+	</levels>
+</component>

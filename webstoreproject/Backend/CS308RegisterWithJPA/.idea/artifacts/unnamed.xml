@@ -1,0 +1,19 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="unnamed">
+    <output-path>$PROJECT_DIR$/out/artifacts/unnamed</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="CS308RegisterWithJPA" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Java EE 6-Java EE 6" />
+          <element id="library" level="project" name="antlr-2.7.7" />
+        </element>
+      </element>
+      <element id="module-source" name="CS308RegisterWithJPA" />
+      <element id="module-output" name="CS308RegisterWithJPA" />
+      <element id="dir-copy" path="$PROJECT_DIR$/../../../Backend/CS308RegisterWithJPA/WebContent" />
+    </root>
+  </artifact>
+</component>
