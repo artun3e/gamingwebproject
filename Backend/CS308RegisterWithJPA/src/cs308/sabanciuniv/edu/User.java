@@ -14,7 +14,7 @@ public class User {
 	@Column(name="Email")
 	private String email;
 	private String password;
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	private List<Order> orders;
 	//public int getId() {
 	//	return id;

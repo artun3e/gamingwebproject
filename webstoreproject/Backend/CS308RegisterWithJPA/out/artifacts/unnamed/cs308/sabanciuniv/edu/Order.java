@@ -16,14 +16,16 @@ public class Order {
 	private String date;
 	@ManyToOne
 	private User owner;
-	@ManyToMany
-	@MapKeyColumn(name="Quantity")
-	Map<Integer, Games> products;
+	@ElementCollection
+	@CollectionTable(name = "Orders_Games", joinColumns =  @JoinColumn(name = "Order_id"))
+	@MapKeyJoinColumn(name = "products_appid", unique = false)
+	@Column(name = "Quantity")
+	Map<Games, Integer> products;
 	public void addProduct(Games device, int howMany)
 	{
-		products.put(howMany, device);
+		products.put(device, howMany);
 	}
-	public Map<Integer,Games> getProducts()
+	public Map<Games,Integer> getProducts()
 	{
 		return products;
 	}
@@ -64,9 +66,33 @@ public class Order {
 		this.date = dtf.format(now);
 		this.products = new HashMap<>();
 	}
-	public void setMap(Map<Integer,Games> hashmap)
+	public void setMap(Map<Games,Integer> hashmap)
 	{
 		this.products = hashmap;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Order{" +
+				"id=" + id +
+				", address='" + address + '\'' +
+				", date='" + date + '\'' +
+				", owner=" + owner +
+				'}';
+	}
+	@Override
+	public boolean equals(Object o)
+	{
+		Order temp = (Order)o;
+		if(this.id == temp.getId())
+		{
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return id;
+	}
 }

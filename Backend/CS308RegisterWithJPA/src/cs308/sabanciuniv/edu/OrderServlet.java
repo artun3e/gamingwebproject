@@ -78,7 +78,6 @@ public class OrderServlet extends HttpServlet {
 					}
 					countingVariable++;
 				}
-				user = em.find(User.class, user.getEmail());
 				em.getTransaction().begin();
 				Order newOrder = new Order("TODO", user);
 				newOrder.setMap(hashmap);
@@ -88,7 +87,15 @@ public class OrderServlet extends HttpServlet {
 				em.getTransaction().commit();
 				em.close();
 				emf.close();
-				System.out.println("Done placing the order in the database.");
+				System.out.println("Done placing the order in the database v2.");
+				System.out.println("All user orders are : ");
+				int countTime = 1;
+				for(Order o : user.getOrders())
+				{
+					System.out.println("-------------------------- "+ countTime + "  --------------------------");
+					System.out.println(o);
+					countTime++;
+				}
 			}
 		}
 		catch(Exception e)

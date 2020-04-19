@@ -70,5 +70,29 @@ public class Order {
 	{
 		this.products = hashmap;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Order{" +
+				"id=" + id +
+				", address='" + address + '\'' +
+				", date='" + date + '\'' +
+				", owner=" + owner.getName() +
+				'}';
+	}
+	@Override
+	public boolean equals(Object o)
+	{
+		Order temp = (Order)o;
+		if(this.id == temp.getId())
+		{
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return id;
+	}
 }
