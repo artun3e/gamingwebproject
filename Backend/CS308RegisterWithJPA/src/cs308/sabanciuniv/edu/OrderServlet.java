@@ -59,7 +59,7 @@ public class OrderServlet extends HttpServlet {
 				//String userEmail = user.getEmail();
 				String[] itemNames = request.getParameter("list_names").split(",");
 				String[] itemQuantities = request.getParameter("list_q").split(",");
-				Map<Games, Integer> hashmap = new HashMap<>();
+				Map<Integer, Games> hashmap = new HashMap<>();
 				EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
 				EntityManager em = emf.createEntityManager();
 				int countingVariable = 0;
@@ -70,7 +70,7 @@ public class OrderServlet extends HttpServlet {
 					{
 						Object obj = em.createQuery("from Games where name=:nameTemp").setParameter("nameTemp", itemName).setMaxResults(1).getSingleResult();
 						Games temp = (Games) obj;
-						hashmap.put(temp, Integer.parseInt(itemQuantities[countingVariable]));
+						hashmap.put(Integer.parseInt(itemQuantities[countingVariable]),temp);
 					}
 					catch(NoResultException e)
 					{
@@ -78,17 +78,20 @@ public class OrderServlet extends HttpServlet {
 					}
 					countingVariable++;
 				}
-				user = em.find(User.class, user.getEmail());
 				em.getTransaction().begin();
 				Order newOrder = new Order("TODO", user);
 				newOrder.setMap(hashmap);
 				em.persist(newOrder);
+				em.getTransaction().commit();
+				System.out.println("We are here!");
+				em.getTransaction().begin();
+				em.merge(user);
 				user.addOrder(newOrder);
 				em.merge(user);
 				em.getTransaction().commit();
 				em.close();
 				emf.close();
-				System.out.println("Done placing the order in the database.");
+				System.out.println("Done!!!!!");
 			}
 		}
 		catch(Exception e)
