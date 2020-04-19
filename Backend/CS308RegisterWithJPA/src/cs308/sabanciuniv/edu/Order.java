@@ -16,7 +16,7 @@ public class Order {
 	private String date;
 	@ManyToOne
 	private User owner;
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@MapKeyColumn(name="Quantity")
 	Map<Integer, Games> products;
 	public void addProduct(Games device, int howMany)
