@@ -10,8 +10,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(name = "addtocart", urlPatterns = {"/addtocart"})
-public class AddToCartServlet extends HttpServlet {
+@WebServlet(name = "removefromcart", urlPatterns = {"/removefromcart"})
+public class RemoveFromCartServlet extends HttpServlet {
     /**
      *
      */
@@ -19,7 +19,7 @@ public class AddToCartServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("In the doPost of add to cart!!!");
+        System.out.println("In the doPost of remove from cart!!!");
         try {
             HttpSession session = request.getSession();
             User user = (User) session.getAttribute("user");
@@ -32,25 +32,17 @@ public class AddToCartServlet extends HttpServlet {
             String itemName = request.getParameter("itemName");
             System.out.println("Item Name is: " + itemName);
             Games temp = GamesManager.getDeviceByName(itemName);
-            // Add products to card variable in the session...
+            
             if (session.getAttribute("cart") == null) {
-                Map<Games, Integer> cartMap = new HashMap<>();
-                cartMap.put(temp, 1);
-                session.setAttribute("cart", cartMap);
-                System.out.println("The cart is emty adding: " + temp.getName());
+                System.out.println("The cart is emty.");
 
-            } else { // cart is not null, however we don't know if the game that we want to add is in the cart.
-                // If it exists we need to increment the count
+            } else { // cart is not null, however we don't know if the game that we want to remove is in the cart.
+                // If it exists we need delete the whole item.
                 // games
                 Map<Games, Integer> cartMap = (HashMap)session.getAttribute("cart");
                 if (cartMap.get(temp) != null) { // the game we want
-                    int count = cartMap.get(temp);
-                    count = count + 1;
-                    cartMap.put(temp, count);
-                    System.out.println("Alredy have the game: " + temp.getName() + " incremented count: " + count);
-                } else { // it is the first one
-                    cartMap.put(temp, 1);
-                    System.out.println("Added game for the first time: " + temp.getName());
+                    cartMap.remove(temp);
+                    System.out.println("Removed Revised: " + temp.getName());
                 }
                 System.out.println("Cart at final: " + cartMap);
                 session.removeAttribute("cart");

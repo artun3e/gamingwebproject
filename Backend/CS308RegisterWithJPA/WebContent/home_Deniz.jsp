@@ -48,6 +48,7 @@
 	<script type="text/javascript" src="home_Deniz.js"></script>
     <meta charset="UTF-8">
 </head>
+
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container" style="margin-right: center;">
@@ -111,26 +112,32 @@
                                 href="#tv">TV</a> <a href="#camera">Camera</a> <a
                                 href="#accessories">Accessories</a>
                         </div></li>
-                    <li style="margin-left: 5%; margin-top: 5px;"><input
-                            type="text" placeholder="Search.."></li>
-                    <li class="dropdown" style="margin-left: 5%;"><a
-                            class="fa fa-user" style="font-size: 34px; color: grey;"></a>
+                    <li style="margin-left: 5%; margin-top: 12px; ">
+                    	<input type="text" placeholder="Search..">
+                    </li>
+                    <li class="dropdown" style="margin-left: 5%;">
+                    	<a class="fa fa-user" style="font-size: 34px; color: grey;"></a>
 
                         <div class="dropdown-content">
                             <a href="login.jsp">Login</a> <a href="register.html">Register</a> <a
                                 href="#orders">My Orders</a> <a href="#account">Account</a> <a
                                 href="#liked">Liked Ones</a>
-                        </div></li>
-                    <p><%
-                        session = request.getSession();
-                        if(session.getAttribute("user") != null)
-                        {
-                            Object obj = session.getAttribute("user");
-                            User user = (User) obj;
-                            out.print("Hello, " + user.getName());
-                        }
-                    %></p>
-                    <a class="fa fa-shopping-cart" href="#Shopping_Cart" style="font-size: 34px; color: grey; margin-left: 10%;"></a>
+                        </div>
+                     </li>
+                     <li class="dropdown" style="margin-left: 5%;">
+                    	<a class="fa fa-shopping-cart" href="shopping_cart.jsp" style="font-size: 34px; color: grey;"></a>
+                    </li>
+                    <p style="margin-left: 5%;">
+                    	<%
+	                        session = request.getSession();
+	                        if(session.getAttribute("user") != null)
+	                        {
+	                            Object obj = session.getAttribute("user");
+	                            User user = (User) obj;
+	                            out.print("Hello, " + user.getName());
+	                        }
+	            		%>
+	            	</p>
                 </ul>
             </div>
         </div>
@@ -360,46 +367,6 @@
                     </ul> -->
                 </div>
                 <!-- /store top filter -->
-				<%
-						session = request.getSession();
-						session.getAttribute("user_cart");
-						/* if (session.getAttribute("user_cart") == null) {
-							Map<String, String> cart_items = new HashMap<String, String>();
-							session.setAttribute("user_cart", cart_items);
-						} else {
-							Object object = session.getAttribute("user_cart");
-							HashMap<String, String> cart_items = (HashMap<String, String>) object;
-							session.removeAttribute("user_cart");
-							session.setAttribute("user_cart", electronicdevicelist);
-						}
-						try {
-				            HttpSession session = request.getSession();
-				            User user = (User) session.getAttribute("user");
-				            if(user==null) {
-				            	console.log("You are not logged in!!!");
-				            }
-				            console.log("You are logged in!!!");
-				            String itemName = request.getParameter("itemName");
-				            Games temp = GamesManager.getDeviceByName(itemName);
-				            // Add products to card variable in the session...
-				            if (session.getAttribute("cart") == null) {
-				                List<Games> gamesList = new ArrayList<Games>();
-				                gamesList.add(temp);
-				                session.setAttribute("cart", gamesList);
-
-
-				            } else {
-				                Object object = session.getAttribute("cart");
-				                List<Games> gameslist = (List) object;
-				                gameslist.add(temp);
-				                session.removeAttribute("cart");
-				                session.setAttribute("cart", gameslist);
-				            }
-				            // session.setAttribute("cart", id);
-				        } catch (Exception e) {
-				            e.printStackTrace();
-				        } */
-				%>
                 <!-- store products -->
                 <div class="row">
                     <!-- product -->
@@ -505,8 +472,8 @@
                                 <img src="./img/product04.png" alt="">
                             </div>
                             <div class="product-body">
-                                <p class="product-category">Deathmatch Classic</p>
-                                <h3 class="product-name" id="product-name"><a href="#">Wreckfest</a></h3>
+                                <p class="product-category">Category</p>
+                                <h3 class="product-name" id="product-name"><a href="#">Deathmatch Classic</a></h3>
                                 <h4 class="product-price">$16.00 <del class="product-old-price">$20.00</del></h4>
                                 <div class="product-rating">
                                 </div>
@@ -670,16 +637,17 @@
                 <div class="store-filter clearfix">
                     <span class="store-qty">Showing 20-100 products</span>
                     <%
-                        System.out.println("We are called");
+                        System.out.println("We are in Home Page");
                         if(request.getSession().getAttribute("cart") != null){
                             //The cart is NOT null. Thus there is some products in the cart. Let's display them.
-                            System.out.println("We are in");
+                            System.out.println("Cart has elements.");
                             Map<Games, Integer> cartMap = (HashMap)request.getSession().getAttribute("cart");
                             out.println("<p style=\"color:red;\">");
                             for(Games game : cartMap.keySet())
                             {
-                                System.out.println(game.getName() + ": " + cartMap.get(game));
-                                out.println(game.getName() + ": " + cartMap.get(game) + "</br>");
+                                System.out.println((game.getAppID() / 10)+ " : " + game.getName() + ": " + cartMap.get(game));
+                                out.println((game.getAppID() / 10) + " : " + game.getName() + ": " + cartMap.get(game) + "</br>");
+                                
                             }
                             out.println("</p>");
                         }
