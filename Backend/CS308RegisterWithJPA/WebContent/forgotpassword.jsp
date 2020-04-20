@@ -1,20 +1,28 @@
 <html>
 
   <head>
-    <link rel="stylesheet" href="register.css">
+    <link rel="stylesheet" href="css/register.css">
   </head>
     <body>
+
+      <div class="topnav">
+        <a class="active" href="#home">Home</a>
+        <a href="#news">News</a>
+        <a href="#contact">Contact</a>
+        <a href="#about">About</a>
+        <input type="text" placeholder="Search..">
+        <a class="entrance" href="#contact">Login</a>
+        <a class="entrance"href="#about">Sign Up</a>
+      </div>
+
       <div class="register-container">
         <div class="register-left">
-        
-          <form action="resetpassword" method="post">
-            <h3> Please enter your code </h3>
-            <img src="logo.png" height="100px" width="100px"> <br>
-    
-            <input type="text" id="usercode" name="usercode" placeholder="your verification code"><br>
-			<input type="password" id="password" name="password" placeholder="your new password"><br>
-
-            <button> confirm </button>
+          <form action="forgotpassword" method="post">
+            <h3> Enter the email address of the associated account</h3>
+            <img src="img/logo.png" height="100px" width="100px"> <br>
+            <input class="register" type="email" id="email" name="email" placeholder="E-mail"><br>
+            <h5> Your password should be at least 6 characters.</h5><br>
+            <button> Confirm </button>
           </form>
         </div>
         <div class="register-right">

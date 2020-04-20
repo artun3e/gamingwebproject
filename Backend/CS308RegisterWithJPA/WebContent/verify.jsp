@@ -1,14 +1,14 @@
 <html>
 
   <head>
-    <link rel="stylesheet" href="register.css">
+    <link rel="stylesheet" href="css/register.css">
   </head>
     <body>
       <div class="register-container">
         <div class="register-left">
           <form action="verify" method="post">
             <h3> Please verify your email address</h3>
-            <img src="logo.png" height="100px" width="100px"> <br>
+            <img src="img/logo.png" height="100px" width="100px"> <br>
     
             <input type="text" id="usercode" name="usercode" placeholder="your verification code"><br>
 

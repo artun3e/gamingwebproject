@@ -25,8 +25,8 @@
 	crossorigin="anonymous"></script>
 
 <!-- Berkin CSS and JS-->
-<link rel="stylesheet" href="register.css">
-<script type="text/javascript" src="register.js"></script>
+<link rel="stylesheet" href="css/register.css">
+<script type="text/javascript" src="js/register.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -35,7 +35,7 @@
 <header>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="container" style="margin-right: 22%;">
-			<a class="navbar-brand" href="home_Deniz.jsp"> <img src="logo.png" width="34"
+			<a class="navbar-brand" href="index.jsp"> <img src="img/logo.png" width="34"
 				height="34" class="d-inline-block align-top" alt=""> Tech
 				Market
 			</a>
@@ -119,7 +119,7 @@
 				<div class="col-md-auto">
 					<h2>Please sign up in order to continue</h2>
 				</div>
-				<img src="logo.png" height="100px" width="100px"> <br> <br>
+				<img src="img/logo.png" height="100px" width="100px"> <br> <br>
 				<input class="register" id="name_field" type="text" name="name" placeholder="Name"> <br> 
 				<input class="register" id="mail_field" type="email" name="email" placeholder="E-mail"><br>
 				<input class="register" id="pwd_field" type="password" name="pass" placeholder="Password"><br> <br>

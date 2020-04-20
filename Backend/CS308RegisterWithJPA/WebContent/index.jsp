@@ -28,7 +28,7 @@
             crossorigin="anonymous"></script>
 
     <!-- Template CSS and JS-->
-    <script type="text/javascript" src="home_Deniz.js"></script>
+    <script type="text/javascript" src="index.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/slick.min.js"></script>
@@ -45,13 +45,13 @@
     <script type="text/javascript" src="register.js"></script>
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<script type="text/javascript" src="home_Deniz.js"></script>
+	<script type="text/javascript" src="index.js"></script>
     <meta charset="UTF-8">
 </head>
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container" style="margin-right: center;">
-            <a class="navbar-brand" href="home_Deniz.jsp"> <img src="logo.png" width="34"
+            <a class="navbar-brand" href="index.jsp"> <img src="logo.png" width="34"
                                                                  height="34" class="d-inline-block align-top" alt=""> Tech
                 Market
             </a>
