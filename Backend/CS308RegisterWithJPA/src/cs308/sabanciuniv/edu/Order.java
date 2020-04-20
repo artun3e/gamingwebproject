@@ -16,9 +16,17 @@ public class Order {
 	private String date;
 	@ManyToOne
 	private User owner;
+//<<<<<<< HEAD
 	@ManyToMany(fetch = FetchType.EAGER)
 	@MapKeyColumn(name="Quantity")
 	Map<Integer, Games> products;
+//=======
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name = "Orders_Games", joinColumns =  @JoinColumn(name = "Order_id"))
+	@MapKeyJoinColumn(name = "products_appid", unique = false)
+	@Column(name = "Quantity")
+	//Map<Games, Integer> products;
+//>>>>>>> 22ad9288440c89a6dc9ace6e6bbeaf4843b3a17a
 	public void addProduct(Games device, int howMany)
 	{
 		products.put(howMany, device);
@@ -68,5 +76,29 @@ public class Order {
 	{
 		this.products = hashmap;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Order{" +
+				"id=" + id +
+				", address='" + address + '\'' +
+				", date='" + date + '\'' +
+				", owner=" + owner.getName() +
+				'}';
+	}
+	@Override
+	public boolean equals(Object o)
+	{
+		Order temp = (Order)o;
+		if(this.id == temp.getId())
+		{
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return id;
+	}
 }

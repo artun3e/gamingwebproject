@@ -13,7 +13,7 @@
     {
         System.out.println("You're already logged in!!!");
         session.setAttribute("loggedIn-Error", true);
-        response.sendRedirect("home_Deniz.jsp");
+        response.sendRedirect("index.jsp");
     }
     else
     {
@@ -45,8 +45,14 @@
             crossorigin="anonymous"></script>
 
     <!-- Berkin CSS and JS-->
-    <link rel="stylesheet" href="register.css">
-    <script type="text/javascript" src="register.js"></script>
+    <script src="js/search.js"></script>
+    <link rel="stylesheet" href="css/register.css">
+        <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="css/slick.css">
+    <link type="text/css" rel="stylesheet" href="css/nouislider.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="js/register.js"></script>
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -55,7 +61,7 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container" style="margin-right: center;">
-            <a class="navbar-brand" href="home_Deniz.jsp"> <img src="logo.png" width="34"
+            <a class="navbar-brand" href="index.jsp"> <img src="img/logo.png" width="34"
                                                                  height="34" class="d-inline-block align-top" alt=""> Tech
                 Market
             </a>
@@ -66,66 +72,40 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
-                    <li class="dropdown"><a class="nav-link" href="Home_HTML">Phone
+                     <li class="dropdown"><a class="nav-link" href="Home_HTML">Action
                         <span class="sr-only">(current)</span>
                     </a>
 
-                        <div class="dropdown-content">
-                            <a href="#computer">Computer</a> <a href="#phone">Phone</a> <a
-                                href="#tv">TV</a> <a href="#camera">Camera</a> <a
-                                href="#accessories">Accessories</a>
-                        </div></li>
                     <li class="dropdown" style="margin-left: 5%;"><a
-                            class="nav-link" href="Home_HTML">TV <span class="sr-only">(current)</span></a>
+                            class="nav-link" href="Home_HTML">Multiplayer <span class="sr-only">(current)</span></a>
 
-                        <div class="dropdown-content">
-                            <a href="#computer">Computer</a> <a href="#phone">Phone</a> <a
-                                href="#tv">TV</a> <a href="#camera">Camera</a> <a
-                                href="#accessories">Accessories</a>
-                        </div></li>
+					</li>
                     <li class="dropdown" style="margin-left: 5%;"><a
-                            class="nav-link" href="Home_HTML">Computer <span
+                            class="nav-link" href="Home_HTML"> Sports <span
                             class="sr-only">(current)</span></a>
 
-                        <div class="dropdown-content">
-                            <a href="#computer">Computer</a> <a href="#phone">Phone</a> <a
-                                href="#tv">TV</a> <a href="#camera">Camera</a> <a
-                                href="#accessories">Accessories</a>
-                        </div></li>
+                    </li>
                     <li class="dropdown" style="margin-left: 5%;"><a
-                            class="nav-link" href="Home_HTML">Camera <span class="sr-only">(current)</span></a>
+                            class="nav-link" href="Home_HTML"> FPS <span class="sr-only">(current)</span></a>
 
-                        <div class="dropdown-content">
-                            <a href="#computer">Computer</a> <a href="#phone">Phone</a> <a
-                                href="#tv">TV</a> <a href="#camera">Camera</a> <a
-                                href="#accessories">Accessories</a>
-                        </div></li>
+                   </li>
                     <li class="dropdown" style="margin-left: 5%;"><a
-                            class="nav-link" href="Home_HTML">Home_Appliances<span
+                            class="nav-link" href="Home_HTML"> RPG <span
                             class="sr-only">(current)</span></a>
-                        <div class="dropdown-content">
-                            <a href="#computer">Computer</a> <a href="#phone">Phone</a> <a
-                                href="#tv">TV</a> <a href="#camera">Camera</a> <a
-                                href="#accessories">Accessories</a>
-                        </div></li>
+                   </li>
                     <li class="dropdown" style="margin-left: 5%;"><a
-                            class="nav-link" href="Home_HTML">Console<span class="sr-only">(current)</span></a>
-                        <div class="dropdown-content">
-                            <a href="#computer">Computer</a> <a href="#phone">Phone</a> <a
-                                href="#tv">TV</a> <a href="#camera">Camera</a> <a
-                                href="#accessories">Accessories</a>
-                        </div></li>
-                    <li style="margin-left: 5%; margin-top: 5px;"><input
-                            type="text" placeholder="Search.."></li>
+                            class="nav-link" href="Home_HTML">Strategy<span class="sr-only">(current)</span></a>
+                    <li style="margin-left: 5%; margin-top: 5px;"><input id="search"  type="text" placeholder="Search.."  onkeydown="if (event.keyCode == 13) { search(); }"></li>
                     <li class="dropdown" style="margin-left: 5%;"><a
                             class="fa fa-user" style="font-size: 34px; color: grey;"></a>
 
                         <div class="dropdown-content">
-                            <a href="login.jsp">Login</a> <a href="register.html">Register</a> <a
+                            <a href="login.jsp">Login</a> 
+                            <a href="register.jsp">Register</a> <a
                                 href="#orders">My Orders</a> <a href="#account">Account</a> <a
                                 href="#liked">Liked Ones</a>
                         </div></li>
-                    <a class="fa fa-shopping-cart" href="#Shopping_Cart" style="font-size: 34px; color: grey; margin-left: 10%;"></a>
+                    <a class="fa fa-shopping-cart" href="shoppingCart.jsp" style="font-size: 34px; color: grey; margin-left: 10%;"></a>
                 </ul>
             </div>
         </div>
@@ -133,6 +113,7 @@
 
 </header>
 <body>
+	<div class="main">
 <div class="container">
     <div class="row">
         <div class="col">&nbsp;</div>
@@ -155,7 +136,7 @@
         <div class="col"></div>
     </div>
     <div class="text-center">
-        <img src="logo.png" class="rounded" alt="Balloon" width="128">
+        <img src="img/logo.png" class="rounded" alt="Balloon" width="128">
         <p style='color: #a94442'>
         <%
             session = request.getSession();
@@ -185,6 +166,7 @@
         </form>
     </div>
 </div>
+</div
 </body>
 </body>
 <footer> </footer>

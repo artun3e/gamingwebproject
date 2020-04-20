@@ -7,7 +7,7 @@
 <html>
 <head>
 
-<script type="text/javascript" src="myOrders.js"></script>
+<script type="text/javascript" src="js/myOrders.js"></script>
 
 </head>
 

@@ -17,7 +17,7 @@ public class ElectronicDeviceManager {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("byName/{n}")
+	//@Path("byName/{n}")
 	public List<ElectronicDeviceTemp> getDevice(@PathParam("n") String query)
 	{
 		List<ElectronicDeviceTemp> resultList = new ArrayList<ElectronicDeviceTemp>();
