@@ -1,6 +1,10 @@
 package cs308.sabanciuniv.edu;
 
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -111,5 +115,38 @@ public class GamesManager {
 			return null;
 		}
 	}
-	
+	public static List<Games> findByCategory(List<String> categories)
+	{
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
+		EntityManager em = emf.createEntityManager();
+		try {
+			Query q1 = em.createQuery("from Games where steamspy_tags like ?0 and steamspy_tags like ?1 and steamspy_tags like ?2 and steamspy_tags like ?3 and steamspy_tags like ?4 and steamspy_tags like ?5");
+			int i = 0;
+			for(; i < categories.size(); i++)
+			{
+				//q1.setParameter("tag"+Integer.toString(i), categories.get(i));
+				q1.setParameter(i, "%" + categories.get(i) + "%");
+			}
+			while(i < 6)
+			{
+				//q1.setParameter("tag"+Integer.toString(i), " ");
+				q1.setParameter(i, "% %");
+				i++;
+			}
+			List<Object> objects = q1.getResultList();
+			List<Games> gameList = new ArrayList<>();
+			for(Object o : objects)
+			{
+				gameList.add((Games)o);
+			}
+			em.close();
+			emf.close();
+			return gameList;
+		} catch (Exception e) {
+			e.printStackTrace();
+			em.close();
+			emf.close();
+			return null;
+		}
+	}
 }

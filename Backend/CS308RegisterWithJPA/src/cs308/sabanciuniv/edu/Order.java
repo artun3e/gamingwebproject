@@ -16,7 +16,7 @@ public class Order {
 	private String date;
 	@ManyToOne
 	private User owner;
-	@ElementCollection
+	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "Orders_Games", joinColumns =  @JoinColumn(name = "Order_id"))
 	@MapKeyJoinColumn(name = "products_appid", unique = false)
 	@Column(name = "Quantity")
