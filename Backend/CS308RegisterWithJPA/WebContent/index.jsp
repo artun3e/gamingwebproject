@@ -43,7 +43,7 @@
     <link type="text/css" rel="stylesheet" href="css/style.css">
     <!-- Berkin CSS and JS-->
     <link rel="stylesheet" href="css/register.css">
-    <script type="text/javascript" src="register.js"></script>
+    <script type="text/javascript" src="js/register.js"></script>
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script type="text/javascript" src="js/index.js"></script>
@@ -63,50 +63,29 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
-                    <li class="dropdown"><a class="nav-link" href="Home_HTML">Phone
+  <li class="dropdown"><a class="nav-link" href="Home_HTML">Action
                         <span class="sr-only">(current)</span>
                     </a>
 
-                        <div class="dropdown-content">
-                            <a href="#computer">Computer</a> <a href="#phone">Phone</a> <a
-                                href="#tv">TV</a> <a href="#camera">Camera</a> <a
-                                href="#accessories">Accessories</a>
-                        </div></li>
                     <li class="dropdown" style="margin-left: 5%;"><a
-                            class="nav-link" href="Home_HTML">TV <span class="sr-only">(current)</span></a>
+                            class="nav-link" href="Home_HTML">Multiplayer <span class="sr-only">(current)</span></a>
 
-                        <div class="dropdown-content">
-                            <a href="#computer">Computer</a> <a href="#phone">Phone</a> <a
-                                href="#tv">TV</a> <a href="#camera">Camera</a> <a
-                                href="#accessories">Accessories</a>
-                        </div></li>
+					</li>
                     <li class="dropdown" style="margin-left: 5%;"><a
-                            class="nav-link" href="Home_HTML">Computer <span
+                            class="nav-link" href="Home_HTML"> Sports <span
                             class="sr-only">(current)</span></a>
 
-                        <div class="dropdown-content">
-                            <a href="#computer">Computer</a> <a href="#phone">Phone</a> <a
-                                href="#tv">TV</a> <a href="#camera">Camera</a> <a
-                                href="#accessories">Accessories</a>
-                        </div></li>
+                    </li>
                     <li class="dropdown" style="margin-left: 5%;"><a
-                            class="nav-link" href="Home_HTML">Camera <span class="sr-only">(current)</span></a>
+                            class="nav-link" href="Home_HTML"> FPS <span class="sr-only">(current)</span></a>
 
-                        <div class="dropdown-content">
-                            <a href="#computer">Computer</a> <a href="#phone">Phone</a> <a
-                                href="#tv">TV</a> <a href="#camera">Camera</a> <a
-                                href="#accessories">Accessories</a>
-                        </div></li>
+                   </li>
                     <li class="dropdown" style="margin-left: 5%;"><a
-                            class="nav-link" href="Home_HTML">Home Appliances<span
+                            class="nav-link" href="Home_HTML"> RPG <span
                             class="sr-only">(current)</span></a>
-                        <div class="dropdown-content">
-                            <a href="#computer">Computer</a> <a href="#phone">Phone</a> <a
-                                href="#tv">TV</a> <a href="#camera">Camera</a> <a
-                                href="#accessories">Accessories</a>
-                        </div></li>
+                   </li>
                     <li class="dropdown" style="margin-left: 5%;"><a
-                            class="nav-link" href="Home_HTML">Console<span class="sr-only">(current)</span></a>
+                            class="nav-link" href="Home_HTML">Strategy<span class="sr-only">(current)</span></a>
 
                     <li style="margin-left: 5%; margin-top: 5px;"><input id="search"  type="text" placeholder="Search.."  onkeydown="if (event.keyCode == 13) { search(); }"></li>
                     <li class="dropdown" style="margin-left: 5%;"><a

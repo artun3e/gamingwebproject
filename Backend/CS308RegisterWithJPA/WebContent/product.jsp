@@ -48,7 +48,7 @@
 			<!-- TOP HEADER -->
 				<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="container" style="margin-right: 22%;">
-			<a class="navbar-brand" href="index.html"> <img src="img/logo.png" width="34"
+			<a class="navbar-brand" href="index.jsp"> <img src="img/logo.png" width="34"
 				height="34" class="d-inline-block align-top" alt=""> Tech
 				Market
 			</a>
@@ -87,10 +87,10 @@
 					<li class="dropdown" style="margin-left: 5%;"><a
 						class="fa fa-user" style="font-size: 34px; color: grey;"></a>
 							 <div class="dropdown-content">
-                            <a href="login.html">Login</a> 
-                            <a href="register.html">Register</a> 
-                            <a href="#orders">My Orders</a> <a href="#account">Account</a> 
-                            <a href="#liked">Liked Ones</a>
+                            <a href="login.jsp">Login</a> 
+                            <a href="register.jsp">Register</a> 
+                            <a href="myOrders.jsp">My Orders</a> 
+                            <a href="#account">Account</a> 
                         </div></li>
 						</li>
 					<a class="fa fa-shopping-cart" href="shoppingCart.jsp" style="font-size: 34px; color: grey; margin-left: 10%;"></a>
@@ -99,6 +99,7 @@
 		</div>
 	</nav>
 		<!-- BREADCRUMB -->
+		<div class="main">
 		<div id="breadcrumb" class="section">
 			<!-- container -->
 			<div class="container">
@@ -121,7 +122,7 @@
 		<!-- /BREADCRUMB -->
 
 		<!-- SECTION -->
-		<div class="main">
+		
 			<!-- container -->
 			<div class="container">
 				<!-- row -->
@@ -641,62 +642,7 @@
 			<div class="section">
 				<!-- container -->
 				<div class="container">
-					<!-- row -->
-					<div class="row">
-						<div class="col-md-3 col-xs-6">
-							<div class="footer">
-								<h3 class="footer-title">About Us</h3>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
-								<ul class="footer-links">
-									<li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
-									<li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
-									<li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
-								</ul>
-							</div>
-						</div>
-
-						<div class="col-md-3 col-xs-6">
-							<div class="footer">
-								<h3 class="footer-title">Categories</h3>
-								<ul class="footer-links">
-									<li><a href="#">Hot deals</a></li>
-									<li><a href="#">Laptops</a></li>
-									<li><a href="#">Smartphones</a></li>
-									<li><a href="#">Cameras</a></li>
-									<li><a href="#">Accessories</a></li>
-								</ul>
-							</div>
-						</div>
-
-						<div class="clearfix visible-xs"></div>
-
-						<div class="col-md-3 col-xs-6">
-							<div class="footer">
-								<h3 class="footer-title">Information</h3>
-								<ul class="footer-links">
-									<li><a href="#">About Us</a></li>
-									<li><a href="#">Contact Us</a></li>
-									<li><a href="#">Privacy Policy</a></li>
-									<li><a href="#">Orders and Returns</a></li>
-									<li><a href="#">Terms & Conditions</a></li>
-								</ul>
-							</div>
-						</div>
-
-						<div class="col-md-3 col-xs-6">
-							<div class="footer">
-								<h3 class="footer-title">Service</h3>
-								<ul class="footer-links">
-									<li><a href="#">My Account</a></li>
-									<li><a href="#">View Cart</a></li>
-									<li><a href="#">Wishlist</a></li>
-									<li><a href="#">Track My Order</a></li>
-									<li><a href="#">Help</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<!-- /row -->
+					
 				</div>
 				<!-- /container -->
 			</div>
@@ -716,11 +662,6 @@
 								<li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
 								<li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
 							</ul>
-							<span class="copyright">
-								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-								Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-							</span>
 						</div>
 					</div>
 						<!-- /row -->
