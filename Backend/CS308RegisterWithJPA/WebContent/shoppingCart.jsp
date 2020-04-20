@@ -26,11 +26,12 @@
 <script src="js/nouislider.min.js"></script>
 <script src="js/jquery.zoom.min.js"></script>
 <script src="js/main.js"></script>
-<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
-<link type="text/css" rel="stylesheet" href="css/slick.css">
-<link type="text/css" rel="stylesheet" href="css/nouislider.min.css">
-<link rel="stylesheet" href="css/font-awesome.min.css">
-
+        <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="css/slick.css">
+    <link type="text/css" rel="stylesheet" href="css/nouislider.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="css/style.css">
+   <script src="js/search.js"></script>
 <!-- Berkin CSS and JS-->
 <link rel="stylesheet" href="css/register.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -104,17 +105,17 @@
 								href="#tv">TV</a> <a href="#camera">Camera</a> <a
 								href="#accessories">Accessories</a>
 						</div></li>
-					<li style="margin-left: 5%; margin-top: 5px;"><input
-						type="text" placeholder="Search.."></li>
+					<li style="margin-left: 5%; margin-top: 5px;"><input id="search"  type="text" placeholder="Search.."  onkeydown="if (event.keyCode == 13) { search(); }"></li>
 					<li class="dropdown" style="margin-left: 5%;"><a
 						class="fa fa-user" style="font-size: 34px; color: grey;"></a>
 
 						<div class="dropdown-content">
-							<a href="login.jsp">Login</a> <a href="register.html">Register</a> <a
-								href="#orders">My Orders</a> <a href="#account">Account</a> <a
-								href="#liked">Liked Ones</a>
+							<a href="login.jsp">Login</a> 
+							<a href="register.jsp">Register</a> 
+							<a href="myOrders.jsp">My Orders</a> 
+							<a href="#account">Account</a> 
 						</div></li>
-					<a class="fa fa-shopping-cart" href="#Shopping_Cart" style="font-size: 34px; color: grey; margin-left: 10%;"></a>
+					<a class="fa fa-shopping-cart" href="shoppingCart.jsp" style="font-size: 34px; color: grey; margin-left: 10%;"></a>
 				</ul>
 			</div>
 		</div>
@@ -123,7 +124,7 @@
             <h1 class= "cart">Shopping cart</h1>
     </div>
 </header>
-    
+    <div class="main">
     <div class="container">
         <section id="shopping_cart" class ="products" > 
         	<%
@@ -196,6 +197,7 @@
             </article>
         </section>
     </div>
+</div>
     <footer id="site-footer">
         <div class="container clearfix">
             <div class="left">

@@ -35,6 +35,7 @@
     <script src="js/nouislider.min.js"></script>
     <script src="js/jquery.zoom.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/search.js"></script>
     <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="css/slick.css">
     <link type="text/css" rel="stylesheet" href="css/nouislider.min.css">
@@ -97,7 +98,7 @@
                                 href="#accessories">Accessories</a>
                         </div></li>
                     <li class="dropdown" style="margin-left: 5%;"><a
-                            class="nav-link" href="Home_HTML">Home_Appliances<span
+                            class="nav-link" href="Home_HTML">Home Appliances<span
                             class="sr-only">(current)</span></a>
                         <div class="dropdown-content">
                             <a href="#computer">Computer</a> <a href="#phone">Phone</a> <a
@@ -106,20 +107,14 @@
                         </div></li>
                     <li class="dropdown" style="margin-left: 5%;"><a
                             class="nav-link" href="Home_HTML">Console<span class="sr-only">(current)</span></a>
-                        <div class="dropdown-content">
-                            <a href="#computer">Computer</a> <a href="#phone">Phone</a> <a
-                                href="#tv">TV</a> <a href="#camera">Camera</a> <a
-                                href="#accessories">Accessories</a>
-                        </div></li>
-                    <li style="margin-left: 5%; margin-top: 5px;"><input
-                            type="text" placeholder="Search.."></li>
+
+                    <li style="margin-left: 5%; margin-top: 5px;"><input id="search"  type="text" placeholder="Search.."  onkeydown="if (event.keyCode == 13) { search(); }"></li>
                     <li class="dropdown" style="margin-left: 5%;"><a
                             class="fa fa-user" style="font-size: 34px; color: grey;"></a>
 
                         <div class="dropdown-content">
-                            <a href="login.jsp">Login</a> <a href="register.html">Register</a> <a
-                                href="#orders">My Orders</a> <a href="#account">Account</a> <a
-                                href="#liked">Liked Ones</a>
+                            <a href="login.jsp">Login</a> <a href="register.jsp">Register</a> <a
+                                href="#orders">My Orders</a> <a href="myOrders.jsp">Account</a> <a
                         </div></li>
                     <p><%
                         session = request.getSession();
@@ -130,7 +125,7 @@
                             out.print("Hello, " + user.getName());
                         }
                     %></p>
-                    <a class="fa fa-shopping-cart" href="#Shopping_Cart" style="font-size: 34px; color: grey; margin-left: 10%;"></a>
+                    <a class="fa fa-shopping-cart" href="shoppingCart.jsp" style="font-size: 34px; color: grey; margin-left: 10%;"></a>
                 </ul>
             </div>
         </div>
@@ -150,6 +145,8 @@
             }
         %>
     </p>
+
+    <div class ="main">
     <div class="container">
         <!-- row -->
         <div class="row">
@@ -699,6 +696,7 @@
         <!-- /row -->
     </div>
     <!-- /container -->
+	</div>
 </div>
 </body>
 </body>

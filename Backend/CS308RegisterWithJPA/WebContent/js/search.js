@@ -1,32 +1,24 @@
-function Call(searchQuery)
-{
-    alert("Search suggestions can come here!!");
-    var value = searchQuery.value;  
-    const url = '/CS308RegisterWithJPA/search/fromDB/byName/' + value;
-    async function getData(){
+function search()
+{   
+    var value = document.getElementById('search').value; //gets value from search bar
+    const url = '/CS308RegisterWithJPA/search/fromDB/byName/' + value; //goes to url which returns json list
+    /*window.location.href = 'searchResults.html';*/
+// function to get json object
+async function getData(){
     	const response = await fetch(url);
     	const data = await response.json();
     	clearDiv();
     	for (var k = 0; k < data.length; k++){
     		fillCard(data[k], k);
-    	}
+    	} //
     }
     getData();
     
+	
     function clearDiv(){
     	    document.getElementsByClassName("main")[0].innerHTML = "";
-    	    console.log("girdim");
     	    
-    }
-        var html = '<div class="photo">' +
-        '  <img src="image.png" height="200px" width="300px">' +
-        '</div>' +
-        '<div class="info">' +
-        ' <h6> brand </h6>' +
-        '    <h6> name </h6>' +
-        '    <h6> info </h6>' +
-        '    </div>';
-        
+    }        
         var productHTML= '<div class="product">'+
 		'<div class="product-img">'+
 			'<img src="product01.png" alt="">'+
@@ -57,7 +49,7 @@ function Call(searchQuery)
 		'</div>'+
 	'</div>';
         
-        function createNewCard(){
+        function createNewCard(){ //creates new element in html for each product
             var p = document.getElementsByClassName("main")[0];
             var newElement = document.createElement('div');
             //// newElement.setAttribute('id', elementId);
@@ -67,7 +59,7 @@ function Call(searchQuery)
             }
         
         
-        function fillCard(element, k){
+        function fillCard(element, k){ //fill the card with necessary information
         	createNewCard();
         	var images = element.imageURLs;
             var imagesArr = images.split(',');
@@ -80,11 +72,11 @@ function Call(searchQuery)
             var price = document.getElementsByClassName("product-body")[k].getElementsByTagName('h4')[0];
             brand.innerHTML = element.brand;
             name.innerHTML = element.name;
-            price.innerHTML = element.price;
+            price.innerHTML = "$" + element.price;
             }
         
         
-        function checkImage(img,imagesArr){
+        function checkImage(img,imagesArr){ //check image exists or not
         	img.onerror = function() {
 //        		console.log(img.src);
         	    img.src= imagesArr[1];

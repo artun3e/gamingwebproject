@@ -27,15 +27,15 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
-<link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css">
-<link type="text/css" rel="stylesheet" href="../css/slick.css">
-<link type="text/css" rel="stylesheet" href="../css/nouislider.min.css">
-<link rel="stylesheet" href="../css/font-awesome.min.css">
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
+<link type="text/css" rel="stylesheet" href="css/slick.css">
+<link type="text/css" rel="stylesheet" href="css/nouislider.min.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
 <!-- Berkin CSS and JS-->
-<link rel="stylesheet" href="../css/login.css">
-<link rel="stylesheet" href="../css/style.css">
-<script type="text/javascript" src="../js/register.js"></script>
-<script src="../js/search.js"></script>
+<link rel="stylesheet" href="css/login.css">
+<link rel="stylesheet" href="css/style.css">
+<script type="text/javascript" src="js/register.js"></script>
+<script src="js/search.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		
@@ -48,7 +48,7 @@
 			<!-- TOP HEADER -->
 				<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="container" style="margin-right: 22%;">
-			<a class="navbar-brand" href="index.html"> <img src="../img/logo.png" width="34"
+			<a class="navbar-brand" href="index.html"> <img src="img/logo.png" width="34"
 				height="34" class="d-inline-block align-top" alt=""> Tech
 				Market
 			</a>
@@ -93,7 +93,7 @@
                             <a href="#liked">Liked Ones</a>
                         </div></li>
 						</li>
-					<a class="fa fa-shopping-cart" href="shoppingCart.html" style="font-size: 34px; color: grey; margin-left: 10%;"></a>
+					<a class="fa fa-shopping-cart" href="shoppingCart.jsp" style="font-size: 34px; color: grey; margin-left: 10%;"></a>
 				</ul>
 			</div>
 		</div>
@@ -130,19 +130,19 @@
 					<div class="col-md-5 col-md-push-2">
 						<div id="product-main-img">
 							<div class="product-preview">
-								<img src="../img/product01.png" alt="">
+								<img src="img/product01.png" alt="">
 							</div>
 
 							<div class="product-preview">
-								<img src="../img/product03.png" alt="">
+								<img src="img/product03.png" alt="">
 							</div>
 
 							<div class="product-preview">
-								<img src="../img/product06.png" alt="">
+								<img src="img/product06.png" alt="">
 							</div>
 
 							<div class="product-preview">
-								<img src="../img/product08.png" alt="">
+								<img src="img/product08.png" alt="">
 							</div>
 						</div>
 					</div>
@@ -152,19 +152,19 @@
 					<div class="col-md-2  col-md-pull-5">
 						<div id="product-imgs">
 							<div class="product-preview">
-								<img src="../img/product01.png" alt="">
+								<img src="img/product01.png" alt="">
 							</div>
 
 							<div class="product-preview">
-								<img src="../img/product03.png" alt="">
+								<img src="img/product03.png" alt="">
 							</div>
 
 							<div class="product-preview">
-								<img src="../img/product06.png" alt="">
+								<img src="img/product06.png" alt="">
 							</div>
 
 							<div class="product-preview">
-								<img src="../img/product08.png" alt="">
+								<img src="img/product08.png" alt="">
 							</div>
 						</div>
 					</div>
@@ -478,7 +478,7 @@
 					<div class="col-md-3 col-xs-6">
 						<div class="product">
 							<div class="product-img">
-								<img src="../img/product01.png" alt="">
+								<img src="img/product01.png" alt="">
 								<div class="product-label">
 									<span class="sale">-30%</span>
 								</div>
@@ -506,7 +506,7 @@
 					<div class="col-md-3 col-xs-6">
 						<div class="product">
 							<div class="product-img">
-								<img src="../img/product02.png" alt="">
+								<img src="img/product02.png" alt="">
 								<div class="product-label">
 									<span class="new">NEW</span>
 								</div>
@@ -541,7 +541,7 @@
 					<div class="col-md-3 col-xs-6">
 						<div class="product">
 							<div class="product-img">
-								<img src="../img/product03.png" alt="">
+								<img src="img/product03.png" alt="">
 							</div>
 							<div class="product-body">
 								<p class="product-category">Category</p>
@@ -571,7 +571,7 @@
 					<div class="col-md-3 col-xs-6">
 						<div class="product">
 							<div class="product-img">
-								<img src="../img/product04.png" alt="">
+								<img src="img/product04.png" alt="">
 							</div>
 							<div class="product-body">
 								<p class="product-category">Category</p>
@@ -732,12 +732,12 @@
 		<!-- /FOOTER -->
 
 		<!-- jQuery Plugins -->
-		<script src="../js/jquery.min.js"></script>
-		<script src="../js/bootstrap.min.js"></script>
-		<script src="../js/slick.min.js"></script>
-		<script src="../js/nouislider.min.js"></script>
-		<script src="../js/jquery.zoom.min.js"></script>
-		<script src="../js/main.js"></script>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/slick.min.js"></script>
+		<script src="js/nouislider.min.js"></script>
+		<script src="js/jquery.zoom.min.js"></script>
+		<script src="js/main.js"></script>
 
 	</body>
 </html>
