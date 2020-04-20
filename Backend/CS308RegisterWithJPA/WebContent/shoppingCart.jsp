@@ -32,19 +32,19 @@
 <link rel="stylesheet" href="css/font-awesome.min.css">
 
 <!-- Berkin CSS and JS-->
-<link rel="stylesheet" href="register.css">
+<link rel="stylesheet" href="css/register.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<link href="shopping_cart.css" rel="stylesheet">
+<link href="css/shoppingCart.css" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="shopping_cart.js"></script>
+<script type="text/javascript" src="js/shoppingCart.js"></script>
 </head>
   <header id="site-header">
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="container" style="margin-right: 22%;">
-			<a class="navbar-brand" href="home_Deniz.html"> <img src="logo.png" width="34"
+			<a class="navbar-brand" href="index.jsp"> <img src="img/logo.png" width="34"
 				height="34" class="d-inline-block align-top" alt=""> Tech
 				Market
 			</a>
@@ -155,8 +155,8 @@
                     <span class="qt-minus">-</span>
                     <span class="qt">2</span>
                     <span class="qt-plus">+</span>
-                    <h2 class="full-price"> 29.98â¬  </h2>
-                    <h2 class="price"> 14.99â¬ </h2>
+                    <h2 class="full-price"> 29.98$  </h2>
+                    <h2 class="price"> 14.99$ </h2>
                 </footer>
             </article>
             <article class="product">
@@ -171,8 +171,8 @@
                     <span class="qt-minus">-</span>
                     <span class="qt">1</span>
                     <span class="qt-plus">+</span>
-                    <h2 class="full-price"> 79.99â¬ </h2>
-                    <h2 class="price"> 79.99â¬ </h2>
+                    <h2 class="full-price"> 79.99$ </h2>
+                    <h2 class="price"> 79.99$ </h2>
                 </footer>
             </article>
             <article class="product">
@@ -190,8 +190,8 @@
                     <span class="qt-minus">-</span>
                     <span class="qt">3</span>
                     <span class="qt-plus">+</span>
-                    <h2 class="full-price">53.99â¬</h2>
-                    <h2 class="price"> 17.99â¬ </h2>
+                    <h2 class="full-price">53.99$</h2>
+                    <h2 class="price"> 17.99$ </h2>
                 </footer>
             </article>
         </section>
@@ -199,12 +199,12 @@
     <footer id="site-footer">
         <div class="container clearfix">
             <div class="left">
-                <h2 class="subtotal">Subtotal: <span>163.96</span>â¬</h2>
-                <h3 class="tax">Taxes (5%): <span>8.2</span>â¬</h3>
-                <h3 class="shipping">Shipping: <span>5.00</span>â¬</h3>
+                <h2 class="subtotal">Subtotal: <span>163.96</span>$</h2>
+                <h3 class="tax">Taxes (5%): <span>8.2</span>$</h3>
+                <h3 class="shipping">Shipping: <span>5.00</span>$</h3>
             </div>
             <div class="right">
-                <h1 class="total">Total: <span>177.16</span>â¬</h1>
+                <h1 class="total">Total: <span>177.16</span>$</h1>
 				<form action="placeorder" method="post">
                 	<a class="btn_check">Checkout</a>
 				</form>

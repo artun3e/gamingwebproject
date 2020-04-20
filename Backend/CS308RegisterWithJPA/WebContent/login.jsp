@@ -45,8 +45,8 @@
             crossorigin="anonymous"></script>
 
     <!-- Berkin CSS and JS-->
-    <link rel="stylesheet" href="register.css">
-    <script type="text/javascript" src="register.js"></script>
+    <link rel="stylesheet" href="css/register.css">
+    <script type="text/javascript" src="js/register.js"></script>
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -55,7 +55,7 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container" style="margin-right: center;">
-            <a class="navbar-brand" href="home_Deniz.jsp"> <img src="logo.png" width="34"
+            <a class="navbar-brand" href="home_Deniz.jsp"> <img src="img/logo.png" width="34"
                                                                  height="34" class="d-inline-block align-top" alt=""> Tech
                 Market
             </a>
@@ -155,7 +155,7 @@
         <div class="col"></div>
     </div>
     <div class="text-center">
-        <img src="logo.png" class="rounded" alt="Balloon" width="128">
+        <img src="img/logo.png" class="rounded" alt="Balloon" width="128">
         <p style='color: #a94442'>
         <%
             session = request.getSession();
