@@ -91,9 +91,7 @@ public class OrderServlet extends HttpServlet {
 				em.getTransaction().commit();
 				em.close();
 				emf.close();
-//<<<<<<< HEAD
 				System.out.println("Done!!!!!");
-//=======
 				System.out.println("Done placing the order in the database v2.");
 				System.out.println("All user orders are : ");
 				int countTime = 1;
@@ -103,7 +101,7 @@ public class OrderServlet extends HttpServlet {
 					System.out.println(o);
 					countTime++;
 				}
-//>>>>>>> 22ad9288440c89a6dc9ace6e6bbeaf4843b3a17a
+				session.removeAttribute("cart");
 			}
 		}
 		catch(Exception e)

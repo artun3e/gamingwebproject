@@ -143,7 +143,7 @@
 	                		out.println("</header>");
 	                		out.println("<div class=\"content_info\">");	
 	                			out.println("<h1 class= \"product_name\">"+ game.getName() +" </h1>");	
-	                			out.println(game.getDetailed_description());	
+	                			out.println(game.getShort_description());
 	                		out.println("</div>");	
 	                		out.println("<footer class=\"content\">");	
 	                			out.println("<span class=\"qt-minus\">-</span>");
@@ -170,7 +170,7 @@
                 <div class="right">
                     <h1 class="total">Total: <span>0</span>$</h1>
                     <form action="placeorder" method="post">
-                        <a class="btn_check">Checkout</a>
+                        <a class="btn">Checkout</a>
                     </form>
                 </div>
             </div>

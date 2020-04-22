@@ -139,7 +139,7 @@ $(document).ready(function(){
   
   window.setTimeout(function(){$(".is-open").removeClass("is-open")}, 1200);
   
-  $(".btn_check").click(function(){
+  $(".btn").click(function(){
     var cartItemContainer = document.getElementsByClassName('products')[0]
     var cartRows = cartItemContainer.getElementsByClassName('product')
     Item_Names = []
@@ -169,6 +169,11 @@ $(document).ready(function(){
         {
           console.log("No login.");
           window.location = "login.jsp";
+        }
+        else
+        {
+            alert("Your order has been placed!");
+            window.location = "index.jsp";
         }
       }
     });

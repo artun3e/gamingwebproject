@@ -153,9 +153,6 @@ public class GamesManager {
 	
 	public static List<Games> getRandomGames()
 	{
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
-		EntityManager em = emf.createEntityManager();
-		
 		try 
 		{
 			
@@ -192,14 +189,15 @@ public class GamesManager {
 					obj.setShort_description(rs.getString("short_description"));
 					resultList.add(obj);	
 				}
-			
+				ps.close();
+			conn.close();
+			ps = null;
+			conn = null;
 			return resultList;
 		} 
 		catch (Exception e)
 		{
 			e.printStackTrace();
-			em.close();
-			emf.close();
 			return null;
 		}
 	}

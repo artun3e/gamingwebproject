@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,8 +30,11 @@ public class AddToCartServlet extends HttpServlet {
             else {
                 System.out.println("You are logged in!!!");
             }
+            request.setCharacterEncoding("UTF-16");
             String itemName = request.getParameter("itemName");
-            System.out.println("Item Name is: " + itemName);
+            byte[] bytes = itemName.getBytes(StandardCharsets.ISO_8859_1);
+            itemName = new String(bytes, StandardCharsets.UTF_8);
+            System.out.println("New Item Name2 is: " + itemName);
             Games temp = GamesManager.getDeviceByName(itemName);
             // Add products to card variable in the session...
             if (session.getAttribute("cart") == null) {

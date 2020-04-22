@@ -48,21 +48,21 @@ public class LoginServlet extends HttpServlet {
 					HttpSession session = request.getSession();
 					PrintWriter out = response.getWriter();
 					session.setAttribute("user", searchResult);
-					out.println("<html><meta http-equiv='refresh' content='1;URL=home_Deniz.jsp'>"); //redirects after 1 second
+					out.println("<html><meta http-equiv='refresh' content='1;URL=index.jsp'>"); //redirects after 1 second
 					out.println("<p style='color:red;'>Successfully logged in, redirecting to home page...</p></html>");
 					//response.sendRedirect("home_Deniz.html");
 				}
 				else
 				{
 					PrintWriter out = response.getWriter();
-					out.println("<html><meta http-equiv='refresh' content='3;URL=register.html'>"); //redirects after 3 seconds
+					out.println("<html><meta http-equiv='refresh' content='3;URL=register.jsp'>"); //redirects after 3 seconds
 					out.println("<p style='color:red;'>Wrong Password!!!!!</p></html>");
 				}
 			}
 			else
 			{
 				PrintWriter out = response.getWriter();
-				out.println("<html><meta http-equiv='refresh' content='3;URL=register.html'>"); //redirects after 3 seconds
+				out.println("<html><meta http-equiv='refresh' content='3;URL=register.jsp'>"); //redirects after 3 seconds
 				out.println("<p style='color:red;'>No such email was found, redirecting to the register page</p></html>");
 			}
 		} catch (Exception e) {
