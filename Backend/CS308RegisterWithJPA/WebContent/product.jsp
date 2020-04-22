@@ -47,63 +47,63 @@
 	<body>
 		<!-- HEADER -->
 			<!-- TOP HEADER -->
-				<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<div class="container" style="margin-right: 22%;">
-			<a class="navbar-brand" href="index.jsp"> <img src="img/logo.png" width="34"
-				height="34" class="d-inline-block align-top" alt=""> Tech
-				Market
-			</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#navbarNav" aria-controls="navbarNav"
-				aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarNav">
-				<ul class="navbar-nav mr-auto">
-					<li class="dropdown"><a class="nav-link" href="Home_HTML">Phone
-							<span class="sr-only">(current)</span>
-					</a>
+				 <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container" style="margin-right: center;">
+            <a class="navbar-brand" href="index.jsp"> <img src="img/logo.png" width="34"
+                                                                 height="34" class="d-inline-block align-top" alt=""> Tech
+                Market
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarNav" aria-controls="navbarNav"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                     <li class="dropdown"><a class="nav-link" href="Home_HTML">Action
+                        <span class="sr-only">(current)</span>
+                    </a>
 
-</li>
-					<li class="dropdown" style="margin-left: 5%;"><a
-						class="nav-link" href="Home_HTML">TV <span class="sr-only">(current)</span></a>
-</li>
-					<li class="dropdown" style="margin-left: 5%;"><a
-						class="nav-link" href="Home_HTML">Computer <span
-							class="sr-only">(current)</span></a>
+                    <li class="dropdown" style="margin-left: 5%;"><a
+                            class="nav-link" href="Home_HTML">Multiplayer <span class="sr-only">(current)</span></a>
 
-						</li>
-					<li class="dropdown" style="margin-left: 5%;"><a
-						class="nav-link" href="Home_HTML">Camera <span class="sr-only">(current)</span></a>
+					</li>
+                    <li class="dropdown" style="margin-left: 5%;"><a
+                            class="nav-link" href="Home_HTML"> Sports <span
+                            class="sr-only">(current)</span></a>
 
-						</li>
-					<li class="dropdown" style="margin-left: 5%;"><a
-						class="nav-link" href="Home_HTML">Home_Appliances<span
-							class="sr-only">(current)</span></a>
-						</li>
-					<li class="dropdown" style="margin-left: 5%;"><a
-						class="nav-link" href="Home_HTML">Console<span class="sr-only">(current)</span></a>
-						</li>
-					<li style="margin-left: 5%; margin-top: 5px;"><input id="search"  type="text" placeholder="Search.."  onkeydown="if (event.keyCode == 13) { search(); }"></li>
-					<li class="dropdown" style="margin-left: 5%;"><a
-						class="fa fa-user" style="font-size: 34px; color: grey;"></a>
-							 <div class="dropdown-content">
+                    </li>
+                    <li class="dropdown" style="margin-left: 5%;"><a
+                            class="nav-link" href="Home_HTML"> FPS <span class="sr-only">(current)</span></a>
+
+                   </li>
+                    <li class="dropdown" style="margin-left: 5%;"><a
+                            class="nav-link" href="Home_HTML"> RPG <span
+                            class="sr-only">(current)</span></a>
+                   </li>
+                    <li class="dropdown" style="margin-left: 5%;"><a
+                            class="nav-link" href="Home_HTML">Strategy<span class="sr-only">(current)</span></a>
+                    <li style="margin-left: 5%; margin-top: 5px;"><input id="search"  type="text" placeholder="Search.."  onkeydown="if (event.keyCode == 13) { search(); }"></li>
+                    <li class="dropdown" style="margin-left: 5%;"><a
+                            class="fa fa-user" style="font-size: 34px; color: grey;"></a>
+
+                        <div class="dropdown-content">
                             <a href="login.jsp">Login</a> 
-                            <a href="register.jsp">Register</a> 
-                            <a href="myOrders.jsp">My Orders</a> 
-                            <a href="#account">Account</a> 
+                            <a href="register.jsp">Register</a> <a
+                                href="#orders">My Orders</a> <a href="#account">Account</a> <a
+                                href="#liked">Liked Ones</a>
                         </div></li>
-						</li>
-					<a class="fa fa-shopping-cart" href="shoppingCart.jsp" style="font-size: 34px; color: grey; margin-left: 10%;"></a>
-				</ul>
-			</div>
-		</div>
-	</nav>
+                    <a class="fa fa-shopping-cart" href="shoppingCart.jsp" style="font-size: 34px; color: grey; margin-left: 10%;"></a>
+                </ul>
+            </div>
+        </div>
+    </nav>
 	
 
 		<!-- SECTION -->
 		
 			<!-- container -->
+			<div class="main">
 			<div class="container">
 				<!-- row -->
 				<div class="row">
@@ -111,19 +111,19 @@
 					<div class="col-md-5 col-md-push-2">
 						<div id="product-main-img">
 							<div class="product-preview">
-								<img id="detail-img" src="img/product01.png" alt="">
+								<img id="detail-img" src="" alt="">
 							</div>
 
 							<div class="product-preview">
-								<img src="img/product03.png" alt="">
+								<img src="" alt="">
 							</div>
 
 							<div class="product-preview">
-								<img src="img/product06.png" alt="">
+								<img src="" alt="">
 							</div>
 
 							<div class="product-preview">
-								<img src="img/product08.png" alt="">
+								<img src="" alt="">
 							</div>
 						</div>
 					</div>
@@ -133,19 +133,19 @@
 					<div class="col-md-2  col-md-pull-5">
 						<div id="product-imgs">
 							<div class="product-preview">
-								<img src="img/product01.png" alt="">
+								<img src="" alt="">
 							</div>
 
 							<div class="product-preview">
-								<img src="img/product03.png" alt="">
+								<img src="" alt="">
 							</div>
 
 							<div class="product-preview">
-								<img src="img/product06.png" alt="">
+								<img src="" alt="">
 							</div>
 
 							<div class="product-preview">
-								<img src="img/product08.png" alt="">
+								<img src="" alt="">
 							</div>
 						</div>
 					</div>
@@ -185,14 +185,9 @@
 
 							<ul class="product-btns">
 								<li><a href="#"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
-								<li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li>
+								
 							</ul>
 
-							<ul class="product-links">
-								<li>Category:</li>
-								<li><a href="#">Headphones</a></li>
-								<li><a href="#">Accessories</a></li>
-							</ul>
 
 							<ul class="product-links">
 								<li>Share:</li>
@@ -424,6 +419,7 @@
 				<!-- /row -->
 			</div>
 			<!-- /container -->
+			</div>
 		</div>
 		<!-- /SECTION -->
 

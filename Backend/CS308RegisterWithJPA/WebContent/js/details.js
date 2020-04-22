@@ -38,6 +38,8 @@ async function getData(value){
     	 var image = document.getElementById('detail-img');
     	 var price = document.getElementById('detail-price');
     	 var description = document.getElementById('detail-description');
+    	 var descriptionTab = document.getElementsByClassName("col-md-12")[0].getElementsByTagName('p')[0];
+    	 console.log(descriptionTab);
     	 name.innerHTML = data[0].name;
     	 var images = data[0].screenshots;
      	 imagesArr = images.split(',');
@@ -72,7 +74,8 @@ async function getData(value){
          sid7.src =sideValue3;
          sid8.src =sideValue4;
     	 price.innerHTML = data[0].price + "$";
-    	 description.innerHTML = data[0].detailed_description;
+    	 description.innerHTML = data[0].short_description;
+    	 descriptionTab.innerHTML = data[0].detailed_description;
     }
 	
 	var parsed = parseURLParams(window.location.href);
