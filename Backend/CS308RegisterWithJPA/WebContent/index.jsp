@@ -62,35 +62,31 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
-  					<li class="dropdown">
-  						<a class="nav-link" href="Home_HTML">Action <span class="sr-only">(current)</span></a>
-					</li>
-                    <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="Home_HTML">Multiplayer <span class="sr-only">(current)</span></a>
-					</li>
-                    <li class="dropdown" style="margin-left: 5%;"><a
-                            class="nav-link" href="Home_HTML"> Sports <span
-                            class="sr-only">(current)</span></a>
-
-                    </li>
-                    <li class="dropdown" style="margin-left: 5%;"><a
-                            class="nav-link" href="Home_HTML"> FPS <span class="sr-only">(current)</span></a>
-
-                   </li>
-                    <li class="dropdown" style="margin-left: 5%;"><a
-                            class="nav-link" href="Home_HTML"> RPG <span
-                            class="sr-only">(current)</span></a>
-                   </li>
-                    <li class="dropdown" style="margin-left: 5%;"><a
-                            class="nav-link" href="Home_HTML">Strategy<span class="sr-only">(current)</span></a>
+  					<li class="dropdown"><a class="nav-link" href="#" value="Action">Action</a></li>
+                    <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="Multiplayer">Multiplayer</a></li>
+                    <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="Sports">Sports</a></li>
+                    <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="FPS">FPS</a></li>
+                    <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="RPG">RPG</a></li>
+                    <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="Strategy">Strategy</span></a>
 
                     <li style="margin-left: 5%; margin-top: 12px;"><input id="search"  type="text" placeholder="Search.."  onkeydown="if (event.keyCode == 13) { search(); }"></li>
                     <li class="dropdown" style="margin-left: 5%;">
                     	<a class="fa fa-user" style="font-size: 34px; color: grey;"></a>
 
                         <div class="dropdown-content">
-                            <a href="login.jsp">Login</a> <a href="register.html">Register</a> <a
-                                href="#orders">My Orders</a> <a href="#account">Account</a> <a
-                                href="#liked">Liked Ones</a>
+                        	<% 
+                        		session = request.getSession();
+                        		if(session.getAttribute("user") != null)
+	                        	{
+                        			/* out.println("<a href=\"#account\">Account</a>");
+                        			out.println("<a href=\"#liked\">Liked Ones</a>"); */
+                        			out.println("<a href=\"#orders\">My Orders</a> ");
+	                        	}
+                        		else{
+                        			out.println("<a href=\"login.jsp\">Login</a>");
+                        			out.println("<a href=\"register.jsp\">Register</a>");
+                        		}
+                        	%>
                         </div>
                      </li>
                      <li class="dropdown" style="margin-left: 5%;">
@@ -98,14 +94,14 @@
                     </li>
                     <p style="margin-left: 5%;">
                     	<%
-	                        session = request.getSession();
+	                        
 	                        if(session.getAttribute("user") != null)
 	                        {
 	                            Object obj = session.getAttribute("user");
 	                            User user = (User) obj;
 	                            out.print("Hello, " + user.getName());
 	                        }
-	            		%>
+                    	%>
 	            	</p>
                 </ul>
             </div>
@@ -126,12 +122,12 @@
             }
         %>
     </p>
-    <div class="main">
+    <div class="main" >
 
 
     <div class="container">
         <!-- row -->
-        <div class="row">
+        <div class="row" ">
             <!-- ASIDE -->
             <div id="aside" class="col-md-3">
                 <!-- aside Widget -->
@@ -197,7 +193,7 @@
                 <!-- /aside Widget -->
 
                 <!-- aside Widget -->
-                <div class="aside">
+                <!-- <div class="aside">
                     <h3 class="aside-title">Price</h3>
                     <div class="price-filter">
                         <div id="price-slider" class="noUi-target noUi-ltr noUi-horizontal"><div class="noUi-base"><div class="noUi-origin" style="left: 0%;"><div class="noUi-handle noUi-handle-lower" data-handle="0" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="0.0" aria-valuemax="100.0" aria-valuenow="0.0" aria-valuetext="1.00" style="z-index: 5;"></div></div><div class="noUi-connect" style="left: 0%; right: 0%;"></div><div class="noUi-origin" style="left: 100%;"><div class="noUi-handle noUi-handle-upper" data-handle="1" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="0.0" aria-valuemax="100.0" aria-valuenow="100.0" aria-valuetext="999.00" style="z-index: 4;"></div></div></div></div>
@@ -213,7 +209,7 @@
                             <span class="qty-down">-</span>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- /aside Widget -->
 
                 <!-- aside Widget
@@ -274,39 +270,30 @@
 
                 <!-- aside Widget -->
                 <div class="aside">
-                    <h3 class="aside-title">Top selling</h3>
-                    <div class="product-widget">
-                        <div class="product-img">
-                            <img src="./img/product01.png" alt="">
-                        </div>
-                        <div class="product-body">
-                            <p class="product-category">Category</p>
-                            <h3 class="product-name"><a onclick="toDetails(this)" href="#">Counter-Strike</a></h3>
-                            <h4 class="product-price">$50.00 <del class="product-old-price">$990.00</del></h4>
-                        </div>
-                    </div>
-
-                    <div class="product-widget">
-                        <div class="product-img">
-                            <img src="./img/product02.png" alt="">
-                        </div>
-                        <div class="product-body">
-                            <p class="product-category">Category</p>
-                            <h3 class="product-name"><a onclick="toDetails(this)" href="#">Half-Life</a></h3>
-                            <h4 class="product-price">$20.00 <del class="product-old-price">$990.00</del></h4>
-                        </div>
-                    </div>
-
-                    <div class="product-widget">
-                        <div class="product-img">
-                            <img src="./img/product03.png" alt="">
-                        </div>
-                        <div class="product-body">
-                            <p class="product-category">Category</p>
-                            <h3 class="product-name"><a onclick="toDetails(this)" href="#">Company of Heroes - Legacy Edition</a></h3>
-                            <h4 class="product-price">$35.00 <del class="product-old-price">$990.00</del></h4>
-                        </div>
-                    </div>
+                    <h3 class="aside-title">YOU MIGHT LIKE</h3>
+                    <%
+                    	List<Games> myGames_2 = (List<Games>)GamesManager.getRandomGames();
+                        int k = 0;
+                        for(Games game : myGames_2)
+                        {
+                        	if(k ==3) break;
+                        	Random r = new Random();
+       						Integer random = r.nextInt((30 - 20) + 1) + 20;
+       						out.println("<div class=\"product-widget\">");
+       							out.println("<div class=\"product-img\">");
+       								out.println("<img src=" + game.getHeader_image() + " alt=\"\">");
+       							out.println("</div>");
+       							out.println("<div class=\"product-body\">");
+       								out.println("<p class=\"product-category\"> "+ game.getPublisher() +"</p>");
+       								out.println("<h3 class=\"product-name\"><a onclick=\"toDetails(this)\" href=\"#\">"+ game.getName() + "</a></h3>");
+       								out.println("<h4 class=\"product-price\">$"+ game.getPrice() + "<del class=\"product-old-price\">$" + (int)(game.getPrice() + random) + "</del></h4>");
+       							out.println("</div>");
+       						out.println("</div>");	
+       						k++;
+                        }
+                    %>
+                    
+                    
                 </div>
                 <!-- /aside Widget -->
             </div>
@@ -368,11 +355,11 @@
 		                				out.println("<i class=\"fa fa-star\"></i>");	
 		                				out.println("<i class=\"fa fa-star-o\"></i>");
 		                			out.println("</div>");
-	                				out.println("<div class=\"product-btns\">");	
-	                					out.println("<button class=\"add-to-wishlist\"><i class=\"fa fa-heart-o\"></i><span class=\"tooltipp\">add to wishlist</span></button>");
-	                					out.println("<button class=\"add-to-compare\"><i class=\"fa fa-exchange\"></i><span class=\"tooltipp\">add to compare</span></button>");
-	                					out.println("<button class=\"quick-view\"><i class=\"fa fa-eye\"></i><span class=\"tooltipp\">quick view</span></button>");
-	                				out.println("</div>");
+	                				//out.println("<div class=\"product-btns\">");	
+	                				//	out.println("<button class=\"add-to-wishlist\"><i class=\"fa fa-heart-o\"></i><span class=\"tooltipp\">add to wishlist</span></button>");
+	                				//	out.println("<button class=\"add-to-compare\"><i class=\"fa fa-exchange\"></i><span class=\"tooltipp\">add to compare</span></button>");
+	                				//	out.println("<button class=\"quick-view\"><i class=\"fa fa-eye\"></i><span class=\"tooltipp\">quick view</span></button>");
+	                				//out.println("</div>");
 	                			out.println("</div>");
 	                			out.println("<div class=\"add-to-cart\">");
 	                				out.println("<button class=\"add-to-cart-btn\"><i class=\"fa fa-shopping-cart\"></i> cart</button>");
@@ -408,7 +395,7 @@
                 <!-- /store products -->
                 <!-- store bottom filter -->
                 <div class="store-filter clearfix">
-                    <span class="store-qty">Showing 9-45 products</span>
+                    <span class="store-qty">Showing 9 products</span>
                     <%
                         System.out.println("We are in Home Page");
                         if(request.getSession().getAttribute("cart") != null){

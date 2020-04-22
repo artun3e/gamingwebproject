@@ -178,7 +178,7 @@ $(document).ready(function(){
       }
     });
     var data_about = JSON.stringify({"list_names": Item_Names, "list_q": Item_Q });
-    var params = 'list_names='+Item_Names+'&list_q='+Item_Q;
+    var params = 'list_names='+Item_Names+'&list_q='+Item_Q; // + '&quantity' + 12;
     console.log(data_about);
     xhr.send(params);
   });

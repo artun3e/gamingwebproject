@@ -200,8 +200,8 @@ public class GamesManager {
                 Random r = new Random();
                 Integer random = r.nextInt((30 - 20) + 1) + 20;
 				System.out.println("Game found game is: " + rs.getString("name"));
-                String temp = "<div class=\"col-md-4 col-xs-6\">"
-                        + "<div class=\"product\">"
+                String temp = 
+                         "<div class=\"product\">"
                         + "<div class=\"product-img\">"
                         + "<img src=\"" + rs.getString("header_image") + " alt=\"\">"
                         + "<div class=\"product-label\">"
@@ -219,15 +219,14 @@ public class GamesManager {
                         + "<i class=\"fa fa-star\"></i>"
                         + "<i class=\"fa fa-star-o\"></i>"
                         + "</div>"
-                        + "<div class=\"product-btns\">"
-                        + "<button class=\"add-to-wishlist\"><i class=\"fa fa-heart-o\"></i><span class=\"tooltipp\">add to wishlist</span></button>"
-                        + "<button class=\"add-to-compare\"><i class=\"fa fa-exchange\"></i><span class=\"tooltipp\">add to compare</span></button>"
-                        + "<button class=\"quick-view\"><i class=\"fa fa-eye\"></i><span class=\"tooltipp\">quick view</span></button>"
-                        + "</div>"
+                      //+ "<div class=\"product-btns\">"
+                      //+ "<button class=\"add-to-wishlist\"><i class=\"fa fa-heart-o\"></i><span class=\"tooltipp\">add to wishlist</span></button>"
+                      //+ "<button class=\"add-to-compare\"><i class=\"fa fa-exchange\"></i><span class=\"tooltipp\">add to compare</span></button>"
+                      //+ "<button class=\"quick-view\"><i class=\"fa fa-eye\"></i><span class=\"tooltipp\">quick view</span></button>"
+                      //+ "</div>"
                         + "</div>"
                         + "<div class=\"add-to-cart\">"
                         + "<button class=\"add-to-cart-btn\"><i class=\"fa fa-shopping-cart\"></i> cart</button>"
-                        + "</div>"
                         + "</div>"
                         + "</div>";
                 resultArray.add(temp);
@@ -288,6 +287,68 @@ public class GamesManager {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("randomJSON/")
+    public List<String> getRandomGames_JSON() {
+        List<String> resultList = new ArrayList<String>();
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Games ORDER BY RAND() LIMIT 9");
+            ResultSet rs = ps.executeQuery();
+
+            // attributes for the Games class : name', 'release_date', 'developer', 'publisher', 'platforms',
+            //'required_age', 'categories', 'genres', 'steamspy_tags',
+            //'number_of_players', 'price', 'rating'],
+
+            while (rs.next()) {
+            	Random r = new Random();
+                Integer random = r.nextInt((30 - 20) + 1) + 20;
+				System.out.println("Game found game is: " + rs.getString("name"));
+                String temp = 
+                         "<div class=\"product\">"
+                        + "<div class=\"product-img\">"
+                        + "<img src=\"" + rs.getString("header_image") + " alt=\"\">"
+                        + "<div class=\"product-label\">"
+                        + "<span class=\"new\">NEW</span>"
+                        + "</div>"
+                        + "</div>"
+                        + "<div class=\"product-body\">"
+                        + "<p class=\"product-category\">" + rs.getString("steamspy_tags") + "</p>"
+                        + "<h3 class=\"product-name\"><a onclick=\"toDetails(this)\" href=\"#\">" + rs.getString("name") + "</a></h3>"
+                        + "<h4 class=\"product-price\">$" + rs.getDouble("price") + "<del class=\"product-old-price\">$" + ((int) rs.getDouble("price") + random) + ".00</del></h4>"
+                        + "<div class=\"product-rating\">"
+                        + "<i class=\"fa fa-star\"></i>"
+                        + "<i class=\"fa fa-star\"></i>"
+                        + "<i class=\"fa fa-star\"></i>"
+                        + "<i class=\"fa fa-star\"></i>"
+                        + "<i class=\"fa fa-star-o\"></i>"
+                        + "</div>"
+                        //+ "<div class=\"product-btns\">"
+                        //+ "<button class=\"add-to-wishlist\"><i class=\"fa fa-heart-o\"></i><span class=\"tooltipp\">add to wishlist</span></button>"
+                        //+ "<button class=\"add-to-compare\"><i class=\"fa fa-exchange\"></i><span class=\"tooltipp\">add to compare</span></button>"
+                        //+ "<button class=\"quick-view\"><i class=\"fa fa-eye\"></i><span class=\"tooltipp\">quick view</span></button>"
+                        //+ "</div>"
+                        + "</div>"
+                        + "<div class=\"add-to-cart\">"
+                        + "<button class=\"add-to-cart-btn\"><i class=\"fa fa-shopping-cart\"></i> cart</button>"
+                        + "</div>"
+                        + "</div>";
+                resultList.add(temp);
+            }
+            ps.close();
+            conn.close();
+            rs.close();
+            rs=null;
+            ps = null;
+            conn = null;
+            return resultList;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return resultList;
         }
     }
 
