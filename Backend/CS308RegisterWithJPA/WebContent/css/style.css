@@ -872,9 +872,9 @@ textarea.input {
 }
 
 .product .product-img>img {
-  width: 95%;
-    width: 420px;
-  height: 250px;
+  width: 100%;
+    width: 260px;
+  height: 200px;
 }
 
 .product .product-img .product-label {
