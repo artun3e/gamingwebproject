@@ -50,4 +50,5 @@ async function getData(value){
 	
 	var parsed = parseURLParams(window.location.href);
     getData(parsed);
-   
+    console.log(parsed);
+    document.title = parsed.name[0];
