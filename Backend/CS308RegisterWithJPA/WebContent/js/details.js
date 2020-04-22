@@ -17,8 +17,8 @@
     }
     return parms;
 }
-
-
+   
+ 
 
     //goes to url which returns json list
     /*window.location.href = 'searchResults.html';*/
@@ -81,3 +81,4 @@ async function getData(value){
 	var parsed = parseURLParams(window.location.href);
     getData(parsed);
     document.title = parsed.name[0];
+    refineURL();

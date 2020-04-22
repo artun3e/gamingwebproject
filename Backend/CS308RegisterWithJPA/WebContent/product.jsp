@@ -37,6 +37,7 @@
 <script type="text/javascript" src="js/register.js"></script>
 <script src="js/search.js"></script>
 <script src="js/details.js"></script>
+<script src="js/toDetails.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		
