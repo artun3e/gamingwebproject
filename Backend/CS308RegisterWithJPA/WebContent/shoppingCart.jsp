@@ -23,27 +23,27 @@
 	crossorigin="anonymous"></script>
 
 <!-- Template CSS and JS-->
-<script src="/../js/jquery.min.js"></script>
-<script src="/../js/bootstrap.min.js"></script>
-<script src="/../js/slick.min.js"></script>
-<script src="/../js/nouislider.min.js"></script>
-<script src="/../js/jquery.zoom.min.js"></script>
-<script src="/../js/main.js"></script>
- <link type="text/css" rel="stylesheet" href="/../css/bootstrap.min.css">
-<link type="text/css" rel="stylesheet" href="/../css/slick.css">
-<link type="text/css" rel="stylesheet" href="/../css/nouislider.min.css">
-<link rel="stylesheet" href="/../css/font-awesome.min.css">
-<link type="text/css" rel="stylesheet" href="/../css/style.css">
-<script src="../js/search.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/slick.min.js"></script>
+<script src="js/nouislider.min.js"></script>
+<script src="js/jquery.zoom.min.js"></script>
+<script src="js/main.js"></script>
+ <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
+<link type="text/css" rel="stylesheet" href="css/slick.css">
+<link type="text/css" rel="stylesheet" href="css/nouislider.min.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link type="text/css" rel="stylesheet" href="css/style.css">
+<script src="js/search.js"></script>
 <!-- Berkin CSS and JS-->
-<link rel="stylesheet" href="/../css/register.css">
+<link rel="stylesheet" href="css/register.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<link href="/../css/shoppingCart.css" rel="stylesheet">
+<link href="css/shoppingCart.css" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/../js/shoppingCart.js"></script>
+<script type="text/javascript" src="js/shoppingCart.js"></script>
 </head>
   <header id="site-header">
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -99,6 +99,8 @@
 			</div>
 		</div>
 	</nav>
+	<div class="main">
+	
  	<div class="container">
             <h1 class= "cart">Shopping cart</h1>
             <h5 class= "cart" style="margin-top: -1%;">
@@ -116,6 +118,7 @@
 		    	%>
 	    	</h5>
     </div>
+    </div>
 	</header>
     <body>
     <div class="container">
@@ -126,8 +129,8 @@
         	<%
 	        	System.out.println("We are in Cart Page");
 	            if(request.getSession().getAttribute("cart") != null){
-	                //The cart is NOT null. Thus there is some products in the cart. Let's display them.
-	                //System.out.println("Cart has elements.");
+	               //The cart is NOT null. Thus there is some products in the cart. Let's display them.
+	               //System.out.println("Cart has elements.");
 	                Map<Games, Integer> cartMap = (HashMap)request.getSession().getAttribute("cart");
 	                
 	                for(Games game : cartMap.keySet())
@@ -151,8 +154,8 @@
 	                			out.println("<h2 class=\"price\"> "+ game.getPrice() +"$</h2>");
 	                		out.println("</footer>");	
 	                	out.println("</article>");
-	                    //System.out.println(game.getName() + ": " + cartMap.get(game));
-	                    //out.println(game.getName() + ": " + cartMap.get(game) + "</br>");
+	                   //System.out.println(game.getName() + ": " + cartMap.get(game));
+	                   //out.println(game.getName() + ": " + cartMap.get(game) + "</br>");
 	                }
 	            }
 			%>
