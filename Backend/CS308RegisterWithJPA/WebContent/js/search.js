@@ -21,14 +21,12 @@ async function getData(){
     }        
         var productHTML= '<div class="product">'+
 		'<div class="product-img">'+
-			'<div class="search-img">'+
-			'<img src="product01.png" alt="" width="380px" height="260px">'+
-			'</div>'+
-			'<div class="product-label">'+
-				'<span class="sale"></span>'+
-				'<span class="new"></span>'+
-			'</div>'+
+		'<img src="product01.png" alt="">'+
+		'<div class="product-label">'+
+			'<span class="sale"></span>'+
+			'<span class="new"></span>'+
 		'</div>'+
+	'</div>'+
 		'<div class="product-body">'+
 			'<p class="product-category"> <a href="product.jsp"> Category </a></p>'+
 			'<h3 class="product-name"> </h3>'+
@@ -65,11 +63,16 @@ async function getData(){
         function fillCard(element, k){ //fill the card with necessary information
         	createNewCard();
         	var images = element.screenshots;
+        	var newImg = element.header_image;
         	imagesArr = images.split(',');
         	var image = imagesArr[1].split("': ");
             var imgvalue = image[1].replace(/['"]+/g, '');
             var img = document.getElementsByClassName("product-img")[k].getElementsByTagName('img')[0];
-            img.src = imgvalue;
+            img.src = newImg;
+            console.log(img.width);
+            img.style.width = "550px";
+            console.log(img.height);
+            img.style.height = "300px"
         	var brand = document.getElementsByClassName("product-body")[k].getElementsByTagName('p')[0];
             var name = document.getElementsByClassName("product-body")[k].getElementsByTagName('h3')[0];
             var price = document.getElementsByClassName("product-body")[k].getElementsByTagName('h4')[0];

@@ -39,6 +39,7 @@ async function getData(value){
     	 var price = document.getElementById('detail-price');
     	 var description = document.getElementById('detail-description');
     	 var descriptionTab = document.getElementsByClassName("col-md-12")[0].getElementsByTagName('p')[0];
+    	 var requirementTab = document.getElementById("tab2");
     	 console.log(descriptionTab);
     	 name.innerHTML = data[0].name;
     	 var images = data[0].screenshots;
@@ -76,9 +77,9 @@ async function getData(value){
     	 price.innerHTML = data[0].price + "$";
     	 description.innerHTML = data[0].short_description;
     	 descriptionTab.innerHTML = data[0].detailed_description;
+    	 requirementTab.innerHTML = data[0].minimum;
     }
 	
 	var parsed = parseURLParams(window.location.href);
     getData(parsed);
     document.title = parsed.name[0];
-    refineURL();
