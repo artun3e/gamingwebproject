@@ -114,34 +114,62 @@ public class GamesManager {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("byCategory/{cat1}/{cat2}/{cat3}/{cat4}/{cat5}")
-    public List<Games> findByCategory(@PathParam("cat1") String category0, @PathParam("cat2") String category1, @PathParam("cat3") String category2, @PathParam("cat4") String category3, @PathParam("cat5") String category4) {
-        List<Games> resultArray = new ArrayList<Games>();
+    public List<String> findByCategory(@PathParam("cat1") String category0, @PathParam("cat2") String category1, @PathParam("cat3") String category2, @PathParam("cat4") String category3, @PathParam("cat5") String category4) {
+        List<String> resultArray = new ArrayList<String>();
         System.out.println("Function called...");
         try {
+            System.out.println("Cat1 " + category0);
+            System.out.println("Cat2 " + category1);
+            System.out.println("Cat3 " + category2);
+            System.out.println("Cat4 " + category3);
+            System.out.println("Cat5 " + category4);
 			Connection conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
-            PreparedStatement ps = conn.prepareStatement("Select * from Games where steamspy_tags like ? and steamspy_tags like ? and steamspy_tags like ? and steamspy_tags like ? and steamspy_tags like ? LIMIT 9");
-            if (category0 != "null")
-                ps.setString(1, "'%" + category0 + "%'");
+            PreparedStatement ps = conn.prepareStatement("Select * from Games where steamspy_tags like CONCAT( '%',?,'%') and steamspy_tags like CONCAT( '%',?,'%') and steamspy_tags like CONCAT( '%',?,'%') and steamspy_tags like CONCAT( '%',?,'%') and steamspy_tags like CONCAT( '%',?,'%') LIMIT 9");
+            if (!category0.contentEquals("null"))
+            {
+                ps.setString(1, category0);
+                System.out.println("Cat 1 was not null");
+            }
             else
-                ps.setString(1, "'% %'");
-            if (category1 != "null")
-				ps.setString(2, "'%" + category1 + "%'");
-            else
-				ps.setString(2, "'% %'");
-            if (category2 != "null")
-				ps.setString(3, "'%" + category2 + "%'");
-            else
-				ps.setString(3, "'% %'");
-            if (category3 != "null")
-				ps.setString(4, "'%" + category3 + "%'");
-            else
-				ps.setString(4, "'% %'");
-            if (category4 != "null")
-				ps.setString(5, "'%" + category4 + "%'");
-            else
-				ps.setString(5, "'% %'");
+            {
+                ps.setString(1, " ");
+                System.out.println("Cat 1 was null");
+            }
+            if (!category1.contentEquals("null"))
+            {
+                ps.setString(2, category1);
+                System.out.println("Cat 2 was not null");
+            }
+            else {
+                ps.setString(2, " ");
+                System.out.println("Cat 2 was null");
+            }
+            if (!category2.contentEquals("null")) {
+                ps.setString(3, category2);
+                System.out.println("Cat 3 was not null");
+            }
+            else {
+                ps.setString(3, " ");
+                System.out.println("Cat 3 was null");
+            }
+            if (!category3.contentEquals("null")) {
+                ps.setString(4, category3);
+                System.out.println("Cat 4 was not null");
+            }
+            else {
+                ps.setString(4, " ");
+                System.out.println("Cat 4 was null");
+            }
+            if (!category4.contentEquals("null")) {
+                ps.setString(5, category4);
+                System.out.println("Cat 5 was not null");
+            }
+            else {
+                ps.setString(5, " ");
+                System.out.println("Cat 5 was null");
+            }
             ResultSet rs = ps.executeQuery();
-            System.out.println("On top of the while loop");
+            /*System.out.println("On top of the while loop");
 			while (rs.next()) {
 				Games obj = new Games();
 				obj.setAppID(rs.getInt("appid"));
@@ -167,8 +195,8 @@ public class GamesManager {
 				System.out.println("Game name is " + obj.getName());
 				resultArray.add(obj);
 			}
-            System.out.println("at the end of the while loop");
-            /*while(rs.next()) {
+            System.out.println("at the end of the while loop");*/
+            while(rs.next()) {
                 Random r = new Random();
                 Integer random = r.nextInt((30 - 20) + 1) + 20;
 				System.out.println("Game found game is: " + rs.getString("name"));
@@ -203,7 +231,7 @@ public class GamesManager {
                         + "</div>"
                         + "</div>";
                 resultArray.add(temp);
-            }*/
+            }
             conn.close();
             ps.close();
             rs.close();
