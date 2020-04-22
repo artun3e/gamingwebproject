@@ -7,7 +7,7 @@ function search()
 async function getData(){
     	const response = await fetch(url);
     	const data = await response.json();
-    	clearDiv();
+       	clearDiv();
     	for (var k = 0; k < data.length; k++){
     		fillCard(data[k], k);
     	} //
@@ -61,16 +61,17 @@ async function getData(){
         
         function fillCard(element, k){ //fill the card with necessary information
         	createNewCard();
-        	var images = element.imageURLs;
-            var imagesArr = images.split(',');
-            var imgvalue = imagesArr[7];
+        	var images = element.screenshots;
+        	imagesArr = images.split(',');
+        	console.log(imagesArr);
+        	var image = imagesArr[1].split("': ");
+            var imgvalue = image[1].replace(/['"]+/g, '');
             var img = document.getElementsByClassName("product-img")[k].getElementsByTagName('img')[0];
             img.src = imgvalue;
-            checkImage(img,imagesArr);
         	var brand = document.getElementsByClassName("product-body")[k].getElementsByTagName('p')[0];
             var name = document.getElementsByClassName("product-body")[k].getElementsByTagName('h3')[0];
             var price = document.getElementsByClassName("product-body")[k].getElementsByTagName('h4')[0];
-            brand.innerHTML = element.brand;
+            brand.innerHTML = element.publisher;
             name.innerHTML = element.name;
             price.innerHTML = "$" + element.price;
             }
