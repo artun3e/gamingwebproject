@@ -28,8 +28,8 @@ async function getData(){
 			'</div>'+
 		'</div>'+
 		'<div class="product-body">'+
-			'<p class="product-category">Category</p>'+
-			'<h3 class="product-name"><a href="#">product name goes here</a></h3>'+
+			'<p class="product-category"> <a href="product.jsp"> Category </a></p>'+
+			'<h3 class="product-name"> </h3>'+
 			'<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>'+
 			'<div class="product-rating">'+
 				'<i class="fa fa-star"></i>'+
@@ -48,6 +48,7 @@ async function getData(){
 			'<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>'+
 		'</div>'+
 	'</div>';
+	
         
         function createNewCard(){ //creates new element in html for each product
             var p = document.getElementsByClassName("main")[0];
@@ -63,7 +64,6 @@ async function getData(){
         	createNewCard();
         	var images = element.screenshots;
         	imagesArr = images.split(',');
-        	console.log(imagesArr);
         	var image = imagesArr[1].split("': ");
             var imgvalue = image[1].replace(/['"]+/g, '');
             var img = document.getElementsByClassName("product-img")[k].getElementsByTagName('img')[0];
@@ -72,7 +72,7 @@ async function getData(){
             var name = document.getElementsByClassName("product-body")[k].getElementsByTagName('h3')[0];
             var price = document.getElementsByClassName("product-body")[k].getElementsByTagName('h4')[0];
             brand.innerHTML = element.publisher;
-            name.innerHTML = element.name;
+            name.innerHTML = '<a onclick="toDetails(this)" href="#">' + element.name + '</a>' ;
             price.innerHTML = "$" + element.price;
             }
         

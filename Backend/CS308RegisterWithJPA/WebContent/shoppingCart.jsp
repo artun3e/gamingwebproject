@@ -35,6 +35,7 @@
 <link rel="stylesheet" href="css/font-awesome.min.css">
 <link type="text/css" rel="stylesheet" href="css/style.css">
 <script src="js/search.js"></script>
+<script src="js/toDetails.js"></script>
 <!-- Berkin CSS and JS-->
 <link rel="stylesheet" href="css/register.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

@@ -46,6 +46,7 @@
 
     <!-- Berkin CSS and JS-->
     <script src="js/search.js"></script>
+        <script src="js/toDetails.js"></script>
     <link rel="stylesheet" href="css/register.css">
         <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="css/slick.css">
