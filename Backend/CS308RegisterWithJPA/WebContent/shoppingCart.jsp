@@ -29,11 +29,12 @@
 <script src="js/nouislider.min.js"></script>
 <script src="js/jquery.zoom.min.js"></script>
 <script src="js/main.js"></script>
- <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
-<link type="text/css" rel="stylesheet" href="css/slick.css">
-<link type="text/css" rel="stylesheet" href="css/nouislider.min.css">
-<link rel="stylesheet" href="css/font-awesome.min.css">
-<link type="text/css" rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/register.css">
+        <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="css/slick.css">
+    <link type="text/css" rel="stylesheet" href="css/nouislider.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="css/style.css">
 <script src="js/search.js"></script>
 <script src="js/toDetails.js"></script>
 <!-- Berkin CSS and JS-->
@@ -101,10 +102,10 @@
 		</div>
 	</nav>
 	<div class="main">
-	
- 	<div class="container">
-            <h1 class= "cart">Shopping cart</h1>
-            <h5 class= "cart" style="margin-top: -1%;">
+
+    <div class="container">
+        <h1 class="cart">Shopping cart</h1>
+        <h5 class="cart" style="margin-top: -1%;">
 	            <%
 					session = request.getSession();
 					if(session.getAttribute("user") != null)
@@ -118,22 +119,19 @@
 					}
 		    	%>
 	    	</h5>
-    </div>
-    </div>
-	</header>
-    <body>
-    <div class="container">
-    	<p style="margin-left: 5%;">
-        	
-	    </p>
-        <section id="shopping_cart" class ="products" > 
-        	<%
+
+        <div class="container">
+            <p style="margin-left: 5%;">
+
+            </p>
+            <section id="shopping_cart" class="products">
+                <%
 	        	System.out.println("We are in Cart Page");
 	            if(request.getSession().getAttribute("cart") != null){
 	               //The cart is NOT null. Thus there is some products in the cart. Let's display them.
 	               //System.out.println("Cart has elements.");
 	                Map<Games, Integer> cartMap = (HashMap)request.getSession().getAttribute("cart");
-	                
+
 	                for(Games game : cartMap.keySet())
 	                {
 	                	out.println("<article class=\"product\">");
@@ -160,22 +158,33 @@
 	                }
 	            }
 			%>
-		</section>
-    </div>
-	</body>  
-    <footer id="site-footer">
-        <div class="container clearfix">
-            <div class="left">
-                <h2 class="subtotal">Subtotal: <span>0</span>$</h2>
-                <h3 class="tax">Taxes (5%): <span>0</span>$</h3>
-                <h3 class="shipping">Shipping: <span>0</span>$</h3>
-            </div>
-            <div class="right">
-                <h1 class="total">Total: <span>0</span>$</h1>
-				<form action="placeorder" method="post">
-                	<a class="btn_check">Checkout</a>
-				</form>
-            </div>
+            </section>
         </div>
-    </footer>
+        <footer id="site-footer">
+            <div class="container clearfix">
+                <div class="left">
+                    <h2 class="subtotal">Subtotal: <span>0</span>$</h2>
+                    <h3 class="tax">Taxes (5%): <span>0</span>$</h3>
+                    <h3 class="shipping">Shipping: <span>0</span>$</h3>
+                </div>
+                <div class="right">
+                    <h1 class="total">Total: <span>0</span>$</h1>
+                    <form action="placeorder" method="post">
+                        <a class="btn_check">Checkout</a>
+                    </form>
+                </div>
+            </div>
+
+        </footer>
+    </div>
+
+    </header>
+
+    <body>
+
+</div>
+</body>
+	</body>  
+
+
 </html>

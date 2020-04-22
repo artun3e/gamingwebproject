@@ -86,7 +86,7 @@
 							<a href="myOrders.jsp">My Orders</a> 
 								<a href="#account">Account</a> 
 						</div></li>
-					<a class="fa fa-shopping-cart" href="#Shopping_Cart" style="font-size: 34px; color: grey; margin-left: 10%;"></a>
+					<a class="fa fa-shopping-cart" href="shoppingCart.jsp" style="font-size: 34px; color: grey; margin-left: 10%;"></a>
 				</ul>
 			</div>
 		</div>

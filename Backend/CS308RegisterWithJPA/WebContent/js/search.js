@@ -21,7 +21,7 @@ async function getData(){
     }        
         var productHTML= '<div class="product">'+
 		'<div class="product-img">'+
-			'<img src="product01.png" alt="">'+
+			'<img src="product01.png" alt="" width="420px" height="260px">'+
 			'<div class="product-label">'+
 				'<span class="sale"></span>'+
 				'<span class="new"></span>'+
