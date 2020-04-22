@@ -36,6 +36,7 @@
 <link rel="stylesheet" href="css/style.css">
 <script type="text/javascript" src="js/register.js"></script>
 <script src="js/search.js"></script>
+<script src="js/details.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		
@@ -131,7 +132,7 @@
 					<div class="col-md-5 col-md-push-2">
 						<div id="product-main-img">
 							<div class="product-preview">
-								<img src="img/product01.png" alt="">
+								<img id="detail-img" src="img/product01.png" alt="">
 							</div>
 
 							<div class="product-preview">
@@ -174,7 +175,7 @@
 					<!-- Product details -->
 					<div class="col-md-5">
 						<div class="product-details">
-							<h2 class="product-name">product name goes here</h2>
+							<h2 id="detail-name" class="product-name"></h2>
 							<div>
 								<div class="product-rating">
 									<i class="fa fa-star"></i>
@@ -186,25 +187,10 @@
 								<a class="review-link" href="#">10 Review(s) | Add your review</a>
 							</div>
 							<div>
-								<h3 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h3>
+								<h3 id="detail-price" class="product-price">$980.00 <del class="product-old-price">$990.00</del></h3>
 								<span class="product-available">In Stock</span>
 							</div>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-
-							<div class="product-options">
-								<label>
-									Size
-									<select class="input-select">
-										<option value="0">X</option>
-									</select>
-								</label>
-								<label>
-									Color
-									<select class="input-select">
-										<option value="0">Red</option>
-									</select>
-								</label>
-							</div>
+							<p id="detail-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 
 							<div class="add-to-cart">
 								<div class="qty-label">

@@ -37,6 +37,7 @@
     <script src="js/jquery.zoom.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/search.js"></script>
+    <script src="js/toDetails.js"></script>
     <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="css/slick.css">
     <link type="text/css" rel="stylesheet" href="css/nouislider.min.css">
@@ -277,7 +278,7 @@
                         </div>
                         <div class="product-body">
                             <p class="product-category">Category</p>
-                            <h3 class="product-name"><a href="#">Counter-Strike</a></h3>
+                            <h3 class="product-name"><a onclick="toDetails(this)" href="#">Counter-Strike</a></h3>
                             <h4 class="product-price">$50.00 <del class="product-old-price">$990.00</del></h4>
                         </div>
                     </div>
@@ -288,7 +289,7 @@
                         </div>
                         <div class="product-body">
                             <p class="product-category">Category</p>
-                            <h3 class="product-name"><a href="#">Half-Life</a></h3>
+                            <h3 class="product-name"><a onclick="toDetails(this)" href="#">Half-Life</a></h3>
                             <h4 class="product-price">$20.00 <del class="product-old-price">$990.00</del></h4>
                         </div>
                     </div>
@@ -299,7 +300,7 @@
                         </div>
                         <div class="product-body">
                             <p class="product-category">Category</p>
-                            <h3 class="product-name"><a href="#">Company of Heroes - Legacy Edition</a></h3>
+                            <h3 class="product-name"><a onclick="toDetails(this)" href="#">Company of Heroes - Legacy Edition</a></h3>
                             <h4 class="product-price">$35.00 <del class="product-old-price">$990.00</del></h4>
                         </div>
                     </div>
@@ -355,7 +356,7 @@
 	                			out.println("</div>");
 	                			out.println("<div class=\"product-body\">");
 	                				out.println("<p class=\"product-category\">" + game.getCategories() + "</p>");
-	                				out.println("<h3 class=\"product-name\"><a href=\"#\">"+ game.getName() +"</a></h3>");
+	                				out.println("<h3 class=\"product-name\"><a onclick=\"toDetails(this)\" href=\"#\">"+ game.getName() +"</a></h3>");
 	                				out.println("<h4 class=\"product-price\">$" + game.getPrice() + "<del class=\"product-old-price\">$" + ((int)game.getPrice() + random) + ".00</del></h4>");	
 	                				out.println("<div class=\"product-rating\">");	
 		                				out.println("<i class=\"fa fa-star\"></i>");	
