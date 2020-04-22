@@ -83,3 +83,41 @@ async function getData(value){
 	var parsed = parseURLParams(window.location.href);
     getData(parsed);
     document.title = parsed.name[0];
+    
+    $(document).ready(function() {
+	$(".add-to-cart-btn").click(function(e) {
+		console.log("add to cart button is clicked")
+		e.stopPropagation();
+		e.stopImmediatePropagation();
+		
+		var child = $(this).parent().parent();
+		var itemName = document.getElementById("detail-name").innerText;
+		var quantity = document.getElementById("input-quantity").value;
+		
+		if(quantity.length == 0){
+			
+			var xhr = new XMLHttpRequest();
+		    var url = "addtocart";
+		    xhr.open("POST", url, true);
+			var params = 'itemName='+itemName;
+			console.log(params);
+		    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		    
+		    xhr.send(params);
+		}
+		else
+			{
+			console.log(itemName);
+			console.log(quantity);
+			var xhr = new XMLHttpRequest();
+		    var url = "addmultipletocart";
+		    xhr.open("POST", url, true);
+			var params = 'gameName='+itemName+'&quantity='+quantity;
+			console.log(params);
+		    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		    
+		    xhr.send(params);
+			}
+
+	});
+    });

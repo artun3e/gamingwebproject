@@ -176,7 +176,7 @@
 								<div class="qty-label">
 									Qty
 									<div class="input-number">
-										<input type="number">
+										<input id="input-quantity" type="number">
 										<span class="qty-up">+</span>
 										<span class="qty-down">-</span>
 									</div>
