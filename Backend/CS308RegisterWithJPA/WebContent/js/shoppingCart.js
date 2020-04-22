@@ -4,7 +4,7 @@ function changeVal(el) {
   var price = parseFloat(el.parent().children(".price").html());
   var eq = Math.round(price * qt * 100) / 100;
   
-  el.parent().children(".full-price").html( eq + "€" );
+  el.parent().children(".full-price").html( eq + "$" );
   
   changeTotal();			
 }
@@ -32,24 +32,35 @@ function changeTotal() {
 }
 
 $(document).ready(function(){
-  
+	changeTotal();
+	
   $(".remove").click(function(){
+	 
+	var child_ = $(this).parent().parent();
+	var itemName = child_.children('.content_info').children('.product_name')[0].innerText;
+	    
+	console.log(itemName);
+	var xhr = new XMLHttpRequest();
+	var url = "removefromcart";
+	xhr.open("POST", url, true);
+	var params = 'itemName='+itemName;
+	console.log(params);
+	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhr.send(params);
+	
     var el = $(this);
     el.parent().parent().addClass("removed");
     window.setTimeout(
       function(){
         el.parent().parent().slideUp('fast', function() { 
           el.parent().parent().remove(); 
-          if($(".product").length == 0) {
-            if(check) {
-              $("#cart").html("<h1>The shop does not function, yet!</h1>");
-            } else {
-              $("#cart").html("<h1>No products!</h1>");
-            }
-          }
           changeTotal(); 
         });
       }, 200);
+    
+    var el = $(this);
+    window.setTimeout(function(){el.parent().children(".full-price").removeClass("minused"); changeVal(el);}, 150);
+    changeTotal();
   });
   
   $(".qt-plus").click(function(){
@@ -57,16 +68,67 @@ $(document).ready(function(){
     
     $(this).parent().children(".full-price").addClass("added");
     
+    var child_ = $(this).parent().parent();
+    var itemName = child_.children('.content_info').children('.product_name')[0].innerText;
+    
+    //console.log(itemName);
+    var xhr = new XMLHttpRequest();
+    var url = "addtocart";
+    xhr.open("POST", url, true);
+	var params = 'itemName='+itemName;
+	console.log(params);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send(params);
+    
     var el = $(this);
     window.setTimeout(function(){el.parent().children(".full-price").removeClass("added"); changeVal(el);}, 150);
+    changeTotal();
   });
   
   $(".qt-minus").click(function(){
     
     child = $(this).parent().children(".qt");
     
+    var child_ = $(this).parent().parent();
+    var itemName = child_.children('.content_info').children('.product_name')[0].innerText;
+    
     if(parseInt(child.html()) > 1) {
       child.html(parseInt(child.html()) - 1);
+      //console.log(itemName);
+      var xhr = new XMLHttpRequest();
+      var url = "decrementfromcart";
+      xhr.open("POST", url, true);
+      var params = 'itemName='+itemName;
+      console.log(params);
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhr.send(params);
+    }
+    else{
+		console.log(itemName);
+		var xhr = new XMLHttpRequest();
+		var url = "removefromcart";
+		xhr.open("POST", url, true);
+		var params = 'itemName='+itemName;
+		console.log(params);
+		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xhr.send(params);
+    	
+        var el = $(this);
+        el.parent().parent().addClass("removed");
+        window.setTimeout(
+          function(){
+            el.parent().parent().slideUp('fast', function() { 
+              el.parent().parent().remove(); 
+              if($(".product").length == 0) {
+                if(check) {
+                  $("#cart").html("<h1>The shop does not function, yet!</h1>");
+                } else {
+                  $("#cart").html("<h1>No products!</h1>");
+                }
+              }
+              changeTotal(); 
+            });
+          }, 200);
     }
     
     $(this).parent().children(".full-price").addClass("minused");
@@ -115,4 +177,5 @@ $(document).ready(function(){
     console.log(data_about);
     xhr.send(params);
   });
+  
 });
