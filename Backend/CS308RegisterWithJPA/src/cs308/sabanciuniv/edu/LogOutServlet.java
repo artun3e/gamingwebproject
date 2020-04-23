@@ -37,7 +37,7 @@ public class LogOutServlet extends HttpServlet {
 			if(session.getAttribute("user") != null)
             {
 				session.removeAttribute("user");
-				// TODO: Refresh The Page
+				response.sendRedirect("index.jsp");
             }
 		} catch (Exception e) {
 			e.printStackTrace();
