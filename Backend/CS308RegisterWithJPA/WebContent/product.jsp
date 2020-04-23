@@ -33,6 +33,7 @@
 <!-- Berkin CSS and JS-->
 <link rel="stylesheet" href="css/login.css">
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/searchBar.css">
 <script type="text/javascript" src="js/register.js"></script>
 <script src="js/search.js"></script>
 <script src="js/details.js"></script>
@@ -83,7 +84,10 @@
                    </li>
                     <li class="dropdown" style="margin-left: 5%;"><a
                             class="nav-link" href="Home_HTML">Strategy<span class="sr-only">(current)</span></a>
-                    <li style="margin-left: 5%; margin-top: 5px;"><input id="search"  type="text" placeholder="Search.."  onkeydown="if (event.keyCode == 13) { search(); }"></li>
+                    <li style="margin-left: 5%; margin-top: 5px;">
+                    <input id="search"  type="text" placeholder="What are you looking for?"  onkeydown="if (event.keyCode == 13) { search(); }">
+                    </li>
+
                     <li class="dropdown" style="margin-left: 5%;"><a
                             class="fa fa-user" style="font-size: 34px; color: grey;"></a>
 
@@ -124,7 +128,18 @@ a:hover {
 
 .round {
   border-radius: 50%;
-}</style>
+}
+.center {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+.btns {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+</style>
 			<!-- container -->
 			<div class="main">
 			<div class="container">
@@ -137,8 +152,13 @@ a:hover {
 								<img id="detail-img" src="" alt="">
 
 							</div>
-								<a onclick="changePreviousImage()" class="previous round">&#8249;</a>
-								<a onclick="changeNextImage()" class="next round">&#8250;</a>
+									<div class="center"> 
+										<div class="btns">
+											<a onclick="changePreviousImage()" class="previous round">&#8249;</a>
+											<a onclick="changeNextImage()" class="next round">&#8250;</a>
+										</div>
+									</div>
+								
 							<div class="product-preview">
 								<img src="" alt="">
 							</div>
@@ -205,7 +225,7 @@ a:hover {
 										<span class="qty-down">-</span>
 									</div>
 								</div>
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Cart </button>
 							</div>
 
 <!-- 							<ul class="product-btns">
@@ -449,10 +469,10 @@ a:hover {
 		<!-- /SECTION -->
 
 		<!-- Section -->
-		<div class="section">
-			<!-- container -->
+		<!-- <div class="section">
+			container
 			<div class="container">
-				<!-- row -->
+				row
 				<div class="row">
 
 					<div class="col-md-12">
@@ -461,7 +481,7 @@ a:hover {
 						</div>
 					</div>
 
-					<!-- product -->
+					product
 					<div class="col-md-3 col-xs-6">
 						<div class="product">
 							<div class="product-img">
@@ -487,9 +507,9 @@ a:hover {
 							</div>
 						</div>
 					</div>
-					<!-- /product -->
+					/product
 
-					<!-- product -->
+					product
 					<div class="col-md-3 col-xs-6">
 						<div class="product">
 							<div class="product-img">
@@ -520,11 +540,11 @@ a:hover {
 							</div>
 						</div>
 					</div>
-					<!-- /product -->
+					/product
 
 					<div class="clearfix visible-sm visible-xs"></div>
 
-					<!-- product -->
+					product
 					<div class="col-md-3 col-xs-6">
 						<div class="product">
 							<div class="product-img">
@@ -552,9 +572,9 @@ a:hover {
 							</div>
 						</div>
 					</div>
-					<!-- /product -->
+					/product
 
-					<!-- product -->
+					product
 					<div class="col-md-3 col-xs-6">
 						<div class="product">
 							<div class="product-img">
@@ -577,13 +597,13 @@ a:hover {
 							</div>
 						</div>
 					</div>
-					<!-- /product -->
+					/product
 
 				</div>
-				<!-- /row -->
+				/row
 			</div>
-			<!-- /container -->
-		</div>
+			/container
+		</div> -->
 		<!-- /Section -->
 
 		<!-- NEWSLETTER -->
@@ -599,20 +619,6 @@ a:hover {
 								<input class="input" type="email" placeholder="Enter Your Email">
 								<button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
 							</form>
-							<ul class="newsletter-follow">
-								<li>
-									<a href="#"><i class="fa fa-facebook"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-twitter"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-instagram"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-pinterest"></i></a>
-								</li>
-							</ul>
 						</div>
 					</div>
 				</div>

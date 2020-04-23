@@ -7,10 +7,17 @@ async function getData(value){
 //	window.location.href = url;
 	const response = await fetch(url);
 	const data = await response.json();
-    	
-    	for (var k = 0; k < data.length; k++){
-    		fillCard(data[k], k);
-    	} //
+    	console.log(data.length);
+		if(data.length == 0){
+			document.getElementsByClassName("main")[0].innerHTML = noResult;
+		}
+		else{
+	    	for (var k = 0; k < data.length; k++){
+	    		fillCard(data[k], k);
+	    	
+	    	} //
+		}
+
     }
 
 	var parsed = parseURLParams(window.location.href);
@@ -39,7 +46,13 @@ async function getData(value){
     function clearDiv(){
     	    document.getElementsByClassName("main")[0].innerHTML = "";
     	    
-    }        
+    }       
+    var noResult= 
+    	'<p> Your search "'+ 
+    	parsed.name[0]+
+    	'" did not match any products  </p>';
+    
+    
         var productHTML= 
         	'<div class="product">'+
 		'<div class="product-img">'+
@@ -60,14 +73,9 @@ async function getData(value){
 				'<i class="fa fa-star"></i>'+
 				'<i class="fa fa-star"></i>'+
 			'</div>'+
-			'<div class="product-btns">'+
-				'<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>'+
-				'<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>'+
-				'<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>'+
-			'</div>'+
 		'</div>'+
 		'<div class="add-to-cart">'+
-			'<button onclick="addToCart(this)" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>'+
+			'<button onclick="addToCart(this)" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Cart</button>'+
 		'</div>'+
 	'</div>';
 	

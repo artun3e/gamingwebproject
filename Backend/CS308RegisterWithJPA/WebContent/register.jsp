@@ -35,6 +35,7 @@
     <link type="text/css" rel="stylesheet" href="css/nouislider.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/searchBar.css">
 <script type="text/javascript" src="js/register.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -85,10 +86,39 @@
                      <li class="dropdown" style="margin-left: 5%;">
                     	<a class="fa fa-shopping-cart" href="shoppingCart.jsp" style="font-size: 34px; color: grey;"></a>
                     </li>
+<<<<<<< HEAD
                 </ul>
             </div>
         </div>
     </nav>
+=======
+                    <li class="dropdown" style="margin-left: 5%;"><a
+                            class="nav-link" href="Home_HTML"> FPS <span class="sr-only">(current)</span></a>
+
+                   </li>
+                    <li class="dropdown" style="margin-left: 5%;"><a
+                            class="nav-link" href="Home_HTML"> RPG <span
+                            class="sr-only">(current)</span></a>
+                   </li>
+                    <li class="dropdown" style="margin-left: 5%;"><a
+                            class="nav-link" href="Home_HTML">Strategy<span class="sr-only">(current)</span></a>
+					<li style="margin-left: 5%; margin-top: 5px;"><input id="search"  type="text" placeholder="What are you looking for?" onkeydown="if (event.keyCode == 13) { search(); }"></li>
+					<li class="dropdown" style="margin-left: 5%;"><a
+						class="fa fa-user" style="font-size: 34px; color: grey;"></a>
+
+						<div class="dropdown-content">
+							<a href="login.jsp">Login</a> 
+							<a href="register.jsp">Register</a> 
+							<a href="myOrders.jsp">My Orders</a> 
+								<a href="#account">Account</a> 
+						</div></li>
+					<a class="fa fa-shopping-cart" href="shoppingCart.jsp" style="font-size: 34px; color: grey; margin-left: 10%;"></a>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+>>>>>>> 9444eed3eed2a180a541da4822c48aceac0ccfcc
 </header>
 <body>
 	<div class="main">

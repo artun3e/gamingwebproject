@@ -35,6 +35,7 @@
     <link type="text/css" rel="stylesheet" href="css/nouislider.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/searchBar.css">
 <script src="js/search.js"></script>
 <script src="js/toDetails.js"></script>
 <!-- Berkin CSS and JS-->
@@ -48,6 +49,7 @@
 <script type="text/javascript" src="js/shoppingCart.js"></script>
 </head>
   <header id="site-header">
+<<<<<<< HEAD
 	<header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container" style="margin-right: center;">
@@ -67,6 +69,45 @@
                     <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="Strategy"></span></a>
 
                     <li style="margin-left: 75%; margin-top: 12px;"><input id="search"  type="text" placeholder="Search.."  onkeydown="if (event.keyCode == 13) { search(); }"></li>
+=======
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="container" style="center">
+			<a class="navbar-brand" href="index.jsp"> <img src="img/logo.png" width="34"
+				height="34" class="d-inline-block align-top" alt=""> Tech
+				Market
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarNav" aria-controls="navbarNav"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav mr-auto">
+					                    <li class="dropdown"><a class="nav-link" href="Home_HTML">Action
+                        <span class="sr-only">(current)</span>
+                    </a>
+
+                    <li class="dropdown" style="margin-left: 5%;"><a
+                            class="nav-link" href="Home_HTML">Multiplayer <span class="sr-only">(current)</span></a>
+
+					</li>
+                    <li class="dropdown" style="margin-left: 5%;"><a
+                            class="nav-link" href="Home_HTML"> Sports <span
+                            class="sr-only">(current)</span></a>
+
+                    </li>
+                    <li class="dropdown" style="margin-left: 5%;"><a
+                            class="nav-link" href="Home_HTML"> FPS <span class="sr-only">(current)</span></a>
+
+                   </li>
+                    <li class="dropdown" style="margin-left: 5%;"><a
+                            class="nav-link" href="Home_HTML"> RPG <span
+                            class="sr-only">(current)</span></a>
+                   </li>
+                    <li class="dropdown" style="margin-left: 5%;"><a
+                            class="nav-link" href="Home_HTML">Strategy<span class="sr-only">(current)</span></a>
+					<li style="margin-left: 5%; margin-top: 12px;"><input id="search"  type="text" placeholder="What are you looking for?" onkeydown="if (event.keyCode == 13) { search(); }"></li>
+>>>>>>> 9444eed3eed2a180a541da4822c48aceac0ccfcc
                     <li class="dropdown" style="margin-left: 5%;">
                     	<a class="fa fa-user" style="font-size: 34px; color: grey;"></a>
 
