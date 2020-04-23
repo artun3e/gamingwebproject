@@ -7,10 +7,17 @@ async function getData(value){
 //	window.location.href = url;
 	const response = await fetch(url);
 	const data = await response.json();
-    	
-    	for (var k = 0; k < data.length; k++){
-    		fillCard(data[k], k);
-    	} //
+    	console.log(data.length);
+		if(data.length == 0){
+			document.getElementsByClassName("main")[0].innerHTML = noResult;
+		}
+		else{
+	    	for (var k = 0; k < data.length; k++){
+	    		fillCard(data[k], k);
+	    	
+	    	} //
+		}
+
     }
 
 	var parsed = parseURLParams(window.location.href);
@@ -39,7 +46,13 @@ async function getData(value){
     function clearDiv(){
     	    document.getElementsByClassName("main")[0].innerHTML = "";
     	    
-    }        
+    }       
+    var noResult= 
+    	'<p> Your search "'+ 
+    	parsed.name[0]+
+    	'" did not match any products  </p>';
+    
+    
         var productHTML= 
         	'<div class="product">'+
 		'<div class="product-img">'+

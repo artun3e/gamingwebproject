@@ -449,10 +449,10 @@ a:hover {
 		<!-- /SECTION -->
 
 		<!-- Section -->
-		<div class="section">
-			<!-- container -->
+		<!-- <div class="section">
+			container
 			<div class="container">
-				<!-- row -->
+				row
 				<div class="row">
 
 					<div class="col-md-12">
@@ -461,7 +461,7 @@ a:hover {
 						</div>
 					</div>
 
-					<!-- product -->
+					product
 					<div class="col-md-3 col-xs-6">
 						<div class="product">
 							<div class="product-img">
@@ -487,9 +487,9 @@ a:hover {
 							</div>
 						</div>
 					</div>
-					<!-- /product -->
+					/product
 
-					<!-- product -->
+					product
 					<div class="col-md-3 col-xs-6">
 						<div class="product">
 							<div class="product-img">
@@ -520,11 +520,11 @@ a:hover {
 							</div>
 						</div>
 					</div>
-					<!-- /product -->
+					/product
 
 					<div class="clearfix visible-sm visible-xs"></div>
 
-					<!-- product -->
+					product
 					<div class="col-md-3 col-xs-6">
 						<div class="product">
 							<div class="product-img">
@@ -552,9 +552,9 @@ a:hover {
 							</div>
 						</div>
 					</div>
-					<!-- /product -->
+					/product
 
-					<!-- product -->
+					product
 					<div class="col-md-3 col-xs-6">
 						<div class="product">
 							<div class="product-img">
@@ -577,13 +577,13 @@ a:hover {
 							</div>
 						</div>
 					</div>
-					<!-- /product -->
+					/product
 
 				</div>
-				<!-- /row -->
+				/row
 			</div>
-			<!-- /container -->
-		</div>
+			/container
+		</div> -->
 		<!-- /Section -->
 
 		<!-- NEWSLETTER -->
