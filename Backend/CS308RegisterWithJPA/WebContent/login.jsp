@@ -163,7 +163,7 @@
             <button type="submit" class="btn btn-primary btn-block btn-lg" name="log" value="Login">Submit</button>
 
             <p class="link-forgot-password-container">
-                <a href="" class="link-type-one" target="_parent">Forgot My Password</a>
+                <a href="forgotPassword.jsp" class="link-type-one">Forgot My Password</a>
         </form>
     </div>
 </div>
