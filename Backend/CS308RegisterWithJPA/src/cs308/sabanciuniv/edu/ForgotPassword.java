@@ -59,7 +59,7 @@ public class ForgotPassword extends HttpServlet {
 			session.setAttribute("mycode", formatted);
 			session.setAttribute("email", useremail);
 			
-			response.sendRedirect("verify2.html");
+			response.sendRedirect("verify2.jsp");
 		}
 	}
 

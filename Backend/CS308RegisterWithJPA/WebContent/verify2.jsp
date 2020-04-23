@@ -10,7 +10,15 @@
           <form action="resetpassword" method="post">
             <h3> Please enter your code </h3>
             <img src="img/logo.png" height="100px" width="100px"> <br>
-    
+            <%
+                session = request.getSession();
+                if(session.getAttribute("verify-error")!=null)
+                {
+                    String toBeWritten = session.getAttribute("verify-error").toString();
+                    out.println("<p style='color: #a94442'>"+ toBeWritten +"</p>");
+                    session.removeAttribute("verify-error");
+                }
+            %>
             <input type="text" id="usercode" name="usercode" placeholder="your verification code"><br>
 			<input type="password" id="password" name="password" placeholder="your new password"><br>
 

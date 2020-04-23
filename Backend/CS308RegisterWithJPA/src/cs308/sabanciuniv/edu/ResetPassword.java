@@ -66,14 +66,13 @@ public class ResetPassword extends HttpServlet {
 				em.getTransaction().commit();
 				em.close();
 				emf.close();
-				PrintWriter out = response.getWriter();
-				out.println("<html><meta http-equiv='refresh' content='3;URL=login.html'>"); 
-				out.println("<p style='color:green;'>Password changed successfully, redirecting to the login page in 3 seconds</p></html>");
+				session.setAttribute("order-error", "Password has changed successfully.");
+				response.sendRedirect("login.jsp");
 			}
 			else
 			{
 				PrintWriter out = response.getWriter();
-				out.println("<html><meta http-equiv='refresh' content='3;URL=forgotpassword.html'>"); 
+				out.println("<html><meta http-equiv='refresh' content='3;URL=forgotpassword.jsp'>");
 				out.println("<p style='color:red;'>Verification code is incorrect!!!</p></html>");
 			}
 		} 

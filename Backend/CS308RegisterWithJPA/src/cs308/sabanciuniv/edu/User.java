@@ -14,7 +14,7 @@ public class User {
 	@Column(name="Email")
 	private String email;
 	private String password;
-	@OneToMany(fetch = FetchType.EAGER)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
 	private List<Order> orders;
 	//public int getId() {
 	//	return id;
@@ -75,5 +75,20 @@ public class User {
 	public User() {
 		orders = new ArrayList<Order>();
 		//this.id = 0;
+	}
+	@Override
+	public boolean equals(Object o)
+	{
+		User temp = (User)o;
+		if(this.getEmail().contentEquals(temp.getEmail()))
+		{
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return this.getEmail().hashCode();
 	}
 }

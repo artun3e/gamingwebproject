@@ -82,16 +82,13 @@ public class OrderServlet extends HttpServlet {
 				Order newOrder = new Order("TODO", user);
 				newOrder.setMap(hashmap);
 				em.persist(newOrder);
-				em.getTransaction().commit();
-				System.out.println("We are here!");
-				em.getTransaction().begin();
-				em.merge(user);
+				System.out.println("We are here!v3");
 				user.addOrder(newOrder);
 				em.merge(user);
 				em.getTransaction().commit();
 				em.close();
 				emf.close();
-				System.out.println("Done!!!!!");
+				System.out.println("Done v2!!!!!");
 				System.out.println("Done placing the order in the database v2.");
 				System.out.println("All user orders are : ");
 				int countTime = 1;
