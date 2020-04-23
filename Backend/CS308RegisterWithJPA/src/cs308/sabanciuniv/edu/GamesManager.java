@@ -210,7 +210,7 @@ public class GamesManager {
                         + "</div>"
                         + "<div class=\"product-body\">"
                         + "<p class=\"product-category\">" + rs.getString("steamspy_tags") + "</p>"
-                        + "<h3 class=\"product-name\"><a onclick=\"toDetails(this)\" href=\"#\">" + rs.getString("name") + "</a></h3>"
+                        + "<h3 class=\"product-name\"><a onclick=\"toDetails(this)\" href=\"#\">"+rs.getString("name")+"</a></h3>"
                         + "<h4 class=\"product-price\">$" + rs.getDouble("price") + "<del class=\"product-old-price\">$" + ((int) rs.getDouble("price") + random) + ".00</del></h4>"
                         + "<div class=\"product-rating\">"
                         + "<i class=\"fa fa-star\"></i>"
@@ -226,7 +226,7 @@ public class GamesManager {
                       //+ "</div>"
                         + "</div>"
                         + "<div class=\"add-to-cart\">"
-                        + "<button class=\"add-to-cart-btn\"><i class=\"fa fa-shopping-cart\"></i> cart</button>"
+                        + "<button onclick=\"addToCart(this)\" class=\"add-to-cart-btn\"><i class=\"fa fa-shopping-cart\"></i> cart</button>"
                         + "</div>"
                         + "</div>";
                 resultArray.add(temp);
@@ -318,7 +318,7 @@ public class GamesManager {
                         + "</div>"
                         + "<div class=\"product-body\">"
                         + "<p class=\"product-category\">" + rs.getString("steamspy_tags") + "</p>"
-                        + "<h3 class=\"product-name\"><a onclick=\"toDetails(this)\" href=\"#\">" + rs.getString("name") + "</a></h3>"
+                        + "<h3 class=\"product-name\"><a onclick=\"toDetails(this)\" href=\"#\">"+rs.getString("name")+"</a></h3>"
                         + "<h4 class=\"product-price\">$" + rs.getDouble("price") + "<del class=\"product-old-price\">$" + ((int) rs.getDouble("price") + random) + ".00</del></h4>"
                         + "<div class=\"product-rating\">"
                         + "<i class=\"fa fa-star\"></i>"
@@ -334,7 +334,7 @@ public class GamesManager {
                         //+ "</div>"
                         + "</div>"
                         + "<div class=\"add-to-cart\">"
-                        + "<button class=\"add-to-cart-btn\"><i class=\"fa fa-shopping-cart\"></i> cart</button>"
+                        + "<button onclick=\"addToCart(this)\" class=\"add-to-cart-btn\"><i class=\"fa fa-shopping-cart\"></i> cart</button>"
                         + "</div>"
                         + "</div>";
                 resultList.add(temp);
