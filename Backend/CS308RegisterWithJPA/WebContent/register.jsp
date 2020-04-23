@@ -61,9 +61,11 @@
                     <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="FPS"></a></li>
                     <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="RPG"></a></li>
                     <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="Strategy"></span></a>
-                    <li style="margin-left: 75%; margin-top: 12px;"><input id="search"  type="text" placeholder="Search.."  onkeydown="if (event.keyCode == 13) { search(); }"></li>
+
+                    <li style="margin-left: 100%; margin-top: 12px;"><input id="search"  type="text" placeholder="Search.."  onkeydown="if (event.keyCode == 13) { search(); }"></li>
                     <li class="dropdown" style="margin-left: 5%;">
                     	<a class="fa fa-user" style="font-size: 34px; color: grey;"></a>
+
                         <div class="dropdown-content">
                         	<% 
                         		session = request.getSession();
@@ -88,31 +90,6 @@
             </div>
         </div>
     </nav>
-					<li class="dropdown" style="margin-left: 5%;"><a
-                            class="nav-link" href="Home_HTML"> FPS <span class="sr-only">(current)</span></a>
-
-                   </li>
-                    <li class="dropdown" style="margin-left: 5%;"><a
-                            class="nav-link" href="Home_HTML"> RPG <span
-                            class="sr-only">(current)</span></a>
-                   </li>
-                    <li class="dropdown" style="margin-left: 5%;"><a
-                            class="nav-link" href="Home_HTML">Strategy<span class="sr-only">(current)</span></a>
-					<li style="margin-left: 5%; margin-top: 5px;"><input id="search"  type="text" placeholder="What are you looking for?" onkeydown="if (event.keyCode == 13) { search(); }"></li>
-					<li class="dropdown" style="margin-left: 5%;"><a
-						class="fa fa-user" style="font-size: 34px; color: grey;"></a>
-
-						<div class="dropdown-content">
-							<a href="login.jsp">Login</a> 
-							<a href="register.jsp">Register</a> 
-							<a href="myOrders.jsp">My Orders</a> 
-								<a href="#account">Account</a> 
-						</div></li>
-					<a class="fa fa-shopping-cart" href="shoppingCart.jsp" style="font-size: 34px; color: grey; margin-left: 10%;"></a>
-				</ul>
-			</div>
-		</div>
-	</nav>
 </header>
 <body>
 	<div class="main">
