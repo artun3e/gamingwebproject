@@ -1,5 +1,8 @@
 package cs308.sabanciuniv.edu;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -38,7 +41,13 @@ public class LoginServlet extends HttpServlet {
 		try {
 			String emailInput = request.getParameter("email");
 			String passInput = request.getParameter("pass");
-			User searchResult = User.findByEmail(emailInput);
+			EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
+			EntityManager em = emf.createEntityManager();
+			User searchResult = em.find(User.class,emailInput);
+			emf.close();
+			em.close();
+			em=null;
+			emf=null;
 			if(searchResult != null)
 			{
 				MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -46,24 +55,31 @@ public class LoginServlet extends HttpServlet {
 				if(searchResult.getPassword().contentEquals(new String(hash, "UTF-8")))
 				{
 					HttpSession session = request.getSession();
-					PrintWriter out = response.getWriter();
+					//PrintWriter out = response.getWriter();
 					session.setAttribute("user", searchResult);
-					out.println("<html><meta http-equiv='refresh' content='1;URL=index.jsp'>"); //redirects after 1 second
-					out.println("<p style='color:red;'>Successfully logged in, redirecting to home page...</p></html>");
+					response.sendRedirect("index.jsp");
+					//out.println("<html><meta http-equiv='refresh' content='1;URL=index.jsp'>"); //redirects after 1 second
+					//.println("<p style='color:red;'>Successfully logged in, redirecting to home page...</p></html>");
 					//response.sendRedirect("home_Deniz.html");
 				}
 				else
 				{
-					PrintWriter out = response.getWriter();
-					out.println("<html><meta http-equiv='refresh' content='3;URL=register.jsp'>"); //redirects after 3 seconds
-					out.println("<p style='color:red;'>Wrong Password!!!!!</p></html>");
+					HttpSession session = request.getSession();
+					session.setAttribute("order-error", "Wrong password!!!");
+					response.sendRedirect("login.jsp");
+					//PrintWriter out = response.getWriter();
+					//out.println("<html><meta http-equiv='refresh' content='3;URL=register.jsp'>"); //redirects after 3 seconds
+					//out.println("<p style='color:red;'>Wrong Password!!!!!</p></html>");
 				}
 			}
 			else
 			{
-				PrintWriter out = response.getWriter();
-				out.println("<html><meta http-equiv='refresh' content='3;URL=register.jsp'>"); //redirects after 3 seconds
-				out.println("<p style='color:red;'>No such email was found, redirecting to the register page</p></html>");
+				//PrintWriter out = response.getWriter();
+				//out.println("<html><meta http-equiv='refresh' content='3;URL=register.jsp'>"); //redirects after 3 seconds
+				//out.println("<p style='color:red;'>No such email was found, redirecting to the register page</p></html>");
+				HttpSession session = request.getSession();
+				session.setAttribute("order-error", "No such e-mail found!!!");
+				response.sendRedirect("login.jsp");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

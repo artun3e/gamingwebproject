@@ -80,7 +80,8 @@
 	                        	{
                         			/* out.println("<a href=\"#account\">Account</a>");
                         			out.println("<a href=\"#liked\">Liked Ones</a>"); */
-                        			out.println("<a href=\"#orders\">My Orders</a> ");
+                        			out.println("<a href=\"#orders\">My Orders</a>");
+                        			out.println("<a href=\"#orders\">Logout</a>");
 	                        	}
                         		else{
                         			out.println("<a href=\"login.jsp\">Login</a>");
@@ -107,7 +108,6 @@
             </div>
         </div>
     </nav>
-
 </header>
 <body>
 <div class="section">

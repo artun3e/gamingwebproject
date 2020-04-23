@@ -101,7 +101,17 @@
 				<div class="col-md-auto">
 					<h2>Please sign up in order to continue</h2>
 				</div>
-				<img src="img/logo.png" height="100px" width="100px"> <br> <br>
+				<img src="img/logo.png" height="100px" width="100px"> <br>
+				<%
+					session = request.getSession();
+					if(session.getAttribute("register-error") != null)
+					{
+						String toBeWritten = session.getAttribute("register-error").toString();
+						out.println("<p style='color: #a94442'>"+ toBeWritten +"</p>");
+						session.removeAttribute("register-error");
+					}
+				%>
+				<br>
 				<input class="register" id="name_field" type="text" name="name" placeholder="Name"> <br> 
 				<input class="register" id="mail_field" type="email" name="email" placeholder="E-mail"><br>
 				<input class="register" id="pwd_field" type="password" name="pass" placeholder="Password"><br> <br>

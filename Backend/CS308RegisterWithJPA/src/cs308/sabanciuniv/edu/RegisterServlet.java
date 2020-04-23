@@ -50,9 +50,9 @@ public class RegisterServlet extends HttpServlet {
 			User searchResult = em.find(User.class, email);
 			if(searchResult != null)
 			{
-				PrintWriter out = response.getWriter();
-				out.println("<html><meta http-equiv='refresh' content='2;URL=login.html'>"); 
-				out.println("<p style='color:green;'>The email is already in use...</p></html>");
+				HttpSession session = request.getSession();
+				session.setAttribute("register-error", "The e-mail is already in use.");
+				response.sendRedirect("register.jsp");
 				return;
 			}
 			else
@@ -81,7 +81,7 @@ public class RegisterServlet extends HttpServlet {
 				session.setAttribute("email", email);
 				session.setAttribute("password", password);
 				
-				response.sendRedirect("verify.html");
+				response.sendRedirect("verify.jsp");
 				
 				//RequestDispatcher rd = request.getRequestDispatcher("verify.html");
 				
@@ -89,9 +89,9 @@ public class RegisterServlet extends HttpServlet {
 
 			}
 		} catch (Exception e) {
-			PrintWriter out = response.getWriter();
-			out.println("<html><meta http-equiv='refresh' content='2;URL=register.html'>"); 
-			out.println("<p style='color:orange;'>Please make sure to fill all the entries...</p></html>");
+			HttpSession session = request.getSession();
+			session.setAttribute("register-error", "Make sure to fill all the entries.");
+			response.sendRedirect("register.jsp");
 			e.printStackTrace();
 		}
 		em.close();

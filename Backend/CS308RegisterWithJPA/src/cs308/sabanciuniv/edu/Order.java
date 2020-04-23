@@ -15,10 +15,11 @@ public class Order {
 	private String address;
 	private String date;
 	@ManyToOne
+	@JoinColumn(name = "User_Email")
 	private User owner;
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "Orders_Games", joinColumns =  @JoinColumn(name = "Order_id"))
-	@MapKeyJoinColumn(name = "products_appid", unique = false)
+	@MapKeyJoinColumn(name = "appid", unique = false)
 	@Column(name = "Quantity")
 	Map<Games, Integer> products;
 	public void addProduct(Games device, int howMany)
