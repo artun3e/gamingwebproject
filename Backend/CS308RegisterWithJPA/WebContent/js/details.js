@@ -17,8 +17,7 @@
     }
     return parms;
 }
-   
- 
+   	console.log("Details icindeyim");
 
     //goes to url which returns json list
     /*window.location.href = 'searchResults.html';*/
@@ -56,16 +55,16 @@ async function getData(value){
          var sideValue4 = sideImg4[1].replace(/['"]+/g, '');
          image.src = imgvalue;
          var sid1 = document.getElementsByClassName("product-preview")[1].getElementsByTagName('img')[0];
-         console.log(sid1);
+         
          var sid2 = document.getElementsByClassName("product-preview")[2].getElementsByTagName('img')[0];
-         console.log(sid2);
+         
          var sid3 = document.getElementsByClassName("product-preview")[3].getElementsByTagName('img')[0];
          var sid4 = document.getElementsByClassName("product-preview")[4].getElementsByTagName('img')[0];
          var sid5 = document.getElementsByClassName("product-preview")[6].getElementsByTagName('img')[0];
          var sid6 = document.getElementsByClassName("product-preview")[7].getElementsByTagName('img')[0];
          var sid7 = document.getElementsByClassName("product-preview")[8].getElementsByTagName('img')[0];
          var sid8 = document.getElementsByClassName("product-preview")[9].getElementsByTagName('img')[0];
-         console.log(sideValue1);
+         
          sid1.src =sideValue1;
          sid2.src =sideValue2;
          sid3.src =sideValue3;

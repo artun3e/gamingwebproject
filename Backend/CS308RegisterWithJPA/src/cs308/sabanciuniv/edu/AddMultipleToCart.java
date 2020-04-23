@@ -56,7 +56,7 @@ public class AddMultipleToCart extends HttpServlet {
                     cartMap.put(temp, count);
                     System.out.println("Alredy have the game: " + temp.getName() + " count: " + count);
                 } else { // it is the first one
-                    cartMap.put(temp, 1);
+                    cartMap.put(temp, quantity);
                     System.out.println("Added game for the first time: " + temp.getName());
                 }
                 System.out.println("Cart at final: " + cartMap);
