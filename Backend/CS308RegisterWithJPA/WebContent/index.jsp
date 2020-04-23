@@ -362,7 +362,7 @@
 	                				//out.println("</div>");
 	                			out.println("</div>");
 	                			out.println("<div class=\"add-to-cart\">");
-	                				out.println("<button class=\"add-to-cart-btn\"><i class=\"fa fa-shopping-cart\"></i> cart</button>");
+	                				out.println("<button onclick=\"addToCart(this)\" class=\"add-to-cart-btn\"><i class=\"fa fa-shopping-cart\"></i> cart</button>");
 	                			out.println("</div>");
 	                		out.println("</div>");
 	                	out.println("</div>");

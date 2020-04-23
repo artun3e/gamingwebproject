@@ -1,8 +1,26 @@
+function addToCart(game){	
+	var child = game.parentElement.parentElement;
+	var itemName = child.getElementsByClassName("product-name")[0].getElementsByTagName('a')[0].innerText;
+	
+	//console.log(itemName);
+	
+	var xhr = new XMLHttpRequest();
+    var url = "addtocart";
+    xhr.open("POST", url, true);
+	var params = 'itemName='+itemName;
+	console.log(params);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    
+    xhr.send(params);
+}
 
+function Log_User_Out(){	
+	
+}
 
 $(document).ready(function() {
 	
-	$(".add-to-cart-btn").click(function(e) {
+	/*$(".add-to-cart-btn").click(function(e) {
 		e.stopPropagation();
 		e.stopImmediatePropagation();
 		
@@ -19,7 +37,7 @@ $(document).ready(function() {
 	    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	    
 	    xhr.send(params);
-	});
+	});*/
 	$(".input-checkbox_check").click(function(e){
 		e.stopPropagation();
 		e.stopImmediatePropagation();
