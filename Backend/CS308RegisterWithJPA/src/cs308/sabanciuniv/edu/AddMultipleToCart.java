@@ -38,6 +38,7 @@ public class AddMultipleToCart extends HttpServlet {
             Games temp = GamesManager.getDeviceByName(itemName);
             String quantityString = request.getParameter("quantity");
             int quantity = Integer.parseInt(quantityString);
+            System.out.println("New quantity is: " + quantity);
             // Add products to card variable in the session...
             if (session.getAttribute("cart") == null) {
                 Map<Games, Integer> cartMap = new HashMap<>();

@@ -45,7 +45,7 @@ async function getData(){
 			'</div>'+
 		'</div>'+
 		'<div class="add-to-cart">'+
-			'<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>'+
+			'<button onclick="addToCart(this)" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>'+
 		'</div>'+
 	'</div>';
 	
@@ -69,9 +69,7 @@ async function getData(){
             var imgvalue = image[1].replace(/['"]+/g, '');
             var img = document.getElementsByClassName("product-img")[k].getElementsByTagName('img')[0];
             img.src = newImg;
-            console.log(img.width);
             img.style.width = "550px";
-            console.log(img.height);
             img.style.height = "300px"
         	var brand = document.getElementsByClassName("product-body")[k].getElementsByTagName('p')[0];
             var name = document.getElementsByClassName("product-body")[k].getElementsByTagName('h3')[0];
@@ -89,6 +87,8 @@ async function getData(){
         	};
         }
         
+        
+        
 
 //    (async () => {
 //  	var b = (await getData());
@@ -98,4 +98,19 @@ async function getData(){
 
 
 
+};
+
+function addToCart(game){	
+	var child = game.parentElement.parentElement;
+
+	var itemName = child.getElementsByClassName("product-name")[0].getElementsByTagName('a')[0].innerText;
+	
+	var xhr = new XMLHttpRequest();
+    var url = "addtocart";
+    xhr.open("POST", url, true);
+	var params = 'itemName='+itemName;
+	console.log(params);
+	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    
+    xhr.send(params);
 }

@@ -142,7 +142,7 @@
 	                			out.println("</a>");
 	                		out.println("</header>");
 	                		out.println("<div class=\"content_info\">");	
-	                			out.println("<h1 class= \"product_name\"><a onclick=\"toDetails(this)\" href=\"#\">"+ game.getName() +" </h1>");	
+	                			out.println("<h1 class= \"product_name\" <a onclick=\"toDetails(this)\" href=\"#\">"+ game.getName() +" </h1>");	
 	                			out.println(game.getShort_description());
 	                		out.println("</div>");	
 	                		out.println("<footer class=\"content\">");	
