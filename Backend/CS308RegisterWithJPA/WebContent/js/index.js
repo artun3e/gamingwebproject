@@ -14,11 +14,19 @@ function addToCart(game){
 }
 
 function Log_User_Out(logging){	
-	/*var xhr = new XMLHttpRequest();
+	var xhr = new XMLHttpRequest();
     var url = "logout";
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.send();*/
+    xhr.addEventListener('readystatechange', function(e){
+    	if(this.readyState === 4)
+		{
+			alert("Successfully logged out.")
+			console.log("User logged out.");
+			window.location = "index.jsp";
+		}
+	})
+    xhr.send();
 }
 
 $(document).ready(function() {
