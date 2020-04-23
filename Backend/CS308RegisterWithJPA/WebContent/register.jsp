@@ -111,19 +111,36 @@
 			</form>
 		</div>
 		<div class="register-right">
-			<h4>Milyonlarca Ürün 30 farklı kategoride 2.700.000'in üzerinde
-				ürünle ne ararsan hepsi burada, tek tıkla ayağında!</h4>
-			<br />
-			</h4>
-			<h4>Süper hızlı gönderi logosunu gördüğün ürünlerde saat 14:00’a
-				kadar vereceğin tüm siparişler, aynı gün kargoda!</h4>
-			<br />
-			<h4>Değiştirmek istediğin ürünü 14 gün içinde ücretsiz iade
-				edebilirsin.</h4>
-			<br />
-			<h4>Olur da yardıma ihtiyaç duyarsan, müşteri hizmetlerimiz bir
-				telefon yakınında!</h4>
-			<br />
+			<div class="row">
+		<div class="col-6 col-md mt-4 mb-4 footerText">
+			<i class="fas fa-feather fa-4x"></i>
+			<p class="mt-3"><b>Easy to Use </b><br><br>
+				<span class="footerSpan">A simple and useful user interface that helps you to get things done</span>
+			</p>
+			<div class="underLine"></div>
+		</div>
+		<div class="col-6 col-md mt-4 mb-4 footerText">
+			<i class="fas fa-shield-alt fa-4x"></i>
+			<p class="mt-3"><b> Totally Secure </b><br><br>
+				<span class="footerSpan">All payment methods and technologies consider the data security</span>
+			</p>
+			<div class="underLine"></div>
+		</div>
+		<div class="col-6 col-md mt-4 mb-4 footerText">
+			<i class=""></i>
+			<p class="mt-3"><b> Fastest Delivery </b> <br><br>
+				<span class="footerSpan">Accounts that you buy will be delivered as soon as possible</span>
+			</p>
+			<div class="underLine"></div>
+		</div>
+		<div class="col-6 col-md mt-4 mb-4 footerText">
+			<i class="far fa-handshake fa-4x"></i>
+			<p class="mt-3"> <b> Customer Happiness </b><br><br>
+				<span class="footerSpan">We are always here to help you after or before your purchase</span>
+			</p>
+			<div class="underLine"></div>
+		</div>
+	</div>
 		</div>
 	</div>
 </div>
