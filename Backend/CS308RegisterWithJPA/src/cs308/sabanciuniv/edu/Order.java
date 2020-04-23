@@ -1,5 +1,8 @@
 package cs308.sabanciuniv.edu;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -21,6 +24,7 @@ public class Order {
 	@CollectionTable(name = "Orders_Games", joinColumns =  @JoinColumn(name = "Order_id"))
 	@MapKeyJoinColumn(name = "appid", unique = false)
 	@Column(name = "Quantity")
+	@Fetch(FetchMode.SELECT)
 	Map<Games, Integer> products;
 	public void addProduct(Games device, int howMany)
 	{
