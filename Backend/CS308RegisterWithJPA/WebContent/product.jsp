@@ -124,7 +124,18 @@ a:hover {
 
 .round {
   border-radius: 50%;
-}</style>
+}
+.center {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+.btns {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+</style>
 			<!-- container -->
 			<div class="main">
 			<div class="container">
@@ -137,8 +148,13 @@ a:hover {
 								<img id="detail-img" src="" alt="">
 
 							</div>
-								<a onclick="changePreviousImage()" class="previous round">&#8249;</a>
-								<a onclick="changeNextImage()" class="next round">&#8250;</a>
+									<div class="center"> 
+										<div class="btns">
+											<a onclick="changePreviousImage()" class="previous round">&#8249;</a>
+											<a onclick="changeNextImage()" class="next round">&#8250;</a>
+										</div>
+									</div>
+								
 							<div class="product-preview">
 								<img src="" alt="">
 							</div>
@@ -599,20 +615,6 @@ a:hover {
 								<input class="input" type="email" placeholder="Enter Your Email">
 								<button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
 							</form>
-							<ul class="newsletter-follow">
-								<li>
-									<a href="#"><i class="fa fa-facebook"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-twitter"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-instagram"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-pinterest"></i></a>
-								</li>
-							</ul>
 						</div>
 					</div>
 				</div>
