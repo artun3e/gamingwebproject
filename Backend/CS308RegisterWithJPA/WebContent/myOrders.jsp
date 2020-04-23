@@ -8,15 +8,33 @@
 <head>
 
 <style>
-body {
-  background-image: url("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBw8NDw8NDQ0NDQ8NDQ8NDQ0NDQ8NDQ0NFREWFhURFRUYHSggGBolGxUVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDQ0NDw8PFSsZFRkrKy0rKy03KysrLTctKy03LTctNy03LS0tKzctKys3LTctKy0tLSstLTctLSsrNystK//AABEIALEBHAMBIgACEQEDEQH/xAAYAAEBAQEBAAAAAAAAAAAAAAABAAIDB//EABcQAQEBAQAAAAAAAAAAAAAAAAABEQL/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAf/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/APFQiAIIIpYoUkoisIJIwEjiBLCsAI4gCOKwAkgAaxYDIsaAANCgAUgyiACKQBgIAhAUkoYQQRxQqIggikBWKRqQBixrDgM4saw4DGLGsWAxgxuwWAyGsGAAUDKIBmo0AmWhUAkgBBQSBgIwNRRJFRGIwEUQRkEjcgCRrDDgA4ZGsBnFjSwGcWN4MBiwN2DAc7BXSs2A5pqwAyGqKDIpQMpIACKgCCgkkBhEKiMDSiKIIxGAY1BG5AUakUagJSNSHAZw41iwGcFjeDAYFjdgsBzsZdLGKDFZrdZsBhGgAGqyABoABoIBRKAiDARSUMIhgEggY1GY3AMb5ZjUBrGoGoBjQjUESwnBGcFjYorFZbrNBixmt1miudFarNBistUABSKAZaZBCkVAKJAkiChSUJEMAwggY3GY1AajcYjcBqNxiNwGmozCI1CIREzWqKDLNarNFYrNarNFZrFbrFBihqsgARQApZBCkVAJIEYEDSEKhhBAwiEGo1GI1Abjcc43AbjUYjUBuNRhqURrTrOrQaFGigmabWaArNOs0Vms1qsWgKybQABrIIUsghSEAkgSSAwiECYzGlCWWoBMCBuNRiVqA6RpiNSg3KYxKdBvTrGrRGtWs6rRVaLRaLQVZptYoKsU1mgAaAAIAUGgECKgElABQQaLJihMCUaLMMBoswg1GpWDAdIZWJTKDpp1z0yg6atY06DWjWdWg1rOjRQNrNFooK1nVQCSABIUFQkACSCUBgJAoJJKNIQgdMZMUaLJAlkg0dZWg3KdY06DerWNWg3o1nVoNWjWdWgdZWoAkAVCQBBAgWUCEkAYCARAIggiCoUkoZSyQaQQNIagJCA6tCA6ggIS0EggQSBCrQCSALQkggQgjAYCSQAhASkoUkojEgKKBJICkgSSBJIEqkABQBJAKEgSSQZSSCSQJJA//9k=");
-  
-}
 title{
 color:white;
 }
+.accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+}
+
+.active, .accordion:hover {
+  background-color: #ccc; 
+}
+
+.total {
+font-size:40px;
+font-weight:bold;
+}
 
 .box {
+border:3px solid black;
   background-color: #E8A2A2;
   background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQfbeY07Hj35CsKASs4BAyDuaAGBg-GOxVpws5yqFBILOgaFySW&usqp=CAU");
   
@@ -55,18 +73,80 @@ color:white;
     <script type="text/javascript" src="./vendor/jquery.scrollto/jquery.scrollTo.min.js"></script>
     <script type="text/javascript" src="./js/front.js"></script>
 	
+	<script src="js/search.js"></script>
+        <script src="js/toDetails.js"></script>
+    <link rel="stylesheet" href="css/register.css">
+        <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="css/slick.css">
+    <link type="text/css" rel="stylesheet" href="css/nouislider.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="js/register.js"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
-	
-	
-	
-<!-- <script type="text/javascript" src="myOrders.js"></script> -->
 
 </head>
 
-<body style = "background-color:#DCFAB5;">
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container" style="margin-right: center;">
+            <a class="navbar-brand" href="index.jsp"> <img src="img/logo.png" width="34"
+                                                                 height="34" class="d-inline-block align-top" alt=""> Tech
+                Market
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarNav" aria-controls="navbarNav"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                     <li class="dropdown"><a class="nav-link" href="Home_HTML">Action
+                        <span class="sr-only">(current)</span>
+                    </a>
+
+                    <li class="dropdown" style="margin-left: 5%;"><a
+                            class="nav-link" href="Home_HTML">Multiplayer <span class="sr-only">(current)</span></a>
+
+					</li>
+                    <li class="dropdown" style="margin-left: 5%;"><a
+                            class="nav-link" href="Home_HTML"> Sports <span
+                            class="sr-only">(current)</span></a>
+
+                    </li>
+                    <li class="dropdown" style="margin-left: 5%;"><a
+                            class="nav-link" href="Home_HTML"> FPS <span class="sr-only">(current)</span></a>
+
+                   </li>
+                    <li class="dropdown" style="margin-left: 5%;"><a
+                            class="nav-link" href="Home_HTML"> RPG <span
+                            class="sr-only">(current)</span></a>
+                   </li>
+                    <li class="dropdown" style="margin-left: 5%;"><a
+                            class="nav-link" href="Home_HTML">Strategy<span class="sr-only">(current)</span></a>
+                    <li style="margin-left: 5%; margin-top: 5px;"><input id="search"  type="text" placeholder="Search.."  onkeydown="if (event.keyCode == 13) { search(); }"></li>
+                    <li class="dropdown" style="margin-left: 5%;"><a
+                            class="fa fa-user" style="font-size: 34px; color: grey;"></a>
+
+                        <div class="dropdown-content">
+                            <a href="login.jsp">Login</a> 
+                            <a href="register.jsp">Register</a> <a
+                                href="myOrders.jsp">My Orders</a> <a href="#account">Account</a> <a
+                                href="#liked">Liked Ones</a>
+                        </div></li>
+                    <a class="fa fa-shopping-cart" href="shoppingCart.jsp" style="font-size: 34px; color: grey; margin-left: 10%;"></a>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+</header>
+
+<body style = "background-color:white;">
 
 	<section class="container content-section">
-		<h1 style="color:white; text-align:left;" class="section-header">My Orders</h1>
+		<h1 style="color:black; text-align:justify;" class="section-header">Your Orders</h1>
 		<div id="cart-items"></div>
 	</section>
 
@@ -86,8 +166,9 @@ if(session.getAttribute("user") != null)
     out.println("<div class=\"container\">");
     out.println("<div class=\"row bar\">");
     out.println("<div id=\"customer-order\" class=\"col-lg-9\">");
-	
-	for(Order o : orderList){
+    
+    int orderid = 1;
+	for(Order o : orderList){		
 		double total = 0;		
 		
 	    System.out.println(o.getOwner().getEmail());
@@ -96,7 +177,10 @@ if(session.getAttribute("user") != null)
 	    Map<Games, Integer> gameList = new HashMap<>();
 	    gameList  = o.getProducts();	    
 	    
+	    
+	    
 	    out.println("<div class=\"box\">");
+	    out.println("<button id=\"newbtn\" class=\"accordion\">Order " + orderid + "</button>");
 			out.println("<div class=\"table-responsive\">");
 				out.println("<table class=\"table\">");
 				
@@ -132,8 +216,8 @@ if(session.getAttribute("user") != null)
 	    		System.out.println(game.getPrice());
 	    					
 	    }
-	    out.println("<div id=\"total\">");
-	    out.println("<td><a>" + "Total: "+ total + "$</a></td>");
+	    out.println("<div class=\"total\">");
+	    out.println("<td><a><td><a><td><a><td><a><td><a>" + "Total: "+ total + "$</a></td>");
 	    out.println("</div>");
 	    			out.println("</tbody>");
 	    				out.println("</tr>");
@@ -141,7 +225,8 @@ if(session.getAttribute("user") != null)
 				out.println("</table>");
 			out.println("</div>");
 		out.println("</div>");
-
+		
+		orderid = orderid + 1;
 		    
 	}
 	out.println("</div>");
@@ -160,6 +245,34 @@ else
     return;
 }
 %>
+<script>
+$(document).ready(function () {
+    var butEl = document.getElementsByClassName("accordion");
+        count = butEl.length;
+    for (i = 0; i < count; i++){
+        butEl[i].click();
+        butEl[i].click();
+    }
+});
+
+</script>
+
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.display === "block") {
+      panel.style.display = "none";
+    } else {
+      panel.style.display = "block";
+    }
+  });
+}
+</script>
 
 </body>
 </html>
