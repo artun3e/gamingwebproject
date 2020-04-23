@@ -28,7 +28,6 @@
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
 <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
-<link type="text/css" rel="stylesheet" href="css/slick.css">
 <link type="text/css" rel="stylesheet" href="css/nouislider.min.css">
 <link rel="stylesheet" href="css/font-awesome.min.css">
 <!-- Berkin CSS and JS-->
@@ -90,9 +89,8 @@
 
                         <div class="dropdown-content">
                             <a href="login.jsp">Login</a> 
-                            <a href="register.jsp">Register</a> <a
-                                href="#orders">My Orders</a> <a href="#account">Account</a> <a
-                                href="#liked">Liked Ones</a>
+                            <a href="register.jsp">Register</a> 
+                            <a href="myOrders.jsp">My Orders</a>
                         </div></li>
                     <a class="fa fa-shopping-cart" href="shoppingCart.jsp" style="font-size: 34px; color: grey; margin-left: 10%;"></a>
                 </ul>
@@ -102,19 +100,45 @@
 	
 
 		<!-- SECTION -->
-		
+			<style> 
+			a {
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 16px;
+}
+
+a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.previous {
+  background-color: #f1f1f1;
+  color: black;
+}
+
+.next {
+  background-color: #f1f1f1;
+  color: white;
+}
+
+.round {
+  border-radius: 50%;
+}</style>
 			<!-- container -->
 			<div class="main">
 			<div class="container">
 				<!-- row -->
 				<div class="row">
 					<!-- Product main img -->
-					<div class="col-md-5 col-md-push-2">
+					<!-- <div class="col-md-5 col-md-push-2"> -->
 						<div id="product-main-img">
 							<div class="product-preview">
 								<img id="detail-img" src="" alt="">
-							</div>
 
+							</div>
+								<a onclick="changePreviousImage()" class="previous round">&#8249;</a>
+								<a onclick="changeNextImage()" class="next round">&#8250;</a>
 							<div class="product-preview">
 								<img src="" alt="">
 							</div>
@@ -127,11 +151,11 @@
 								<img src="" alt="">
 							</div>
 						</div>
-					</div>
+<!-- 					</div> -->
 					<!-- /Product main img -->
 
 					<!-- Product thumb imgs -->
-					<div class="col-md-2  col-md-pull-5">
+<!-- 					<div class="col-md-2  col-md-pull-5">
 						<div id="product-imgs">
 							<div class="product-preview">
 								<img src="" alt="">
@@ -149,14 +173,14 @@
 								<img src="" alt="">
 							</div>
 						</div>
-					</div>
+					</div> -->
 					<!-- /Product thumb imgs -->
 
 					<!-- Product details -->
 					<div class="col-md-5">
 						<div class="product-details">
 							<h2 id="detail-name" class="product-name"></h2>
-							<div>
+							<!-- <div>
 								<div class="product-rating">
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
@@ -165,12 +189,12 @@
 									<i class="fa fa-star-o"></i>
 								</div>
 								<a class="review-link" href="#">10 Review(s) | Add your review</a>
-							</div>
+							</div> -->
 							<div>
 								<h3 id="detail-price" class="product-price">$980.00 <del class="product-old-price">$990.00</del></h3>
 								<span class="product-available">In Stock</span>
 							</div>
-							<p id="detail-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+							<p id="detail-description"></p>
 
 							<div class="add-to-cart">
 								<div class="qty-label">
@@ -184,10 +208,10 @@
 								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
 							</div>
 
-							<ul class="product-btns">
+<!-- 							<ul class="product-btns">
 								<li><a href="#"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
 								
-							</ul>
+							</ul> -->
 
 
 							<ul class="product-links">
@@ -209,7 +233,7 @@
 							<ul class="tab-nav">
 								<li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
 								<li><a data-toggle="tab" href="#tab2">Details</a></li>
-								<li><a data-toggle="tab" href="#tab3">Reviews (3)</a></li>
+								<!-- <li><a data-toggle="tab" href="#tab3">Reviews (3)</a></li> -->
 							</ul>
 							<!-- /product tab nav -->
 
@@ -219,7 +243,7 @@
 								<div id="tab1" class="tab-pane fade in active">
 									<div class="row">
 										<div class="col-md-12">
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+											<p></p>
 										</div>
 									</div>
 								</div>
@@ -229,16 +253,16 @@
 								<div id="tab2" class="tab-pane fade in">
 									<div class="row">
 										<div class="col-md-12">
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+											<p> </p>
 										</div>
 									</div>
 								</div>
 								<!-- /tab2  -->
 
 								<!-- tab3  -->
-								<div id="tab3" class="tab-pane fade in">
+<!-- 								<div id="tab3" class="tab-pane fade in">
 									<div class="row">
-										<!-- Rating -->
+										Rating
 										<div class="col-md-3">
 											<div id="rating">
 												<div class="rating-avg">
@@ -319,11 +343,11 @@
 													</li>
 												</ul>
 											</div>
-										</div>
+										</div> -->
 										<!-- /Rating -->
 
 										<!-- Reviews -->
-										<div class="col-md-6">
+										<!-- <div class="col-md-6">
 											<div id="reviews">
 												<ul class="reviews">
 													<li>
@@ -383,11 +407,11 @@
 													<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
 												</ul>
 											</div>
-										</div>
+										</div> -->
 										<!-- /Reviews -->
 
 										<!-- Review Form -->
-										<div class="col-md-3">
+										<!-- <div class="col-md-3">
 											<div id="review-form">
 												<form class="review-form">
 													<input class="input" type="text" placeholder="Your Name">
@@ -406,7 +430,7 @@
 													<button class="primary-btn">Submit</button>
 												</form>
 											</div>
-										</div>
+										</div> -->
 										<!-- /Review Form -->
 									</div>
 								</div>
@@ -637,10 +661,8 @@
 		<!-- jQuery Plugins -->
 		<script src="js/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
-		<script src="js/slick.min.js"></script>
 		<script src="js/nouislider.min.js"></script>
 		<script src="js/jquery.zoom.min.js"></script>
-		<script src="js/main.js"></script>
-
+	
 	</body>
 </html>

@@ -18,7 +18,7 @@
     return parms;
 }
    	console.log("Details icindeyim");
-
+   	var list=new Array; 
     //goes to url which returns json list
     /*window.location.href = 'searchResults.html';*/
 // function to get json object
@@ -54,30 +54,50 @@ async function getData(value){
          var sideValue3 = sideImg3[1].replace(/['"]+/g, '');
          var sideValue4 = sideImg4[1].replace(/['"]+/g, '');
          image.src = imgvalue;
-         var sid1 = document.getElementsByClassName("product-preview")[1].getElementsByTagName('img')[0];
+         list.push(imgvalue);
+         list.push(sideValue1);
+         list.push(sideValue2);
+         list.push(sideValue3);
+         list.push(sideValue4);
          
-         var sid2 = document.getElementsByClassName("product-preview")[2].getElementsByTagName('img')[0];
          
-         var sid3 = document.getElementsByClassName("product-preview")[3].getElementsByTagName('img')[0];
-         var sid4 = document.getElementsByClassName("product-preview")[4].getElementsByTagName('img')[0];
-         var sid5 = document.getElementsByClassName("product-preview")[6].getElementsByTagName('img')[0];
-         var sid6 = document.getElementsByClassName("product-preview")[7].getElementsByTagName('img')[0];
-         var sid7 = document.getElementsByClassName("product-preview")[8].getElementsByTagName('img')[0];
-         var sid8 = document.getElementsByClassName("product-preview")[9].getElementsByTagName('img')[0];
-         
-         sid1.src =sideValue1;
-         sid2.src =sideValue2;
-         sid3.src =sideValue3;
-         sid4.src =sideValue4;
-         sid5.src =sideValue1;
-         sid6.src =sideValue2;
-         sid7.src =sideValue3;
-         sid8.src =sideValue4;
+//         sid1.src =sideValue1;
+//         sid2.src =sideValue2;
+//         sid3.src =sideValue3;
+//         sid4.src =sideValue4;
+//         sid5.src =sideValue1;
+//         sid6.src =sideValue2;
+//         sid7.src =sideValue3;
+//         sid8.src =sideValue4;
     	 price.innerHTML = data[0].price + "$";
     	 description.innerHTML = data[0].short_description;
     	 descriptionTab.innerHTML = data[0].detailed_description;
     	 requirementTab.innerHTML = data[0].minimum;
+    	 image.style.width = "575px";
+         image.style.height = "350px";
     }
+
+	var i = 0;
+	function changeNextImage(){
+		i++;
+		if(i > list.length - 1)
+			{
+			i = 0;
+			}
+			
+		var image = document.getElementById('detail-img');
+		image.src = list[i];
+	}
+	function changePreviousImage(){
+		i--;
+		if(i < 0 ){
+			i = list.length-1;
+			console.log(i);
+		}
+			
+		var image = document.getElementById('detail-img');
+		image.src = list[i];
+	}
 	
 	var parsed = parseURLParams(window.location.href);
     getData(parsed);
