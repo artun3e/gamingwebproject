@@ -35,6 +35,7 @@
     <link type="text/css" rel="stylesheet" href="css/nouislider.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/searchBar.css">
 <script src="js/search.js"></script>
 <script src="js/toDetails.js"></script>
 <!-- Berkin CSS and JS-->
@@ -84,7 +85,7 @@
                    </li>
                     <li class="dropdown" style="margin-left: 5%;"><a
                             class="nav-link" href="Home_HTML">Strategy<span class="sr-only">(current)</span></a>
-					<li style="margin-left: 5%; margin-top: 12px;"><input id="search"  type="text" placeholder="Search.."  onkeydown="if (event.keyCode == 13) { search(); }"></li>
+					<li style="margin-left: 5%; margin-top: 12px;"><input id="search"  type="text" placeholder="What are you looking for?" onkeydown="if (event.keyCode == 13) { search(); }"></li>
                     <li class="dropdown" style="margin-left: 5%;">
                     	<a class="fa fa-user" style="font-size: 34px; color: grey;"></a>
 
