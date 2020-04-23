@@ -1,7 +1,6 @@
 function addToCart(game){	
 	var child = game.parentElement.parentElement;
 	var itemName = child.getElementsByClassName("product-name")[0].getElementsByTagName('a')[0].innerText;
-	
 	//console.log(itemName);
 	
 	var xhr = new XMLHttpRequest();
@@ -14,8 +13,12 @@ function addToCart(game){
     xhr.send(params);
 }
 
-function Log_User_Out(){	
-	
+function Log_User_Out(logging){	
+	/*var xhr = new XMLHttpRequest();
+    var url = "logout";
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send();*/
 }
 
 $(document).ready(function() {
@@ -59,10 +62,6 @@ $(document).ready(function() {
 	    		url_2 += "null/"
 	    	}
     	}
-	    //const url = '/CS308RegisterWithJPA/search/fromDB/byCategory/FPS/null/null/null/null/'; //goes to url which returns json list
-	    /*window.location.href = 'searchResults.html';*/
-	    // function to get json object
-	    var string_html = "";
 	    document.getElementById("About_To_Change").innerHTML = "";
 	    async function getData(){
 	    	const response = await fetch(url_2);

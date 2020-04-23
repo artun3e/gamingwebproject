@@ -80,8 +80,8 @@
 	                        	{
                         			/* out.println("<a href=\"#account\">Account</a>");
                         			out.println("<a href=\"#liked\">Liked Ones</a>"); */
-                        			out.println("<a href=\"#orders\">My Orders</a>");
-                        			out.println("<a href=\"#orders\">Logout</a>");
+                        			out.println("<a href=\"myOrders.jsp\">My Orders</a>");
+                        			out.println("<a onclick=\"Log_User_Out(this)\" href=\"#\">Logout</a>");
 	                        	}
                         		else{
                         			out.println("<a href=\"login.jsp\">Login</a>");
@@ -93,17 +93,14 @@
                      <li class="dropdown" style="margin-left: 5%;">
                     	<a class="fa fa-shopping-cart" href="shoppingCart.jsp" style="font-size: 34px; color: grey;"></a>
                     </li>
-                    <p style="margin-left: 5%;">
-                    	<%
-	                        
-	                        if(session.getAttribute("user") != null)
-	                        {
-	                            Object obj = session.getAttribute("user");
-	                            User user = (User) obj;
-	                            out.print("Hello, " + user.getName());
-	                        }
-                    	%>
-	            	</p>
+                   	<%
+                        if(session.getAttribute("user") != null)
+                        {
+                            Object obj = session.getAttribute("user");
+                            User user = (User) obj;
+                            out.print("<p style=\"margin-left: 5%;margin-top: 8px;\">"+user.getName()+"</p>");
+                        }
+                   	%>
                 </ul>
             </div>
         </div>
@@ -112,10 +109,10 @@
 <body>
 <div class="section">
     <!-- container -->
-    <p style='color: #a94442'>
+    <p style='color: #a94442' style="margin-left: 500px;">
         <%
             session = request.getSession();
-            if(session.getAttribute("loggedIn-Error") != null)
+        	if(session.getAttribute("loggedIn-Error") != null)
             {
                 out.print("You are already logged in!");
                 session.removeAttribute("loggedIn-Error");

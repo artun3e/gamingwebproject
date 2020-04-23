@@ -1,3 +1,8 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ page import="java.util.*"%>
+<%@ page import="cs308.sabanciuniv.edu.User"%>
+<%@ page import="cs308.sabanciuniv.edu.Games"%>
+<%@ page import="cs308.sabanciuniv.edu.Order"%>
 <html>
 
   <head>
@@ -14,58 +19,59 @@
   </head>
   
   <header>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<div class="container" style="margin-right: 22%;">
-			<a class="navbar-brand" href="index.jsp"> <img src="img/logo.png" width="34"
-				height="34" class="d-inline-block align-top" alt=""> Tech
-				Market
-			</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#navbarNav" aria-controls="navbarNav"
-				aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarNav">
-				<ul class="navbar-nav mr-auto">
-					 <li class="dropdown"><a class="nav-link" href="Home_HTML">Action
-                        <span class="sr-only">(current)</span>
-                    </a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container" style="margin-right: center;">
+            <a class="navbar-brand" href="index.jsp" style="margin-top: 6px;"> <img src="img/logo.png" width="34" height="34" class="d-inline-block align-top" alt="" style="margin-top: -6px;"> Tech Market </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarNav" aria-controls="navbarNav"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+  					<li class="dropdown"><a class="nav-link" href="#" value="Action"></a></li>
+                    <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="Multiplayer"></a></li>
+                    <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="Sports"></a></li>
+                    <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="FPS"></a></li>
+                    <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="RPG"></a></li>
+                    <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="Strategy"></span></a>
 
-                    <li class="dropdown" style="margin-left: 5%;"><a
-                            class="nav-link" href="Home_HTML">Multiplayer <span class="sr-only">(current)</span></a>
+                    <li style="margin-left: 75%; margin-top: 12px;"><input id="search"  type="text" placeholder="Search.."  onkeydown="if (event.keyCode == 13) { search(); }"></li>
+                    <li class="dropdown" style="margin-left: 5%;">
+                    	<a class="fa fa-user" style="font-size: 34px; color: grey;"></a>
 
-					</li>
-                    <li class="dropdown" style="margin-left: 5%;"><a
-                            class="nav-link" href="Home_HTML"> Sports <span
-                            class="sr-only">(current)</span></a>
-
+                        <div class="dropdown-content">
+                        	<% 
+                        		session = request.getSession();
+                        		if(session.getAttribute("user") != null)
+	                        	{
+                        			/* out.println("<a href=\"#account\">Account</a>");
+                        			out.println("<a href=\"#liked\">Liked Ones</a>"); */
+                        			out.println("<a href=\"myOrders.jsp\">My Orders</a>");
+                        			out.println("<a onclick=\"Log_User_Out(this)\" href=\"#\">Logout</a>");
+	                        	}
+                        		else{
+                        			out.println("<a href=\"login.jsp\">Login</a>");
+                        			out.println("<a href=\"register.jsp\">Register</a>");
+                        		}
+                        	%>
+                        </div>
+                     </li>
+                     <li class="dropdown" style="margin-left: 5%;">
+                    	<a class="fa fa-shopping-cart" href="shoppingCart.jsp" style="font-size: 34px; color: grey;"></a>
                     </li>
-                    <li class="dropdown" style="margin-left: 5%;"><a
-                            class="nav-link" href="Home_HTML"> FPS <span class="sr-only">(current)</span></a>
-
-                   </li>
-                    <li class="dropdown" style="margin-left: 5%;"><a
-                            class="nav-link" href="Home_HTML"> RPG <span
-                            class="sr-only">(current)</span></a>
-                   </li>
-                    <li class="dropdown" style="margin-left: 5%;"><a
-                            class="nav-link" href="Home_HTML">Strategy<span class="sr-only">(current)</span></a>
-					<li style="margin-left: 5%; margin-top: 5px;"><input id="search"  type="text" placeholder="Search.."  onkeydown="if (event.keyCode == 13) { search(); }"></li>
-					<li class="dropdown" style="margin-left: 5%;"><a
-						class="fa fa-user" style="font-size: 34px; color: grey;"></a>
-
-						<div class="dropdown-content">
-							<a href="login.jsp">Login</a> 
-							<a href="register.jsp">Register</a> 
-							<a href="myOrders.jsp">My Orders</a> 
-								<a href="#account">Account</a> 
-						</div></li>
-					<a class="fa fa-shopping-cart" href="shoppingCart.jsp" style="font-size: 34px; color: grey; margin-left: 10%;"></a>
-				</ul>
-			</div>
-		</div>
-	</nav>
-
+                   	<%
+                        if(session.getAttribute("user") != null)
+                        {
+                            Object obj = session.getAttribute("user");
+                            User user = (User) obj;
+                            out.print("<p style=\"margin-left: 5%;margin-top: 8px;\">"+user.getName()+"</p>");
+                        }
+                   	%>
+                </ul>
+            </div>
+        </div>
+    </nav>
 </header>
   
   
@@ -82,7 +88,7 @@
           </form>
         </div>
         <div class="register-right">
-<p> Yinelenen bir sayfa içeriğinin okuyucunun dikkatini dağıttığı bilinen bir gerçektir. Lorem Ipsum kullanmanın amacı, sürekli 'buraya metin gelecek, buraya metin gelecek' yazmaya kıyasla daha dengeli bir harf dağılımı sağlayarak okunurluğu artırmasıdır. Şu anda birçok masaüstü yayıncılık paketi ve web sayfa düzenleyicisi, varsayılan mıgır metinler olarak Lorem Ipsum kullanmaktadır. Ayrıca arama motorlarında 'lorem ipsum' anahtar sözcükleri ile arama yapıldığında henüz tasarım aşamasında olan çok sayıda site listelenir. Yıllar içinde, bazen kazara, bazen bilinçli olarak (örneğin mizah katılarak), çeşitli sürümleri geliştirilmiştir.</p>
+<p> Yinelenen bir sayfa iÃ§eriÄinin okuyucunun dikkatini daÄÄ±ttÄ±ÄÄ± bilinen bir gerÃ§ektir. Lorem Ipsum kullanmanÄ±n amacÄ±, sÃ¼rekli 'buraya metin gelecek, buraya metin gelecek' yazmaya kÄ±yasla daha dengeli bir harf daÄÄ±lÄ±mÄ± saÄlayarak okunurluÄu artÄ±rmasÄ±dÄ±r. Åu anda birÃ§ok masaÃ¼stÃ¼ yayÄ±ncÄ±lÄ±k paketi ve web sayfa dÃ¼zenleyicisi, varsayÄ±lan mÄ±gÄ±r metinler olarak Lorem Ipsum kullanmaktadÄ±r. AyrÄ±ca arama motorlarÄ±nda 'lorem ipsum' anahtar sÃ¶zcÃ¼kleri ile arama yapÄ±ldÄ±ÄÄ±nda henÃ¼z tasarÄ±m aÅamasÄ±nda olan Ã§ok sayÄ±da site listelenir. YÄ±llar iÃ§inde, bazen kazara, bazen bilinÃ§li olarak (Ã¶rneÄin mizah katÄ±larak), Ã§eÅitli sÃ¼rÃ¼mleri geliÅtirilmiÅtir.</p>
         </div>
       </div>
 

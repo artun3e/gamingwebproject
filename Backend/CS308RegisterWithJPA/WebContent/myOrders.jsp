@@ -91,10 +91,7 @@ border:3px solid black;
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container" style="margin-right: center;">
-            <a class="navbar-brand" href="index.jsp"> <img src="img/logo.png" width="34"
-                                                                 height="34" class="d-inline-block align-top" alt=""> Tech
-                Market
-            </a>
+            <a class="navbar-brand" href="index.jsp" style="margin-top: 6px;"> <img src="img/logo.png" width="34" height="34" class="d-inline-block align-top" alt="" style="margin-top: -6px;"> Tech Market </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarNav" aria-controls="navbarNav"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -102,47 +99,50 @@ border:3px solid black;
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
-                     <li class="dropdown"><a class="nav-link" href="Home_HTML">Action
-                        <span class="sr-only">(current)</span>
-                    </a>
+  					<li class="dropdown"><a class="nav-link" href="#" value="Action"></a></li>
+                    <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="Multiplayer"></a></li>
+                    <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="Sports"></a></li>
+                    <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="FPS"></a></li>
+                    <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="RPG"></a></li>
+                    <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="Strategy"></span></a>
 
-                    <li class="dropdown" style="margin-left: 5%;"><a
-                            class="nav-link" href="Home_HTML">Multiplayer <span class="sr-only">(current)</span></a>
-
-					</li>
-                    <li class="dropdown" style="margin-left: 5%;"><a
-                            class="nav-link" href="Home_HTML"> Sports <span
-                            class="sr-only">(current)</span></a>
-
-                    </li>
-                    <li class="dropdown" style="margin-left: 5%;"><a
-                            class="nav-link" href="Home_HTML"> FPS <span class="sr-only">(current)</span></a>
-
-                   </li>
-                    <li class="dropdown" style="margin-left: 5%;"><a
-                            class="nav-link" href="Home_HTML"> RPG <span
-                            class="sr-only">(current)</span></a>
-                   </li>
-                    <li class="dropdown" style="margin-left: 5%;"><a
-                            class="nav-link" href="Home_HTML">Strategy<span class="sr-only">(current)</span></a>
-                    <li style="margin-left: 5%; margin-top: 5px;"><input id="search"  type="text" placeholder="Search.."  onkeydown="if (event.keyCode == 13) { search(); }"></li>
-                    <li class="dropdown" style="margin-left: 5%;"><a
-                            class="fa fa-user" style="font-size: 34px; color: grey;"></a>
+                    <li style="margin-left: 75%; margin-top: 12px;"><input id="search"  type="text" placeholder="Search.."  onkeydown="if (event.keyCode == 13) { search(); }"></li>
+                    <li class="dropdown" style="margin-left: 5%;">
+                    	<a class="fa fa-user" style="font-size: 34px; color: grey;"></a>
 
                         <div class="dropdown-content">
-                            <a href="login.jsp">Login</a> 
-                            <a href="register.jsp">Register</a> <a
-                                href="myOrders.jsp">My Orders</a> <a href="#account">Account</a> <a
-                                href="#liked">Liked Ones</a>
-                        </div></li>
-                    <a class="fa fa-shopping-cart" href="shoppingCart.jsp" style="font-size: 34px; color: grey; margin-left: 10%;"></a>
+                        	<% 
+                        		session = request.getSession();
+                        		if(session.getAttribute("user") != null)
+	                        	{
+                        			/* out.println("<a href=\"#account\">Account</a>");
+                        			out.println("<a href=\"#liked\">Liked Ones</a>"); */
+                        			out.println("<a href=\"myOrders.jsp\">My Orders</a>");
+                        			out.println("<a onclick=\"Log_User_Out(this)\" href=\"#\">Logout</a>");
+	                        	}
+                        		else{
+                        			out.println("<a href=\"login.jsp\">Login</a>");
+                        			out.println("<a href=\"register.jsp\">Register</a>");
+                        		}
+                        	%>
+                        </div>
+                     </li>
+                     <li class="dropdown" style="margin-left: 5%;">
+                    	<a class="fa fa-shopping-cart" href="shoppingCart.jsp" style="font-size: 34px; color: grey;"></a>
+                    </li>
+                   	<%
+                        if(session.getAttribute("user") != null)
+                        {
+                            Object obj = session.getAttribute("user");
+                            User user = (User) obj;
+                            out.print("<p style=\"margin-left: 5%;margin-top: 8px;\">"+user.getName()+"</p>");
+                        }
+                   	%>
                 </ul>
             </div>
         </div>
     </nav>
-
 </header>
-
 <body style = "background-color:white;">
 
 	<section class="container content-section">
