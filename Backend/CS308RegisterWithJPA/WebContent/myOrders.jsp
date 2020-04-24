@@ -274,7 +274,7 @@ if(session.getAttribute("user") != null)
 	    		//out.println("<td><a href=\"#\"><img src=\"./img/product02.png\" alt=" + game.getName() + "class=\"img-fluid\"></a></td>");
 	    		out.println("<td><a href=\"#\"><img src=" + game.getHeader_image() +  "alt=" + game.getName() + "width=\"100\" height=\"100\"\"></a></td>");
 	    		
-	    		out.println("<td><a href=\"#\">" + game.getName()+ "</a></td>");
+	    		out.println("<td><a onclick=\"toDetails(this)\" href=\"#\">" + game.getName()+ "</a></td>");
 	    		out.println("<td><a>" + gameList.get(game) + "</a></td>");
 	    		//out.println("<td><a href=\"#\">" + gameList.get(game)* 0 + "</a></td>");
 	    		out.println("<td><a>" + game.getPrice()+ "$</a></td>");
