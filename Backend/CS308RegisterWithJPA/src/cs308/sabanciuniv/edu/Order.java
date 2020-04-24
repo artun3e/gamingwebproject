@@ -22,7 +22,7 @@ public class Order {
 	private User owner;
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "Orders_Games", joinColumns =  @JoinColumn(name = "Order_id"))
-	@MapKeyJoinColumn(name = "appid", unique = false)
+	@MapKeyJoinColumn(unique = false)
 	@Column(name = "Quantity")
 	@Fetch(FetchMode.SELECT)
 	Map<Games, Integer> products;
