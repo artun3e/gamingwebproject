@@ -99,7 +99,7 @@ async function getData(value){
             var imgvalue = image[1].replace(/['"]+/g, '');
             var img = document.getElementsByClassName("product-img")[k].getElementsByTagName('img')[0];
             img.src = newImg;
-            img.style.width = "550px";
+            img.style.width = "100%";
             img.style.height = "300px"
         	var brand = document.getElementsByClassName("product-body")[k].getElementsByTagName('p')[0];
             var name = document.getElementsByClassName("product-body")[k].getElementsByTagName('h3')[0];
