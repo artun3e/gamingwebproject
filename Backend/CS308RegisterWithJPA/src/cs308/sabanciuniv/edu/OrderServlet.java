@@ -44,7 +44,7 @@ public class OrderServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("In do post of order servlet!!!!");
 		try
-		{
+		{			
 			HttpSession session = request.getSession();
 			User user = (User)session.getAttribute("user");
 			if(user == null)
@@ -98,6 +98,11 @@ public class OrderServlet extends HttpServlet {
 					System.out.println(o);
 					countTime++;
 				}
+				String mail_content= "Hello " + user.getName()+"\n";
+				for (Games game: hashmap.keySet()) {
+					mail_content = mail_content + "you have bought " + hashmap.get(game) + " copies of " + game.getName() + "\n";					
+				}
+				JavaMailUtil.sendMailwithMessage(mail_content,user.getEmail()); 
 				session.removeAttribute("cart");
 			}
 		}
