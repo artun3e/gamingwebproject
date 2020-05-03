@@ -48,6 +48,11 @@ if (session.getAttribute("user") != null) {
 <!-- Berkin CSS and JS-->
 <script src="js/search.js"></script>
 <script src="js/toDetails.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/slick.min.js"></script>
+    <script src="js/nouislider.min.js"></script>
+    <script src="js/jquery.zoom.min.js"></script>
 <link rel="stylesheet" href="css/register.css">
 <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
 <link type="text/css" rel="stylesheet" href="css/slick.css">
@@ -59,6 +64,7 @@ if (session.getAttribute("user") != null) {
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Berkin CSS and JS-->
     <script src="js/search.js"></script>
+    <script src="js/main.js"></script>
         <script src="js/toDetails.js"></script>
     <link rel="stylesheet" href="css/register.css">
         <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
@@ -72,6 +78,16 @@ if (session.getAttribute("user") != null) {
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <meta charset="UTF-8">
 </head>
+
+<body>
+		        <div class="spinner-wrapper">
+					<div class="sk-folding-cube">
+						  <div class="sk-cube1 sk-cube"></div>
+						  <div class="sk-cube2 sk-cube"></div>
+						  <div class="sk-cube4 sk-cube"></div>
+						  <div class="sk-cube3 sk-cube"></div>
+					</div>
+				</div>
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container" style="margin-right: center;">
@@ -119,7 +135,8 @@ if (session.getAttribute("user") != null) {
         </div>
     </nav>
 </header>
-<body>
+
+
 	<div class="main">
 		<div class="container" >
 			<div class="row">

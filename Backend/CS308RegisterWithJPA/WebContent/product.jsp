@@ -31,6 +31,11 @@
 <link type="text/css" rel="stylesheet" href="css/nouislider.min.css">
 <link rel="stylesheet" href="css/font-awesome.min.css">
 <!-- Berkin CSS and JS-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/slick.min.js"></script>
+    <script src="js/nouislider.min.js"></script>
+    <script src="js/jquery.zoom.min.js"></script>
 <link rel="stylesheet" href="css/login.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/searchBar.css">
@@ -38,6 +43,7 @@
 <script src="js/search.js"></script>
 <script src="js/details.js"></script>
 <script src="js/toDetails.js"></script>
+<script src="js/main.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		
@@ -46,7 +52,19 @@
 
     </head>
 	
-		<header>
+		
+	
+<body>
+		        <div class="spinner-wrapper">
+					<div class="sk-folding-cube">
+						  <div class="sk-cube1 sk-cube"></div>
+						  <div class="sk-cube2 sk-cube"></div>
+						  <div class="sk-cube4 sk-cube"></div>
+						  <div class="sk-cube3 sk-cube"></div>
+					</div>
+				</div>
+
+<header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container" style="margin-right: center;">
             <a class="navbar-brand" href="index.jsp" style="margin-top: 6px;"> <img src="img/logo.png" width="34" height="34" class="d-inline-block align-top" alt="" style="margin-top: -6px;"> Tech Market </a>
@@ -93,8 +111,7 @@
         </div>
     </nav>
 </header>
-	
-<body>
+
 		<!-- SECTION -->
 			<style> 
 			a {

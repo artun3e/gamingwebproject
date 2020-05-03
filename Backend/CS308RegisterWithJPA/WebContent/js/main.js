@@ -13,7 +13,15 @@
 	});
 
 	/////////////////////////////////////////
-
+	$(document).ready(function() {
+		//Preloader
+		var preloaderFadeOutTime = 2250;
+		function hidePreloader() {
+		var preloader = $('.spinner-wrapper');
+		preloader.fadeOut(preloaderFadeOutTime);
+		}
+		hidePreloader();
+		});
 	// Products Slick
 	$('.products-slick').each(function() {
 		var $this = $(this),

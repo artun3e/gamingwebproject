@@ -52,6 +52,22 @@
 	<script type="text/javascript" src="js/index.js"></script>
     <meta charset="UTF-8">
 </head>
+
+<body>
+
+			        <!-- Preloader Start -->
+
+		        <div class="spinner-wrapper">
+					<div class="sk-folding-cube">
+						  <div class="sk-cube1 sk-cube"></div>
+						  <div class="sk-cube2 sk-cube"></div>
+						  <div class="sk-cube4 sk-cube"></div>
+						  <div class="sk-cube3 sk-cube"></div>
+					</div>
+				</div>
+
+    <!-- Preloader end -->
+
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container" style="margin-right: center;">
@@ -107,7 +123,7 @@
         </div>
     </nav>
 </header>
-<body>
+
 <div class="section">
     <!-- container -->
     <p style='color: #a94442' style="margin-left: 500px;">
