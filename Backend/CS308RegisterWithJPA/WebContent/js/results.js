@@ -1,6 +1,3 @@
- 	console.log("buradayim");
-    /*window.location.href = 'searchResults.html';*/
-// function to get json object
 async function getData(value){
 	const query  = value.name[0];
 	const url = '/CS308RegisterWithJPA/search/fromDB/byName/' + query; 
@@ -67,31 +64,36 @@ async function getData(value){
 			'<h3 class="product-name"> </h3>'+
 			'<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>'+
 			'<div class="product-rating">'+
-				'<i class="fa fa-star"></i>'+
-				'<i class="fa fa-star"></i>'+
-				'<i class="fa fa-star"></i>'+
-				'<i class="fa fa-star"></i>'+
-				'<i class="fa fa-star"></i>'+
 			'</div>'+
 		'</div>'+
 		'<div class="add-to-cart">'+
 			'<button onclick="addToCart(this)" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Cart</button>'+
 		'</div>'+
 	'</div>';
-	
+        function addStars(k){
+        	var stars = document.getElementsByClassName("product-rating")[k];
+        	var random = Math.floor(Math.random() * 5) + 1;
+            for(var i=0; i<random ;i++){
+            	var star = document.createElement('i');
+                star.setAttribute('class', "fa fa-star");
+            	stars.appendChild(star);
+            }
+
+        }
         
-        function createNewCard(){ //creates new element in html for each product
+        function createNewCard(k){ //creates new element in html for each product
             var p = document.getElementsByClassName("main")[0];
             var newElement = document.createElement('div');
             //// newElement.setAttribute('id', elementId);
             newElement.innerHTML = productHTML;
             newElement.setAttribute('class', "col-md-4 col-xs-6");
             p.appendChild(newElement);
+            addStars(k);
             }
         
         
         function fillCard(element, k){ //fill the card with necessary information
-        	createNewCard();
+        	createNewCard(k);
         	var images = element.screenshots;
         	var newImg = element.header_image;
         	imagesArr = images.split(',');
