@@ -1,3 +1,6 @@
+const products = [];
+
+
 async function getData(value){
 	const query  = value.name[0];
 	const url = '/CS308RegisterWithJPA/search/fromDB/byName/' + query; 
@@ -10,13 +13,14 @@ async function getData(value){
 		}
 		else{
 	    	for (var k = 0; k < data.length; k++){
+	    		products.push(data[k]);
 	    		fillCard(data[k], k);
 	    	
 	    	} //
 		}
 
     }
-
+	console.log(products);
 	var parsed = parseURLParams(window.location.href);
 	getData(parsed);
 
@@ -72,6 +76,7 @@ async function getData(value){
 	'</div>';
         function addStars(k){
         	var stars = document.getElementsByClassName("product-rating")[k];
+        	stars.innerHTML = "";
         	var random = Math.floor(Math.random() * 5) + 1;
             for(var i=0; i<random ;i++){
             	var star = document.createElement('i');
@@ -111,6 +116,23 @@ async function getData(value){
             price.innerHTML = "$" + element.price;
             }
         
+        function reFill(element, j){ //fill the card with necessary information
+        	var images = element.screenshots;
+        	var newImg = element.header_image;
+        	imagesArr = images.split(',');
+        	var image = imagesArr[1].split("': ");
+            var imgvalue = image[1].replace(/['"]+/g, '');
+            var img = document.getElementsByClassName("product-img")[j].getElementsByTagName('img')[0];
+            img.src = newImg;
+        	var brand = document.getElementsByClassName("product-body")[j].getElementsByTagName('p')[0];
+            var name = document.getElementsByClassName("product-body")[j].getElementsByTagName('h3')[0];
+            var price = document.getElementsByClassName("product-body")[j].getElementsByTagName('h4')[0];
+            brand.innerHTML = element.publisher;
+            name.innerHTML = '<a onclick="toDetails(this)" href="#">' + element.name + '</a>' ;
+            price.innerHTML = "$" + element.price;
+            addStars(j);
+            }
+        
         
         function checkImage(img,imagesArr){ //check image exists or not
         	img.onerror = function() {
@@ -141,4 +163,17 @@ function addToCart(game){
 	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     
     xhr.send(params);
+}
+
+function sortByPriceAsc(){	
+	products.sort(function(a, b){return a.price - b.price});
+	for(var j=0; j<products.length; j++){
+		reFill(products[j], j);
+	}
+}
+function sortByPriceDes(){	
+	products.sort(function(a, b){return b.price - a.price});
+	for(var j=0; j<products.length; j++){
+		reFill(products[j], j);
+	}
 }

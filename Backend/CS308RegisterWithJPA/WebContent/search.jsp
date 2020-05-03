@@ -90,6 +90,8 @@
     </nav>
 </header>
 <body>
+	<button onclick="sortByPriceAsc()"> Sort price (Ascending): </button>
+	<button onclick="sortByPriceDes()"> Sort price (Descending): </button>
 	<div class="main">
 
     </div
