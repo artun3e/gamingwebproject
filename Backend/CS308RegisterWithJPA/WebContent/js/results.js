@@ -74,11 +74,23 @@ async function getData(value){
 			'<button onclick="addToCart(this)" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Cart</button>'+
 		'</div>'+
 	'</div>';
-        function addStars(k){
+        function addStars(k, rating){
         	var stars = document.getElementsByClassName("product-rating")[k];
         	stars.innerHTML = "";
-        	var random = Math.floor(Math.random() * 5) + 1;
-            for(var i=0; i<random ;i++){
+        	console.log("ben addstarstayim", rating)
+        	if(rating > 0.95)
+        		var starNumber = 5;
+        	else if(rating > 0.83)
+        		var starNumber = 4;
+        	else if(rating > 0.65)
+        		var starNumber = 3;
+        	else if(rating > 0.50)
+        		var starNumber = 2;
+        	else if(rating > 0.35)
+        		var starNumber = 1;
+        	else
+        		var starNumber = 0;
+            for(var i=0; i<starNumber ;i++){
             	var star = document.createElement('i');
                 star.setAttribute('class', "fa fa-star");
             	stars.appendChild(star);
@@ -93,7 +105,7 @@ async function getData(value){
             newElement.innerHTML = productHTML;
             newElement.setAttribute('class', "col-md-4 col-xs-6");
             p.appendChild(newElement);
-            addStars(k);
+            
             }
         
         
@@ -114,6 +126,8 @@ async function getData(value){
             brand.innerHTML = element.publisher;
             name.innerHTML = '<a onclick="toDetails(this)" href="#">' + element.name + '</a>' ;
             price.innerHTML = "$" + element.price;
+            var rating = element.rating;
+            addStars(k, rating);
             }
         
         function reFill(element, j){ //fill the card with necessary information
@@ -130,7 +144,8 @@ async function getData(value){
             brand.innerHTML = element.publisher;
             name.innerHTML = '<a onclick="toDetails(this)" href="#">' + element.name + '</a>' ;
             price.innerHTML = "$" + element.price;
-            addStars(j);
+            var rating = element.rating;
+            addStars(j, rating);
             }
         
         
