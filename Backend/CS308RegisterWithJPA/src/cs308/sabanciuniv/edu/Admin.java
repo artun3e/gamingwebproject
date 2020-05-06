@@ -63,6 +63,11 @@ public class Admin extends User  {
 		Connection conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
 		PreparedStatement ps = conn.prepareStatement("DELETE FROM Games WHERE name = "+gameName+"");
 		ResultSet rs = ps.executeQuery();
+		
+		conn.close(); // bug fixes -- deniztura
+        conn = null;
+        ps = null;
+        rs = null;
 		}catch (Exception e) {
             e.printStackTrace();
         }
@@ -71,6 +76,17 @@ public class Admin extends User  {
 	/*
 	 *TODO add changeProduct function here!!!!
 	 */
+	
+	
+	/*
+	 * admin must be able to add categories to the function
+	 */
+	// we need to add the to the "categories string" of the game class ? --deniztura
+	//
+	public void addCategory(String category){
+		
+		
+	}
 	 
 	
 	
