@@ -38,8 +38,6 @@ public class Admin extends User  {
 		// first we need to connect to the database
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
-			/*INSERT INTO table_name (column1, column2, column3, ...)
-			VALUES (value1, value2, value3, ...);*/
 			PreparedStatement ps = conn.prepareStatement("INSERT INTO Games(appid,name,release_date,developer,publisher,platforms,required_age,categories,genres,steamspy_tags,owners,price,rating,header_image,screenshots,background,minimum,detailed_description,about_the_game,short_description)"
 					+ "                                   VALUES("+ newGame.getAppID() +", " + newGame.getName()+", "+newGame.getReleaseDate()+","+newGame.getDeveloper()+","+newGame.getPublisher()+","+newGame.getPlatforms()+","+newGame.getRequiredAge()+", "+newGame.getCategories()+", "+newGame.getGenres()+","+newGame.getSteampsyTags()+","
 							+ "								"+newGame.getOwners()+", "+newGame.getPrice()+","+newGame.getRating()+","+newGame.getHeader_image()+","
@@ -103,15 +101,6 @@ public class Admin extends User  {
 	}
 	
 	
-	/*
-	 * admin must be able to add categories to the function
-	 */
-	// we need to add the to the "categories string" of the game class ? --deniztura
-	//
-	public void addCategory(String category){
-		
-		
-	}
 	 
 	
 	
