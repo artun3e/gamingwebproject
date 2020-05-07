@@ -1,3 +1,4 @@
+
 package cs308.sabanciuniv.edu;
 
 import java.util.Properties;
@@ -97,6 +98,53 @@ public class JavaMailUtil {
 		}
 		return null;
 	}
+	
+	private static Message prepareMessageWithTopic(Session session, String emailAddress, String recipient, String textMessage,String topic)
+	{
+		Message message = new MimeMessage(session);
+		try{
+			message.setFrom(new InternetAddress(emailAddress));
+			message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
+			message.setSubject("topic");
+			message.setText(textMessage);
+			return message;
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public static void sendMailwithMessageAndTopic(String messageInput, String recipient,String topic)
+	{
+		try {
+			System.out.println("Preparing to send the verification e-mail...");
+			Properties properties = new Properties();
+			
+			properties.put("mail.smtp.auth", "true");
+			properties.put("mail.smtp.starttls.enable", "true");
+			properties.put("mail.smtp.host", "smtp.gmail.com");
+			properties.put("mail.smtp.port", "587");
+			
+			String emailAddress = "cs308group14@gmail.com";
+			String password = "kodumla100les";
+			
+			Session session = Session.getInstance(properties, new Authenticator() {
+				@Override
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return new PasswordAuthentication(emailAddress, password);
+				}
+			});
+			String textMessage = messageInput;
+			Message message = prepareMessageWithTopic(session, emailAddress, recipient, textMessage,topic);
+			Transport.send(message);
+			System.out.println("Message sent successfully!!!");
+		} 
+		catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}		
 	public static void  SendInlineImagesInEmail(String content, String recipient, String topic, int count ) {
 		  
 		      // Recipient's email ID needs to be mentioned.
@@ -173,4 +221,3 @@ public class JavaMailUtil {
 		      }
 		   }
 		}
-
