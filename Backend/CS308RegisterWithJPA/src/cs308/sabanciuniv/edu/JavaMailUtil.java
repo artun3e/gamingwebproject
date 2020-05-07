@@ -105,7 +105,7 @@ public class JavaMailUtil {
 		try{
 			message.setFrom(new InternetAddress(emailAddress));
 			message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
-			message.setSubject("topic");
+			message.setSubject(topic);
 			message.setText(textMessage);
 			return message;
 		} 

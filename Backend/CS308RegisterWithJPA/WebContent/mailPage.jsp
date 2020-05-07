@@ -705,14 +705,17 @@
                             <div class="row">
                                 <div class="col-lg-1 col-md-2 col-sm-2 col-xs-12">
                                     <div class="cmp-int-lb text-right">
+                                        <!-- <span>Subject: </span> -->
                                         <span>Subject: </span>
+                                        <span> .</span>
+                                        <textarea name="subject"id="subject" rows="1" cols="112" ></textarea>
                                     </div>
                                 </div>
                                 <div class="col-lg-11 col-md-10 col-sm-10 col-xs-12">
                                     <div class="form-group cmp-em-mg">
-                                        <div class="nk-int-st cmp-int-in cmp-email-over">
+                                        <!-- <div class="nk-int-st cmp-int-in cmp-email-over">
                                             <input type="text" class="form-control" placeholder="" />
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -738,8 +741,8 @@
                             <div class="btn-group ib-btn-gp active-hook nk-email-inbox">
                                 <button class="btn btn-default btn-sm waves-effect"><i class="notika-icon notika-next"></i> Reply</button>
                                 <button class="btn btn-default btn-sm waves-effect"><i class="notika-icon notika-right-arrow"></i> Forward</button>
-                                <button class="btn btn-default btn-sm waves-effect"><i class="notika-icon notika-down-arrow"></i> Send All</button>
-                                <button onclick="myFunction()" class="btn btn-default btn-sm waves-effect"><i class="notika-icon notika-trash"></i> Send</button>
+                                <button class="btn btn-default btn-sm waves-effect"><i class="notika-icon notika-down-arrow"></i> Send</button>
+                                <button onclick="myFunction()" class="btn btn-default btn-sm waves-effect"><i class="notika-icon notika-trash"></i> Send All</button>
                             </div>
                         </div>
                     </div>
@@ -763,8 +766,10 @@
     </div>
     <script>
     function myFunction() {
-    	  var messageVariable = document.getElementById("myMessage");
-    	  console.log("your message: " + data.value);
+    	  var messageVariable = document.getElementById("myMessage").value;
+    	  var topicVariable = document.getElementById("subject").value;
+    	  console.log("your message: " + messageVariable.value);
+    	  console.log("your topic: " + document.getElementById("subject").value);
 
     	  var xhr = new XMLHttpRequest();
     	    var url = "SendAllServlet";
