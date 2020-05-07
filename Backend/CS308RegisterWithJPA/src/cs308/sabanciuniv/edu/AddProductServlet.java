@@ -43,9 +43,8 @@ public class AddProductServlet extends HttpServlet {
 		//doGet(request, response);
 		
 		// first we need to connect to the database
-		String emailInput = request.getParameter("email");
-		String passInput = request.getParameter("pass");
-		try {
+		// add icin daha sayfa eklenmedi galiba
+		/*try {
 			Connection conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
 			PreparedStatement ps = conn.prepareStatement("INSERT INTO Games(appid,name,release_date,developer,publisher,platforms,required_age,categories,genres,steamspy_tags,owners,price,rating,header_image,screenshots,background,minimum,detailed_description,about_the_game,short_description)"
 					+ "                                   VALUES("+ newGame.getAppID() +", " + newGame.getName()+", "+newGame.getReleaseDate()+","+newGame.getDeveloper()+","+newGame.getPublisher()+","+newGame.getPlatforms()+","+newGame.getRequiredAge()+", "+newGame.getCategories()+", "+newGame.getGenres()+","+newGame.getSteampsyTags()+","
@@ -61,7 +60,7 @@ public class AddProductServlet extends HttpServlet {
 			
 		}catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
 		
 	}
 
