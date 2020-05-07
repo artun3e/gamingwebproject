@@ -8,6 +8,8 @@
 <html class="no-js" lang="">
 
 <head>
+
+
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Mail Page</title>
@@ -73,7 +75,7 @@
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <div class="logo-area">
-                        <a href="#"><img src="img/logo/logo.png" alt="" /></a>
+                        <a href="#"><img src="img3/logo/logo.png" alt="" /></a>
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
@@ -98,7 +100,7 @@
                                         <a href="#">
                                             <div class="hd-message-sn">
                                                 <div class="hd-message-img">
-                                                    <img src="img/post/1.jpg" alt="" />
+                                                    <img src="img3/post/1.jpg" alt="" />
                                                 </div>
                                                 <div class="hd-mg-ctn">
                                                     <h3>David Belle</h3>
@@ -109,7 +111,7 @@
                                         <a href="#">
                                             <div class="hd-message-sn">
                                                 <div class="hd-message-img">
-                                                    <img src="img/post/2.jpg" alt="" />
+                                                    <img src="img3/post/2.jpg" alt="" />
                                                 </div>
                                                 <div class="hd-mg-ctn">
                                                     <h3>Jonathan Morris</h3>
@@ -120,7 +122,7 @@
                                         <a href="#">
                                             <div class="hd-message-sn">
                                                 <div class="hd-message-img">
-                                                    <img src="img/post/4.jpg" alt="" />
+                                                    <img src="img3/post/4.jpg" alt="" />
                                                 </div>
                                                 <div class="hd-mg-ctn">
                                                     <h3>Fredric Mitchell</h3>
@@ -131,7 +133,7 @@
                                         <a href="#">
                                             <div class="hd-message-sn">
                                                 <div class="hd-message-img">
-                                                    <img src="img/post/1.jpg" alt="" />
+                                                    <img src="img3/post/1.jpg" alt="" />
                                                 </div>
                                                 <div class="hd-mg-ctn">
                                                     <h3>David Belle</h3>
@@ -142,7 +144,7 @@
                                         <a href="#">
                                             <div class="hd-message-sn">
                                                 <div class="hd-message-img">
-                                                    <img src="img/post/2.jpg" alt="" />
+                                                    <img src="img3/post/2.jpg" alt="" />
                                                 </div>
                                                 <div class="hd-mg-ctn">
                                                     <h3>Glenn Jecobs</h3>
@@ -165,7 +167,7 @@
                                         <a href="#">
                                             <div class="hd-message-sn">
                                                 <div class="hd-message-img">
-                                                    <img src="img/post/1.jpg" alt="" />
+                                                    <img src="img3/post/1.jpg" alt="" />
                                                 </div>
                                                 <div class="hd-mg-ctn">
                                                     <h3>David Belle</h3>
@@ -176,7 +178,7 @@
                                         <a href="#">
                                             <div class="hd-message-sn">
                                                 <div class="hd-message-img">
-                                                    <img src="img/post/2.jpg" alt="" />
+                                                    <img src="img3/post/2.jpg" alt="" />
                                                 </div>
                                                 <div class="hd-mg-ctn">
                                                     <h3>Jonathan Morris</h3>
@@ -187,7 +189,7 @@
                                         <a href="#">
                                             <div class="hd-message-sn">
                                                 <div class="hd-message-img">
-                                                    <img src="img/post/4.jpg" alt="" />
+                                                    <img src="img3/post/4.jpg" alt="" />
                                                 </div>
                                                 <div class="hd-mg-ctn">
                                                     <h3>Fredric Mitchell</h3>
@@ -198,7 +200,7 @@
                                         <a href="#">
                                             <div class="hd-message-sn">
                                                 <div class="hd-message-img">
-                                                    <img src="img/post/1.jpg" alt="" />
+                                                    <img src="img3/post/1.jpg" alt="" />
                                                 </div>
                                                 <div class="hd-mg-ctn">
                                                     <h3>David Belle</h3>
@@ -608,7 +610,7 @@
 										<i class="notika-icon notika-mail"></i>
 									</div>
 									<div class="breadcomb-ctn">
-										<h2>Inbox</h2>
+										<h2>Compose Email</h2>
 										<p>Welcome to Notika <span class="bread-ntd">Admin Template</span></p>
 									</div>
 								</div>
@@ -625,13 +627,13 @@
 		</div>
 	</div>
 	<!-- Breadcomb area End-->
-    <!-- Inbox area Start-->
+    <!-- Compose email area Start-->
     <div class="inbox-area">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
                     <div class="inbox-left-sd">
-						<div class="compose-ml">
+                        <div class="compose-ml">
                             <a class="btn" href="#">Compose</a>
                         </div>
                         <div class="inbox-status">
@@ -664,116 +666,80 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                    <div class="inbox-text-list sm-res-mg-t-30">
-                        <div class="form-group">
-                            <div class="nk-int-st search-input search-overt">
-                                <input type="text" class="form-control" placeholder="Search email..." />
-                                <button class="btn search-ib">Search</button>
+                <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
+                    <div class="view-mail-list sm-res-mg-t-30">
+                        <div class="view-mail-hd">
+                            <div class="view-mail-hrd">
+                                <h2>New Message</h2>
                             </div>
                         </div>
-                        <div class="inbox-btn-st-ls btn-toolbar">
+                        <div class="cmp-int mg-t-20">
+                            <div class="row">
+                                <div class="col-lg-1 col-md-2 col-sm-2 col-xs-12">
+                                    <div class="cmp-int-lb cmp-int-lb1 text-right">
+                                        <span>To: </span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-11 col-md-10 col-sm-10 col-xs-12">
+                                    <div class="form-group">
+                                        <div class="nk-int-st cmp-int-in cmp-email-over">
+                                            <input type="email" class="form-control" placeholder="example@email.com" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-1 col-md-2 col-sm-2 col-xs-12">
+                                    <div class="cmp-int-lb cmp-int-lb1 text-right">
+                                        <span>Cc: </span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-11 col-md-10 col-sm-10 col-xs-12">
+                                    <div class="form-group">
+                                        <div class="nk-int-st cmp-int-in cmp-email-over">
+                                            <input type="email" class="form-control" placeholder="" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-1 col-md-2 col-sm-2 col-xs-12">
+                                    <div class="cmp-int-lb text-right">
+                                        <span>Subject: </span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-11 col-md-10 col-sm-10 col-xs-12">
+                                    <div class="form-group cmp-em-mg">
+                                        <div class="nk-int-st cmp-int-in cmp-email-over">
+                                            <input type="text" class="form-control" placeholder="" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cmp-int-box mg-t-20">
+                            <div class="text-area">
+                            <textarea name="myMessage"id="myMessage" rows="10" cols="112" placeholder="Write your mail here..."></textarea>
+                            </div>
+                        </div>
+                        <div class="multiupload-sys">
+                            <div id="dropzone" class="dropmail">
+                                <form action="/upload" class="dropzone dropzone-custom needsclick" id="demo-upload">
+                                    <div class="dz-message needsclick download-custom">
+                                        <i class="notika-icon notika-cloud" aria-hidden="true"></i>
+                                        <h2>Drop files here or click to upload.</h2>
+                                        <p><span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
+                                        </p>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="vw-ml-action-ls text-right mg-t-20">
                             <div class="btn-group ib-btn-gp active-hook nk-email-inbox">
-                                <button class="btn btn-default btn-sm"><i class="notika-icon notika-refresh"></i> Refresh</button>
-                                <button class="btn btn-default btn-sm"><i class="notika-icon notika-next"></i></button>
-                                <button class="btn btn-default btn-sm"><i class="notika-icon notika-down-arrow"></i></button>
-                                <button class="btn btn-default btn-sm"><i class="notika-icon notika-trash"></i></button>
-                                <button class="btn btn-default btn-sm"><i class="notika-icon notika-checked"></i></button>
-                                <button class="btn btn-default btn-sm"><i class="notika-icon notika-promos"></i></button>
-                            </div>
-                            <div class="btn-group ib-btn-gp active-hook nk-act nk-email-inbox">
-                                <button class="btn btn-default btn-sm"><i class="notika-icon notika-left-arrow"></i></button>
-                                <button class="btn btn-default btn-sm"><i class="notika-icon notika-right-arrow"></i></button>
-                            </div>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table table-hover table-inbox">
-                                <tbody>
-                                    <tr class="unread">
-                                        <td class="">
-                                            <label><input type="checkbox" checked="" class="i-checks"></label>
-                                        </td>
-                                        <td><a href="#">Jeremy Massey</a></td>
-                                        <td><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a>
-                                        </td>
-                                        <td><i class="notika-icon notika-paperclip"></i></td>
-                                        <td class="text-right mail-date">Tue, Nov 25</td>
-                                    </tr>
-                                    <tr class="active">
-                                        <td class="">
-                                            <label><input type="checkbox" class="i-checks"></label>
-                                        </td>
-                                        <td><a href="#">Marshall Horne</a></td>
-                                        <td><a href="#">Praesent nec nisl sed neque ornare maximus at ac enim.</a>
-                                        </td>
-                                        <td></td>
-                                        <td class="text-right mail-date">Wed, Jan 13</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="">
-                                            <label><input type="checkbox" class="i-checks"></label>
-                                        </td>
-                                        <td><a href="#">Grant Franco</a> <span class="label label-warning">Finance</span></td>
-                                        <td><a href="#">Etiam maximus tellus a turpis tempor mollis.</a></td>
-                                        <td></td>
-                                        <td class="text-right mail-date">Mon, Oct 19</td>
-                                    </tr>
-                                    <tr class="unread active">
-                                        <td class="">
-                                            <label><input type="checkbox" class="i-checks"></label>
-                                        </td>
-                                        <td><a href="#">Ferdinand Meadows</a></td>
-                                        <td><a href="#">Aenean hendrerit ligula eget augue gravida semper.</a></td>
-                                        <td><i class="notika-icon notika-paperclip"></i></td>
-                                        <td class="text-right mail-date">Sat, Aug 29</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="">
-                                            <label><input type="checkbox" checked="" class="i-checks"></label>
-                                        </td>
-                                        <td><a href="#">Ivor Rios</a> <span class="label label-info">Social</span>
-                                        </td>
-                                        <td><a href="#">Sed quis augue in nunc venenatis finibus.</a></td>
-                                        <td><i class="notika-icon notika-paperclip"></i></td>
-                                        <td class="text-right mail-date">Sat, Dec 12</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="">
-                                            <label><input type="checkbox" class="i-checks"></label>
-                                        </td>
-                                        <td><a href="#">Maxwell Murphy</a></td>
-                                        <td><a href="#">Quisque eu tortor quis justo viverra cursus.</a></td>
-                                        <td></td>
-                                        <td class="text-right mail-date">Sun, May 17</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="">
-                                            <label><input type="checkbox" class="i-checks"></label>
-                                        </td>
-                                        <td><a href="#">Henry Patterson</a></td>
-                                        <td><a href="#">Aliquam nec justo interdum, ornare mi non, elementum lacus.</a></td>
-                                        <td><i class="notika-icon notika-paperclip"></i></td>
-                                        <td class="text-right mail-date">Thu, Aug 06</td>
-                                    </tr>
-									<tr>
-                                        <td class="">
-                                            <label><input type="checkbox" class="i-checks"></label>
-                                        </td>
-                                        <td><a href="#">Maxwell Murphy</a></td>
-                                        <td><a href="#">Quisque eu tortor quis justo viverra cursus.</a></td>
-                                        <td></td>
-                                        <td class="text-right mail-date">Sun, May 17</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="pagination-inbox">
-                                <ul class="wizard-nav-ac">
-                                    <li><a class="btn" href="#"><i class="notika-icon notika-back"></i></a></li>
-                                    <li class="active"><a class="btn" href="#">1</a></li>
-                                    <li><a class="btn" href="#">2</a></li>
-                                    <li><a class="btn" href="#">3</a></li>
-                                    <li><a class="btn" href="#"><i class="notika-icon notika-next-pro"></i></a></li>
-                                </ul>
+                                <button class="btn btn-default btn-sm waves-effect"><i class="notika-icon notika-next"></i> Reply</button>
+                                <button class="btn btn-default btn-sm waves-effect"><i class="notika-icon notika-right-arrow"></i> Forward</button>
+                                <button class="btn btn-default btn-sm waves-effect"><i class="notika-icon notika-down-arrow"></i> Send All</button>
+                                <button onclick="myFunction()" class="btn btn-default btn-sm waves-effect"><i class="notika-icon notika-trash"></i> Send</button>
                             </div>
                         </div>
                     </div>
@@ -781,7 +747,7 @@
             </div>
         </div>
     </div>
-    <!-- Inbox area End-->
+    <!-- Compose email area End-->
     <!-- Start Footer area-->
     <div class="footer-copyright-area">
         <div class="container">
@@ -795,6 +761,21 @@
             </div>
         </div>
     </div>
+    <script>
+    function myFunction() {
+    	  var messageVariable = document.getElementById("myMessage");
+    	  console.log("your message: " + data.value);
+
+    	  var xhr = new XMLHttpRequest();
+    	    var url = "SendAllServlet";
+    	    xhr.open("POST", url, true);
+    		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    		var params = 'topic='+topicVariable+'&messageInput='+messageVariable;
+    		xhr.send(params);
+    	}
+    
+    </script>
+    
     <!-- End Footer area-->
     <!-- jquery
 		============================================ -->
@@ -839,6 +820,13 @@
     <script src="js3/knob/jquery.knob.js"></script>
     <script src="js3/knob/jquery.appear.js"></script>
     <script src="js3/knob/knob-active.js"></script>
+    <!-- summernote JS
+		============================================ -->
+    <script src="js3/summernote/summernote-updated.min.js"></script>
+    <script src="js3/summernote/summernote-active.js"></script>
+    <!-- dropzone JS
+		============================================ -->
+    <script src="js3/dropzone/dropzone.js"></script>
     <!--  wave JS
 		============================================ -->
     <script src="js3/wave/waves.min.js"></script>
