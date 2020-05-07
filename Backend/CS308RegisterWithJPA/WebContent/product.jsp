@@ -262,7 +262,7 @@ a:hover {
 							<ul class="tab-nav">
 								<li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
 								<li><a data-toggle="tab" href="#tab2">Min Requirements</a></li>
-								<!-- <li><a data-toggle="tab" href="#tab3">Reviews (3)</a></li> -->
+								<li><a data-toggle="tab" href="#tab3">Reviews (3)</a></li>
 							</ul>
 							<!-- /product tab nav -->
 
@@ -289,7 +289,7 @@ a:hover {
 								<!-- /tab2  -->
 
 								<!-- tab3  -->
-<!-- 								<div id="tab3" class="tab-pane fade in">
+								<div id="tab3" class="tab-pane fade in">
 									<div class="row">
 										Rating
 										<div class="col-md-3">
@@ -372,75 +372,29 @@ a:hover {
 													</li>
 												</ul>
 											</div>
-										</div> -->
+										</div>
 										<!-- /Rating -->
 
 										<!-- Reviews -->
-										<!-- <div class="col-md-6">
+										<div class="col-md-6">
 											<div id="reviews">
 												<ul class="reviews">
-													<li>
-														<div class="review-heading">
-															<h5 class="name">John</h5>
-															<p class="date">27 DEC 2018, 8:0 PM</p>
-															<div class="review-rating">
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star-o empty"></i>
-															</div>
-														</div>
-														<div class="review-body">
-															<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-														</div>
-													</li>
-													<li>
-														<div class="review-heading">
-															<h5 class="name">John</h5>
-															<p class="date">27 DEC 2018, 8:0 PM</p>
-															<div class="review-rating">
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star-o empty"></i>
-															</div>
-														</div>
-														<div class="review-body">
-															<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-														</div>
-													</li>
-													<li>
-														<div class="review-heading">
-															<h5 class="name">John</h5>
-															<p class="date">27 DEC 2018, 8:0 PM</p>
-															<div class="review-rating">
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star-o empty"></i>
-															</div>
-														</div>
-														<div class="review-body">
-															<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-														</div>
-													</li>
+													
+													
 												</ul>
-												<ul class="reviews-pagination">
+												<!-- <ul class="reviews-pagination">
 													<li class="active">1</li>
 													<li><a href="#">2</a></li>
 													<li><a href="#">3</a></li>
 													<li><a href="#">4</a></li>
 													<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-												</ul>
+												</ul> -->
 											</div>
-										</div> -->
+										</div>
 										<!-- /Reviews -->
 
 										<!-- Review Form -->
-										<!-- <div class="col-md-3">
+										<div class="col-md-3">
 											<div id="review-form">
 												<form class="review-form">
 													<input class="input" type="text" placeholder="Your Name">
@@ -459,7 +413,7 @@ a:hover {
 													<button class="primary-btn">Submit</button>
 												</form>
 											</div>
-										</div> -->
+										</div>
 										<!-- /Review Form -->
 									</div>
 								</div>

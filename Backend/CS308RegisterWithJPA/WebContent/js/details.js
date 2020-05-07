@@ -25,9 +25,12 @@
 async function getData(value){
 		const query  = value.name[0];
 		const url = '/CS308RegisterWithJPA/search/fromDB/byName/' + query; 
-//		window.location.href = url;
     	const response = await fetch(url);
     	const data = await response.json();
+    	const urlR = '/CS308RegisterWithJPA/search/fromDB/byNamee/' + query; 
+    	const responseR = await fetch(urlR);
+    	const reviews = await responseR.json();
+    	
 //       	clearDiv();
 //    	for (var k = 0; k < data.length; k++){
 //    		fillCard(data[k], k);
@@ -39,7 +42,7 @@ async function getData(value){
     	 var description = document.getElementById('detail-description');
     	 var descriptionTab = document.getElementsByClassName("col-md-12")[0].getElementsByTagName('p')[0];
     	 var requirementTab = document.getElementById("tab2");
-    	 console.log(descriptionTab);
+    	 
     	 name.innerHTML = data[0].name;
     	 var images = data[0].screenshots;
      	 imagesArr = images.split(',');
@@ -73,9 +76,49 @@ async function getData(value){
     	 description.innerHTML = data[0].short_description;
     	 descriptionTab.innerHTML = data[0].detailed_description;
     	 requirementTab.innerHTML = data[0].minimum;
+//    	 document.querySelector("#reviews > ul.reviews > li > div.review-heading > h5")
+//    	 document.querySelector("#reviews > ul.reviews > li > div.review-body > p")
+    	 
+    	 for (var r=0; r<reviews.length ; r++){
+    		 createNewReview();
+    		 var reviewsUser = document.getElementsByClassName("review-heading")[r].getElementsByTagName('h5')[0];
+    		 console.log(reviewsUser);
+    		 var reviewsComment = document.getElementsByClassName("review-body")[r].getElementsByTagName('p')[0];
+    		 console.log(reviewsComment);
+    		 reviewsComment.innerHTML = reviews[r].comment;
+        	 var username = reviews[r].user.split('@')
+        	 reviewsUser.innerHTML = username[0];
+    	 }
+    	 
+    	 
     	 image.style.width = "575px";
          image.style.height = "350px";
     }
+function createNewReview(){ //creates new element in html for each product
+	var reviewsTab = document.querySelector("#reviews > ul.reviews");
+    var newElement = document.createElement('li');
+    //// newElement.setAttribute('id', elementId);
+    newElement.innerHTML = reviewHTML;
+    reviewsTab.appendChild(newElement);
+    }
+
+var reviewHTML = 
+'														<div class="review-heading">'+
+'															<h5 class="name"></h5>'+
+'															<p class="date">27 DEC 2018, 8:0 PM</p>'+
+'															<div class="review-rating">'+
+'																<i class="fa fa-star"></i>'+
+'																<i class="fa fa-star"></i>'+
+'																<i class="fa fa-star"></i>'+
+'																<i class="fa fa-star"></i>'+
+'																<i class="fa fa-star-o empty"></i>'+
+'															</div>'+
+'														</div>'+
+'														<div class="review-body">'+
+'															<p></p>'+
+'														</div>';
+	
+
 
 	var i = 0;
 	function changeNextImage(){

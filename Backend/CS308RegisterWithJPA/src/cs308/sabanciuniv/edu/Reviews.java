@@ -46,41 +46,41 @@ public class Reviews {
 	    		this.comment = comment;	
 	    }
 	    	public Reviews() {
-	    	}
-	    	
-	    	@GET
-	        @Produces(MediaType.APPLICATION_JSON)
-	        @Path("byNamee/{n}")
-	        public List<Reviews> getReview(@PathParam("n")String query) {
-	        	 System.out.println("Review ");
-	            List<Reviews> resultReviews = new ArrayList<Reviews>();
-	            try {
-	                Connection conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
-	                PreparedStatement ps = conn.prepareStatement("Select * from Reviews WHERE name like "+ "'%" + query + "%'");
-	                ResultSet rs = ps.executeQuery();
-	                System.out.println("Review");
+	    	}	
+	    	  @GET
+	    	    @Produces(MediaType.APPLICATION_JSON)
+	    	    @Path("byNamee/{n}")
+	    	    public List<Reviews> getReview(@PathParam("n")String query) {
+	    	    	 System.out.println("Review ");
+	    	        List<Reviews> resultReviews = new ArrayList<Reviews>();
+	    	        try {
+	    	            Connection conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
+	    	            PreparedStatement ps = conn.prepareStatement("Select * from Reviews WHERE name like "+ "'%" + query + "%'");
+	    	            ResultSet rs = ps.executeQuery();
+	    	            System.out.println("Review");
 
-	                while (rs.next()) {
-	                	 Reviews r = new Reviews();
-	                	 r.setName(rs.getString("name"));
-	                	 r.setUser(rs.getString("user_email"));
-	                	 r.setComment(rs.getString("user_comment"));
-	                	 System.out.println("Review " + r.getComment());
-	                	 resultReviews.add(r);
-	                }
-	                
-	                conn.close();
-	                conn = null;
-	                ps = null;
-	                rs = null;
-	                return resultReviews;
-	            } 
-	            catch (Exception e) {
-	                e.printStackTrace();
-	                return resultReviews;
-	            }
-	        }
-	    	
-	    	
+	    	            while (rs.next()) {
+	    	            	 Reviews r = new Reviews();
+	    	            	 r.setName(rs.getString("name"));
+	    	            	 r.setUser(rs.getString("user_email"));
+	    	            	 r.setComment(rs.getString("user_comment"));
+	    	            	 System.out.println("Review " + r.getComment());
+	    	            	 resultReviews.add(r);
+	    	            }
+	    	            
+	    	            conn.close();
+	    	            conn = null;
+	    	            ps = null;
+	    	            rs = null;
+	    	            return resultReviews;
+	    	        } 
+	    	        catch (Exception e) {
+	    	            e.printStackTrace();
+	    	            return resultReviews;
+	    	        }
+	    	    }
+	    	   
 }
+
+
 
