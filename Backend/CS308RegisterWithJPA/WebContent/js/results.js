@@ -54,26 +54,39 @@ async function getData(value){
     	'" did not match any products  </p>';
     
     
-        var productHTML= 
-        	'<div class="product">'+
-		'<div class="product-img">'+
-		'<img src="product01.png" alt="">'+
-		'<div class="product-label">'+
-			'<span class="sale"></span>'+
-			'<span class="new"></span>'+
-		'</div>'+
-	'</div>'+
-		'<div class="product-body">'+
-			'<p class="product-category"> <a href="product.jsp"> Category </a></p>'+
-			'<h3 class="product-name"> </h3>'+
-			'<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>'+
-			'<div class="product-rating">'+
-			'</div>'+
-		'</div>'+
-		'<div class="add-to-cart">'+
-			'<button onclick="addToCart(this)" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Cart</button>'+
-		'</div>'+
-	'</div>';
+
+    var productHTML = 
+    '                                <div class="product">'+
+    '                                    <div class="product-img">'+
+    '                                        <img src="./img/product01.png" alt="">'+
+    '                                        <div class="product-label">'+
+    '                                            <span class="sale">-30%</span>'+
+    '                                            <span class="new">NEW</span>'+
+    '                                        </div>'+
+    '                                    </div>'+
+    '                                    <div class="product-body">'+
+    '                                        <p class="product-category">Category</p>'+
+    '                                        <h3 class="product-name"><a href="#">product name goes here</a></h3>'+
+    '                                        <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>'+
+    '                                        <div class="product-rating">'+
+    '                                            <i class="fa fa-star"></i>'+
+    '                                            <i class="fa fa-star"></i>'+
+    '                                            <i class="fa fa-star"></i>'+
+    '                                            <i class="fa fa-star"></i>'+
+    '                                            <i class="fa fa-star"></i>'+
+    '                                        </div>'+
+    '                                        <div class="product-btns">'+
+    '                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>'+
+    '                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>'+
+    '                                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>'+
+    '                                        </div>'+
+    '                                    </div>'+
+    '                                    <div class="add-to-cart">'+
+    '                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>'+
+    '                                    </div>'+
+    '                                </div>';
+    	
+
         function addStars(k, rating){
         	var stars = document.getElementsByClassName("product-rating")[k];
         	stars.innerHTML = "";
@@ -99,7 +112,7 @@ async function getData(value){
         }
         
         function createNewCard(k){ //creates new element in html for each product
-            var p = document.getElementsByClassName("main")[0];
+            var p = document.querySelector("#store > div.row")
             var newElement = document.createElement('div');
             //// newElement.setAttribute('id', elementId);
             newElement.innerHTML = productHTML;
@@ -107,7 +120,6 @@ async function getData(value){
             p.appendChild(newElement);
             
             }
-        
         
         function fillCard(element, k){ //fill the card with necessary information
         	createNewCard(k);

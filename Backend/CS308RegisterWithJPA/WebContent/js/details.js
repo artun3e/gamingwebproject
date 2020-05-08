@@ -24,18 +24,19 @@
 // function to get json object
 async function getData(value){
 		const query  = value.name[0];
+		console.log("query is equal to" + query);
 		const url = '/CS308RegisterWithJPA/search/fromDB/byName/' + query; 
     	const response = await fetch(url);
     	const data = await response.json();
     	const urlR = '/CS308RegisterWithJPA/search/fromDB/byNamee/' + query; 
     	const responseR = await fetch(urlR);
     	const reviews = await responseR.json();
+    	console.log(reviews);
     	
 //       	clearDiv();
 //    	for (var k = 0; k < data.length; k++){
 //    		fillCard(data[k], k);
 //    	} //
-    	console.log(data[0].name);
     	 var name = document.getElementById('detail-name');
     	 var image = document.getElementById('detail-img');
     	 var price = document.getElementById('detail-price');
@@ -82,9 +83,7 @@ async function getData(value){
     	 for (var r=0; r<reviews.length ; r++){
     		 createNewReview();
     		 var reviewsUser = document.getElementsByClassName("review-heading")[r].getElementsByTagName('h5')[0];
-    		 console.log(reviewsUser);
     		 var reviewsComment = document.getElementsByClassName("review-body")[r].getElementsByTagName('p')[0];
-    		 console.log(reviewsComment);
     		 reviewsComment.innerHTML = reviews[r].comment;
         	 var username = reviews[r].user.split('@')
         	 reviewsUser.innerHTML = username[0];
