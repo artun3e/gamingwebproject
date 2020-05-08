@@ -47,20 +47,7 @@ public class RemoveProductServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//doGet(request, response);
-		try {
-			Connection conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
-			PreparedStatement ps = conn.prepareStatement("DELETE FROM Games WHERE appid = "+ID+"");
-			ResultSet rs = ps.executeQuery();
-			
-			conn.close(); 
-	        conn = null;
-	        ps = null;
-	        rs = null;
-			}catch (Exception e) {
-	            e.printStackTrace();
-	        }
+
 	}
 
 }

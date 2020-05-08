@@ -38,58 +38,57 @@ public class UpdateProductServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		//doGet(request, response);
-		
+		EntityManagerFactory emf;
+		EntityManager em;
 		try {
-			//int gameID = Integer.parseInt(request.getParameter("ssid"));
-			String gameName = request.getParameter("streamer_id");
-			String publisher = request.getParameter("stream_name");
-			String categories = request.getParameter("streamed_game");
+			int gameID = Integer.parseInt(request.getParameter("id"));
+			String gameName = request.getParameter("name");
+			String publisher = request.getParameter("publisher");
+			String categories = request.getParameter("categories");
+			String steamspyTags = request.getParameter("steamspytags");
 			double price = Double.parseDouble(request.getParameter("revenue"));
-			
-			Games update = new Games();
-			//update.setAppID(gameID);
-			update.setName(gameName);
-			update.setPublisher(publisher);
-			update.setCategories(categories);
-			update.setPrice(price);
-			
-			EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
-			EntityManager em = emf.createEntityManager();
-			
-			Object obj =em.createQuery("UPDATE Games SET name = "+update.getName()+",publisher = "+update.getPublisher()+","
-					+ "categories = "+update.getCategories()+",price = "+update.getPrice()+"").getSingleResult();
-			
-			em.close();
-			emf.close(); 
-			
-			
-			//Games update = new Games(gameID,gameName,null,null,publisher,null,null,categories,null,null,null,price,null,null,null,null,null,null,null,null);
-			
-			
+			String shortDescription = request.getParameter("shortdescription");
+			String detailedDescription = request.getParameter("detaileddescription");
+			String minimum = request.getParameter("minimum");
+			String aboutTheGame = request.getParameter("aboutthegame");
+			String background = request.getParameter("background");
+			String screenshots = request.getParameter("screenshots");
+			String headerImage = request.getParameter("headerimage");
 
-			/*
-			 Connection conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
-             PreparedStatement ps = conn.prepareStatement("UPDATE Games SET name = "+update.getName()+",release_date = "+update.getReleaseDate()+","
-             		+ "developer = "+update.getDeveloper()+",publihser = "+update.getPublisher()+",platforms = "+update.getPlatforms()+",required_age = "+update.getRequiredAge()+","
-             				+ "categories = "+update.getCategories()+", genres = "+ update.getGenres()+",steamspy_tags = "+update.getSteampsyTags()+","
-             						+ "owners = "+update.getOwners()+", price = "+update.getPrice()+", rating = "+update.getRating()+","
-             								+ "header_image = "+update.getHeader_image()+",screenshots = "+update.getScreenshots()+","
-             										+ "backgorund = "+update.getBackground()+",minimum = "+update.getMinimum()+","
-             												+ "detailed_description = "+update.getDetailed_description()+",about_the_game = "+update.getAbout_the_game()+","
-             														+ "short_description = "+update.getShort_description()+" WHERE appid = " + ID + "");
-             ResultSet rs = ps.executeQuery();
-             conn.close(); 
-             conn = null;
-             ps = null;
-             rs = null;
-			*/
-           
+			emf = Persistence.createEntityManagerFactory("cs308");
+			em = emf.createEntityManager();
+
+			Games game = em.find(Games.class, gameID);
+			game.setName(gameName);
+			game.setPublisher(publisher);
+			game.setCategories(categories);
+			game.setPrice(price);
+			game.setSteampsyTags(steamspyTags);
+			game.setShort_description(shortDescription);
+			game.setDetailed_description(detailedDescription);
+			game.setMinimum(minimum);
+			game.setAbout_the_game(aboutTheGame);
+			game.setBackground(background);
+			game.setScreenshots(screenshots);
+			game.setHeader_image(headerImage);
+			//game.setOwners(); We shouldn't be able to edit how many people own the game or the rating from the admin panel...
+			//game.setRating();
+
+			em.merge(game);
+
+			em.close();
+			emf.close();
+
+			em = null;
+			emf = null;
+
 		}catch (Exception e){
 			e.printStackTrace();
+			em = null;
+			emf = null;
 		}
-		
+
 	}
 
 }

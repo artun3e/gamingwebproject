@@ -6,6 +6,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,29 +42,28 @@ public class AddProductServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//doGet(request, response);
-		
-		// first we need to connect to the database
-		// add icin daha sayfa eklenmedi galiba
-		/*try {
-			Connection conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
-			PreparedStatement ps = conn.prepareStatement("INSERT INTO Games(appid,name,release_date,developer,publisher,platforms,required_age,categories,genres,steamspy_tags,owners,price,rating,header_image,screenshots,background,minimum,detailed_description,about_the_game,short_description)"
-					+ "                                   VALUES("+ newGame.getAppID() +", " + newGame.getName()+", "+newGame.getReleaseDate()+","+newGame.getDeveloper()+","+newGame.getPublisher()+","+newGame.getPlatforms()+","+newGame.getRequiredAge()+", "+newGame.getCategories()+", "+newGame.getGenres()+","+newGame.getSteampsyTags()+","
-							+ "								"+newGame.getOwners()+", "+newGame.getPrice()+","+newGame.getRating()+","+newGame.getHeader_image()+","
-									+ "						"+newGame.getScreenshots()+", "+newGame.getBackground()+","+newGame.getMinimum()+","+newGame.getDetailed_description()+","+newGame.getAbout_the_game()+","+newGame.getShort_description()+")");
-			ResultSet rs = ps.executeQuery(); // we don't need to get any object, executing the query is enough
-			
-			
-			 conn.close();
-	         conn = null;
-	         ps = null;
-	         rs = null;
-			
-		}catch (Exception e) {
-            e.printStackTrace();
-        }*/
-		
+
+		EntityManagerFactory emf;
+		EntityManager em;
+
+		try
+		{
+			emf = Persistence.createEntityManagerFactory("cs308");
+			em = emf.createEntityManager();
+
+
+
+
+
+			em = null;
+			emf= null;
+		}
+		catch (Exception e) {
+			em = null;
+			emf = null;
+			e.printStackTrace();
+		}
+
 	}
 
 }
