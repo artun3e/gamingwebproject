@@ -111,51 +111,6 @@
                                         <small>(120)</small>
                                     </label>
                                 </div>
-
-                                <div class="input-checkbox">
-                                    <input type="checkbox" id="category-2">
-                                    <label for="category-2">
-                                        <span></span>
-                                        Smartphones
-                                        <small>(740)</small>
-                                    </label>
-                                </div>
-
-                                <div class="input-checkbox">
-                                    <input type="checkbox" id="category-3">
-                                    <label for="category-3">
-                                        <span></span>
-                                        Cameras
-                                        <small>(1450)</small>
-                                    </label>
-                                </div>
-
-                                <div class="input-checkbox">
-                                    <input type="checkbox" id="category-4">
-                                    <label for="category-4">
-                                        <span></span>
-                                        Accessories
-                                        <small>(578)</small>
-                                    </label>
-                                </div>
-
-                                <div class="input-checkbox">
-                                    <input type="checkbox" id="category-5">
-                                    <label for="category-5">
-                                        <span></span>
-                                        Laptops
-                                        <small>(120)</small>
-                                    </label>
-                                </div>
-
-                                <div class="input-checkbox">
-                                    <input type="checkbox" id="category-6">
-                                    <label for="category-6">
-                                        <span></span>
-                                        Smartphones
-                                        <small>(740)</small>
-                                    </label>
-                                </div>
                             </div>
                         </div>
                         <!-- /aside Widget -->
@@ -176,6 +131,8 @@
                                     <span class="qty-up">+</span>
                                     <span class="qty-down">-</span>
                                 </div>
+                                <br>
+                                <button onClick="filter(document.getElementById('price-min').value,document.getElementById('price-max').value)"> Filter</button>
                             </div>
                         </div>
                         <!-- /aside Widget -->
@@ -296,13 +253,13 @@
                                     </select>
                                 </label>
 
-                                <label>
+<!--                                 <label>
                                     Show:
                                     <select class="input-select">
                                         <option value="0">20</option>
                                         <option value="1">50</option>
                                     </select>
-                                </label>
+                                </label> -->
                             </div>
                             <ul class="store-grid">
                                 <li class="active"><i class="fa fa-th"></i></li>
@@ -316,7 +273,7 @@
 						
 						</div>
 
-                        <!-- store bottom filter -->
+<!--                         store bottom filter
                         <div class="store-filter clearfix">
                             <span class="store-qty">Showing 20-100 products</span>
                             <ul class="store-pagination">
@@ -327,7 +284,7 @@
                                 <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
                             </ul>
                         </div>
-                        <!-- /store bottom filter -->
+                        /store bottom filter -->
                     </div>
                     <!-- /STORE -->
                 </div>

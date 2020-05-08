@@ -27,7 +27,6 @@ async function getData(value){
 		}
 
     }
-	console.log(products);
 	var parsed = parseURLParams(window.location.href);
 	getData(parsed);
 
@@ -89,7 +88,7 @@ async function getData(value){
     '                                        </div>'+
     '                                    </div>'+
     '                                    <div class="add-to-cart">'+
-    '                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>'+
+    '                                        <button onclick="addToCart(this)" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Add </button>'+
     '                                    </div>'+
     '                                </div>';
     	
@@ -97,7 +96,6 @@ async function getData(value){
         function addStars(k, rating){
         	var stars = document.getElementsByClassName("product-rating")[k];
         	stars.innerHTML = "";
-        	console.log("ben addstarstayim", rating)
         	if(rating > 0.95)
         		var starNumber = 5;
         	else if(rating > 0.83)
@@ -118,7 +116,7 @@ async function getData(value){
 
         }
         
-        function createNewCard(k){ //creates new element in html for each product
+        function createNewCard(){ //creates new element in html for each product
             var p = document.querySelector("#store > div.row")
             var newElement = document.createElement('div');
             //// newElement.setAttribute('id', elementId);
@@ -129,7 +127,7 @@ async function getData(value){
             }
         
         function fillCard(element, k){ //fill the card with necessary information
-        	createNewCard(k);
+        	createNewCard();
         	var images = element.screenshots;
         	var newImg = element.header_image;
         	imagesArr = images.split(',');
@@ -185,6 +183,7 @@ async function getData(value){
 //})()
 
 function addToCart(game){	
+	console.log("add to cart butonuna basildi");
 	var child = game.parentElement.parentElement;
 
 	var itemName = child.getElementsByClassName("product-name")[0].getElementsByTagName('a')[0].innerText;
@@ -224,4 +223,25 @@ function sortByPrice(type){
 			reFill(products[j], j);
 		}
 	}
-}	
+}
+
+function filter(min, max){
+	if(min == ""){
+		min = 0;
+		document.querySelector("#price-min").value = 0;
+	}	
+	if(max == ""){
+		max = 999;
+		document.querySelector("#price-max").value= 999;
+	}
+	var count= 0;
+	var row = document.querySelector("#store > div.row");
+	row.innerHTML = "";
+	for(var j=0; j<products.length; j++){
+		if(products[j].price >= min && products[j].price <= max){
+			fillCard(products[j],count)
+			count++;
+		}
+
+	}
+}
