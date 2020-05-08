@@ -12,6 +12,13 @@ async function getData(value){
 			document.getElementsByClassName("main")[0].innerHTML = noResult;
 		}
 		else{
+			var main = document.getElementsByClassName("container")[1];
+			var resultsInfo = document.createElement('h4');
+			if(data.length > 1)
+				resultsInfo.innerHTML = "There are " +  data.length + " results for: " + query;
+			else 
+				resultsInfo.innerHTML = "There is " +  data.length + " result for: " + query;
+			main.prepend(resultsInfo);
 	    	for (var k = 0; k < data.length; k++){
 	    		products.push(data[k]);
 	    		fillCard(data[k], k);
@@ -192,15 +199,17 @@ function addToCart(game){
     xhr.send(params);
 }
 
-function sortByPriceAsc(){	
-	products.sort(function(a, b){return a.price - b.price});
-	for(var j=0; j<products.length; j++){
-		reFill(products[j], j);
+function sortByPrice(type){	
+	if (type == "asc"){
+		products.sort(function(a, b){return a.price - b.price});
+		for(var j=0; j<products.length; j++){
+			reFill(products[j], j);
+		}
 	}
-}
-function sortByPriceDes(){	
-	products.sort(function(a, b){return b.price - a.price});
-	for(var j=0; j<products.length; j++){
-		reFill(products[j], j);
+	else if (type == "desc"){
+		products.sort(function(a, b){return b.price - a.price});
+		for(var j=0; j<products.length; j++){
+			reFill(products[j], j);
+		}
 	}
-}
+}	

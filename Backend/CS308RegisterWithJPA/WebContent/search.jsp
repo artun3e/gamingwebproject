@@ -283,9 +283,9 @@
                             <div class="store-sort">
                                 <label>
                                     Sort By:
-                                    <select class="input-select">
-                                        <option value="0">by Price (Ascending)</option>
-                                        <option value="1">by Price (Descending)</option>
+                                    <select class="input-select" onChange="sortByPrice(this.value)">
+                                        <option value="asc"> Price (Ascending)</option>
+                                        <option value="desc"> Price (Descending)</option>
                                     </select>
                                 </label>
 
