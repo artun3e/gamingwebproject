@@ -139,11 +139,11 @@
 
                         <!-- aside Widget -->
                         <div class="aside">
-                            <h3 class="aside-title">STARS</h3>
+                            <h3 class="aside-title">RATINGS</h3>
                             <div class="checkbox-filter">
-                                <div class="input-checkbox">
-                                    <input type="checkbox" id="brand-1">
-                                    <label for="brand-1">
+                                <div class="input-checkbox" >
+                                    <input type="checkbox" id="5stars" onclick="ratingCheckbox()">
+                                    <label for="5stars">
                                         <span></span>
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
@@ -154,10 +154,9 @@
                                     </label>
                                 </div>
                                 <div class="input-checkbox">
-                                    <input type="checkbox" id="brand-1">
-                                    <label for="brand-1">
+                                    <input type="checkbox" id="4stars" onclick="ratingCheckbox()">
+                                    <label for="4stars">
                                         <span></span>
-                                        <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
@@ -166,8 +165,8 @@
                                     </label>
                                 </div>
                                 <div class="input-checkbox">
-                                    <input type="checkbox" id="brand-1">
-                                    <label for="brand-1">
+                                    <input type="checkbox" id="3stars" onclick="ratingCheckbox()">
+                                    <label for="3stars">
                                         <span></span>
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
@@ -177,8 +176,8 @@
                                     </label>
                                 </div>
                                 <div class="input-checkbox">
-                                    <input type="checkbox" id="brand-1">
-                                    <label for="brand-1">
+                                    <input type="checkbox" id="2stars" onclick="ratingCheckbox()">
+                                    <label for="2stars">
                                         <span></span>
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
@@ -186,8 +185,8 @@
                                     </label>
                                 </div>
                                 <div class="input-checkbox">
-                                    <input type="checkbox" id="brand-1">
-                                    <label for="brand-1">
+                                    <input type="checkbox" id="1star" onclick="ratingCheckbox()">
+                                    <label for="1star">
                                         <span></span>
                                         <i class="fa fa-star"></i>
                                         <small></small>

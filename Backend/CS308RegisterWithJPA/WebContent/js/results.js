@@ -96,15 +96,15 @@ async function getData(value){
         function addStars(k, rating){
         	var stars = document.getElementsByClassName("product-rating")[k];
         	stars.innerHTML = "";
-        	if(rating > 0.95)
+        	if(rating >= 0.95)
         		var starNumber = 5;
-        	else if(rating > 0.83)
+        	else if(rating >= 0.88 && rating < 0.95)
         		var starNumber = 4;
-        	else if(rating > 0.65)
+        	else if(rating >= 0.70 && rating < 0.88)
         		var starNumber = 3;
-        	else if(rating > 0.50)
+        	else if(rating >= 0.50 && rating < 0.70)
         		var starNumber = 2;
-        	else if(rating > 0.35)
+        	else if(rating >= 0.35 && rating < 0.50)
         		var starNumber = 1;
         	else
         		var starNumber = 0;
@@ -249,4 +249,55 @@ function filter(min, max){
 
 	}
 	products = filtered;
+}
+
+function ratingCheckbox(){
+	products = firstData;
+	var ratingFiltered = [];
+	
+	ratingCount = 0;
+	var row = document.querySelector("#store > div.row");
+	row.innerHTML = "";
+	for(var j=0; j<products.length; j++){
+		if(document.getElementById("5stars").checked == true){
+			if (products[j].rating >= 0.95){
+				fillCard(products[j],ratingCount)
+				ratingFiltered.push(products[j]);
+				ratingCount++;
+			}
+		}
+		if(document.getElementById("4stars").checked == true){
+			if (products[j].rating >= 0.88 && products[j].rating < 0.95){
+				fillCard(products[j],ratingCount)
+				ratingFiltered.push(products[j]);
+				ratingCount++;
+			}
+		}
+		if(document.getElementById("3stars").checked == true){
+			if (products[j].rating >= 0.70 && products[j].rating < 0.88){
+				fillCard(products[j],ratingCount)
+				ratingFiltered.push(products[j]);
+				ratingCount++;
+			}
+		}
+		if(document.getElementById("2stars").checked == true){
+			if (products[j].rating >= 0.50 && products[j].rating < 0.70){
+				fillCard(products[j],ratingCount)
+				ratingFiltered.push(products[j]);
+				ratingCount++;
+			}
+		}
+		if(document.getElementById("1star").checked == true){
+			if (products[j].rating >= 0.35 && products[j].rating < 0.50){
+				fillCard(products[j],ratingCount)
+				ratingFiltered.push(products[j]);
+				ratingCount++;
+			}
+		}
+	
+	}
+	products = ratingFiltered;
+
+	
+	
 }
