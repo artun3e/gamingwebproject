@@ -1,5 +1,5 @@
-const products = [];
-
+var products = [];
+var firstData = [];
 
 async function getData(value){
 	const query  = value.name[0];
@@ -25,7 +25,7 @@ async function getData(value){
 	    	
 	    	} //
 		}
-
+	firstData = products;
     }
 	var parsed = parseURLParams(window.location.href);
 	getData(parsed);
@@ -226,6 +226,9 @@ function sortByPrice(type){
 }
 
 function filter(min, max){
+
+	products = firstData;
+	var filtered = [];
 	if(min == ""){
 		min = 0;
 		document.querySelector("#price-min").value = 0;
@@ -240,8 +243,10 @@ function filter(min, max){
 	for(var j=0; j<products.length; j++){
 		if(products[j].price >= min && products[j].price <= max){
 			fillCard(products[j],count)
+			filtered.push(products[j]);
 			count++;
 		}
 
 	}
+	products = filtered;
 }
