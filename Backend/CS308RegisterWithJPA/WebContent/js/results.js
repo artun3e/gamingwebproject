@@ -200,14 +200,26 @@ function addToCart(game){
 }
 
 function sortByPrice(type){	
-	if (type == "asc"){
+	if (type == "p-asc"){
 		products.sort(function(a, b){return a.price - b.price});
 		for(var j=0; j<products.length; j++){
 			reFill(products[j], j);
 		}
 	}
-	else if (type == "desc"){
+	else if (type == "p-desc"){
 		products.sort(function(a, b){return b.price - a.price});
+		for(var j=0; j<products.length; j++){
+			reFill(products[j], j);
+		}
+	}
+	else if(type == "r-asc"){
+		products.sort(function(a, b){return a.rating - b.rating});
+		for(var j=0; j<products.length; j++){
+			reFill(products[j], j);
+		}
+	}
+	else{
+		products.sort(function(a, b){return b.rating - a.rating});
 		for(var j=0; j<products.length; j++){
 			reFill(products[j], j);
 		}

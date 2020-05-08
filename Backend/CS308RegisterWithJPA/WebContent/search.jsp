@@ -182,56 +182,61 @@
 
                         <!-- aside Widget -->
                         <div class="aside">
-                            <h3 class="aside-title">Brand</h3>
+                            <h3 class="aside-title">STARS</h3>
                             <div class="checkbox-filter">
                                 <div class="input-checkbox">
                                     <input type="checkbox" id="brand-1">
                                     <label for="brand-1">
                                         <span></span>
-                                        SAMSUNG
-                                        <small>(578)</small>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <small></small>
                                     </label>
                                 </div>
                                 <div class="input-checkbox">
-                                    <input type="checkbox" id="brand-2">
-                                    <label for="brand-2">
+                                    <input type="checkbox" id="brand-1">
+                                    <label for="brand-1">
                                         <span></span>
-                                        LG
-                                        <small>(125)</small>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <small></small>
                                     </label>
                                 </div>
                                 <div class="input-checkbox">
-                                    <input type="checkbox" id="brand-3">
-                                    <label for="brand-3">
+                                    <input type="checkbox" id="brand-1">
+                                    <label for="brand-1">
                                         <span></span>
-                                        SONY
-                                        <small>(755)</small>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+
+                                        <small></small>
                                     </label>
                                 </div>
                                 <div class="input-checkbox">
-                                    <input type="checkbox" id="brand-4">
-                                    <label for="brand-4">
+                                    <input type="checkbox" id="brand-1">
+                                    <label for="brand-1">
                                         <span></span>
-                                        SAMSUNG
-                                        <small>(578)</small>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <small></small>
                                     </label>
                                 </div>
                                 <div class="input-checkbox">
-                                    <input type="checkbox" id="brand-5">
-                                    <label for="brand-5">
+                                    <input type="checkbox" id="brand-1">
+                                    <label for="brand-1">
                                         <span></span>
-                                        LG
-                                        <small>(125)</small>
+                                        <i class="fa fa-star"></i>
+                                        <small></small>
                                     </label>
                                 </div>
-                                <div class="input-checkbox">
-                                    <input type="checkbox" id="brand-6">
-                                    <label for="brand-6">
-                                        <span></span>
-                                        SONY
-                                        <small>(755)</small>
-                                    </label>
-                                </div>
+
                             </div>
                         </div>
                         <!-- /aside Widget -->
@@ -284,8 +289,10 @@
                                 <label>
                                     Sort By:
                                     <select class="input-select" onChange="sortByPrice(this.value)">
-                                        <option value="asc"> Price (Ascending)</option>
-                                        <option value="desc"> Price (Descending)</option>
+                                        <option value="p-asc"> Price (Ascending)</option>
+                                        <option value="p-desc"> Price (Descending)</option>
+                                        <option value="r-asc"> Rating (Ascending)</option>
+                                        <option value="r-desc"> Rating (Descending)</option>
                                     </select>
                                 </label>
 
@@ -329,7 +336,7 @@
             <!-- /container -->
         </div>
         <!-- /SECTION -->
-    </div
+    </div>
 </body>
 </body>
 <footer> </footer>
