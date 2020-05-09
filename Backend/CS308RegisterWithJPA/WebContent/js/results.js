@@ -1,5 +1,6 @@
 var products = [];
 var firstData = [];
+var filtered  = [];
 
 async function getData(value){
 	const query  = value.name[0];
@@ -226,9 +227,20 @@ function sortByPrice(type){
 }
 
 function filter(min, max){
+	if(document.getElementById("5stars").checked == true)
+		document.getElementById("5stars").checked = false;
+	if(document.getElementById("4stars").checked == true)
+		document.getElementById("4stars").checked = false;
+	if(document.getElementById("3stars").checked == true)
+		document.getElementById("3stars").checked = false;
+	if(document.getElementById("2stars").checked == true)
+		document.getElementById("2stars").checked = false;
+	if(document.getElementById("1star").checked == true)
+		document.getElementById("1star").checked = false;
+	
 
 	products = firstData;
-	var filtered = [];
+	filtered = [];
 	if(min == ""){
 		min = 0;
 		document.querySelector("#price-min").value = 0;
@@ -252,51 +264,65 @@ function filter(min, max){
 }
 
 function ratingCheckbox(){
-	products = firstData;
 	var ratingFiltered = [];
+
+	var five =document.getElementById("5stars");
+
+	var four=	document.getElementById("4stars");
+
+	var three=	document.getElementById("3stars");
+
+	var two= document.getElementById("2stars");
+
+	var one=	document.getElementById("1star");
 	
 	ratingCount = 0;
 	var row = document.querySelector("#store > div.row");
 	row.innerHTML = "";
 	for(var j=0; j<products.length; j++){
-		if(document.getElementById("5stars").checked == true){
+		if(five.checked == true){
 			if (products[j].rating >= 0.95){
 				fillCard(products[j],ratingCount)
 				ratingFiltered.push(products[j]);
 				ratingCount++;
 			}
 		}
-		if(document.getElementById("4stars").checked == true){
+		if(four.checked == true){
 			if (products[j].rating >= 0.88 && products[j].rating < 0.95){
 				fillCard(products[j],ratingCount)
 				ratingFiltered.push(products[j]);
 				ratingCount++;
 			}
 		}
-		if(document.getElementById("3stars").checked == true){
+		if(three.checked == true){
 			if (products[j].rating >= 0.70 && products[j].rating < 0.88){
 				fillCard(products[j],ratingCount)
 				ratingFiltered.push(products[j]);
 				ratingCount++;
 			}
 		}
-		if(document.getElementById("2stars").checked == true){
+		if(two.checked == true){
 			if (products[j].rating >= 0.50 && products[j].rating < 0.70){
 				fillCard(products[j],ratingCount)
 				ratingFiltered.push(products[j]);
 				ratingCount++;
 			}
 		}
-		if(document.getElementById("1star").checked == true){
+		if(one.checked == true){
 			if (products[j].rating >= 0.35 && products[j].rating < 0.50){
 				fillCard(products[j],ratingCount)
 				ratingFiltered.push(products[j]);
 				ratingCount++;
 			}
 		}
+		if( five.checked == false && four.checked==false && three.checked==false && two.checked==false && one.checked == false){
+			for(var j=0; j<products.length; j++){
+					fillCard(products[j],j)
+			}
+		}
 	
 	}
-	products = ratingFiltered;
+
 
 	
 	
