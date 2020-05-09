@@ -4,11 +4,10 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Entity
 public class User {
-	
-	// @GeneratedValue(strategy = GenerationType.IDENTITY)
-	//private int id;
+    enum deviceTypes { User,Admin,ProductManager,SalesManager } 
 	private String name;
 	@Id
 	@Column(name="Email")
@@ -91,4 +90,5 @@ public class User {
 	public int hashCode() {
 		return this.getEmail().hashCode();
 	}
+	
 }
