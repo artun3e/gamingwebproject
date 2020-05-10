@@ -177,14 +177,13 @@ if (session.getAttribute("user") != null) {
 				</p>
 			</div>
 			<div class="row justify-content-md-center" style="margin-top: -5%; margin-right: center;">
-				<form action="login" method="post" >
+				<form action="login" method="post" id="loginForm">
 					<input class="register" id="email" type="text" name="email"
 						placeholder="Email"> <br> <input class="register"
 						id="pass" type="password" name="pass" placeholder="Password">
 					<br>
 					<!-- <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"> -->
 					<!-- <label for="vehicle1"> Remember Me </label><br> -->
-
 					<button type="submit" class="btn btn-primary btn-block btn-lg"
 						name="log" value="Login">Submit</button>
 

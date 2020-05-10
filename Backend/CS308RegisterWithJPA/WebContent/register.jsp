@@ -65,7 +65,6 @@
                     <li style="margin-left: 100%; margin-top: 12px;"><input id="search"  type="text" placeholder="What are you looking for?"  onkeydown="if (event.keyCode == 13) { search(); }"></li>
                     <li class="dropdown" style="margin-left: 5%;">
                     	<a class="fa fa-user" style="font-size: 34px; color: grey;"></a>
-
                         <div class="dropdown-content">
                         	<% 
                         		session = request.getSession();
@@ -73,8 +72,10 @@
 	                        	{
                         			/* out.println("<a href=\"#account\">Account</a>");
                         			out.println("<a href=\"#liked\">Liked Ones</a>"); */
+									%><script>alert("You can't access this page when you're logged in..."); window.location = "index.jsp"; </script><%
                         			out.println("<a href=\"myOrders.jsp\">My Orders</a>");
                         			out.println("<a onclick=\"Log_User_Out(this)\" href=\"#\">Logout</a>");
+
 	                        	}
                         		else{
                         			out.println("<a href=\"login.jsp\">Login</a>");

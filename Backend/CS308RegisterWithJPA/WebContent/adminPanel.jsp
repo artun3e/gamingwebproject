@@ -86,7 +86,6 @@
             out.println("<a onclick=\"Log_User_Out(this)\" href=\"#\">Logout</a>");
         }
         else{
-            System.out.println("içinde değilim erkay aghahhghghghhg");
             %><script> alert("you are not authourized to see this page");
             window.location = "index.jsp";</script><% 
         }

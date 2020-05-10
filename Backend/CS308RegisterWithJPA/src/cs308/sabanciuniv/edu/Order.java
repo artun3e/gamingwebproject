@@ -12,11 +12,14 @@ import java.util.Map;
 @Entity
 @Table(name="Orders") 
 public class Order {
+	public enum orderStatus {PreparingPackage,Shipped,OutOnDelivery,Delivered}
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String address;
 	private String date;
+	@Enumerated(EnumType.STRING)
+	private orderStatus status;
 	@ManyToOne
 	@JoinColumn(name = "User_Email")
 	private User owner;
@@ -94,6 +97,14 @@ public class Order {
 			return true;
 		}
 		return false;
+	}
+
+	public orderStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(orderStatus status) {
+		this.status = status;
 	}
 
 	@Override

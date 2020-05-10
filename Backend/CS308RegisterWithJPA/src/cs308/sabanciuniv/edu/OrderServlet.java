@@ -63,6 +63,8 @@ public class OrderServlet extends HttpServlet {
 				EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
 				EntityManager em = emf.createEntityManager();
 				int countingVariable = 0;
+				String htmlText = "<H1>"+"Hello " + user.getName()+"\n" + "You have made the following purchase from our website: "+"<H1>";
+
 				for(String itemName : itemNames)
 				{
 					System.out.println("Query is " + itemName);
@@ -71,6 +73,7 @@ public class OrderServlet extends HttpServlet {
 						Object obj = em.createQuery("from Games where name=:nameTemp").setParameter("nameTemp", itemName).setMaxResults(1).getSingleResult();
 						Games temp = (Games) obj;
 						hashmap.put(temp, Integer.parseInt(itemQuantities[countingVariable]));
+						htmlText += "<H2>"+itemQuantities[countingVariable] + " copies of " + itemName + "\n"+"</H2><img src=\""+ temp.getHeader_image() +"\"><br>";
 					}
 					catch(NoResultException e)
 					{
@@ -80,6 +83,7 @@ public class OrderServlet extends HttpServlet {
 				}
 				em.getTransaction().begin();
 				Order newOrder = new Order("TODO", user);
+				newOrder.setStatus(Order.orderStatus.PreparingPackage);
 				newOrder.setMap(hashmap);
 				em.persist(newOrder);
 				System.out.println("We are here!v3");
@@ -98,12 +102,9 @@ public class OrderServlet extends HttpServlet {
 					System.out.println(o);
 					countTime++;
 				}
-				String mail_content= "Hello " + user.getName()+"\n";
-				for (Games game: hashmap.keySet()) {
-					mail_content = mail_content + "you have bought " + hashmap.get(game) + " copies of " + game.getName() + "\n";					
-				}
-				JavaMailUtil.sendMailwithMessage(mail_content,user.getEmail()); 
 				session.removeAttribute("cart");
+				htmlText += "<H3>Thank you for your purchase! You can always check your order status from our website. We will also e-mail you when your order status changes<H3>";
+				JavaMailUtil.sendHTMLMail(htmlText,user.getEmail());
 			}
 		}
 		catch(Exception e)
