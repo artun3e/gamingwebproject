@@ -5,7 +5,7 @@ function addReview(){
 	var xhrAddR = new XMLHttpRequest();
 	var urlRR = "addreview";
 	xhrAddR.open("POST", urlRR, true);
-	var params = "itemName="+gameName;
+	var params = "itemName="+gameName+"&comment="+comment;
 	console.log(params);
 	xhrAddR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhrAddR.send(params);
@@ -100,9 +100,12 @@ async function getData(value){
     		 createNewReview();
     		 var reviewsUser = document.getElementsByClassName("review-heading")[r].getElementsByTagName('h5')[0];
     		 var reviewsComment = document.getElementsByClassName("review-body")[r].getElementsByTagName('p')[0];
+    		 var reviewsDate = document.getElementsByClassName("review-heading")[r].getElementsByTagName('p')[0];
     		 reviewsComment.innerHTML = reviews[r].comment;
         	 var username = reviews[r].user.split('@')
         	 reviewsUser.innerHTML = username[0];
+        	 var date = reviews[r].date;
+        	 reviewsDate.innerHTML = date;
     	 }
     	 
     	 
