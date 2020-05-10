@@ -1,0 +1,33 @@
+{
+	"folders": {},
+	"connections": {
+		"mysql5-171feb32fc8-37374e70c0ec6a0e": {
+			"provider": "mysql",
+			"driver": "mysql5",
+			"name": "MySQL - MnojkxD0Cc",
+			"save-password": true,
+			"show-system-objects": true,
+			"read-only": false,
+			"configuration": {
+				"host": "remotemysql.com",
+				"port": "3306",
+				"database": "MnojkxD0Cc",
+				"url": "jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc",
+				"home": "MySQL Binaries",
+				"type": "dev",
+				"auth-model": "native",
+				"handlers": {}
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "Regular development database",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false
+		}
+	}
+}

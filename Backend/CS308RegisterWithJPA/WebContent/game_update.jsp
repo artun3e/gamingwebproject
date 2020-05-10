@@ -459,8 +459,8 @@
 							<li><a data-toggle="collapse" data-target="#demodepart"
 								   href="#">Tables</a>
 								<ul id="demodepart" class="collapse dropdown-header-top">
-									<li><a href="normal-table.html">Games Table</a></li>
-									<li><a href="#">User Table</a></li>
+									<li><a href="data_table_Cats.jsp">Category Table</a></li>
+									<li><a href="data_table_Games.jsp">Games Table</a></li>
 								</ul></li>
 							<li><a data-toggle="collapse" data-target="#demo" href="#">Forms</a>
 								<ul id="demo" class="collapse dropdown-header-top">
@@ -566,8 +566,8 @@
 					<div id="Tables"
 						 class="tab-pane active notika-tab-menu-bg animated flipInX">
 						<ul class="notika-main-menu-dropdown">
-							<li><a href="data-table.jsp">Games Table</a></li>
-							<li><a href="#">User Table</a></li>
+							<li><a href="data_table_Cats.jsp">Category Table</a></li>
+							<li><a href="data_table_Games.jsp">Games Table</a></li>
 						</ul>
 					</div>
 					<div id="Forms"
@@ -642,6 +642,7 @@
 		</div>
 	</div>
 </div>
+
 <!-- Breadcomb area End-->
 <!-- Data Table area Start-->
 <div class="data-table-area">
@@ -656,87 +657,87 @@
 						<div class="col-8" style="margin-left: 14px;">
 							<form action='UpdateProductServlet' method=POST>
 								<div class="form-group row" style="margin-left: 14px;">
-									<label class="col-sm-2 col-form-label">Game ID:</label>
+									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">Game ID:</label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" name="id" id="id" value="" placeholder="Game ID"/>
+										<input type="text" class="form-control" name="id" id="id" value="" placeholder="Game ID" readonly/>
 									</div>
 								</div>
 								<div class="form-group row" style="margin-left: 14px;">
-									<label class="col-sm-2 col-form-label">Game Name:</label>
+									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">Game Name:</label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" name="name" id="name"  placeholder="Name"/>
+										<input type="text" class="form-control" name="name" id="name"  placeholder="Game Name"/>
 									</div>
 								</div>
 								<div class="form-group row" style="margin-left: 14px;">
-									<label class="col-sm-2 col-form-label">Publisher: </label>
+									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">Publisher: </label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" name="publisher" id="publisher" />
+										<input type="text" class="form-control" name="publisher" id="publisher" placeholder="Publisher"/>
 									</div>
 								</div>
 								<div class="form-group row" style="margin-left: 14px;">
-									<label class="col-sm-2 col-form-label">Categories: </label>
+									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">Categories: </label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" name="categories" id="categories"/>
+										<input type="text" class="form-control" name="categories" id="categories" placeholder="Categories"/>
 									</div>
 								</div>
 								<div class="form-group row" style="margin-left: 14px;">
-									<label class="col-sm-2 col-form-label">Price: </label>
+									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">Price: </label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" name="price" id="price"/>
+										<input type="text" class="form-control" name="price" id="price" placeholder="Price"/>
 									</div>
 								</div>
 								<div class="form-group row" style="margin-left: 14px;">
-									<label class="col-sm-2 col-form-label">Short Description: </label>
+									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">Short Description: </label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" name="shortdescription" id="shortdescription"/>
+										<input type="text" class="form-control" name="shortdescription" id="shortdescription" placeholder="Short Description"/>
 									</div>
 								</div>
 								<div class="form-group row" style="margin-left: 14px;">
-									<label class="col-sm-2 col-form-label">Detailed Description: </label>
+									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">Detailed Description: </label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" name="detaileddescription" id="detaileddescription"/>
+										<input type="text" class="form-control" name="detaileddescription" id="detaileddescription" placeholder="Detailed Description"/>
 									</div>
 								</div>
 								<div class="form-group row" style="margin-left: 14px;">
-									<label class="col-sm-2 col-form-label">Minimum Requirements: </label>
+									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">Minimum Requirements: </label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" name="minimum" id="minimum"/>
+										<input type="text" class="form-control" name="minimum" id="minimum" placeholder="Minimum Requirements"/>
 									</div>
 								</div>
 								<div class="form-group row" style="margin-left: 14px;">
-									<label class="col-sm-2 col-form-label">About the game: </label>
+									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">About the game: </label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" name="aboutthegame" id="aboutthegame"/>
+										<input type="text" class="form-control" name="aboutthegame" id="aboutthegame" placeholder="About the game"/>
 									</div>
 								</div>
 								<div class="form-group row" style="margin-left: 14px;">
-									<label class="col-sm-2 col-form-label">Background </label>
+									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">Background </label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" name="background" id="background"/>
+										<input type="text" class="form-control" name="background" id="background" placeholder="Background"/>
 									</div>
 								</div>
 								<div class="form-group row" style="margin-left: 14px;">
-									<label class="col-sm-2 col-form-label">Screenshots: </label>
+									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">Screenshots: </label>
 									<div class="col-sm-10">
-										<textarea style="rows='2'" type="text" class="form-control" name="screenshots" id="screenshots"></textarea>
+										<textarea style="rows='2'" type="text" class="form-control" name="screenshots" id="screenshots" placeholder="Screenshots"></textarea>
 									</div>
 								</div>
 								<div class="form-group row" style="margin-left: 14px;">
-									<label class="col-sm-2 col-form-label">Header Image: </label>
+									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">Header Image: </label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" name="headerimage" id="headerimage"/>
+										<input type="text" class="form-control" name="headerimage" id="headerimage" placeholder="Header Image"/>
 									</div>
 								</div>
 								<div class="form-group row" style="margin-left: 14px;">
-									<label class="col-sm-2 col-form-label">Platforms: </label>
+									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">Platforms: </label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" name="platforms" id="platforms"/>
+										<input type="text" class="form-control" name="platforms" id="platforms" placeholder="Platforms"/>
 									</div>
 								</div>
 								<button type="submit" class="btn btn-primary btn-block btn-lg"
 										name="edit">Update</button>
 
-								<a class='btn btn-success btn-block btn-lg' href="data-table.jsp"
+								<a class='btn btn-success btn-block btn-lg' href="data_table_Games.jsp"
 								   style="margin-left: auto; margin-right: auto; display: block; margin-top: 5%; margin-bottom: 0%">Take
 									Me To The Games List</a>
 							</form>
@@ -757,7 +758,7 @@
 		<div class="row">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<div class="footer-copy-right">
-					<p>Copyright 2020 . All rights reserved.</p>
+					<p>Copyright 2020. All rights reserved.</p>
 				</div>
 			</div>
 		</div>

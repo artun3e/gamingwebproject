@@ -21,6 +21,12 @@ console.log("Details icindeyim");
 var list = new Array;
 
 async function getData(value) {
+	
+	
+	if(value == null){
+		alert("To Update Game, First You Need to Select Game.")
+		window.location.replace("data_table_Games.jsp");
+	}
 	const query = value.name[0];
 	const url = '/CS308RegisterWithJPA/search/fromDB/byName/' + query;
 
@@ -78,9 +84,9 @@ async function getData(value) {
 var parsed = parseURLParams(window.location.href);
 getData(parsed);
 document.title = parsed.name[0];
-document
 
 $(document).ready(function() {
+	
 	$(".add-to-cart-btn").click(function(e) {
 		console.log("add to cart button is clicked")
 		e.stopPropagation();

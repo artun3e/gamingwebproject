@@ -69,7 +69,7 @@
     <script src="./js3/vendor/modernizr-2.8.3.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="js/toUpdate.js"></script>
+    <script src="js/data_table_Games.js"></script>
 </head>
 
 <body>
@@ -403,8 +403,8 @@
                                 </li>
                                 <li><a data-toggle="collapse" data-target="#demodepart" href="#">Tables</a>
                                     <ul id="demodepart" class="collapse dropdown-header-top">
-                                        <li><a href="normal-table.html">Games Table</a></li>
-                                        <li><a href="#">User Table</a></li>
+                                        <li><a href="data_table_Cats.jsp">Category Table</a></li>
+                                        <li><a href="data_table_Games.jsp">Games Table</a></li>
                                     </ul>
                                 </li>
                                 <li><a data-toggle="collapse" data-target="#demo" href="#">Forms</a>
@@ -542,9 +542,9 @@
                         </div>
                         <div id="Tables" class="tab-pane active notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
-                                <li><a href="data-table.jsp">Games Table</a>
+                                <li><a href="data_table_Cats.jsp">Category Table</a>
                                 </li>
-                                <li><a href="#">User Table</a>
+                                <li><a href="data_table_Games.jsp">Games Table</a>
                                 </li>
                             </ul>
                         </div>
@@ -644,6 +644,8 @@
                             <h2>Games</h2>
                             <p>This panel is for Admin to insert, update and delete games.</p>
                         </div>
+                         <a class='btn btn-success btn-block btn-lg' href="game_add.jsp"
+										style="margin-left: auto; margin-right: auto; display: block; margin-top: 10px; margin-bottom: 10px">ADD GAME</a>
                         <div class="table-responsive">
                             <table id="data-table-basic" class="table table-striped">
                                 <thead>
@@ -667,7 +669,7 @@
 		               							out.println("<td>"+ game.getCategories() +"</td>");
 		               							out.println("<td>"+ game.getPrice() +"</td>");
 		               							out.println("<td class=\"update\"> <a type='button' class='btn btn-success'> Update </a > </td>");
-	              								out.println("<td> <a type='button' class='btn btn-danger' href=''> Delete </a > </td>");
+	              								out.println("<td class=\"delete\"> <a type='button' class='btn btn-danger'> Delete </a > </td>");
                								out.println("</tr>");	
 		                                }
 	                                %>
@@ -697,9 +699,8 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="footer-copy-right">
-                        <p>Copyright Â© 2018 
-. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
-                    </div>
+						<p>Copyright 2020. All rights reserved.</p>
+					</div>
                 </div>
             </div>
         </div>
