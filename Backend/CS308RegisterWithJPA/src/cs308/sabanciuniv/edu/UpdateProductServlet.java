@@ -42,6 +42,7 @@ public class UpdateProductServlet extends HttpServlet {
 		EntityManagerFactory emf;
 		EntityManager em;
 		try {
+			
 			int gameID = Integer.parseInt(request.getParameter("id"));
 			String gameName = request.getParameter("name");
 			String publisher = request.getParameter("publisher");

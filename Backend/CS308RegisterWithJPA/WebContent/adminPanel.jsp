@@ -3,6 +3,7 @@
 <%@ page import="cs308.sabanciuniv.edu.User"%>
 <%@ page import="cs308.sabanciuniv.edu.Games"%>
 <%@ page import="cs308.sabanciuniv.edu.Order"%>
+<%@ page import="java.io.PrintWriter"%>
 <!DOCTYPE html>
 
 <html class="no-js" lang="">
@@ -72,7 +73,27 @@
         <![endif]-->
     <!-- Start Header Top Area -->
     <div class="header-top-area">
-        <div class="container">
+    <% 
+    session = request.getSession();
+    if(session.getAttribute("user") != null)
+    {
+        Object temp = session.getAttribute("user");
+        User user = (User) temp;
+        System.out.println(user.getUserType());
+        if(user.getUserType() == User.userType.Admin || user.getUserType() == User.userType.ProductManager || user.getUserType() == User.userType.SalesManager)
+        {
+            out.println("<a href=\"data-table.jsp\">GamesList</a>");
+            out.println("<a onclick=\"Log_User_Out(this)\" href=\"#\">Logout</a>");
+        }
+        else{
+            System.out.println("içinde değilim erkay aghahhghghghhg");
+            %><script> alert("you are not authourized to see this page");
+            window.location = "index.jsp";</script><% 
+        }
+    }
+    %>
+            	
+        <div class="container">	
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <div class="logo-area">

@@ -7,7 +7,10 @@ import java.util.List;
 
 @Entity
 public class User {
-    enum deviceTypes { User,Admin,ProductManager,SalesManager } 
+    public enum userType { User,Admin,ProductManager,SalesManager} 
+    @Enumerated(EnumType.STRING)
+	@Column(name="user_type")
+    private userType type;
 	private String name;
 	@Id
 	@Column(name="Email")
@@ -15,12 +18,13 @@ public class User {
 	private String password;
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
 	private List<Order> orders;
-	//public int getId() {
-	//	return id;
-	//}
-	//public void setId(int id) {
-	//	this.id = id;
-	//}
+	
+	public userType getUserType() {
+		return type;
+	}
+	public void setUserType(userType type2) {
+		type = type2;
+	}
 	public List<Order> getOrders()
 	{
 		return orders;

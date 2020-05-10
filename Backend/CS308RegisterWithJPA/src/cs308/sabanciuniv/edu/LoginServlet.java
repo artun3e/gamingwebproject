@@ -44,6 +44,7 @@ public class LoginServlet extends HttpServlet {
 			EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
 			EntityManager em = emf.createEntityManager();
 			User searchResult = em.find(User.class,emailInput);
+			//User.userType type = em.find(arg0, arg1)
 			emf.close();
 			em.close();
 			em=null;

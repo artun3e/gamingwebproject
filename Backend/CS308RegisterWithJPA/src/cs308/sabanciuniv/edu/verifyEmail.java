@@ -58,7 +58,7 @@ public class verifyEmail extends HttpServlet {
 				EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
 				EntityManager entityManager = emf.createEntityManager();
 				entityManager.getTransaction().begin();
-				
+				temp.setUserType(User.userType.User);
 				entityManager.persist(temp);
 				
 				entityManager.getTransaction().commit();
