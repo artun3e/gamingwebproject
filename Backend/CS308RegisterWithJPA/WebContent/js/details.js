@@ -1,4 +1,20 @@
-   function parseURLParams(url) {
+function addReview(){	
+	var comment = document.querySelector("#review-form > form > textarea").value;
+	var gameName = parsed.name[0];
+	console.log(gameName);
+	var xhrAddR = new XMLHttpRequest();
+	var urlRR = "addreview";
+	xhrAddR.open("POST", urlRR, true);
+	var params = "itemName="+gameName;
+	console.log(params);
+	xhrAddR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhrAddR.send(params);
+}
+
+
+
+
+function parseURLParams(url) {
     var queryStart = url.indexOf("?") + 1,
         queryEnd   = url.indexOf("#") + 1 || url.length + 1,
         query = url.slice(queryStart, queryEnd - 1),
@@ -182,3 +198,9 @@ var reviewHTML =
 
 	});
     });
+    
+    window.onload=function(){
+        var form = document.querySelector("#review-form");
+        function handleForm(event) { event.preventDefault(); } 
+        form.addEventListener('submit', handleForm);
+    	}
