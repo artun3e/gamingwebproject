@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.*"%>
+<%@ page import="cs308.sabanciuniv.edu.User" %>
+<%@ page import="cs308.sabanciuniv.edu.Games" %>
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -262,7 +266,7 @@ a:hover {
 							<ul class="tab-nav">
 								<li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
 								<li><a data-toggle="tab" href="#tab2">Min Requirements</a></li>
-								<li><a data-toggle="tab" href="#tab3">Reviews (3)</a></li>
+								<li><a data-toggle="tab" href="#tab3">Reviews</a></li>
 							</ul>
 							<!-- /product tab nav -->
 
@@ -397,8 +401,20 @@ a:hover {
 										<div class="col-md-3">
 											<div id="review-form">
 												<form class="review-form" id="review-form">
-													<input class="input" type="text" placeholder="Your Name">
-													<input class="input" type="email" placeholder="Your Email">
+										        <h5>
+	            <%
+					session = request.getSession();
+					if(session.getAttribute("user") != null)
+					{
+					    Object obj = session.getAttribute("user");
+					    User user = (User) obj;
+					    out.print("Hello, " + user.getName());
+					}
+					else{
+						out.print("Hello, you must login in order to write a comment.");
+					}
+		    	%>
+	    	</h5>			
 													<textarea class="input" placeholder="Your Review"></textarea>
 													<div class="input-rating">
 														<span>Your Rating: </span>

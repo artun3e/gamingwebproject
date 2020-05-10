@@ -9,6 +9,23 @@ function addReview(){
 	console.log(params);
 	xhrAddR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhrAddR.send(params);
+	xhrAddR.addEventListener('readystatechange', function (e) {
+        if(this.readyState === 4 )
+        {
+          console.log("we are done!!!!");
+          var returnedResponse = xhrAddR.getResponseHeader("order-error");
+          if(returnedResponse === "true")
+          {
+            console.log("No login.");
+            window.location = "login.jsp";
+          }
+          else
+          {
+              alert("Your comment is sent!");
+              window.location = "product.jsp?name=" + gameName;
+          }
+        }
+      });
 }
 
 
