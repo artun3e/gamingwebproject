@@ -189,7 +189,8 @@ border:3px solid black;
                     	<a class="fa fa-user" style="font-size: 34px; color: grey;"></a>
 
                         <div class="dropdown-content">
-                        	<% 
+                        	<%
+								response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
                         		session = request.getSession();
                         		if(session.getAttribute("user") != null)
 	                        	{
