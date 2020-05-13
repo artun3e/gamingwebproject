@@ -7,7 +7,7 @@ function addReview(){
 	if(rating != -1){
 		var comment = document.querySelector("#review-form > form > textarea").value;
 		var gameName = parsed.name[0];
-		console.log(gameName);
+		newRating = (steamRating + (rating * 20) / 100) / 2;
 		var xhrAddR = new XMLHttpRequest();
 		var urlRR = "addreview";
 		xhrAddR.open("POST", urlRR, true);
@@ -109,18 +109,23 @@ async function getData(value){
      	var sideImg1 = imagesArr[4].split("': ");
      	var sideImg2 = imagesArr[7].split("': ");
      	var sideImg3 = imagesArr[10].split("': ");
-     	var sideImg4 = imagesArr[13].split("': ");
+     	if(imagesArr.length > 12){
+     		var sideImg4 = imagesArr[13].split("': ");
+     		var sideValue4 = sideImg4[1].replace(/['"]+/g, '');
+     		list.push(sideValue4);
+     	}
+     	
          var imgvalue = imageSplit[1].replace(/['"]+/g, '');
          var sideValue1 = sideImg1[1].replace(/['"]+/g, '');
          var sideValue2 = sideImg2[1].replace(/['"]+/g, '');
          var sideValue3 = sideImg3[1].replace(/['"]+/g, '');
-         var sideValue4 = sideImg4[1].replace(/['"]+/g, '');
+         
          image.src = imgvalue;
          list.push(imgvalue);
          list.push(sideValue1);
          list.push(sideValue2);
          list.push(sideValue3);
-         list.push(sideValue4);
+         
          
          
 //         sid1.src =sideValue1;
@@ -164,7 +169,7 @@ function ratingSection(review){
 		 
 		 var reviewSection = document.querySelector("#tab3 > div > div.col-md-6");
 		 var element = document.createElement("h2");
-		 element.innerHTML = "Sorry, no one has commented this game yet."
+		 element.innerHTML = "Sorry, no one has commented this game yet." + "<br><br>" + "Still, you can see the platform ratings!"
 		 reviewSection.appendChild(element);
 		 var history5star = document.querySelector("#rating > ul > li:nth-child(1) > span");
 		 var history4star = document.querySelector("#rating > ul > li:nth-child(2) > span");
@@ -178,22 +183,24 @@ function ratingSection(review){
 		 history1star.innerHTML = 0;
 		 
 		 var totalRating = document.querySelector("#rating > div > span");
-		 totalRating.innerHTML =  Math.round(((steamRating/20) *100) * 10) / 10;
+		 totalRating.innerHTML =  ((steamRating/20) *100).toFixed(2) ;
 		 console.log(steamRating);
 		 var weightedAverage;
 		 if(steamRating > 0.95)
 			 weightedAverage=5;
-		 else if (steamRating > 0.88)
+		 else if (steamRating > 0.80)
 		 	weightedAverage=4;
-		 else if (steamRating > 0.70)
+		 else if (steamRating > 0.60)
 			 weightedAverage=3;
-		 else if (steamRating > 0.50)
+		 else if (steamRating > 0.40)
 			 weightedAverage=2;
-		 else if (steamRating > 0.35)
+		 else if (steamRating > 0.20)
 			 weightedAverage=1;
+		 else 
+			 weightedAverage=0;
 		 var weightedStar = document.querySelector("#rating > div > div")
 		 weightedStar.innerHTML = "";
-		 console.log(weightedAverage);
+		 
 		 for(var i=0; i < (weightedAverage); i++){
 	      	var star = document.createElement('i');
 	        star.setAttribute('class', "fa fa-star");
@@ -245,10 +252,7 @@ function ratingSection(review){
 			
 			 var totalRating = document.querySelector("#rating > div > span");
 			 var weightedAverage = (count5star* 5 + count4star * 4 + count3star * 3 + count2star *2 + count1star) / totalCount;
-			 console.log(steamRating);
-			 weightedAverage = ((Math.round(weightedAverage * 10) / 10 )+ (Math.round(((steamRating/20) *100) * 10) / 10) ) /2;
-			 newRating = (steamRating + (weightedAverage * 20) / 100) / 2;
-			 console.log(newRating);
+			 weightedAverage = ((steamRating/20) *100).toFixed(2);
 			 totalRating.innerHTML = weightedAverage;
 			 var weightedStar = document.querySelector("#rating > div > div")
 			 weightedStar.innerHTML = "";

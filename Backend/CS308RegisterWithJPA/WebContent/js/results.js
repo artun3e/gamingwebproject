@@ -92,13 +92,13 @@ async function getData(value){
         	stars.innerHTML = "";
         	if(rating >= 0.95)
         		var starNumber = 5;
-        	else if(rating >= 0.88 && rating < 0.95)
+        	else if(rating >= 0.80 && rating < 0.96)
         		var starNumber = 4;
-        	else if(rating >= 0.70 && rating < 0.88)
+        	else if(rating >= 0.60 && rating < 0.80)
         		var starNumber = 3;
-        	else if(rating >= 0.50 && rating < 0.70)
+        	else if(rating >= 0.40 && rating < 0.60)
         		var starNumber = 2;
-        	else if(rating >= 0.35 && rating < 0.50)
+        	else if(rating >= 0 && rating < 0.40)
         		var starNumber = 1;
         	else
         		var starNumber = 0;
@@ -281,28 +281,28 @@ function ratingCheckbox(){
 			}
 		}
 		if(four.checked == true){
-			if (products[j].rating >= 0.88 && products[j].rating < 0.95){
+			if (products[j].rating >= 0.80 && products[j].rating < 0.95){
 				fillCard(products[j],ratingCount)
 				ratingFiltered.push(products[j]);
 				ratingCount++;
 			}
 		}
 		if(three.checked == true){
-			if (products[j].rating >= 0.70 && products[j].rating < 0.88){
+			if (products[j].rating >= 0.60 && products[j].rating < 0.80){
 				fillCard(products[j],ratingCount)
 				ratingFiltered.push(products[j]);
 				ratingCount++;
 			}
 		}
 		if(two.checked == true){
-			if (products[j].rating >= 0.50 && products[j].rating < 0.70){
+			if (products[j].rating >= 0.40 && products[j].rating < 0.60){
 				fillCard(products[j],ratingCount)
 				ratingFiltered.push(products[j]);
 				ratingCount++;
 			}
 		}
 		if(one.checked == true){
-			if (products[j].rating >= 0.35 && products[j].rating < 0.50){
+			if (products[j].rating >= 0 && products[j].rating < 0.40){
 				fillCard(products[j],ratingCount)
 				ratingFiltered.push(products[j]);
 				ratingCount++;
