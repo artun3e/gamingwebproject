@@ -299,13 +299,8 @@ a:hover {
 										<div class="col-md-3">
 											<div id="rating">
 												<div class="rating-avg">
-													<span>4.5</span>
+													<span></span>
 													<div class="rating-stars">
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star-o"></i>
 													</div>
 												</div>
 												<ul class="rating">
@@ -318,7 +313,7 @@ a:hover {
 															<i class="fa fa-star"></i>
 														</div>
 														<div class="rating-progress">
-															<div style="width: 80%;"></div>
+															<div style=""></div>
 														</div>
 														<span class="sum"></span>
 													</li>
@@ -331,7 +326,7 @@ a:hover {
 															<i class="fa fa-star-o"></i>
 														</div>
 														<div class="rating-progress">
-															<div style="width: 60%;"></div>
+															<div style=""></div>
 														</div>
 														<span class="sum"></span>
 													</li>
@@ -382,8 +377,18 @@ a:hover {
 										<!-- Reviews -->
 										<div class="col-md-6">
 											<div id="reviews">
-												<ul class="reviews">
-													
+												<ul class="reviews" id="user-reviews">
+								            <%
+					session = request.getSession();
+					if(session.getAttribute("user") != null)
+					{	
+					    Object obj = session.getAttribute("user");
+					    User user = (User) obj;
+						%><script> sessionMail( '<%=user.getEmail()%>'); </script><%
+
+					}
+					
+		    	%>
 													
 												</ul>
 												<!-- <ul class="reviews-pagination">

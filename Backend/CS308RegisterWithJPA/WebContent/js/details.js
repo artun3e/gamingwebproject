@@ -1,3 +1,5 @@
+var user_email;
+
 function addReview(){
 	var rating = checkRating();
 	if(rating != -1){
@@ -84,7 +86,6 @@ async function getData(value){
     	const urlR = '/CS308RegisterWithJPA/search/fromDB/byNamee/' + query; 
     	const responseR = await fetch(urlR);
     	const reviews = await responseR.json();
-    	console.log(reviews);
     	
 //       	clearDiv();
 //    	for (var k = 0; k < data.length; k++){
@@ -132,81 +133,126 @@ async function getData(value){
     	 requirementTab.innerHTML = data[0].minimum;
 //    	 document.querySelector("#reviews > ul.reviews > li > div.review-heading > h5")
 //    	 document.querySelector("#reviews > ul.reviews > li > div.review-body > p")
-    	 var count5star=0, count4star=0,count3star=0,count2star=0,count1star=0;
     	 for (var r=0; r<reviews.length ; r++){
     		 createNewReview();
     		 var reviewsUser = document.getElementsByClassName("review-heading")[r].getElementsByTagName('h5')[0];
+    		 
     		 var reviewsComment = document.getElementsByClassName("review-body")[r].getElementsByTagName('p')[0];
     		 var reviewsDate = document.getElementsByClassName("review-heading")[r].getElementsByTagName('p')[0];
-    		 var reviewStars = document.getElementsByClassName("review-rating")[r];
+    		 
     		 reviewsComment.innerHTML = reviews[r].comment;
         	 var username = reviews[r].user.split('@')
         	 reviewsUser.innerHTML = username[0];
         	 var date = reviews[r].date;
         	 reviewsDate.innerHTML = date;
-        	 var rating = reviews[r].rating;
-        	 console.log(rating);
-        	 if(rating == "5")
-        		 count5star = count5star +1;
-        	 else if(rating == "4")
-        		 count4star = count4star +1;
-        	 else if(rating == "3")
-        		 count3star = count3star +1;
-        	 else if(rating == "2")
-        		 count2star = count2star +1;
-        	 else
-        		 count1star = count1star +1;
-        	 console.log(count2star);
-        	 var history5star = document.querySelector("#rating > ul > li:nth-child(1) > span");
-        	 var history4star = document.querySelector("#rating > ul > li:nth-child(2) > span");
-        	 var history3star = document.querySelector("#rating > ul > li:nth-child(3) > span");
-        	 var history2star = document.querySelector("#rating > ul > li:nth-child(4) > span");
-        	 var history1star = document.querySelector("#rating > ul > li:nth-child(5) > span");
-        	 history5star.innerHTML = count5star;
-        	 history4star.innerHTML = count4star;
-        	 history3star.innerHTML = count3star;
-        	 history2star.innerHTML = count2star;
-        	 history1star.innerHTML = count1star;
-        	 var progress5star = document.querySelector("#rating > ul > li:nth-child(1) > div.rating-progress > div")
-        	 var progress4star = document.querySelector("#rating > ul > li:nth-child(2) > div.rating-progress > div")
-        	 var progress3star = document.querySelector("#rating > ul > li:nth-child(3) > div.rating-progress > div")
-        	 var progress2star = document.querySelector("#rating > ul > li:nth-child(4) > div.rating-progress > div")
-        	 var progress1star = document.querySelector("#rating > ul > li:nth-child(5) > div.rating-progress > div")
-        	 var totalCount = count5star + count4star + count3star + count2star + count1star;
-        	 var portion;
-        	 portion = (count5star/totalCount) * 100;
-        	 progress5star.setAttribute("style", "width: "+portion +"%");
-        	 portion = (count4star/totalCount) * 100;
-        	 progress4star.setAttribute("style", "width: "+portion+"%");
-        	 portion = (count3star/totalCount) * 100;
-        	 progress3star.setAttribute("style", "width: "+portion+"%");	 
-        	 portion = (count2star/totalCount) * 100;
-        	 progress2star.setAttribute("style", "width: "+portion+"%");
-        	 portion = (count1star/totalCount) * 100;
-        	 progress1star.setAttribute("style", "width: "+portion+"%");
-        	
-        	 var ratingF = parseInt(rating);
-        	 for(var i=0; i<ratingF; i++){
-             	var star = document.createElement('i');
-                star.setAttribute('class', "fa fa-star");
-                reviewStars.appendChild(star);
-        	 }
+        	 deleteButton(reviews[r].user, r);
 
-        	 
     	 }
-    	 
+    	 ratingSection(reviews);
     	 
     	 image.style.width = "575px";
          image.style.height = "350px";
     }
+
+function ratingSection(review){
+	 var count5star=0, count4star=0,count3star=0,count2star=0,count1star=0;
+	 if(review.length == 0){
+		 
+		 var reviewSection = document.querySelector("#tab3 > div > div.col-md-6");
+		 var element = document.createElement("h2");
+		 element.innerHTML = "Sorry, no one has commented this game yet."
+		 reviewSection.appendChild(element);
+		 var history5star = document.querySelector("#rating > ul > li:nth-child(1) > span");
+		 var history4star = document.querySelector("#rating > ul > li:nth-child(2) > span");
+		 var history3star = document.querySelector("#rating > ul > li:nth-child(3) > span");
+		 var history2star = document.querySelector("#rating > ul > li:nth-child(4) > span");
+		 var history1star = document.querySelector("#rating > ul > li:nth-child(5) > span");
+		 history5star.innerHTML = 0;
+		 history4star.innerHTML = 0;
+		 history3star.innerHTML = 0;
+		 history2star.innerHTML = 0;
+		 history1star.innerHTML = 0;
+	 }
+	 for (var r=0; r<review.length ; r++){
+		 var reviewStars = document.getElementsByClassName("review-rating")[r];
+		 var rating = review[r].rating;
+		 if(rating == "5")
+			 count5star = count5star +1;
+		 else if(rating == "4")
+			 count4star = count4star +1;
+		 else if(rating == "3")
+			 count3star = count3star +1;
+		 else if(rating == "2")
+			 count2star = count2star +1;
+		 else
+			 count1star = count1star +1;
+		 var history5star = document.querySelector("#rating > ul > li:nth-child(1) > span");
+		 var history4star = document.querySelector("#rating > ul > li:nth-child(2) > span");
+		 var history3star = document.querySelector("#rating > ul > li:nth-child(3) > span");
+		 var history2star = document.querySelector("#rating > ul > li:nth-child(4) > span");
+		 var history1star = document.querySelector("#rating > ul > li:nth-child(5) > span");
+		 history5star.innerHTML = count5star;
+		 history4star.innerHTML = count4star;
+		 history3star.innerHTML = count3star;
+		 history2star.innerHTML = count2star;
+		 history1star.innerHTML = count1star;
+		 var progress5star = document.querySelector("#rating > ul > li:nth-child(1) > div.rating-progress > div")
+		 var progress4star = document.querySelector("#rating > ul > li:nth-child(2) > div.rating-progress > div")
+		 var progress3star = document.querySelector("#rating > ul > li:nth-child(3) > div.rating-progress > div")
+		 var progress2star = document.querySelector("#rating > ul > li:nth-child(4) > div.rating-progress > div")
+		 var progress1star = document.querySelector("#rating > ul > li:nth-child(5) > div.rating-progress > div")
+		 var totalCount = count5star + count4star + count3star + count2star + count1star;
+		 var portion;
+		 portion = (count5star/totalCount) * 100;
+		 progress5star.setAttribute("style", "width: "+portion +"%");
+		 portion = (count4star/totalCount) * 100;
+		 progress4star.setAttribute("style", "width: "+portion+"%");
+		 portion = (count3star/totalCount) * 100;
+		 progress3star.setAttribute("style", "width: "+portion+"%");	 
+		 portion = (count2star/totalCount) * 100;
+		 progress2star.setAttribute("style", "width: "+portion+"%");
+		 portion = (count1star/totalCount) * 100;
+		 progress1star.setAttribute("style", "width: "+portion+"%");
+		
+		 var totalRating = document.querySelector("#rating > div > span");
+		 var weightedAverage = (count5star* 5 + count4star * 4 + count3star * 3 + count2star *2 + count1star) / totalCount;
+		 totalRating.innerHTML = weightedAverage;
+		 var weightedStar = document.querySelector("#rating > div > div")
+		 weightedStar.innerHTML = "";
+		 for(var i=0; i < weightedAverage; i++){
+	      	var star = document.createElement('i');
+	        star.setAttribute('class', "fa fa-star");
+			 	weightedStar.appendChild(star)
+		 }
+
+		 var ratingF = parseInt(rating);
+		 for(var i=0; i<ratingF; i++){
+	     	var star = document.createElement('i');
+	        star.setAttribute('class', "fa fa-star");
+	        reviewStars.appendChild(star);
+		 }
+		 
+	 }
+	 
+}
 function createNewReview(){ //creates new element in html for each product
+
 	var reviewsTab = document.querySelector("#reviews > ul.reviews");
-	console.log(reviewsTab);
     var newElement = document.createElement('li');
     //// newElement.setAttribute('id', elementId);
+    newElement.setAttribute('class', "li_rev")
     newElement.innerHTML = reviewHTML;
     reviewsTab.appendChild(newElement);
     }
+
+function deleteButton(user, order){
+	if (user == user_email){
+		var commentLi = document.getElementById('user-reviews').getElementsByClassName('li_rev')[order];
+		var deleteButton = document.createElement('button');
+		deleteButton.innerHTML = "delete";
+		commentLi.appendChild(deleteButton);
+	}
+}
 
 var reviewHTML = 
 '														<div class="review-heading">'+
@@ -290,5 +336,7 @@ var reviewHTML =
         function handleForm(event) { event.preventDefault(); } 
         form.addEventListener('submit', handleForm);
     	}
-    
-
+  
+function sessionMail(user){
+	user_email = user;
+}
