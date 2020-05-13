@@ -184,8 +184,9 @@ function ratingSection(review){
 			 count3star = count3star +1;
 		 else if(rating == "2")
 			 count2star = count2star +1;
-		 else
+		 else if (rating == "1")
 			 count1star = count1star +1;
+		 
 		 var history5star = document.querySelector("#rating > ul > li:nth-child(1) > span");
 		 var history4star = document.querySelector("#rating > ul > li:nth-child(2) > span");
 		 var history3star = document.querySelector("#rating > ul > li:nth-child(3) > span");
@@ -216,10 +217,10 @@ function ratingSection(review){
 		
 		 var totalRating = document.querySelector("#rating > div > span");
 		 var weightedAverage = (count5star* 5 + count4star * 4 + count3star * 3 + count2star *2 + count1star) / totalCount;
-		 totalRating.innerHTML = weightedAverage;
+		 totalRating.innerHTML = Math.round(weightedAverage * 10) / 10;
 		 var weightedStar = document.querySelector("#rating > div > div")
 		 weightedStar.innerHTML = "";
-		 for(var i=0; i < weightedAverage; i++){
+		 for(var i=0; i < Math.floor(weightedAverage); i++){
 	      	var star = document.createElement('i');
 	        star.setAttribute('class', "fa fa-star");
 			 	weightedStar.appendChild(star)
