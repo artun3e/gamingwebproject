@@ -185,7 +185,7 @@ if (session.getAttribute("user") != null) {
 					<!-- <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"> -->
 					<!-- <label for="vehicle1"> Remember Me </label><br> -->
 					<button type="submit" class="btn btn-primary btn-block btn-lg"
-						name="log" value="Login">Submit</button>
+						name="log" value="Login">LOGIN</button>
 
 					<p class="link-forgot-password-container">
 						<a href="forgotPassword.jsp" class="link-type-one">Forgot My

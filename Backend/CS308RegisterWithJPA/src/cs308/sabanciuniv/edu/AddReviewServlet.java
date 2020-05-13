@@ -30,7 +30,7 @@ public class AddReviewServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("In do post of order servlet!!!!");
+        System.out.println("In do post of add review servlet!");
         try {
             HttpSession session = request.getSession();
             User user = (User) session.getAttribute("user");
@@ -43,15 +43,18 @@ public class AddReviewServlet extends HttpServlet {
                 System.out.println(gameName);
                 String comment = request.getParameter("comment");
                 System.out.println(comment);
-                String SQL = "INSERT INTO Reviews(user_email,name, user_comment,date) " +
-                    "VALUES(?,?,?,?)";
+                String rating = request.getParameter("rating");
+                System.out.println(rating);
+                String SQL = "INSERT INTO Reviews(user_email,name, user_comment,rating, date) " +
+                    "VALUES(?,?,?,?,?)";
 
                 Connection conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
                 PreparedStatement ps = conn.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
                 ps.setString(1, user.getEmail());
                 ps.setString(2, gameName);
                 ps.setString(3, comment);
-                ps.setString(4, java.time.LocalDate.now().toString());
+                ps.setString(4, rating);
+                ps.setString(5, java.time.LocalDate.now().toString());
 
                 int numRowsChanged = ps.executeUpdate();
 

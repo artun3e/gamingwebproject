@@ -1,11 +1,13 @@
-function addReview(){	
+function addReview(){
+	var rating = checkRating();
+	console.log(rating);
 	var comment = document.querySelector("#review-form > form > textarea").value;
 	var gameName = parsed.name[0];
 	console.log(gameName);
 	var xhrAddR = new XMLHttpRequest();
 	var urlRR = "addreview";
 	xhrAddR.open("POST", urlRR, true);
-	var params = "itemName="+gameName+"&comment="+comment;
+	var params = "itemName="+gameName+"&comment="+comment+"&rating="+rating;
 	console.log(params);
 	xhrAddR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhrAddR.send(params);
@@ -28,7 +30,19 @@ function addReview(){
       });
 }
 
-
+function checkRating(){
+	if(document.querySelector("#star5").checked == true)
+		return 5;
+	else if(document.querySelector("#star4").checked == true)
+		return 4;
+	else if(document.querySelector("#star3").checked == true)
+		return 3;
+	else if(document.querySelector("#star2").checked == true)
+		return 2;
+	else
+		return 1;
+	
+}
 
 
 function parseURLParams(url) {
@@ -112,17 +126,26 @@ async function getData(value){
     	 requirementTab.innerHTML = data[0].minimum;
 //    	 document.querySelector("#reviews > ul.reviews > li > div.review-heading > h5")
 //    	 document.querySelector("#reviews > ul.reviews > li > div.review-body > p")
-    	 
     	 for (var r=0; r<reviews.length ; r++){
     		 createNewReview();
     		 var reviewsUser = document.getElementsByClassName("review-heading")[r].getElementsByTagName('h5')[0];
     		 var reviewsComment = document.getElementsByClassName("review-body")[r].getElementsByTagName('p')[0];
     		 var reviewsDate = document.getElementsByClassName("review-heading")[r].getElementsByTagName('p')[0];
+    		 var reviewStars = document.getElementsByClassName("review-rating")[0];
     		 reviewsComment.innerHTML = reviews[r].comment;
         	 var username = reviews[r].user.split('@')
         	 reviewsUser.innerHTML = username[0];
         	 var date = reviews[r].date;
         	 reviewsDate.innerHTML = date;
+        	 var rating = reviews[r].rating;
+        	 var ratingF = parseInt(rating);
+        	 for(var i=0; i<ratingF; i++){
+             	var star = document.createElement('i');
+                star.setAttribute('class', "fa fa-star");
+                reviewStars.appendChild(star);
+        	 }
+
+        	 
     	 }
     	 
     	 
@@ -131,6 +154,7 @@ async function getData(value){
     }
 function createNewReview(){ //creates new element in html for each product
 	var reviewsTab = document.querySelector("#reviews > ul.reviews");
+	console.log(reviewsTab);
     var newElement = document.createElement('li');
     //// newElement.setAttribute('id', elementId);
     newElement.innerHTML = reviewHTML;
@@ -142,11 +166,6 @@ var reviewHTML =
 '															<h5 class="name"></h5>'+
 '															<p class="date">27 DEC 2018, 8:0 PM</p>'+
 '															<div class="review-rating">'+
-'																<i class="fa fa-star"></i>'+
-'																<i class="fa fa-star"></i>'+
-'																<i class="fa fa-star"></i>'+
-'																<i class="fa fa-star"></i>'+
-'																<i class="fa fa-star-o empty"></i>'+
 '															</div>'+
 '														</div>'+
 '														<div class="review-body">'+
@@ -224,3 +243,5 @@ var reviewHTML =
         function handleForm(event) { event.preventDefault(); } 
         form.addEventListener('submit', handleForm);
     	}
+    
+

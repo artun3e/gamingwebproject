@@ -22,6 +22,7 @@ public class Reviews {
 	    	private String user;
 	    	private String comment;
 	    	private String date;
+	    	private String rating;
 	    	public String getName() {
 	    		return name;
 	    	}
@@ -49,11 +50,19 @@ public class Reviews {
 	    	public void setDate(String date) {
 	    		this.date = date;
 	    	}
-	    	public Reviews(String name, String user, String comment, String date) {
+	    	public String getRating() {
+	    		return rating;
+	    	}
+
+	    	public void setRating(String rating) {
+	    		this.rating = rating;
+	    	}
+	    	public Reviews(String name, String user, String comment, String date, String rating) {
 	    		this.name = name;
 	    		this.user = user;
 	    		this.comment = comment;	
-	    		this.date = date;	
+	    		this.date = date;
+	    		this.rating = rating;
 	    }
 	    	public Reviews() {
 	    	}	
@@ -73,6 +82,7 @@ public class Reviews {
 	    	            	 r.setName(rs.getString("name"));
 	    	            	 r.setUser(rs.getString("user_email"));
 	    	            	 r.setComment(rs.getString("user_comment"));
+	    	            	 r.setRating(rs.getString("rating"));
 	    	            	 r.setDate(rs.getString("date"));
 //	    	            	 System.out.println("Review " + r.getComment());
 	    	            	 resultReviews.add(r);
