@@ -1,33 +1,37 @@
 function addReview(){
 	var rating = checkRating();
-	console.log(rating);
-	var comment = document.querySelector("#review-form > form > textarea").value;
-	var gameName = parsed.name[0];
-	console.log(gameName);
-	var xhrAddR = new XMLHttpRequest();
-	var urlRR = "addreview";
-	xhrAddR.open("POST", urlRR, true);
-	var params = "itemName="+gameName+"&comment="+comment+"&rating="+rating;
-	console.log(params);
-	xhrAddR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhrAddR.send(params);
-	xhrAddR.addEventListener('readystatechange', function (e) {
-        if(this.readyState === 4 )
-        {
-          console.log("we are done!!!!");
-          var returnedResponse = xhrAddR.getResponseHeader("order-error");
-          if(returnedResponse === "true")
-          {
-            console.log("No login.");
-            window.location = "login.jsp";
-          }
-          else
-          {
-              alert("Your comment is sent!");
-              window.location = "product.jsp?name=" + gameName;
-          }
-        }
-      });
+	if(rating != -1){
+		var comment = document.querySelector("#review-form > form > textarea").value;
+		var gameName = parsed.name[0];
+		console.log(gameName);
+		var xhrAddR = new XMLHttpRequest();
+		var urlRR = "addreview";
+		xhrAddR.open("POST", urlRR, true);
+		var params = "itemName="+gameName+"&comment="+comment+"&rating="+rating;
+		console.log(params);
+		xhrAddR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xhrAddR.send(params);
+		xhrAddR.addEventListener('readystatechange', function (e) {
+	        if(this.readyState === 4 )
+	        {
+	          console.log("we are done!!!!");
+	          var returnedResponse = xhrAddR.getResponseHeader("order-error");
+	          if(returnedResponse === "true")
+	          {
+	            console.log("No login.");
+	            window.location = "login.jsp";
+	          }
+	          else
+	          {
+	              alert("Your comment is sent!");
+	              window.location = "product.jsp?name=" + gameName;
+	          }
+	        }
+	      });
+	}
+	else
+		 alert("You need to give star rating in order to submit a comment!");
+	
 }
 
 function checkRating(){
@@ -39,8 +43,10 @@ function checkRating(){
 		return 3;
 	else if(document.querySelector("#star2").checked == true)
 		return 2;
-	else
+	else if(document.querySelector("#star1").checked == true)
 		return 1;
+	else 
+		return -1;
 	
 }
 
@@ -126,18 +132,59 @@ async function getData(value){
     	 requirementTab.innerHTML = data[0].minimum;
 //    	 document.querySelector("#reviews > ul.reviews > li > div.review-heading > h5")
 //    	 document.querySelector("#reviews > ul.reviews > li > div.review-body > p")
+    	 var count5star=0, count4star=0,count3star=0,count2star=0,count1star=0;
     	 for (var r=0; r<reviews.length ; r++){
     		 createNewReview();
     		 var reviewsUser = document.getElementsByClassName("review-heading")[r].getElementsByTagName('h5')[0];
     		 var reviewsComment = document.getElementsByClassName("review-body")[r].getElementsByTagName('p')[0];
     		 var reviewsDate = document.getElementsByClassName("review-heading")[r].getElementsByTagName('p')[0];
-    		 var reviewStars = document.getElementsByClassName("review-rating")[0];
+    		 var reviewStars = document.getElementsByClassName("review-rating")[r];
     		 reviewsComment.innerHTML = reviews[r].comment;
         	 var username = reviews[r].user.split('@')
         	 reviewsUser.innerHTML = username[0];
         	 var date = reviews[r].date;
         	 reviewsDate.innerHTML = date;
         	 var rating = reviews[r].rating;
+        	 console.log(rating);
+        	 if(rating == "5")
+        		 count5star = count5star +1;
+        	 else if(rating == "4")
+        		 count4star = count4star +1;
+        	 else if(rating == "3")
+        		 count3star = count3star +1;
+        	 else if(rating == "2")
+        		 count2star = count2star +1;
+        	 else
+        		 count1star = count1star +1;
+        	 console.log(count2star);
+        	 var history5star = document.querySelector("#rating > ul > li:nth-child(1) > span");
+        	 var history4star = document.querySelector("#rating > ul > li:nth-child(2) > span");
+        	 var history3star = document.querySelector("#rating > ul > li:nth-child(3) > span");
+        	 var history2star = document.querySelector("#rating > ul > li:nth-child(4) > span");
+        	 var history1star = document.querySelector("#rating > ul > li:nth-child(5) > span");
+        	 history5star.innerHTML = count5star;
+        	 history4star.innerHTML = count4star;
+        	 history3star.innerHTML = count3star;
+        	 history2star.innerHTML = count2star;
+        	 history1star.innerHTML = count1star;
+        	 var progress5star = document.querySelector("#rating > ul > li:nth-child(1) > div.rating-progress > div")
+        	 var progress4star = document.querySelector("#rating > ul > li:nth-child(2) > div.rating-progress > div")
+        	 var progress3star = document.querySelector("#rating > ul > li:nth-child(3) > div.rating-progress > div")
+        	 var progress2star = document.querySelector("#rating > ul > li:nth-child(4) > div.rating-progress > div")
+        	 var progress1star = document.querySelector("#rating > ul > li:nth-child(5) > div.rating-progress > div")
+        	 var totalCount = count5star + count4star + count3star + count2star + count1star;
+        	 var portion;
+        	 portion = (count5star/totalCount) * 100;
+        	 progress5star.setAttribute("style", "width: "+portion +"%");
+        	 portion = (count4star/totalCount) * 100;
+        	 progress4star.setAttribute("style", "width: "+portion+"%");
+        	 portion = (count3star/totalCount) * 100;
+        	 progress3star.setAttribute("style", "width: "+portion+"%");	 
+        	 portion = (count2star/totalCount) * 100;
+        	 progress2star.setAttribute("style", "width: "+portion+"%");
+        	 portion = (count1star/totalCount) * 100;
+        	 progress1star.setAttribute("style", "width: "+portion+"%");
+        	
         	 var ratingF = parseInt(rating);
         	 for(var i=0; i<ratingF; i++){
              	var star = document.createElement('i');

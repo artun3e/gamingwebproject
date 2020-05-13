@@ -224,7 +224,7 @@ a:hover {
 								<a class="review-link" href="#">10 Review(s) | Add your review</a>
 							</div> -->
 							<div>
-								<h3 id="detail-price" class="product-price">$980.00 <del class="product-old-price">$990.00</del></h3>
+								<h3 id="detail-price" class="product-price"> <del class="product-old-price"></del></h3>
 								<span class="product-available">In Stock</span>
 							</div>
 							<p id="detail-description"></p>
@@ -247,13 +247,13 @@ a:hover {
 							</ul> -->
 
 
-							<ul class="product-links">
+<!-- 							<ul class="product-links">
 								<li>Share:</li>
 								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
 								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
 								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
 								<li><a href="#"><i class="fa fa-envelope"></i></a></li>
-							</ul>
+							</ul> -->
 
 						</div>
 					</div>
@@ -320,7 +320,7 @@ a:hover {
 														<div class="rating-progress">
 															<div style="width: 80%;"></div>
 														</div>
-														<span class="sum">3</span>
+														<span class="sum"></span>
 													</li>
 													<li>
 														<div class="rating-stars">
@@ -333,7 +333,7 @@ a:hover {
 														<div class="rating-progress">
 															<div style="width: 60%;"></div>
 														</div>
-														<span class="sum">2</span>
+														<span class="sum"></span>
 													</li>
 													<li>
 														<div class="rating-stars">
@@ -346,7 +346,7 @@ a:hover {
 														<div class="rating-progress">
 															<div></div>
 														</div>
-														<span class="sum">0</span>
+														<span class="sum"></span>
 													</li>
 													<li>
 														<div class="rating-stars">
@@ -359,7 +359,7 @@ a:hover {
 														<div class="rating-progress">
 															<div></div>
 														</div>
-														<span class="sum">0</span>
+														<span class="sum"></span>
 													</li>
 													<li>
 														<div class="rating-stars">
@@ -372,7 +372,7 @@ a:hover {
 														<div class="rating-progress">
 															<div></div>
 														</div>
-														<span class="sum">0</span>
+														<span class="sum"></span>
 													</li>
 												</ul>
 											</div>

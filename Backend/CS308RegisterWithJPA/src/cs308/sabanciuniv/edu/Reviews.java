@@ -18,11 +18,18 @@ import javax.persistence.EntityManager;
 
 @Path("fromDB")
 public class Reviews {
+			private int id;
 	    	private String name;
 	    	private String user;
 	    	private String comment;
 	    	private String date;
 	    	private String rating;
+	    	public int getID() {
+	    		return id;
+	    	}
+	    	public void setID(int id) {
+	    		this.id = id;
+	    	}
 	    	public String getName() {
 	    		return name;
 	    	}
@@ -57,7 +64,8 @@ public class Reviews {
 	    	public void setRating(String rating) {
 	    		this.rating = rating;
 	    	}
-	    	public Reviews(String name, String user, String comment, String date, String rating) {
+	    	public Reviews(int id,String name, String user, String comment, String date, String rating) {
+	    		this.id = id;
 	    		this.name = name;
 	    		this.user = user;
 	    		this.comment = comment;	
@@ -79,6 +87,7 @@ public class Reviews {
 
 	    	            while (rs.next()) {
 	    	            	 Reviews r = new Reviews();
+	    	            	 r.setID(rs.getInt("id"));
 	    	            	 r.setName(rs.getString("name"));
 	    	            	 r.setUser(rs.getString("user_email"));
 	    	            	 r.setComment(rs.getString("user_comment"));
