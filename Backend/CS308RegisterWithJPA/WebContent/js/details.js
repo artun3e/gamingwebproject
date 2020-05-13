@@ -1,5 +1,7 @@
 var user_email;
-
+var appID;
+var steamRating;
+var newRating;
 function addReview(){
 	var rating = checkRating();
 	if(rating != -1){
@@ -9,7 +11,7 @@ function addReview(){
 		var xhrAddR = new XMLHttpRequest();
 		var urlRR = "addreview";
 		xhrAddR.open("POST", urlRR, true);
-		var params = "itemName="+gameName+"&comment="+comment+"&rating="+rating;
+		var params = "itemName="+gameName+"&comment="+comment+"&rating="+rating+"&newRating="+newRating+"&id="+appID;
 		console.log(params);
 		xhrAddR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		xhrAddR.send(params);
@@ -91,6 +93,8 @@ async function getData(value){
 //    	for (var k = 0; k < data.length; k++){
 //    		fillCard(data[k], k);
 //    	} //
+    	 appID = (data[0].appID);
+    	 steamRating = data[0].rating;
     	 var name = document.getElementById('detail-name');
     	 var image = document.getElementById('detail-img');
     	 var price = document.getElementById('detail-price');
@@ -172,68 +176,98 @@ function ratingSection(review){
 		 history3star.innerHTML = 0;
 		 history2star.innerHTML = 0;
 		 history1star.innerHTML = 0;
-	 }
-	 for (var r=0; r<review.length ; r++){
-		 var reviewStars = document.getElementsByClassName("review-rating")[r];
-		 var rating = review[r].rating;
-		 if(rating == "5")
-			 count5star = count5star +1;
-		 else if(rating == "4")
-			 count4star = count4star +1;
-		 else if(rating == "3")
-			 count3star = count3star +1;
-		 else if(rating == "2")
-			 count2star = count2star +1;
-		 else if (rating == "1")
-			 count1star = count1star +1;
 		 
-		 var history5star = document.querySelector("#rating > ul > li:nth-child(1) > span");
-		 var history4star = document.querySelector("#rating > ul > li:nth-child(2) > span");
-		 var history3star = document.querySelector("#rating > ul > li:nth-child(3) > span");
-		 var history2star = document.querySelector("#rating > ul > li:nth-child(4) > span");
-		 var history1star = document.querySelector("#rating > ul > li:nth-child(5) > span");
-		 history5star.innerHTML = count5star;
-		 history4star.innerHTML = count4star;
-		 history3star.innerHTML = count3star;
-		 history2star.innerHTML = count2star;
-		 history1star.innerHTML = count1star;
-		 var progress5star = document.querySelector("#rating > ul > li:nth-child(1) > div.rating-progress > div")
-		 var progress4star = document.querySelector("#rating > ul > li:nth-child(2) > div.rating-progress > div")
-		 var progress3star = document.querySelector("#rating > ul > li:nth-child(3) > div.rating-progress > div")
-		 var progress2star = document.querySelector("#rating > ul > li:nth-child(4) > div.rating-progress > div")
-		 var progress1star = document.querySelector("#rating > ul > li:nth-child(5) > div.rating-progress > div")
-		 var totalCount = count5star + count4star + count3star + count2star + count1star;
-		 var portion;
-		 portion = (count5star/totalCount) * 100;
-		 progress5star.setAttribute("style", "width: "+portion +"%");
-		 portion = (count4star/totalCount) * 100;
-		 progress4star.setAttribute("style", "width: "+portion+"%");
-		 portion = (count3star/totalCount) * 100;
-		 progress3star.setAttribute("style", "width: "+portion+"%");	 
-		 portion = (count2star/totalCount) * 100;
-		 progress2star.setAttribute("style", "width: "+portion+"%");
-		 portion = (count1star/totalCount) * 100;
-		 progress1star.setAttribute("style", "width: "+portion+"%");
-		
 		 var totalRating = document.querySelector("#rating > div > span");
-		 var weightedAverage = (count5star* 5 + count4star * 4 + count3star * 3 + count2star *2 + count1star) / totalCount;
-		 totalRating.innerHTML = Math.round(weightedAverage * 10) / 10;
+		 totalRating.innerHTML =  Math.round(((steamRating/20) *100) * 10) / 10;
+		 console.log(steamRating);
+		 var weightedAverage;
+		 if(steamRating > 0.95)
+			 weightedAverage=5;
+		 else if (steamRating > 0.88)
+		 	weightedAverage=4;
+		 else if (steamRating > 0.70)
+			 weightedAverage=3;
+		 else if (steamRating > 0.50)
+			 weightedAverage=2;
+		 else if (steamRating > 0.35)
+			 weightedAverage=1;
 		 var weightedStar = document.querySelector("#rating > div > div")
 		 weightedStar.innerHTML = "";
-		 for(var i=0; i < Math.floor(weightedAverage); i++){
+		 console.log(weightedAverage);
+		 for(var i=0; i < (weightedAverage); i++){
 	      	var star = document.createElement('i');
 	        star.setAttribute('class', "fa fa-star");
 			 	weightedStar.appendChild(star)
 		 }
-
-		 var ratingF = parseInt(rating);
-		 for(var i=0; i<ratingF; i++){
-	     	var star = document.createElement('i');
-	        star.setAttribute('class', "fa fa-star");
-	        reviewStars.appendChild(star);
-		 }
-		 
 	 }
+	 else{
+		 for (var r=0; r<review.length ; r++){
+			 var reviewStars = document.getElementsByClassName("review-rating")[r];
+			 var rating = review[r].rating;
+			 if(rating == "5")
+				 count5star = count5star +1;
+			 else if(rating == "4")
+				 count4star = count4star +1;
+			 else if(rating == "3")
+				 count3star = count3star +1;
+			 else if(rating == "2")
+				 count2star = count2star +1;
+			 else if (rating == "1")
+				 count1star = count1star +1;
+			 
+			 var history5star = document.querySelector("#rating > ul > li:nth-child(1) > span");
+			 var history4star = document.querySelector("#rating > ul > li:nth-child(2) > span");
+			 var history3star = document.querySelector("#rating > ul > li:nth-child(3) > span");
+			 var history2star = document.querySelector("#rating > ul > li:nth-child(4) > span");
+			 var history1star = document.querySelector("#rating > ul > li:nth-child(5) > span");
+			 history5star.innerHTML = count5star;
+			 history4star.innerHTML = count4star;
+			 history3star.innerHTML = count3star;
+			 history2star.innerHTML = count2star;
+			 history1star.innerHTML = count1star;
+			 var progress5star = document.querySelector("#rating > ul > li:nth-child(1) > div.rating-progress > div")
+			 var progress4star = document.querySelector("#rating > ul > li:nth-child(2) > div.rating-progress > div")
+			 var progress3star = document.querySelector("#rating > ul > li:nth-child(3) > div.rating-progress > div")
+			 var progress2star = document.querySelector("#rating > ul > li:nth-child(4) > div.rating-progress > div")
+			 var progress1star = document.querySelector("#rating > ul > li:nth-child(5) > div.rating-progress > div")
+			 var totalCount = count5star + count4star + count3star + count2star + count1star;
+			 var portion;
+			 portion = (count5star/totalCount) * 100;
+			 progress5star.setAttribute("style", "width: "+portion +"%");
+			 portion = (count4star/totalCount) * 100;
+			 progress4star.setAttribute("style", "width: "+portion+"%");
+			 portion = (count3star/totalCount) * 100;
+			 progress3star.setAttribute("style", "width: "+portion+"%");	 
+			 portion = (count2star/totalCount) * 100;
+			 progress2star.setAttribute("style", "width: "+portion+"%");
+			 portion = (count1star/totalCount) * 100;
+			 progress1star.setAttribute("style", "width: "+portion+"%");
+			
+			 var totalRating = document.querySelector("#rating > div > span");
+			 var weightedAverage = (count5star* 5 + count4star * 4 + count3star * 3 + count2star *2 + count1star) / totalCount;
+			 console.log(steamRating);
+			 weightedAverage = ((Math.round(weightedAverage * 10) / 10 )+ (Math.round(((steamRating/20) *100) * 10) / 10) ) /2;
+			 newRating = (steamRating + (weightedAverage * 20) / 100) / 2;
+			 console.log(newRating);
+			 totalRating.innerHTML = weightedAverage;
+			 var weightedStar = document.querySelector("#rating > div > div")
+			 weightedStar.innerHTML = "";
+			 for(var i=0; i < Math.floor(weightedAverage); i++){
+		      	var star = document.createElement('i');
+		        star.setAttribute('class', "fa fa-star");
+				 	weightedStar.appendChild(star)
+			 }
+
+			 var ratingF = parseInt(rating);
+			 for(var i=0; i<ratingF; i++){
+		     	var star = document.createElement('i');
+		        star.setAttribute('class', "fa fa-star");
+		        reviewStars.appendChild(star);
+			 }
+			 
+		 } 
+	 }
+	 
 	 
 }
 function createNewReview(){ //creates new element in html for each product

@@ -55,9 +55,21 @@ public class AddReviewServlet extends HttpServlet {
                 ps.setString(3, comment);
                 ps.setString(4, rating);
                 ps.setString(5, java.time.LocalDate.now().toString());
-
+                
+                
+                
                 int numRowsChanged = ps.executeUpdate();
-
+                String updateSQL = "UPDATE Games SET rating = ? WHERE Games.appid = ?";
+                String appID = request.getParameter("id");
+                System.out.println(appID);
+                String newRating = request.getParameter("newRating");
+                System.out.println(newRating);
+                int intAppID = Integer.parseInt(appID);
+                double dNewRating = Double.parseDouble(newRating);
+                PreparedStatement psUpdate = conn.prepareStatement(updateSQL, Statement.RETURN_GENERATED_KEYS);
+                psUpdate.setInt(2, intAppID);
+                psUpdate.setDouble(1, dNewRating);
+                int execution = psUpdate.executeUpdate();
                 conn.close();
                 conn = null;
                 ps = null;
