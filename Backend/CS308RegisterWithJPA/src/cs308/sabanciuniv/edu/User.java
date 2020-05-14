@@ -19,6 +19,9 @@ public class User {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
 	private List<Order> orders;
 	
+	public void deleteOrder(int orderid) {
+		orders.remove(orderid);
+	}
 	public userType getUserType() {
 		return type;
 	}
