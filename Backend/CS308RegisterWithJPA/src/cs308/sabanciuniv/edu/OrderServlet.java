@@ -54,6 +54,8 @@ public class OrderServlet extends HttpServlet {
 				response.setHeader("order-error","true");
 				return;
 			}
+			
+		
 			else{
 				ResultSet rs = null;
 				//String userEmail = user.getEmail();
