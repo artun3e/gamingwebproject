@@ -53,7 +53,7 @@ public class AdminAddOrderServlet extends HttpServlet {
 			if(user.getUserType() == User.userType.Admin){
 
 				ResultSet rs = null;
-				//String userEmail = user.getEmail();
+				String userEmail = request.getParameter("mail");
 				String[] itemNames = request.getParameter("list_names").split(",");
 				String[] itemQuantities = request.getParameter("list_q").split(",");
 				Map<Games, Integer> hashmap = new HashMap<>();
@@ -86,7 +86,7 @@ public class AdminAddOrderServlet extends HttpServlet {
 				System.out.println("We are here!v3");
 				user.addOrder(newOrder);
 				em.merge(user);
-				em.getTransaction().commit();
+				em.getTransaction().commit(); // updated the database 
 				em.close();
 				emf.close();
 				System.out.println("Done v2!!!!!");

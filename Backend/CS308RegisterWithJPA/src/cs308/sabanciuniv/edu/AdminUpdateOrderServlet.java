@@ -49,6 +49,7 @@ public class AdminUpdateOrderServlet extends HttpServlet {
 			String ID = request.getParameter("order_id");
 			String adress = request.getParameter("adress");
 			String status = request.getParameter("status");
+			String email = request.getParameter("mail");
 			//Order.orderStatus orderStatus = (Order.orderStatus) status; 
 			// below code is fucking retarded
 			
@@ -67,6 +68,7 @@ public class AdminUpdateOrderServlet extends HttpServlet {
 				em.merge(temp);
 				em.getTransaction().begin();
 				temp.setAddress(adress);
+				//mail de eklenecek
 				// Below code is fucking retarded
 				if(status == "PreparingPackage")
 					temp.setStatus(Order.orderStatus.PreparingPackage);
