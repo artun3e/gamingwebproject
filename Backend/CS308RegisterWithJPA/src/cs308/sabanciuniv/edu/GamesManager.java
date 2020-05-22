@@ -14,12 +14,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Path("fromDB")
 public class GamesManager {
+
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -69,19 +68,17 @@ public class GamesManager {
             return resultList;
         }
     }
-   
-    
-    
-    
+
+
     // return game object with respect to ID
     public static Games getGameByID(int ID) {
-    	try {
-    		Connection conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
-			PreparedStatement ps = conn.prepareStatement("SELECT * FROM Games WHERE appid = "+ID+"");
-			ResultSet rs = ps.executeQuery();
-			Games obj = new Games();
-			if(rs.next()){
-				obj.setAppID(rs.getInt("appid"));
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Games WHERE appid = " + ID + "");
+            ResultSet rs = ps.executeQuery();
+            Games obj = new Games();
+            if (rs.next()) {
+                obj.setAppID(rs.getInt("appid"));
                 obj.setName(rs.getString("name"));
                 obj.setReleaseDate(rs.getString("release_date"));
                 obj.setDeveloper(rs.getString("developer"));
@@ -101,16 +98,16 @@ public class GamesManager {
                 obj.setDetailed_description(rs.getString("detailed_description"));
                 obj.setAbout_the_game(rs.getString("about_the_game"));
                 obj.setShort_description(rs.getString("short_description"));
-			}
-			conn.close();
+            }
+            conn.close();
             conn = null;
             ps = null;
             rs = null;
             return obj;
-    	}catch(Exception e){
-    		 e.printStackTrace();
-             return null;
-    	}
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public static Games getDeviceByName(String name) {
@@ -165,48 +162,40 @@ public class GamesManager {
             System.out.println("Cat3 " + category2);
             System.out.println("Cat4 " + category3);
             System.out.println("Cat5 " + category4);
-			Connection conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
             PreparedStatement ps = conn.prepareStatement("Select * from Games where steamspy_tags like CONCAT( '%',?,'%') and steamspy_tags like CONCAT( '%',?,'%') and steamspy_tags like CONCAT( '%',?,'%') and steamspy_tags like CONCAT( '%',?,'%') and steamspy_tags like CONCAT( '%',?,'%') LIMIT 9");
-            if (!category0.contentEquals("null"))
-            {
+            if (!category0.contentEquals("null")) {
                 ps.setString(1, category0);
                 System.out.println("Cat 1 was not null");
-            }
-            else
-            {
+            } else {
                 ps.setString(1, " ");
                 System.out.println("Cat 1 was null");
             }
-            if (!category1.contentEquals("null"))
-            {
+            if (!category1.contentEquals("null")) {
                 ps.setString(2, category1);
                 System.out.println("Cat 2 was not null");
-            }
-            else {
+            } else {
                 ps.setString(2, " ");
                 System.out.println("Cat 2 was null");
             }
             if (!category2.contentEquals("null")) {
                 ps.setString(3, category2);
                 System.out.println("Cat 3 was not null");
-            }
-            else {
+            } else {
                 ps.setString(3, " ");
                 System.out.println("Cat 3 was null");
             }
             if (!category3.contentEquals("null")) {
                 ps.setString(4, category3);
                 System.out.println("Cat 4 was not null");
-            }
-            else {
+            } else {
                 ps.setString(4, " ");
                 System.out.println("Cat 4 was null");
             }
             if (!category4.contentEquals("null")) {
                 ps.setString(5, category4);
                 System.out.println("Cat 5 was not null");
-            }
-            else {
+            } else {
                 ps.setString(5, " ");
                 System.out.println("Cat 5 was null");
             }
@@ -238,39 +227,39 @@ public class GamesManager {
 				resultArray.add(obj);
 			}
             System.out.println("at the end of the while loop");*/
-            while(rs.next()) {
+            while (rs.next()) {
                 Random r = new Random();
                 Integer random = r.nextInt((30 - 20) + 1) + 20;
-				System.out.println("Game found game is: " + rs.getString("name"));
-                String temp = 
-                         "<div class=\"product\">"
-                        + "<div class=\"product-img\">"
-                        + "<img src=\"" + rs.getString("header_image") + " alt=\"\">"
-                        + "<div class=\"product-label\">"
-                        + "<span class=\"new\">NEW</span>"
-                        + "</div>"
-                        + "</div>"
-                        + "<div class=\"product-body\">"
-                        + "<p class=\"product-category\">" + rs.getString("steamspy_tags") + "</p>"
-                        + "<h3 class=\"product-name\"><a onclick=\"toDetails(this)\" href=\"#\">"+rs.getString("name")+"</a></h3>"
-                        + "<h4 class=\"product-price\">$" + rs.getDouble("price") + "<del class=\"product-old-price\">$" + ((int) rs.getDouble("price") + random) + ".00</del></h4>"
-                        + "<div class=\"product-rating\">"
-                        + "<i class=\"fa fa-star\"></i>"
-                        + "<i class=\"fa fa-star\"></i>"
-                        + "<i class=\"fa fa-star\"></i>"
-                        + "<i class=\"fa fa-star\"></i>"
-                        + "<i class=\"fa fa-star-o\"></i>"
-                        + "</div>"
-                      //+ "<div class=\"product-btns\">"
-                      //+ "<button class=\"add-to-wishlist\"><i class=\"fa fa-heart-o\"></i><span class=\"tooltipp\">add to wishlist</span></button>"
-                      //+ "<button class=\"add-to-compare\"><i class=\"fa fa-exchange\"></i><span class=\"tooltipp\">add to compare</span></button>"
-                      //+ "<button class=\"quick-view\"><i class=\"fa fa-eye\"></i><span class=\"tooltipp\">quick view</span></button>"
-                      //+ "</div>"
-                        + "</div>"
-                        + "<div class=\"add-to-cart\">"
-                        + "<button onclick=\"addToCart(this)\" class=\"add-to-cart-btn\"><i class=\"fa fa-shopping-cart\"></i> cart</button>"
-                        + "</div>"
-                        + "</div>";
+                System.out.println("Game found game is: " + rs.getString("name"));
+                String temp =
+                        "<div class=\"product\">"
+                                + "<div class=\"product-img\">"
+                                + "<img src=\"" + rs.getString("header_image") + " alt=\"\">"
+                                + "<div class=\"product-label\">"
+                                + "<span class=\"new\">NEW</span>"
+                                + "</div>"
+                                + "</div>"
+                                + "<div class=\"product-body\">"
+                                + "<p class=\"product-category\">" + rs.getString("steamspy_tags") + "</p>"
+                                + "<h3 class=\"product-name\"><a onclick=\"toDetails(this)\" href=\"#\">" + rs.getString("name") + "</a></h3>"
+                                + "<h4 class=\"product-price\">$" + rs.getDouble("price") + "<del class=\"product-old-price\">$" + ((int) rs.getDouble("price") + random) + ".00</del></h4>"
+                                + "<div class=\"product-rating\">"
+                                + "<i class=\"fa fa-star\"></i>"
+                                + "<i class=\"fa fa-star\"></i>"
+                                + "<i class=\"fa fa-star\"></i>"
+                                + "<i class=\"fa fa-star\"></i>"
+                                + "<i class=\"fa fa-star-o\"></i>"
+                                + "</div>"
+                                //+ "<div class=\"product-btns\">"
+                                //+ "<button class=\"add-to-wishlist\"><i class=\"fa fa-heart-o\"></i><span class=\"tooltipp\">add to wishlist</span></button>"
+                                //+ "<button class=\"add-to-compare\"><i class=\"fa fa-exchange\"></i><span class=\"tooltipp\">add to compare</span></button>"
+                                //+ "<button class=\"quick-view\"><i class=\"fa fa-eye\"></i><span class=\"tooltipp\">quick view</span></button>"
+                                //+ "</div>"
+                                + "</div>"
+                                + "<div class=\"add-to-cart\">"
+                                + "<button onclick=\"addToCart(this)\" class=\"add-to-cart-btn\"><i class=\"fa fa-shopping-cart\"></i> cart</button>"
+                                + "</div>"
+                                + "</div>";
                 resultArray.add(temp);
             }
             conn.close();
@@ -331,6 +320,7 @@ public class GamesManager {
             return null;
         }
     }
+
     public static List<Games> getRandomGames_Admin() {
         try {
 
@@ -376,7 +366,7 @@ public class GamesManager {
             return null;
         }
     }
-    
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("randomJSON/")
@@ -392,44 +382,44 @@ public class GamesManager {
             //'number_of_players', 'price', 'rating'],
 
             while (rs.next()) {
-            	Random r = new Random();
+                Random r = new Random();
                 Integer random = r.nextInt((30 - 20) + 1) + 20;
-				System.out.println("Game found game is: " + rs.getString("name"));
-                String temp = 
-                         "<div class=\"product\">"
-                        + "<div class=\"product-img\">"
-                        + "<img src=\"" + rs.getString("header_image") + " alt=\"\">"
-                        + "<div class=\"product-label\">"
-                        + "<span class=\"new\">NEW</span>"
-                        + "</div>"
-                        + "</div>"
-                        + "<div class=\"product-body\">"
-                        + "<p class=\"product-category\">" + rs.getString("steamspy_tags") + "</p>"
-                        + "<h3 class=\"product-name\"><a onclick=\"toDetails(this)\" href=\"#\">"+rs.getString("name")+"</a></h3>"
-                        + "<h4 class=\"product-price\">$" + rs.getDouble("price") + "<del class=\"product-old-price\">$" + ((int) rs.getDouble("price") + random) + ".00</del></h4>"
-                        + "<div class=\"product-rating\">"
-                        + "<i class=\"fa fa-star\"></i>"
-                        + "<i class=\"fa fa-star\"></i>"
-                        + "<i class=\"fa fa-star\"></i>"
-                        + "<i class=\"fa fa-star\"></i>"
-                        + "<i class=\"fa fa-star-o\"></i>"
-                        + "</div>"
-                        //+ "<div class=\"product-btns\">"
-                        //+ "<button class=\"add-to-wishlist\"><i class=\"fa fa-heart-o\"></i><span class=\"tooltipp\">add to wishlist</span></button>"
-                        //+ "<button class=\"add-to-compare\"><i class=\"fa fa-exchange\"></i><span class=\"tooltipp\">add to compare</span></button>"
-                        //+ "<button class=\"quick-view\"><i class=\"fa fa-eye\"></i><span class=\"tooltipp\">quick view</span></button>"
-                        //+ "</div>"
-                        + "</div>"
-                        + "<div class=\"add-to-cart\">"
-                        + "<button onclick=\"addToCart(this)\" class=\"add-to-cart-btn\"><i class=\"fa fa-shopping-cart\"></i> cart</button>"
-                        + "</div>"
-                        + "</div>";
+                System.out.println("Game found game is: " + rs.getString("name"));
+                String temp =
+                        "<div class=\"product\">"
+                                + "<div class=\"product-img\">"
+                                + "<img src=\"" + rs.getString("header_image") + " alt=\"\">"
+                                + "<div class=\"product-label\">"
+                                + "<span class=\"new\">NEW</span>"
+                                + "</div>"
+                                + "</div>"
+                                + "<div class=\"product-body\">"
+                                + "<p class=\"product-category\">" + rs.getString("steamspy_tags") + "</p>"
+                                + "<h3 class=\"product-name\"><a onclick=\"toDetails(this)\" href=\"#\">" + rs.getString("name") + "</a></h3>"
+                                + "<h4 class=\"product-price\">$" + rs.getDouble("price") + "<del class=\"product-old-price\">$" + ((int) rs.getDouble("price") + random) + ".00</del></h4>"
+                                + "<div class=\"product-rating\">"
+                                + "<i class=\"fa fa-star\"></i>"
+                                + "<i class=\"fa fa-star\"></i>"
+                                + "<i class=\"fa fa-star\"></i>"
+                                + "<i class=\"fa fa-star\"></i>"
+                                + "<i class=\"fa fa-star-o\"></i>"
+                                + "</div>"
+                                //+ "<div class=\"product-btns\">"
+                                //+ "<button class=\"add-to-wishlist\"><i class=\"fa fa-heart-o\"></i><span class=\"tooltipp\">add to wishlist</span></button>"
+                                //+ "<button class=\"add-to-compare\"><i class=\"fa fa-exchange\"></i><span class=\"tooltipp\">add to compare</span></button>"
+                                //+ "<button class=\"quick-view\"><i class=\"fa fa-eye\"></i><span class=\"tooltipp\">quick view</span></button>"
+                                //+ "</div>"
+                                + "</div>"
+                                + "<div class=\"add-to-cart\">"
+                                + "<button onclick=\"addToCart(this)\" class=\"add-to-cart-btn\"><i class=\"fa fa-shopping-cart\"></i> cart</button>"
+                                + "</div>"
+                                + "</div>";
                 resultList.add(temp);
             }
             ps.close();
             conn.close();
             rs.close();
-            rs=null;
+            rs = null;
             ps = null;
             conn = null;
             return resultList;
@@ -438,5 +428,44 @@ public class GamesManager {
             return resultList;
         }
     }
+/*
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("getAllCategories")
+    public Set<String> getAllCategories() {
+        Set<String> categories = new HashSet<>();
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
+            PreparedStatement ps = conn.prepareStatement("Select steamspy_tags from Games");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String[] temp = rs.getString("steamspy_tags").split(";");
+                for (String s : temp) {
+                    if (!categories.contains(s))
+                        categories.add(s);
+                }
+            }
 
+            ps = conn.prepareStatement("create table if not exists categories(category varchar(255), primary key(category))");
+            ps.execute();
+
+            for (String s : categories) {
+                ps = conn.prepareStatement("insert into categories(category) VALUES(?)");
+                ps.setString(1, s);
+                ps.execute();
+            }
+
+            conn.close();
+            ps.close();
+            rs.close();
+
+            conn = null;
+            ps = null;
+            rs = null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return categories;
+    }
+DONT USE THE ABOVE CODE, IT WAS USED FOR EXTRACTING ALL THE CATEGORIES FROM THE CSV VALUES INTO THE TABLE CALLED CATEGORIES*/
 }

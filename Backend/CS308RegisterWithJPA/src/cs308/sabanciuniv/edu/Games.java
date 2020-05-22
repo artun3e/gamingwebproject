@@ -1,6 +1,7 @@
 package cs308.sabanciuniv.edu;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="Games")
@@ -271,4 +272,6 @@ public class Games {
 		return result;
 
 	}
+
+
 }
