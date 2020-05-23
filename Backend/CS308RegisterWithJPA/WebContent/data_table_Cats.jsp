@@ -69,7 +69,7 @@
     <script src="./js3/vendor/modernizr-2.8.3.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="js/data_table_Games.js"></script>
+    <script src="js/data_table_Cats.js"></script>
 </head>
 
 <body>
@@ -646,6 +646,39 @@
                         </div>
                         <div class="table-responsive">
                            
+		                                
+		                                
+		                                <table id="data-table-basic" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Update</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+	                                <%
+		                                GamesManager mg = new GamesManager();
+	                                	Set<String> AllCategories = (Set<String>)mg.getAllCategories();
+		                                for(String cat : AllCategories)
+		                                {
+		               						out.println("<tr>");
+		               							out.println("<td class=\"myName\">"+ cat +"</td>");
+		               							out.println("<td class=\"update\"> <a type='button' class='btn btn-success'> Update </a > </td>");
+	              								out.println("<td class=\"delete\"> <a type='button' class='btn btn-danger'> Delete </a > </td>");
+	           								out.println("</tr>");	
+		                                }
+	                                %>
+                                    
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Update</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
                         </div>
                     </div>
                 </div>
