@@ -659,7 +659,7 @@
 					</p>
 					<div class="row justify-content-md-center" >
 						<div class="col-8" style="margin-left: 14px;">
-							<form action='' method=POST>
+							<form action='addproductservlet' method=POST>
 								<div class="form-group row" style="margin-left: 14px;">
 									<label style="margin-top: 7px;" class="col-sm-2 col-form-label">Game ID:</label>
 									<div class="col-sm-10">

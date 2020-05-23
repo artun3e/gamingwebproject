@@ -85,10 +85,15 @@
             out.println("<a href=\"data_table_Games.jsp\">GamesList</a>");
             out.println("<a onclick=\"Log_User_Out(this)\" href=\"#\">Logout</a>");
         }
-        else{
+        else {
             %><script> alert("you are not authourized to see this page");
             window.location = "index.jsp";</script><% 
         }
+    }
+    else
+    {
+          %><script> alert("you are not authourized to see this page");
+        window.location = "index.jsp";</script><%
     }
     %>
             	

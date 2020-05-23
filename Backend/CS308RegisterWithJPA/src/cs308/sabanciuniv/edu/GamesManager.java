@@ -10,10 +10,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.*;
 
 @Path("fromDB")
@@ -428,11 +425,42 @@ public class GamesManager {
             return resultList;
         }
     }
-/*
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("getAllCategories")
-    public Set<String> getAllCategories() {
+    public Set<String> getAllCategories(){
+        Set<String> categories = new HashSet<>();
+        Connection conn;
+        PreparedStatement ps;
+        ResultSet rs;
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
+            ps = conn.prepareStatement("Select * from categories");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                categories.add(rs.getString("category"));
+            }
+            conn.close();
+            ps.close();
+            rs.close();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        conn = null;
+        ps = null;
+        rs = null;
+        return categories;
+    }
+}
+
+/*
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("fixCategories")
+    public Set<String> fixCategories() {
         Set<String> categories = new HashSet<>();
         try {
             Connection conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
@@ -468,4 +496,5 @@ public class GamesManager {
         return categories;
     }
 DONT USE THE ABOVE CODE, IT WAS USED FOR EXTRACTING ALL THE CATEGORIES FROM THE CSV VALUES INTO THE TABLE CALLED CATEGORIES*/
-}
+
+
