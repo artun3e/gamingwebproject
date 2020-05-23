@@ -80,6 +80,12 @@
 			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
 			integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
 			crossorigin="anonymous"></script>
+			
+	<link rel="stylesheet" href="./css3/chosen.css">
+	<link rel="stylesheet" href="./css3/prism.css">
+	<script src="./js3/chosen.proto.js"></script>	
+	<script src="./js3/chosen.jquery.js"></script>	
+	<script src="./js3/prism.js"></script>	
 </head>
 
 <body>
@@ -676,6 +682,25 @@
 									<label style="margin-top: 7px;" class="col-sm-2 col-form-label">Categories: </label>
 									<div class="col-sm-10">
 										<input type="text" class="form-control" name="categories" id="categories" placeholder="Categories"/>
+									</div>
+									<div class="chosen-container chosen-container-multi" title="" style="width: 350px;">
+										<ul class="chosen-choices">
+										  <li class="search-choice"><span>Sloth Bear</span><a class="search-choice-close" data-option-array-index="5"></a></li><li class="search-choice"><span>Polar Bear</span><a class="search-choice-close" data-option-array-index="7"></a></li><li class="search-choice"><span>Brown Bear</span><a class="search-choice-close" data-option-array-index="3"></a></li><li class="search-field">
+										    <input class="chosen-search-input" type="text" autocomplete="off" value="Your Favorite Types of Bear" tabindex="8" style="width: 25px;">
+										  </li>
+										</ul>
+										<div class="chosen-drop">
+											<ul class="chosen-results">
+										  		<li class="active-result" data-option-array-index="1">American Black Bear</li>
+												<li class="active-result" data-option-array-index="2">Asiatic Black Bear</li>
+												<li class="result-selected" data-option-array-index="3">Brown Bear</li>
+												<li class="active-result" data-option-array-index="4">Giant Panda</li>
+												<li class="result-selected" data-option-array-index="5">Sloth Bear</li>
+												<li class="active-result" data-option-array-index="6">Sun Bear</li>
+												<li class="result-selected" data-option-array-index="7">Polar Bear</li>
+												<li class="active-result" data-option-array-index="8">Spectacled Bear</li>
+											</ul>
+										</div>
 									</div>
 								</div>
 								<div class="form-group row" style="margin-left: 14px;">
