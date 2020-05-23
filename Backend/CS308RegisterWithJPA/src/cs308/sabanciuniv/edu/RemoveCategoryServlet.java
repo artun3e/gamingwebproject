@@ -42,18 +42,20 @@ public class RemoveCategoryServlet extends HttpServlet {
 		{
 			String toBeDeleted = request.getParameter("category");
 			conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
-			ps = conn.prepareStatement("delete from categories where category =" + toBeDeleted);
+			ps = conn.prepareStatement("delete from categories where category =?");
+			ps.setString(1,toBeDeleted);
 			ps.executeUpdate();
 
-			ps = conn.prepareStatement("select categories, steamspy_tags from Games where categories like CONCAT( '%',?,'%')");
+			ps = conn.prepareStatement("select * from Games where categories like CONCAT( '%',?,'%')",ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
 			ps.setString(1,toBeDeleted);
 
 			rs = ps.executeQuery();
 			while(rs.next())
 			{
 				String categoryString = rs.getString("cateogories");
-				categoryString.replace(toBeDeleted+";","");
-				categoryString.replace(toBeDeleted, "");
+				categoryString = categoryString.replace(toBeDeleted+";","");
+				categoryString = categoryString.replace(";"+toBeDeleted, "");
+				categoryString = categoryString.replace(toBeDeleted, "");
 				rs.updateString("categories",categoryString);
 				rs.updateString("steamspy_tags", categoryString);
 				rs.updateRow();

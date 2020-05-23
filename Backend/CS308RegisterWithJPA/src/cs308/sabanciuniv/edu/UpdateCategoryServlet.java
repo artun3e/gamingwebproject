@@ -43,17 +43,20 @@ public class UpdateCategoryServlet extends HttpServlet {
 			String toBeUpdated = request.getParameter("oldcategory");
 			String newCategory = request.getParameter("newCategory");
 			conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
-			ps = conn.prepareStatement("update categories set category =" + newCategory + " where category ="+toBeUpdated);
+			ps = conn.prepareStatement("update categories set category=? where category=?");
+			ps.setString(1,newCategory);
+			ps.setString(2,toBeUpdated);
 			ps.executeUpdate();
 
-			ps = conn.prepareStatement("select categories, steamspy_tags from Games where categories like CONCAT( '%',?,'%')");
-			ps.setString(1,toBeUpdated);
-
+			ps = conn.prepareStatement("select * from Games where categories like '%"+toBeUpdated+"%'",ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
 			rs = ps.executeQuery();
 			while(rs.next())
 			{
-				String categoryString = rs.getString("cateogories");
-				categoryString.replace(toBeUpdated,newCategory);
+				String categoryString = rs.getString("categories");
+				//System.out.println("Current: " + categoryString);
+				categoryString = categoryString.replace(toBeUpdated,newCategory);
+				//System.out.println("Updated: " + categoryString);
+				//System.out.println("____________________________________________");
 				rs.updateString("categories",categoryString);
 				rs.updateString("steamspy_tags", categoryString);
 				rs.updateRow();

@@ -29,11 +29,19 @@ $(document).ready(function() {
 		console.log(itemName);
 		
 		var xhr = new XMLHttpRequest();
-		var url = "";	// Buraya Servlet Ismi Gelicek
+		var url = "RemoveProductServlet";
 		xhr.open("POST", url, true);
 		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		xhr.send(itemName);
+		xhr.addEventListener('readystatechange', function (e) {
+			if(this.readyState === 4 )
+			{
+				alert("You have successfuly deleted " + itemName);	// Then Refresh Page
+				window.location = "data_table_Games.jsp";
+			}
+		});
+		var params = "gamename="+itemName;
+		xhr.send(params);
 		
-		alert("You have successfuly deleted " + itemName);	// Then Refresh Page
+
 	});
 });
