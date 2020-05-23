@@ -52,11 +52,11 @@ public class AddProductServlet extends HttpServlet {
 			double price = Double.parseDouble(request.getParameter("price").replace("$", ""));
 			String shortDescription = request.getParameter("shortdescription").replaceAll("[^\\x00-\\x7F]", "");
 			String detailedDescription = request.getParameter("detaileddescription").replaceAll("[^\\x00-\\x7F]", "");
-			;
+
 			String minimum = request.getParameter("minimum").replaceAll("[^\\x00-\\x7F]", "");
-			;
+
 			String aboutTheGame = request.getParameter("aboutthegame").replaceAll("[^\\x00-\\x7F]", "");
-			;
+
 			String background = request.getParameter("background");
 			String[] screenshotsArray = request.getParameter("screenshots").split(",");
 			String headerImage = request.getParameter("headerimage");
