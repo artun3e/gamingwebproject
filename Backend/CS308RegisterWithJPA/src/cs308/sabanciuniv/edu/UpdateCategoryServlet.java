@@ -56,6 +56,7 @@ public class UpdateCategoryServlet extends HttpServlet {
 				categoryString.replace(toBeUpdated,newCategory);
 				rs.updateString("categories",categoryString);
 				rs.updateString("steamspy_tags", categoryString);
+				rs.updateRow();
 			}
 
 			conn.close();
