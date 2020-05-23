@@ -1,6 +1,7 @@
 package cs308.sabanciuniv.edu;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -95,7 +96,7 @@ public class AddProductServlet extends HttpServlet {
 			System.out.println("Screenshots: "+ screenshots);
 			System.out.println("______________________________________");
 
-			String timeStamp = new SimpleDateFormat("yyyyMMdd").format(Calendar.getInstance().getTime());
+			String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
 
 			Games game = new Games();
 			game.setAppID(id);
@@ -125,6 +126,12 @@ public class AddProductServlet extends HttpServlet {
 
 			em = null;
 			emf = null;
+			PrintWriter out = response.getWriter();
+
+			out.println("<html><script type=\"text/javascript\">");
+			out.println("alert('Your game has been added!');");
+			out.println("location='product.jsp?name="+gameName+"';");
+			out.println("</script></html>");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

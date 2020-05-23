@@ -1,10 +1,7 @@
 package cs308.sabanciuniv.edu;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,19 +37,37 @@ public class RemoveCategoryServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Connection conn;
 		PreparedStatement ps;
+		ResultSet rs;
 		try
 		{
 			String toBeDeleted = request.getParameter("category");
 			conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
 			ps = conn.prepareStatement("delete from categories where category =" + toBeDeleted);
 			ps.executeUpdate();
+
+			ps = conn.prepareStatement("select categories, steamspy_tags from Games where categories like CONCAT( '%',?,'%')");
+			ps.setString(1,toBeDeleted);
+
+			rs = ps.executeQuery();
+			while(rs.next())
+			{
+				String categoryString = rs.getString("cateogories");
+				categoryString.replace(toBeDeleted+";","");
+				categoryString.replace(toBeDeleted, "");
+				rs.updateString("categories",categoryString);
+				rs.updateString("steamspy_tags", categoryString);
+				rs.updateRow();
+			}
+
 			conn.close();
 			ps.close();
+			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		conn = null;
 		ps = null;
+		rs = null;
 	}
 
 }
