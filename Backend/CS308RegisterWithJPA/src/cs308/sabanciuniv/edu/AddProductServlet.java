@@ -1,10 +1,9 @@
 package cs308.sabanciuniv.edu;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -96,6 +95,8 @@ public class AddProductServlet extends HttpServlet {
 			System.out.println("Screenshots: "+ screenshots);
 			System.out.println("______________________________________");
 
+			String timeStamp = new SimpleDateFormat("yyyyMMdd").format(Calendar.getInstance().getTime());
+
 			Games game = new Games();
 			game.setAppID(id);
 			game.setName(gameName);
@@ -111,6 +112,9 @@ public class AddProductServlet extends HttpServlet {
 			game.setScreenshots(screenshots);
 			game.setPlatforms(platforms);
 			game.setHeader_image(headerImage);
+			game.setDeveloper(publisher);
+			game.setReleaseDate(timeStamp);
+
 
 			em.getTransaction().begin();
 			em.persist(game);
