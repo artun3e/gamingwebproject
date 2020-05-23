@@ -655,18 +655,16 @@
 					</p>
 					<div class="row justify-content-md-center" >
 						<div class="col-8" style="margin-left: 14px;">
-							<form action='UpdateProductServlet' method=POST>
 								<div class="form-group row" style="margin-left: 14px;">
 									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">Category Name:</label>
 									<div class="col-sm-10">
 										<input type="text" class="form-control" name="name" id="name"  placeholder="Category Name"/>
 									</div>
 								</div>
-								<button type="submit" class="btn btn-primary btn-block btn-lg" name="edit">Update</button>
+								<button type="submit" class="btn btn-primary btn-block btn-lg" name="edit" id="update_button">Update</button>
 
 								<a class='btn btn-success btn-block btn-lg' href="data_table_Cats.jsp"
-								   style="margin-left: auto; margin-right: auto; display: block; margin-top: 5%; margin-bottom: 0%">Take Me To The Games List</a>
-							</form>
+								   style="margin-left: auto; margin-right: auto; display: block; margin-top: 5%; margin-bottom: 0%">Take Me To The Categories List</a>
 						</div>
 						<div class="col-3"></div>
 					</div>

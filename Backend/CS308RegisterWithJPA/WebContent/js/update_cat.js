@@ -35,4 +35,20 @@ document.title = parsed.name[0];
 
 $(document).ready(function() {
 	document.getElementById('name').value = parsed.name[0];
+	
+	$("#update_button").click(function(e) {
+		console.log("Girdim.")
+		if(document.getElementById('name').value == parsed.name[0]){
+			alert("To Update You Need To Make Changes First.")
+		}
+		else{
+			var xhr = new XMLHttpRequest();
+			var url = "UpdateCategoryServlet";
+			xhr.open("POST", url, true);
+			var params = "oldcategory="+parsed.name[0]+"&newCategory="+document.getElementById('name').value;
+			console.log(params);
+			xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xhr.send(params);
+		}
+	});
 });
