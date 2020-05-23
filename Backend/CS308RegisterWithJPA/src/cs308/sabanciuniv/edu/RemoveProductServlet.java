@@ -47,7 +47,21 @@ public class RemoveProductServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
+		EntityManager em = emf.createEntityManager();
+		try {
+			Object obj = em.createQuery("From Games WHERE name LIKE :name").setParameter("name", request.getParameter("gamename")).getSingleResult();
+			Games game = (Games)obj;
+			em.getTransaction().begin();
+			em.merge(game);
+			em.remove(game);
+			em.getTransaction().commit();
+			em.close();
+			emf.close();
+		} catch (Exception e) {
+			em.close();
+			emf.close();
+		}
 	}
 
 }
