@@ -122,6 +122,23 @@ border:3px solid black;
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script type="text/javascript" src="js/index.js"></script>
+	<script type="text/javascript">
+		function Log_User_Out(logging){	
+			var xhr = new XMLHttpRequest();
+		    var url = "logout";
+		    xhr.open("POST", url, true);
+		    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		    xhr.addEventListener('readystatechange', function(e){
+		    	if(this.readyState === 4)
+				{
+					alert("Successfully logged out.")
+					console.log("User logged out.");
+					window.location = "index.jsp";
+				}
+			})
+		    xhr.send();
+		}
+		</script>
     <meta charset="UTF-8">
 	
 <link rel="stylesheet"

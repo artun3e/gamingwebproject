@@ -37,7 +37,6 @@ $(document).ready(function() {
 	document.getElementById('name').value = parsed.name[0];
 	
 	$("#update_button").click(function(e) {
-		console.log("Girdim.")
 		if(document.getElementById('name').value == parsed.name[0]){
 			alert("To Update You Need To Make Changes First.")
 		}

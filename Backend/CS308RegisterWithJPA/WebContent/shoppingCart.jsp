@@ -47,6 +47,23 @@
 <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/shoppingCart.js"></script>
+<script type="text/javascript">
+		function Log_User_Out(logging){	
+			var xhr = new XMLHttpRequest();
+		    var url = "logout";
+		    xhr.open("POST", url, true);
+		    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		    xhr.addEventListener('readystatechange', function(e){
+		    	if(this.readyState === 4)
+				{
+					alert("Successfully logged out.")
+					console.log("User logged out.");
+					window.location = "index.jsp";
+				}
+			})
+		    xhr.send();
+		}
+		</script>
 </head>
   <header id="site-header">
 	<header>

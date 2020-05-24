@@ -1,3 +1,6 @@
+
+
+
 (function($) {
 	"use strict"
 
@@ -11,7 +14,7 @@
 	$('.cart-dropdown').on('click', function (e) {
 		e.stopPropagation();
 	});
-
+	
 	/////////////////////////////////////////
 	$(document).ready(function() {
 		//Preloader
@@ -153,7 +156,21 @@
 			priceSlider.noUiSlider.set([null, value]);
 		}
 	}
-
+	function Log_User_Out(logging){	
+		var xhr = new XMLHttpRequest();
+	    var url = "logout";
+	    xhr.open("POST", url, true);
+	    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	    xhr.addEventListener('readystatechange', function(e){
+	    	if(this.readyState === 4)
+			{
+				alert("Successfully logged out.")
+				console.log("User logged out.");
+				window.location = "index.jsp";
+			}
+		})
+	    xhr.send();
+	}
 	// Price Slider
 	var priceSlider = document.getElementById('price-slider');
 	if (priceSlider) {

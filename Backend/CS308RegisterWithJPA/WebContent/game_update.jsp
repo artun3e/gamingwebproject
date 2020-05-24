@@ -81,6 +81,8 @@
 			integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
 			crossorigin="anonymous"></script>
 	<script src="js/update_item.js"></script>
+	
+	
 </head>
 
 <body>
@@ -680,6 +682,10 @@
 										<input type="text" class="form-control" name="categories" id="categories" placeholder="Categories"/>
 									</div>
 								</div>
+								
+								
+								
+								
 								<div class="form-group row" style="margin-left: 14px;">
 									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">Price: </label>
 									<div class="col-sm-10">
@@ -767,7 +773,6 @@
 <!-- End Footer area-->
 <!-- jquery
     ============================================ -->
-<script src="./js3/vendor/jquery-1.12.4.min.js"></script>
 <!-- bootstrap JS
     ============================================ -->
 <script src="./js3/bootstrap.min.js"></script>
@@ -830,7 +835,7 @@
 <script src="./js3/main.js"></script>
 <!-- tawk chat JS
     ============================================ -->
-<script src="./js3/tawk-chat.js"></script>
+
 </body>
 
 </html>

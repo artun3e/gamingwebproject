@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -52,7 +54,23 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		
 		
-		
+		<script type="text/javascript">
+		function Log_User_Out(logging){	
+			var xhr = new XMLHttpRequest();
+		    var url = "logout";
+		    xhr.open("POST", url, true);
+		    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		    xhr.addEventListener('readystatechange', function(e){
+		    	if(this.readyState === 4)
+				{
+					alert("Successfully logged out.")
+					console.log("User logged out.");
+					window.location = "index.jsp";
+				}
+			})
+		    xhr.send();
+		}
+		</script>
 
     </head>
 	
@@ -79,14 +97,14 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
-  					<li class="dropdown"><a class="nav-link" href="#" value="Action"></a></li>
-                    <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="Multiplayer"></a></li>
-                    <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="Sports"></a></li>
-                    <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="FPS"></a></li>
-                    <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="RPG"></a></li>
-                    <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="Strategy"></span></a>
+  					<li class="dropdown"><a class="nav-link" href="#" value="Action">Action</a></li>
+                    <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="Multiplayer">Multiplayer</a></li>
+                    <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="Sports">Sports</a></li>
+                    <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="FPS">FPS</a></li>
+                    <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="RPG">RPG</a></li>
+                    <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="Strategy">Strategy</span></a>
 
-                    <li style="margin-left: 100%; margin-top: 12px;"><input id="search"  type="text" placeholder="What are you looking for?"  onkeydown="if (event.keyCode == 13) { search(); }"></li>
+                    <li style="margin-left: 5%; margin-top: 12px;"><input id="search"  type="text" placeholder="What are you looking for?" onkeydown="if (event.keyCode == 13) { search(); }"></li>
                     <li class="dropdown" style="margin-left: 5%;">
                     	<a class="fa fa-user" style="font-size: 34px; color: grey;"></a>
 
@@ -110,6 +128,14 @@
                      <li class="dropdown" style="margin-left: 5%;">
                     	<a class="fa fa-shopping-cart" href="shoppingCart.jsp" style="font-size: 34px; color: grey;"></a>
                     </li>
+                   	<%
+                        if(session.getAttribute("user") != null)
+                        {
+                            Object obj = session.getAttribute("user");
+                            User user = (User) obj;
+                            out.print("<p style=\"margin-left: 5%;margin-top: 8px;\">"+user.getName()+"</p>");
+                        }
+                   	%>
                 </ul>
             </div>
         </div>
