@@ -51,6 +51,8 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script type="text/javascript" src="js/index.js"></script>
     <meta charset="UTF-8">
+    
+    <link rel="stylesheet" href="./css3/notika-custom-icon.css">
 </head>
 
 <body>
@@ -93,7 +95,9 @@
                         <div class="dropdown-content">
                         	<% 
                         		session = request.getSession();
-                        		if(session.getAttribute("user") != null)
+                        		Object temp = session.getAttribute("user");
+					        	User user = (User) temp;
+                        		if(user != null)
 	                        	{
                         			/* out.println("<a href=\"#account\">Account</a>");
                         			out.println("<a href=\"#liked\">Liked Ones</a>"); */
@@ -106,15 +110,17 @@
                         		}
                         	%>
                         </div>
-                     </li>
-                     <li class="dropdown" style="margin-left: 5%;">
+                        
+					</li>
+					<li class="dropdown" style="margin-left: 5%;">
                     	<a class="fa fa-shopping-cart" href="shoppingCart.jsp" style="font-size: 34px; color: grey;"></a>
+                    </li>
+                    <li class="dropdown" style="margin-left: 5%;">
+                    	<a class="fa fa-shield" href="adminPanel.jsp" style="font-size: 34px; color: grey;"></a>
                     </li>
                    	<%
                         if(session.getAttribute("user") != null)
                         {
-                            Object obj = session.getAttribute("user");
-                            User user = (User) obj;
                             out.print("<p style=\"margin-left: 5%;margin-top: 8px;\">"+user.getName()+"</p>");
                         }
                    	%>

@@ -623,10 +623,9 @@
 									<i class="notika-icon notika-windows"></i>
 								</div>
 								<div class="breadcomb-ctn">
-									<h2>Games Table</h2>
+									<h2>Categories Table</h2>
 									<p>
-										Welcome to Tech Market <span class="bread-ntd">Admin
-												Panel Games Table</span>
+										Welcome to Tech Market <span class="bread-ntd">Admin Panel Categories Table</span>
 									</p>
 								</div>
 							</div>

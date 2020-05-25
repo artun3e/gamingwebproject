@@ -69,7 +69,7 @@
     <script src="./js3/vendor/modernizr-2.8.3.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="js/data_table_Cats.js"></script>
+    <script src="js/data_table_Games.js"></script>
 </head>
 
 <body>
@@ -617,8 +617,8 @@
 										<i class="notika-icon notika-windows"></i>
 									</div>
 									<div class="breadcomb-ctn">
-										<h2>Categories Table</h2>
-										<p>Welcome to Tech Market <span class="bread-ntd">Admin Panel Categories Table</span></p>
+										<h2>Games Table</h2>
+										<p>Welcome to Tech Market <span class="bread-ntd">Admin Panel Games Table</span></p>
 									</div>
 								</div>
 							</div>
@@ -642,31 +642,35 @@
                     <div class="data-table-list">
                         <div class="basic-tb-hd">
                             <h2>Games</h2>
-                            <p>This panel is for Admin to insert, update and delete categories.</p>
+                            <p>This panel is for Admin to insert, update and delete games.</p>
                         </div>
+                         <a class='btn btn-success btn-block btn-lg' href="game_add.jsp"
+										style="margin-left: auto; margin-right: auto; display: block; margin-top: 10px; margin-bottom: 10px">ADD GAME</a>
                         <div class="table-responsive">
-                           
-		                                
-		                                
-		                                <table id="data-table-basic" class="table table-striped">
+                            <table id="data-table-basic" class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th>Name</th>
+                                        <th>Publisher</th>
+                                        <th>Categories</th>
+                                        <th>Price</th>
                                         <th>Update</th>
                                         <th>Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 	                                <%
-		                                GamesManager mg = new GamesManager();
-	                                	Set<String> AllCategories = (Set<String>)mg.getAllCategories();
-		                                for(String cat : AllCategories)
+		                                List<Games> myGames_2 = (List<Games>)GamesManager.getRandomGames_Admin();
+		                                for(Games game : myGames_2)
 		                                {
 		               						out.println("<tr>");
-		               							out.println("<td class=\"myName\">"+ cat +"</td>");
+		               							out.println("<td class=\"myName\">"+ game.getName() +"</td>");
+	               								out.println("<td>"+ game.getPublisher() +"</td>");
+		               							out.println("<td>"+ game.getCategories() +"</td>");
+		               							out.println("<td>"+ game.getPrice() +"</td>");
 		               							out.println("<td class=\"update\"> <a type='button' class='btn btn-success'> Update </a > </td>");
 	              								out.println("<td class=\"delete\"> <a type='button' class='btn btn-danger'> Delete </a > </td>");
-	           								out.println("</tr>");	
+               								out.println("</tr>");	
 		                                }
 	                                %>
                                     
@@ -674,6 +678,9 @@
                                 <tfoot>
                                     <tr>
                                         <th>Name</th>
+                                        <th>Publisher</th>
+                                        <th>Categories</th>
+                                        <th>Price</th>
                                         <th>Update</th>
                                         <th>Delete</th>
                                     </tr>
