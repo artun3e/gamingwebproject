@@ -256,7 +256,7 @@
 								</div>
 								<button type="submit" class="btn btn-primary btn-block btn-lg" name="edit" id="update_button">Update</button>
 
-								<a class='btn btn-success btn-block btn-lg' href="data_table_Cats.jsp"
+								<a class='btn btn-success btn-block btn-lg' href="admin_Cats_table.jsp"
 								   style="margin-left: auto; margin-right: auto; display: block; margin-top: 5%; margin-bottom: 0%">Take Me To The Categories List</a>
 						</div>
 						<div class="col-3"></div>

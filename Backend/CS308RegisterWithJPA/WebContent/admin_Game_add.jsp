@@ -244,7 +244,6 @@
 					</p>
 					<div class="row justify-content-md-center" >
 						<div class="col-8" style="margin-left: 14px;">
-							<form action='addproductservlet' method=POST>
 								<div class="form-group row" style="margin-left: 14px;">
 									<label style="margin-top: 7px;" class="col-sm-2 col-form-label">Game ID:</label>
 									<div class="col-sm-10">
@@ -268,12 +267,7 @@
 									<div class="col-sm-10">
 										
 										<div class="selectRow" >
-										    <select class="" id="multipleSelectExample" data-placeholder="Select an option" multiple="" style="width: 745px;">
-										        <option value="1">Option 1</option>
-										        <option value="2">Option 2</option>
-										        <option value="3">Option 3</option>
-										        <option value="4">Option 4</option>
-										        <option value="5">Option 5</option>
+										    <select class="" id="multipleSelectExample" data-placeholder="Select an option" multiple="" style="width: 910px;">
 										    </select>
 										</div>
 									</div>
@@ -334,12 +328,11 @@
 									</div>
 								</div>
 								<button type="submit" class="btn btn-primary btn-block btn-lg"
-										name="edit">ADD</button>
+										name="edit" id="add_button" >ADD</button>
 
 								<a class='btn btn-success btn-block btn-lg' href="admin_Games_table.jsp"
 								   style="margin-left: auto; margin-right: auto; display: block; margin-top: 5%; margin-bottom: 0%">Take
 									Me To The Games List</a>
-							</form>
 						</div>
 						<div class="col-3"></div>
 					</div>

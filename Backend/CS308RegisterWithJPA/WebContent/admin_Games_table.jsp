@@ -257,8 +257,8 @@
 	               								out.println("<td>"+ game.getPublisher() +"</td>");
 		               							out.println("<td>"+ game.getCategories() +"</td>");
 		               							out.println("<td>"+ game.getPrice() +"</td>");
-		               							out.println("<td class=\"update\"> <a type='button' class='btn btn-success'> Update </a > </td>");
-	              								out.println("<td class=\"delete\"> <a type='button' class='btn btn-danger'> Delete </a > </td>");
+		               							out.println("<td class=\"update\"> <a type='button' class='btn btn-success' onclick=\"toUpdate(this)\"> Update </a > </td>");
+	              								out.println("<td class=\"delete\"> <a type='button' class='btn btn-danger'  onclick=\"toDelete(this)\"> Delete </a > </td>");
                								out.println("</tr>");	
 		                                }
 	                                %>

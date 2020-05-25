@@ -233,10 +233,9 @@
                             <h2>Games</h2>
                             <p>This panel is for Admin to insert, update and delete categories.</p>
                         </div>
+                        <a class='btn btn-success btn-block btn-lg' href="admin_Cat_add.jsp"
+										style="margin-left: auto; margin-right: auto; display: block; margin-top: 10px; margin-bottom: 10px">ADD CATEGORY</a>
                         <div class="table-responsive">
-                           
-		                                
-		                                
 		                                <table id="data-table-basic" class="table table-striped">
                                 <thead>
                                     <tr>
@@ -253,8 +252,8 @@
 		                                {
 		               						out.println("<tr>");
 		               							out.println("<td class=\"myName\">"+ cat +"</td>");
-		               							out.println("<td class=\"update\"> <a type='button' class='btn btn-success'> Update </a > </td>");
-	              								out.println("<td class=\"delete\"> <a type='button' class='btn btn-danger'> Delete </a > </td>");
+		               							out.println("<td class=\"update\"> <a type='button' class='btn btn-success' onclick=\"toUpdate(this)\"> Update </a > </td>");
+	              								out.println("<td class=\"delete\"> <a type='button' class='btn btn-danger'  onclick=\"toDelete(this)\"> Delete </a > </td>");
 	           								out.println("</tr>");	
 		                                }
 	                                %>
