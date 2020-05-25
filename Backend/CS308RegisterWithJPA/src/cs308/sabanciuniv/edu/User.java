@@ -19,6 +19,26 @@ public class User {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
 	private List<Order> orders;
 	
+	@Column(name = "payment_method")
+	private String paymentMethod;
+	private String Address;
+	
+	public void setPaymentMethod(String payment_method) {
+		paymentMethod = payment_method;
+	}
+	
+	public String getPaymentMethod() {
+		return paymentMethod;
+	}
+	
+	public void setAddress(String Address){
+		this.Address = Address;
+	}
+	
+	public String getAddress(){
+		return this.Address;
+	}
+	
 	public void deleteOrder(int orderid) {
 		orders.remove(orderid);
 	}

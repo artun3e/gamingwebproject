@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="66d56c18-0c0e-4709-a7ab-62a8105c08d3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Backend/CS308RegisterWithJPA/build/classes/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/CS308RegisterWithJPA/build/classes/cs308/sabanciuniv/devices/ElectronicDevice$deviceTypes.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/CS308RegisterWithJPA/build/classes/cs308/sabanciuniv/devices/ElectronicDevice.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/CS308RegisterWithJPA/build/classes/cs308/sabanciuniv/devices/Laptop.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/CS308RegisterWithJPA/build/classes/cs308/sabanciuniv/devices/MainClass.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/CS308RegisterWithJPA/build/classes/cs308/sabanciuniv/edu/JavaMailUtil$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/CS308RegisterWithJPA/build/classes/cs308/sabanciuniv/edu/JavaMailUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/CS308RegisterWithJPA/build/classes/cs308/sabanciuniv/edu/LoginServlet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/CS308RegisterWithJPA/build/classes/cs308/sabanciuniv/edu/RegisterServlet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/CS308RegisterWithJPA/build/classes/cs308/sabanciuniv/edu/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/CS308RegisterWithJPA/build/classes/cs308/sabanciuniv/edu/verifyEmail.class" beforeDir="false" />
-    </list>
+    <list default="true" id="66d56c18-0c0e-4709-a7ab-62a8105c08d3" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/Backend/CS308RegisterWithJPA/build/classes/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,58 +13,12 @@
     <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Backend/CS308RegisterWithJPA/src/cs308/sabanciuniv/devices/AudioSpecs.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Backend/CS308RegisterWithJPA/src/cs308/sabanciuniv/devices/Earphone.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Backend/CS308RegisterWithJPA/src/cs308/sabanciuniv/devices/ElectronicDevice.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1455">
-              <caret line="97" column="13" lean-forward="true" selection-start-line="97" selection-start-column="13" selection-end-line="97" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Backend/CS308RegisterWithJPA/src/cs308/sabanciuniv/devices/GameConsoles.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="783">
-              <caret line="64" column="58" lean-forward="true" selection-start-line="64" selection-start-column="58" selection-end-line="64" selection-end-column="58" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Backend/CS308RegisterWithJPA/src/cs308/sabanciuniv/devices/Headphone.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="34" selection-start-column="34" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
+  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
     <option name="x" value="-1920" />
     <option name="y" value="-89" />
     <option name="width" value="1920" />
@@ -155,7 +97,7 @@
   <component name="ToolWindowManager">
     <frame x="-1920" y="-89" width="1920" height="1080" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25239617" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2550586" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -191,10 +133,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Backend/CS308RegisterWithJPA/src/cs308/sabanciuniv/devices/Earphone.java">
+    <entry file="file://$PROJECT_DIR$/Backend/CS308RegisterWithJPA/src/cs308/sabanciuniv/devices/GameConsoles.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        <state relative-caret-position="960">
+          <caret line="64" column="58" lean-forward="true" selection-start-line="64" selection-start-column="58" selection-end-line="64" selection-end-column="58" />
         </state>
       </provider>
     </entry>
@@ -205,17 +147,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Backend/CS308RegisterWithJPA/src/cs308/sabanciuniv/devices/GameConsoles.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="783">
-          <caret line="64" column="58" lean-forward="true" selection-start-line="64" selection-start-column="58" selection-end-line="64" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Backend/CS308RegisterWithJPA/src/cs308/sabanciuniv/devices/ElectronicDevice.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1455">
           <caret line="97" column="13" lean-forward="true" selection-start-line="97" selection-start-column="13" selection-end-line="97" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backend/CS308RegisterWithJPA/src/cs308/sabanciuniv/devices/Earphone.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
         </state>
       </provider>
     </entry>

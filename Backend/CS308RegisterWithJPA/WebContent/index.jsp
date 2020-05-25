@@ -50,9 +50,8 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script type="text/javascript" src="js/index.js"></script>
+	<script type="text/javascript" src="js/indexPop.js"></script>
     <meta charset="UTF-8">
-    
-    <link rel="stylesheet" href="./css3/notika-custom-icon.css">
 </head>
 
 <body>
@@ -95,9 +94,7 @@
                         <div class="dropdown-content">
                         	<% 
                         		session = request.getSession();
-                        		Object temp = session.getAttribute("user");
-					        	User user = (User) temp;
-                        		if(user != null)
+                        		if(session.getAttribute("user") != null)
 	                        	{
                         			/* out.println("<a href=\"#account\">Account</a>");
                         			out.println("<a href=\"#liked\">Liked Ones</a>"); */
@@ -110,23 +107,17 @@
                         		}
                         	%>
                         </div>
-                        
-					</li>
-					<li class="dropdown" style="margin-left: 5%;">
+                     </li>
+                     <li class="dropdown" style="margin-left: 5%;">
                     	<a class="fa fa-shopping-cart" href="shoppingCart.jsp" style="font-size: 34px; color: grey;"></a>
                     </li>
-                    <%
-                    if(session.getAttribute("user") != null){
-                    	if(user.getUserType() == User.userType.Admin || user.getUserType() == User.userType.ProductManager || user.getUserType() == User.userType.SalesManager){
-							out.println("<li class=\"dropdown\" style=\"margin-left: 5%;\">");
-							out.println("<a class=\"fa fa-shield\" href=\"adminPanel.jsp\" style=\"font-size: 34px; color: grey;\"></a>");	//Admin Panel
-							out.println("</li>");
-						}
+                   	<%
                         if(session.getAttribute("user") != null)
                         {
+                            Object obj = session.getAttribute("user");
+                            User user = (User) obj;
                             out.print("<p style=\"margin-left: 5%;margin-top: 8px;\">"+user.getName()+"</p>");
                         }
-                    }
                    	%>
                 </ul>
             </div>
@@ -203,7 +194,7 @@
                                 <!-- <small>(120)</small> -->
                             </label>
                         </div>
-
+						
                         <!-- <div class="input-checkbox">
                             <input type="checkbox" id="category-6">
                             <label for="category-6">
@@ -214,85 +205,63 @@
                         </div> -->
                     </div>
                 </div>
-                <!-- /aside Widget -->
+                <h3 class="aside-title">RATINGS</h3>
+                            <div class="checkbox-filter">
+                                <div class="input-checkbox" >
+                                    <input type="checkbox" id="5stars" onclick="ratingCheckbox()">
+                                    <label for="5stars">
+                                        <span></span>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <small></small>
+                                    </label>
+                                </div>
+                                <div class="input-checkbox">
+                                    <input type="checkbox" id="4stars" onclick="ratingCheckbox()">
+                                    <label for="4stars">
+                                        <span></span>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <small></small>
+                                    </label>
+                                </div>
+                                <div class="input-checkbox">
+                                    <input type="checkbox" id="3stars" onclick="ratingCheckbox()">
+                                    <label for="3stars">
+                                        <span></span>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
 
-                <!-- aside Widget -->
-                <!-- <div class="aside">
-                    <h3 class="aside-title">Price</h3>
-                    <div class="price-filter">
-                        <div id="price-slider" class="noUi-target noUi-ltr noUi-horizontal"><div class="noUi-base"><div class="noUi-origin" style="left: 0%;"><div class="noUi-handle noUi-handle-lower" data-handle="0" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="0.0" aria-valuemax="100.0" aria-valuenow="0.0" aria-valuetext="1.00" style="z-index: 5;"></div></div><div class="noUi-connect" style="left: 0%; right: 0%;"></div><div class="noUi-origin" style="left: 100%;"><div class="noUi-handle noUi-handle-upper" data-handle="1" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="0.0" aria-valuemax="100.0" aria-valuenow="100.0" aria-valuetext="999.00" style="z-index: 4;"></div></div></div></div>
-                        <div class="input-number price-min">
-                            <input id="price-min" type="number">
-                            <span class="qty-up">+</span>
-                            <span class="qty-down">-</span>
-                        </div>
-                        <span>-</span>
-                        <div class="input-number price-max">
-                            <input id="price-max" type="number">
-                            <span class="qty-up">+</span>
-                            <span class="qty-down">-</span>
-                        </div>
-                    </div>
-                </div> -->
-                <!-- /aside Widget -->
+                                        <small></small>
+                                    </label>
+                                </div>
+                                <div class="input-checkbox">
+                                    <input type="checkbox" id="2stars" onclick="ratingCheckbox()">
+                                    <label for="2stars">
+                                        <span></span>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <small></small>
+                                    </label>
+                                </div>
+                                <div class="input-checkbox">
+                                    <input type="checkbox" id="1star" onclick="ratingCheckbox()">
+                                    <label for="1star">
+                                        <span></span>
+                                        <i class="fa fa-star"></i>
+                                        <small></small>
+                                    </label>
+                                </div>
 
-                <!-- aside Widget
-                <div class="aside">
-                    <h3 class="aside-title">Brand</h3>
-                    <div class="checkbox-filter">
-                        <div class="input-checkbox">
-                            <input type="checkbox" id="brand-1">
-                            <label for="brand-1">
-                                <span></span>
-                                SAMSUNG
-                                <small>(578)</small>
-                            </label>
-                        </div>
-                        <div class="input-checkbox">
-                            <input type="checkbox" id="brand-2">
-                            <label for="brand-2">
-                                <span></span>
-                                LG
-                                <small>(125)</small>
-                            </label>
-                        </div>
-                        <div class="input-checkbox">
-                            <input type="checkbox" id="brand-3">
-                            <label for="brand-3">
-                                <span></span>
-                                SONY
-                                <small>(755)</small>
-                            </label>
-                        </div>
-                        <div class="input-checkbox">
-                            <input type="checkbox" id="brand-4">
-                            <label for="brand-4">
-                                <span></span>
-                                SAMSUNG
-                                <small>(578)</small>
-                            </label>
-                        </div>
-                        <div class="input-checkbox">
-                            <input type="checkbox" id="brand-5">
-                            <label for="brand-5">
-                                <span></span>
-                                LG
-                                <small>(125)</small>
-                            </label>
-                        </div>
-                        <div class="input-checkbox">
-                            <input type="checkbox" id="brand-6">
-                            <label for="brand-6">
-                                <span></span>
-                                SONY
-                                <small>(755)</small>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                -->
+                            </div>
 
-                <!-- aside Widget -->
+                
                 <div class="aside">
                     <h3 class="aside-title">YOU MIGHT LIKE</h3>
                     <%
@@ -326,36 +295,25 @@
             <!-- STORE -->
             <div id="store" class="col-md-9">
                 <!-- store top filter -->
-                <!-- <div class="store-filter clearfix">
-                    <div class="store-sort">
-                        <label>
-                            Sort By:
-                            <select class="input-select">
-                                <option value="0">Popular</option>
-                                <option value="1">Position</option>
-                            </select>
-                        </label>
+                 <div class="store-filter clearfix">
+                            <div class="store-sort">
+                                <label>
+                                    Sort By:
+                                    <select class="input-select" onChange="sortByPrice(this.value)">
+                                        <option value="p-asc"> Price (Ascending)</option>
+                                        <option value="p-desc"> Price (Descending)</option>
+                                        <option value="r-asc"> Rating (Ascending)</option>
+                                        <option value="r-desc"> Rating (Descending)</option>
+                                    </select>
+                                </label>
 
-                        <label>
-                            Show:
-                            <select class="input-select">
-                                <option value="0">20</option>
-                                <option value="1">50</option>
-                            </select>
-                        </label>
-                    </div>
-                    <ul class="store-grid">
-                       <li class="active"><i class="fa fa-th"></i></li>
-                        <li><a href="#"><i class="fa fa-th-list"></i></a></li>
-                    </ul> 
-                </div> -->
+                            </div>
+                        </div>
                 <!-- /store top filter -->
                 <!-- store products -->
                 <div class="row" id="About_To_Change">
-                    
-					<%
-					
-					
+                   <%--  <%
+
 					String pageNumber = (request.getQueryString());
 					if(pageNumber == null)
 						pageNumber = "p=1";
@@ -370,6 +328,7 @@
 		        	{
 		        		myGames = (List<Games>)request.getSession().getAttribute("indexGames");
 		        	}
+
 		        	int start=0, end=9;
 		        	if(pageNumber.equals("p=2")){
 		        		start = 9;
@@ -389,10 +348,17 @@
 		        		end = 45;
 		        	}
 		        		
-		        	
+ 		        	
 	                for(int j=start; j<end; j++)
 	                {
 	                	Games game = myGames.get(j);
+			        	%>
+						<script>
+						var something = '<%=request.getSession().getAttribute("user")%>';
+						console.log(something);
+						consoling();
+						</script>
+			        	<%
 	                	Random r = new Random();
 						Integer random = r.nextInt((30 - 20) + 1) + 20;
 	                	out.println("<div class=\"col-md-4 col-xs-6\">");
@@ -438,7 +404,9 @@
 	                		out.println("</div>");
 	                	out.println("</div>");
 	                }
-					%>
+
+					%> --%>
+					
 					<!--	Old Static Product
                     <div class="col-md-4 col-xs-6">
                         <div class="product">
@@ -483,15 +451,22 @@
                             out.println("</p>");
                         }
                     %>
+                    			        	<script>
+
+			        	
+			        	</script> 
                     <ul class="store-pagination" id="store-pagination">
-                        <li><a href="index.jsp" class="page_number_1" >1</a></li>
-                        <li><a href="index.jsp?p=2" class="page_number_2">2</a></li>
-                        <li><a href="index.jsp?p=3" class="page_number_3">3</a></li>
-                        <li><a href="index.jsp?p=4" class="page_number_4">4</a></li>
-                        <li><a href="index.jsp?p=5" class="page_number_5">5</a></li>
+                        <li><a onclick="showPage1()" href="#1" class="page_number_1" >1</a></li>
+                        <li><a onclick="showPage2()" href="#2" class="page_number_2">2</a></li>
+                        <li><a onclick="showPage3()" href="#3" class="page_number_3">3</a></li>
+                        <li><a onclick="showPage4()" href="#4" class="page_number_4">4</a></li>
+                        <li><a onclick="showPage5()" href="#5" class="page_number_5">5</a></li>
                         <!-- <li><a href="#"><i class="fa fa-angle-right" style="margin-top: 14px;"></i></a></li> -->
                     </ul>
                     <script>
+                    
+                    
+                    
                     	if(window.location.href == "http://localhost:8080/CS308RegisterWithJPA/index.jsp"){
                     		var page = document.querySelector("#store-pagination > li:nth-child(1)")
                     		console.log(page);
@@ -522,8 +497,8 @@
                     		page.setAttribute("class", "active")
 
                     	}
-                    		
                     </script>
+                    
                 </div>
                 <!-- /store bottom filter -->
             </div>
