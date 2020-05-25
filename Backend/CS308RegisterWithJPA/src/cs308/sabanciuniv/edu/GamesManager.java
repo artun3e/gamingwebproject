@@ -278,7 +278,7 @@ public class GamesManager {
             List<Games> resultList = new ArrayList<Games>();
 
             Connection conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Games ORDER BY RAND() LIMIT 9");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Games ORDER BY RAND() LIMIT 45");
             ResultSet rs = ps.executeQuery();
             //Query q1 = em.createQuery("SELECT * FROM Games ORDER BY RAND() LIMIT 1");
             while (rs.next()) {
