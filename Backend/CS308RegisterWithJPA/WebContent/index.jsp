@@ -362,12 +362,24 @@
 	                				out.println("<p class=\"product-category\">" + game.getCategories() + "</p>");
 	                				out.println("<h3 class=\"product-name\"><a onclick=\"toDetails(this)\" href=\"#\">"+ game.getName() +"</a></h3>");
 	                				out.println("<h4 class=\"product-price\">$" + game.getPrice() + "<del class=\"product-old-price\">$" + ((int)game.getPrice() + random) + ".00</del></h4>");	
-	                				out.println("<div class=\"product-rating\">");	
-		                				out.println("<i class=\"fa fa-star\"></i>");	
-		                				out.println("<i class=\"fa fa-star\"></i>");	
-		                				out.println("<i class=\"fa fa-star\"></i>");	
-		                				out.println("<i class=\"fa fa-star\"></i>");	
-		                				out.println("<i class=\"fa fa-star-o\"></i>");
+	                				out.println("<div class=\"product-rating\">");
+	                				int starNumber = 0;
+	                				double rating = game.getRating();
+                                    if(rating > 0.95)
+		                				 starNumber = 5;
+                                	else if(rating >= 0.80 && rating < 0.95)
+                                		starNumber = 4;
+                                	else if(rating >= 0.60 && rating < 0.80)
+                                		starNumber = 3;
+                                	else if(rating >= 0.40 && rating < 0.60)
+                                		starNumber = 2;
+                                	else if(rating >= 0 && rating < 0.40)
+                                		starNumber = 1;
+                                	else
+                                		starNumber = 0;
+                                    for (int i=0; i<starNumber; i++)
+										out.println("<i class=\"fa fa-star\"></i>");	
+
 		                			out.println("</div>");
 	                				//out.println("<div class=\"product-btns\">");	
 	                				//	out.println("<button class=\"add-to-wishlist\"><i class=\"fa fa-heart-o\"></i><span class=\"tooltipp\">add to wishlist</span></button>");

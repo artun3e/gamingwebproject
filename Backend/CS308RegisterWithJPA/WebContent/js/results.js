@@ -92,7 +92,7 @@ async function getData(value){
         	stars.innerHTML = "";
         	if(rating >= 0.95)
         		var starNumber = 5;
-        	else if(rating >= 0.80 && rating < 0.96)
+        	else if(rating >= 0.80 && rating < 0.95)
         		var starNumber = 4;
         	else if(rating >= 0.60 && rating < 0.80)
         		var starNumber = 3;
