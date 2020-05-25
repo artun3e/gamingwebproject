@@ -115,14 +115,18 @@
 					<li class="dropdown" style="margin-left: 5%;">
                     	<a class="fa fa-shopping-cart" href="shoppingCart.jsp" style="font-size: 34px; color: grey;"></a>
                     </li>
-                    <li class="dropdown" style="margin-left: 5%;">
-                    	<a class="fa fa-shield" href="adminPanel.jsp" style="font-size: 34px; color: grey;"></a>
-                    </li>
-                   	<%
+                    <%
+                    if(session.getAttribute("user") != null){
+                    	if(user.getUserType() == User.userType.Admin || user.getUserType() == User.userType.ProductManager || user.getUserType() == User.userType.SalesManager){
+							out.println("<li class=\"dropdown\" style=\"margin-left: 5%;\">");
+							out.println("<a class=\"fa fa-shield\" href=\"adminPanel.jsp\" style=\"font-size: 34px; color: grey;\"></a>");	//Admin Panel
+							out.println("</li>");
+						}
                         if(session.getAttribute("user") != null)
                         {
                             out.print("<p style=\"margin-left: 5%;margin-top: 8px;\">"+user.getName()+"</p>");
                         }
+                    }
                    	%>
                 </ul>
             </div>

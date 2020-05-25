@@ -17,10 +17,10 @@ $(document).ready(function() {
 		var check = itemName.search("'");
 		if(check != -1){
 			var arr = itemName.split("'");
-			window.location.href = newURL + '/game_update.jsp?name=' + arr[1];
+			window.location.href = newURL + '/admin_Game_update.jsp?name=' + arr[1];
 		}
 		else
-			window.location.href = newURL + '/game_update.jsp?name=' + itemName;
+			window.location.href = newURL + '/admin_Game_update.jsp?name=' + itemName;
 	});
 	$(".delete").click(function(){
 		var $row = $(this).closest("tr");
@@ -36,7 +36,7 @@ $(document).ready(function() {
 			if(this.readyState === 4 )
 			{
 				alert("You have successfuly deleted " + itemName);	// Then Refresh Page
-				window.location = "data_table_Games.jsp";
+				window.location = "admin_Games_table.jsp";
 			}
 		});
 		var params = "gamename="+itemName;

@@ -124,10 +124,13 @@
                         <li><a data-toggle="tab" href="#mailbox"><i class="notika-icon notika-mail"></i> Email</a></li>
                         <li><a data-toggle="tab" href="#Charts"><i class="notika-icon notika-bar-chart"></i> Charts</a></li>
                         <li><a data-toggle="tab" href="#Tables"><i class="notika-icon notika-windows"></i> Tables</a></li>
-                        <li><a data-toggle="tab" href="#Appviews"><i class="notika-icon notika-app"></i> App views</a></li>
                     </ul>
                     <div class="tab-content custom-menu-content">
-                        <div id="Home" class="tab-pane in active notika-tab-menu-bg animated flipInX"></div>
+                    	<div id="Home" class="tab-pane active notika-tab-menu-bg animated flipInX">
+                        	<ul class="notika-main-menu-dropdown">
+                            	<li><a href="adminPanel.jsp">Home Page</a></li>
+                            </ul>
+                        </div>
                         <div id="mailbox" class="tab-pane notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
                             	<li><a href="mailPage.jsp">Compose Email</a></li>
@@ -176,20 +179,6 @@
 							        window.location = "index.jsp";</script><%
 							    }
 							    %>
-                            </ul>
-                        </div>
-                        <div id="Appviews" class="tab-pane notika-tab-menu-bg animated flipInX">
-                            <ul class="notika-main-menu-dropdown">
-                                <li><a href="notification.html">Notifications</a></li>
-                                <li><a href="alert.html">Alerts</a></li>
-                                <li><a href="modals.html">Modals</a></li>
-                                <li><a href="buttons.html">Buttons</a></li>
-                                <li><a href="tabs.html">Tabs</a></li>
-                                <li><a href="accordion.html">Accordion</a></li>
-                                <li><a href="dialog.html">Dialogs</a></li>
-                                <li><a href="popovers.html">Popovers</a></li>
-                                <li><a href="tooltips.html">Tooltips</a></li>
-                                <li><a href="dropdown.html">Dropdowns</a></li>
                             </ul>
                         </div>
                     </div>

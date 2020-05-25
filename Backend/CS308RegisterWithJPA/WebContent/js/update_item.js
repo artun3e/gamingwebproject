@@ -36,7 +36,7 @@ async function getData(value) {
 	
 	if(value == null){
 		alert("To Update Game, First You Need to Select Game.")
-		window.location.replace("data_table_Games.jsp");
+		window.location.replace("admin_Games_table.jsp");
 	}
 	const query = value.name[0];
 	const url = '/CS308RegisterWithJPA/search/fromDB/byName/' + query;
