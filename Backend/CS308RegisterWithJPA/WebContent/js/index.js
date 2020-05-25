@@ -1,4 +1,4 @@
-function addToCart(game){	
+	function addToCart(game){	
 	var child = game.parentElement.parentElement;
 	var itemName = child.getElementsByClassName("product-name")[0].getElementsByTagName('a')[0].innerText;
 	//console.log(itemName);

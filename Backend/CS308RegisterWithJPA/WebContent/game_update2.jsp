@@ -1,40 +1,28 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java"
-		 pageEncoding="UTF-8"%>
-<%@ page import="java.util.*"%>
-<%@ page import="cs308.sabanciuniv.edu.User"%>
-<%@ page import="cs308.sabanciuniv.edu.Games"%>
-<%@ page import="cs308.sabanciuniv.edu.GamesManager"%>
-<%@ page import="cs308.sabanciuniv.edu.Order"%>
-<!DOCTYPE html>
-
-
+<html>
 <head>
-	<link rel="stylesheet" href="./js_drop/dropdown.css">
-	<script src="./js_drop/dropdown.js"></script>
-	<script src="./js_drop/package.js"></script>
-	<script src="./js_drop/index.js"></script>
+    <title>multiple select</title>
+    <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 </head>
+
 <body>
-	<select name="skills" multiple="" class="ui fluid dropdown">
-		<option value="">Skills</option>
-		<option value="angular">Angular</option>
-		<option value="css">CSS</option>
-		<option value="design">Graphic Design</option>
-		<option value="ember">Ember</option>
-		<option value="html">HTML</option>
-		<option value="ia">Information Architecture</option>
-		<option value="javascript">Javascript</option>
-		<option value="mech">Mechanical Engineering</option>
-		<option value="meteor">Meteor</option>
-		<option value="node">NodeJS</option>
-		<option value="plumbing">Plumbing</option>
-		<option value="python">Python</option>
-		<option value="rails">Rails</option>
-		<option value="react">React</option>
-		<option value="repair">Kitchen Repair</option>
-		<option value="ruby">Ruby</option>
-		<option value="ui">UI Design</option>
-		<option value="ux">User Experience</option>
-	</select>
+<p>Multiple select example</p>
+	<div class="selectRow">
+	    <!--     Using data-placeholder below to set place holder value versus putting in configuration-->
+	    <select class="" id="multipleSelectExample" data-placeholder="Select an option" multiple="">
+	        <option selected="1" value="1">Option 1</option>
+	        <option value="2">Option 2</option>
+	        <option value="3">Option 3</option>
+	        <option value="4">Option 4</option>
+	        <option value="5">Option 5</option>
+	    </select>
+	</div>
 </body>
+<script>
+    $(document).ready(function () {
+            $('#multipleSelectExample').select2();
+            
+	});
+</script>
 </html>

@@ -23,7 +23,7 @@ var list = new Array;
 async function getData(value) {
 	
 	if(value == null){
-		alert("To Update Game, First You Need to Select Game.")
+		alert("To Update Category, First You Need to Select Category.")
 		window.location.replace("data_table_Cats.jsp");
 	}
 }
@@ -47,6 +47,12 @@ $(document).ready(function() {
 			var params = "oldcategory="+parsed.name[0]+"&newCategory="+document.getElementById('name').value;
 			console.log(params);
 			xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xhr.addEventListener('readystatechange', function (e) {
+		        if(this.readyState === 4 )
+		        {
+					alert("Item has been updated!!!");
+		        }
+	        });
 			xhr.send(params);
 		}
 	});

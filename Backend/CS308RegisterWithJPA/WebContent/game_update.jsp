@@ -14,6 +14,7 @@
 		  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	
 	<title>Admin Panel</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -70,19 +71,12 @@
 	<!-- responsive CSS
             ============================================ -->
 	<link rel="stylesheet" href="./css3/responsive.css">
-	<!-- modernizr JS
-            ============================================ -->
-	<script src="./js3/vendor/modernizr-2.8.3.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-			integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-			crossorigin="anonymous"></script>
-	<script
-			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-			integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-			crossorigin="anonymous"></script>
+	
 	<script src="js/update_item.js"></script>
-	
-	
+	<script src="https://code.jquery.com/jquery-3.4.0.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+	<script src="js/update_item_update.js"></script>
 </head>
 
 <body>
@@ -657,7 +651,6 @@
 					</p>
 					<div class="row justify-content-md-center" >
 						<div class="col-8" style="margin-left: 14px;">
-							<form action='UpdateProductServlet' method=POST>
 								<div class="form-group row" style="margin-left: 14px;">
 									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">Game ID:</label>
 									<div class="col-sm-10">
@@ -679,13 +672,19 @@
 								<div class="form-group row" style="margin-left: 14px;">
 									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">Categories: </label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" name="categories" id="categories" placeholder="Categories"/>
+										
+										<div class="selectRow" >
+										    <select class="" id="multipleSelectExample" data-placeholder="Select an option" multiple="" style="width: 745px;">
+										        <option selected=1 value="1">Option 1</option>
+										        <option value="2">Option 2</option>
+										        <option value="3">Option 3</option>
+										        <option value="4">Option 4</option>
+										        <option value="5">Option 5</option>
+										    </select>
+										</div>
 									</div>
+									
 								</div>
-								
-								
-								
-								
 								<div class="form-group row" style="margin-left: 14px;">
 									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">Price: </label>
 									<div class="col-sm-10">
@@ -740,13 +739,11 @@
 										<input type="text" class="form-control" name="platforms" id="platforms" placeholder="Platforms"/>
 									</div>
 								</div>
-								<button type="submit" class="btn btn-primary btn-block btn-lg"
-										name="edit">Update</button>
+								<button type="submit" class="btn btn-primary btn-block btn-lg" name="edit" id="update_button" >Update</button>
 
 								<a class='btn btn-success btn-block btn-lg' href="data_table_Games.jsp"
 								   style="margin-left: auto; margin-right: auto; display: block; margin-top: 5%; margin-bottom: 0%">Take
 									Me To The Games List</a>
-							</form>
 						</div>
 						<div class="col-3"></div>
 					</div>

@@ -1,3 +1,14 @@
+function removeA(arr) {
+    var what, a = arguments, L = a.length, ax;
+    while (L > 1 && arr.length) {
+        what = a[--L];
+        while ((ax= arr.indexOf(what)) !== -1) {
+            arr.splice(ax, 1);
+        }
+    }
+    return arr;
+}
+
 function parseURLParams(url) {
 	var queryStart = url.indexOf("?") + 1, queryEnd = url.indexOf("#") + 1
 		|| url.length + 1, query = url.slice(queryStart, queryEnd - 1), pairs = query
@@ -51,11 +62,30 @@ async function getData(value) {
 	var headerimage = document.getElementById('headerimage');
 	var platforms = document.getElementById('platforms');
 
-	console.log(data);
 	id.value = data[0].appID;
 	name.value = data[0].name;
 	publisher.value = data[0].publisher;
-	categories.value = data[0].categories.replace(/;/g, ',');
+	var cats_ =  data[0].categories.replace(/;/g, ',');
+	
+	const url_2 = '/CS308RegisterWithJPA/search/fromDB/getAllCategories/'
+	const response_2 = await
+		fetch(url_2);
+	const data_2 = await
+		response_2.json();
+	
+	
+	var catArr = cats_.split(',');
+	var str_html ="";
+	catArr.forEach(function (item, index) {
+		removeA(data_2, item);
+		str_html += "<option selected=1 value="+ item +">"+ item +"</option>";
+	});
+	data_2.forEach(function (item, index) {
+		str_html += "<option value="+ item +">"+ item +"</option>";
+	});
+	var options = document.getElementById('multipleSelectExample');
+	options.innerHTML = str_html;
+	
 	price.value = data[0].price + "$";
 	shortdescription.value = data[0].short_description;
 	detaileddescription.value = data[0].detailed_description;
@@ -85,39 +115,5 @@ var parsed = parseURLParams(window.location.href);
 getData(parsed);
 document.title = parsed.name[0];
 
-$(document).ready(function() {
-	
-	$(".add-to-cart-btn").click(function(e) {
-		console.log("add to cart button is clicked")
-		e.stopPropagation();
-		e.stopImmediatePropagation();
 
-		var child = $(this).parent().parent();
-		var itemName = document.getElementById("detail-name").innerText;
-		var quantity = document.getElementById("input-quantity").value;
 
-		if(quantity.length == 0){
-			var xhr = new XMLHttpRequest();
-			var url = "addtocart";
-			xhr.open("POST", url, true);
-			var params = 'itemName='+itemName;
-			console.log(params);
-			xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-			xhr.send(params);
-		}
-		else{
-			console.log(itemName);
-			console.log(quantity);
-			var xhr = new XMLHttpRequest();
-			var url = "addmultipletocart";
-			xhr.open("POST", url, true);
-			var params = 'gameName='+itemName+'&quantity='+quantity;
-			console.log(params);
-			xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-			xhr.send(params);
-		}
-
-	});
-});
