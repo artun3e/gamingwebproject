@@ -350,10 +350,45 @@
                 <div class="row" id="About_To_Change">
                     
 					<%
-					List<Games> myGames = (List<Games>)GamesManager.getRandomGames();
-		        	System.out.println("Getting Random Games in Index Page");
-	                for(Games game : myGames)
+					
+					
+					String pageNumber = (request.getQueryString());
+					if(pageNumber == null)
+						pageNumber = "p=1";
+					List<Games> myGames;
+		        	if(request.getSession().getAttribute("indexGames") == null){
+		        		myGames = (List<Games>)GamesManager.getRandomGames();
+		        		System.out.println("Getting Random Games in Index Page");
+		        		request.getSession().setAttribute("indexGames", myGames);
+		        	}
+		        		
+		        	else 
+		        	{
+		        		myGames = (List<Games>)request.getSession().getAttribute("indexGames");
+		        	}
+		        	int start=0, end=9;
+		        	if(pageNumber.equals("p=2")){
+		        		start = 9;
+		        		end = 18;
+		        	}
+		        	else if(pageNumber.equals("p=3")){
+		        		System.out.println("ifin icindeyim");
+		        		start = 18;
+		        		end = 27;
+		        	}
+		        	else if(pageNumber.equals("p=4")){
+		        		start = 27;
+		        		end = 36;
+		        	}
+		        	else if(pageNumber.equals("p=5")){
+		        		start = 36;
+		        		end = 45;
+		        	}
+		        		
+		        	
+	                for(int j=start; j<end; j++)
 	                {
+	                	Games game = myGames.get(j);
 	                	Random r = new Random();
 						Integer random = r.nextInt((30 - 20) + 1) + 20;
 	                	out.println("<div class=\"col-md-4 col-xs-6\">");
@@ -445,13 +480,46 @@
                         }
                     %>
                     <ul class="store-pagination" id="store-pagination">
-                        <li class="active"><a href="#" class="page_number_1" >1</a></li>
-                        <li><a href="#" class="page_number_2">2</a></li>
-                        <li><a href="#" class="page_number_3">3</a></li>
-                        <li><a href="#" class="page_number_4">4</a></li>
-                        <li><a href="#" class="page_number_5">5</a></li>
+                        <li><a href="index.jsp" class="page_number_1" >1</a></li>
+                        <li><a href="index.jsp?p=2" class="page_number_2">2</a></li>
+                        <li><a href="index.jsp?p=3" class="page_number_3">3</a></li>
+                        <li><a href="index.jsp?p=4" class="page_number_4">4</a></li>
+                        <li><a href="index.jsp?p=5" class="page_number_5">5</a></li>
                         <!-- <li><a href="#"><i class="fa fa-angle-right" style="margin-top: 14px;"></i></a></li> -->
                     </ul>
+                    <script>
+                    	if(window.location.href == "http://localhost:8080/CS308RegisterWithJPA/index.jsp"){
+                    		var page = document.querySelector("#store-pagination > li:nth-child(1)")
+                    		console.log(page);
+                    		page.setAttribute("class", "active")
+
+                    	}
+                			
+                    	else if(window.location.href == "http://localhost:8080/CS308RegisterWithJPA/index.jsp?p=2"){
+                    		var page = document.querySelector("#store-pagination > li:nth-child(2)")
+                    		page.setAttribute("class", "active")
+
+                    	}
+                    		
+                    	else if(window.location.href == "http://localhost:8080/CS308RegisterWithJPA/index.jsp?p=3"){
+                    		var page = document.querySelector("#store-pagination > li:nth-child(3)")
+                    		page.setAttribute("class", "active")
+                    		
+                    	}
+                    		
+                    	else if(window.location.href == "http://localhost:8080/CS308RegisterWithJPA/index.jsp?p=4"){
+                    		var page = document.querySelector("#store-pagination > li:nth-child(4)")
+                    		page.setAttribute("class", "active")
+
+                    	}
+                    		
+                    	else if(window.location.href == "http://localhost:8080/CS308RegisterWithJPA/index.jsp?p=5"){
+                    		var page = document.querySelector("#store-pagination > li:nth-child(5)")
+                    		page.setAttribute("class", "active")
+
+                    	}
+                    		
+                    </script>
                 </div>
                 <!-- /store bottom filter -->
             </div>
