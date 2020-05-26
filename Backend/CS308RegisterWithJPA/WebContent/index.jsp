@@ -111,6 +111,7 @@
                      <li class="dropdown" style="margin-left: 5%;">
                     	<a class="fa fa-shopping-cart" href="shoppingCart.jsp" style="font-size: 34px; color: grey;"></a>
                     </li>
+                    
                    	<%
                         if(session.getAttribute("user") != null)
                         {

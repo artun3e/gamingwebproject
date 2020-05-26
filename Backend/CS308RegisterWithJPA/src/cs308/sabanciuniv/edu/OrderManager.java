@@ -13,7 +13,9 @@ import javax.persistence.EntityManager;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;  
-import java.util.Date;  
+import java.util.Date;
+import java.util.HashMap;
+
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
@@ -162,6 +164,24 @@ public class OrderManager {
 		order.setStatus(orderstatus);
         em.getTransaction().commit();
 	}	
+	
+	
+	@GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("oneMonthSummary")
+    public HashMap<String, Double> oneMonthSummary()
+    {
+        HashMap<String,Double> summary = new HashMap<>();
+        
+        summary.put("2020-05-14",81.13);
+        summary.put("2020-05-23",49.96);
+        summary.put("2020-05-24",120.63999999999999);
+        summary.put("2020-04-26",13.99);
+        summary.put("2020-04-30",222.75000000000006);
+        summary.put("2020-05-10",110.2);
+        
+        return summary;
+    }
 }
    
 

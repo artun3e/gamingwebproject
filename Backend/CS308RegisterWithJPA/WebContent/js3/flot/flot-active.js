@@ -81,10 +81,44 @@
  /*----------------------------
  jQuery curvedLines
 ------------------------------ */
-
-    for (var d1 = [], i = 0; 10 >= i; i += 1) d1.push([i, parseInt(30 * Math.random())]);
-    for (var d2 = [], i = 0; 20 >= i; i += 1) d2.push([i, parseInt(30 * Math.random())]);
-    for (var d3 = [], i = 0; 10 >= i; i += 1) d3.push([i, parseInt(30 * Math.random())]);
+	
+	async function getData() {	
+		const url = '/CS308RegisterWithJPA/search/fromDB/oneMonthSummary/';
+		const response = await
+			fetch(url);
+		const data_2 = await
+			response.json();
+		
+		var string_data = JSON.stringify(data_2);
+		//console.log(string_data);
+		var parsed = JSON.parse(string_data);
+		//console.log(parsed);
+		//console.log(typeof data_2);
+		//console.log(parsed.length);
+		
+		for(var k in parsed) {
+			date.push(k);
+			total_money.push(parsed[k]);
+		}
+	}
+	var date = [];
+	var total_money = [];
+	getData();
+	
+	console.log(date);
+	console.log(total_money);
+	
+	console.log(total_money[0]);
+	
+    for (var d1 = [], i = 0; 5 >= i; i += 1){
+    	d1.push([i, 15]);
+    	//console.log(d1[i]);
+	}
+    console.log(d1);
+    for (var d2 = [], i = 0; 20 >= i; i += 1) 
+    	d2.push([i, 10]);
+    for (var d3 = [], i = 0; 5 >= i; i += 1) 
+    	d3.push([i, 1]);
     var options = {
         series: {
             shadowSize: 0,
@@ -119,7 +153,7 @@
         }
     };
     $("#curved-line-chart")[0] && $.plot($("#curved-line-chart"), [{
-        data: d1,
+        data: total_money,
         lines: {
             show: !0,
             fill: .98
