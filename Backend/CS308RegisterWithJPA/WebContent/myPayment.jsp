@@ -1,7 +1,9 @@
-<!DOCTYPE html>
-<!--[if IE 8]>          <html class="ie ie8"> <![endif]-->
-<!--[if IE 9]>          <html class="ie ie9"> <![endif]-->
-<!--[if gt IE 9]><!-->  
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ page import="java.util.*"%>
+<%@ page import="cs308.sabanciuniv.edu.User"%>
+<%@ page import="cs308.sabanciuniv.edu.Games"%>
+<%@ page import="cs308.sabanciuniv.edu.Order"%>
+<%@ page import="java.io.PrintWriter"%>
 <html> 
 	<!--<![endif]-->
     <head>
@@ -97,6 +99,21 @@
 </header>
             <!-- /Header --> 
  <!-- Main Section -->
+ <%
+                            	session = request.getSession();
+							    if(session.getAttribute("user") != null)
+							    {
+							        Object temp = session.getAttribute("user");
+							        User user = (User) temp;
+							        out.println("<h2>Welcome "+user.getName()+"</h2>");	//Admin
+							        
+							    }
+							    else
+							    {
+							          %><script> alert("You should be logged in to see this page.");
+							        window.location = "index.jsp";</script><%
+							    }
+							    %>
             <section id="main">
                 <div class="breadcrumb-wrapper">
                     <div class="pattern-overlay">
