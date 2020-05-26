@@ -229,24 +229,7 @@
                                          if (pw != cpw)
                                          	alert("Your passwords do not match!");
                                          
-                                    function updateInfo(){
-                                    	var name = document.querySelector("#name").value;
-                                    	var pw1 =document.querySelector("#npassword").value;
-                                    	var pw2 =document.querySelector("#cnewpassword").value;
-                                    	if (pw1 == pw2){
-                                    		var xhr = new XMLHttpRequest();
-                                    	    var url = "";//function is needed
-                                    	    xhr.open("POST", url, true);
-                                    		var params = 'name='+name+"&password="+pw1;
-                                    		console.log(params);
-                                    	    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                                    	    xhr.send(params);
-                                    		
-                                    	}
-                                    	else{
-                                    		alert("Your new passwords do not match please change them and try again!");
-                                    	}
-                                    }
+             
                                     }
                                    
                                     </script>
@@ -256,6 +239,29 @@
                                     </div>
                                 </div>
                             </div>
+                            <script>
+                            function updateInfo(){
+                            	console.log("icindeyim erkay");
+                            	var cpw =document.querySelector("#cpassword").value;
+                            	var name = document.querySelector("#name").value;
+                            	var pw1 =document.querySelector("#npassword").value;
+                            	var pw2 =document.querySelector("#cnewpassword").value;
+                            	if (pw1 == pw2){
+                            		var xhr = new XMLHttpRequest();
+                            	    var url = "UpdateUserServlet";//function is needed
+                            	    xhr.open("POST", url, true);
+                            	    
+                            	    var params = 'name='+name+'&cpassword='+cpw+'&npassword='+pw1;
+                            		console.log(params);
+                            	    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                            	    xhr.send(params);
+                            		
+                            	}
+                            	else{
+                            		alert("Your new passwords do not match please change them and try again!");
+                            	}
+                            }
+                            </script>
                             <!-- /Left Section -->
                             <!-- Sidebar -->
                             <div id="sidebar" class="sidebar col-sm-3 col-md-3 col-lg-3">
