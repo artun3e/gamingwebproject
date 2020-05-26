@@ -36,6 +36,19 @@
         <link rel="apple-touch-icon" sizes="114x114" href="img/ico/apple-touch-icon-114.png">
         <link rel="apple-touch-icon" sizes="144x144" href="img/ico/apple-touch-icon-144.png">
         <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <link rel="stylesheet"
+   href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+   integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+   crossorigin="anonymous">
+<link rel="stylesheet" href="css/register.css">
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
+<link type="text/css" rel="stylesheet" href="css/slick.css">
+<link type="text/css" rel="stylesheet" href="css/nouislider.min.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link type="text/css" rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/searchBar.css">
+<link rel="stylesheet" href="css/register.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <!--[if lt IE 9]>
         <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <script src="js/respond.min.js"></script>
@@ -48,10 +61,53 @@
         <!-- Wrap -->
         <div class="wrap">
             <!-- Header -->
-            <header id="header">
-                
-               
-            </header>
+            <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container" style="margin-right: center;">
+            <a class="navbar-brand" href="index.jsp" style="margin-top: 6px;"> <img src="img/logo.png" width="34" height="34" class="d-inline-block align-top" alt="" style="margin-top: -6px;"> Tech Market </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarNav" aria-controls="navbarNav"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+  					<li class="dropdown"><a class="nav-link" href="#" value="Action"></a></li>
+                    <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="Multiplayer"></a></li>
+                    <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="Sports"></a></li>
+                    <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="FPS"></a></li>
+                    <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="RPG"></a></li>
+                    <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="Strategy"></span></a>
+
+                    <li style="margin-left: 100%; margin-top: 12px;"><input id="search"  type="text" placeholder="What are you looking for?"  onkeydown="if (event.keyCode == 13) { search(); }"></li>
+                    <li class="dropdown" style="margin-left: 5%;">
+                    	<a class="fa fa-user" style="font-size: 34px; color: grey;"></a>
+
+                        <div class="dropdown-content">
+                        	<% 
+                        		session = request.getSession();
+                        		if(session.getAttribute("user") != null)
+	                        	{
+                        			/* out.println("<a href=\"#account\">Account</a>");
+                        			out.println("<a href=\"#liked\">Liked Ones</a>"); */
+                        			out.println("<a href=\"myOrders.jsp\">My Orders</a>");
+                        			out.println("<a onclick=\"Log_User_Out(this)\" href=\"#\">Logout</a>");
+	                        	}
+                        		else{
+                        			out.println("<a href=\"login.jsp\">Login</a>");
+                        			out.println("<a href=\"register.jsp\">Register</a>");
+                        		}
+                        	%>
+                        </div>
+                     </li>
+                     <li class="dropdown" style="margin-left: 5%;">
+                    	<a class="fa fa-shopping-cart" href="shoppingCart.jsp" style="font-size: 34px; color: grey;"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
             <!-- /Header --> 
             <section id="main">
                 <div class="breadcrumb-wrapper">
