@@ -27,8 +27,10 @@ public class User {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
 	private List<Order> orders;
 	
-	@Column(name = "payment_method")
+	@Column(name = "payment_method",nullable = true)
 	private String paymentMethod;
+	
+	@Column(nullable = true)
 	private String Address;
 	
 	public void setPaymentMethod(String payment_method) {
