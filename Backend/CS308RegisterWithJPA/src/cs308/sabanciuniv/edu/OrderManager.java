@@ -199,11 +199,22 @@ public class OrderManager {
 
 	}
 
+	public class denizIstedi
+	{
+		public String date;
+		public double profit;
+
+		denizIstedi(String date, double profit)
+		{
+			this.date = date;
+			this.profit = profit;
+		}
+	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("oneMonthSummary")
-	public HashMap<String,Double> oneMonthSummary()
+	public List<denizIstedi> oneMonthSummary()
 	{
 
 		Connection conn;
@@ -237,7 +248,7 @@ public class OrderManager {
 			}
 			for (LocalDate date = today30.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(); date.isBefore(LocalDate.now()); date = date.plusDays(1))
 			{
-				String formattedDate = date.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+				String formattedDate = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 				//System.out.println("formatted date is: " + formattedDate);
 				if(!summary.containsKey(formattedDate))
 				{
@@ -253,6 +264,16 @@ public class OrderManager {
 		conn = null;
 		ps = null;
 		rs = null;
-		return summary;
+
+		SortedSet<String> keys = new TreeSet<>(summary.keySet());
+		HashMap<String, Double> sortedSummary = new HashMap<>();
+		List<denizIstedi> sortedList = new ArrayList<>();
+ 		for (String key : keys) {
+ 			//System.out.println(key);
+ 			//System.out.println("_____________");
+			Double value = summary.get(key);
+			sortedList.add(new denizIstedi(key, value));
+		}
+		return sortedList;
 	}
 }
