@@ -1,5 +1,11 @@
 package cs308.sabanciuniv.edu;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.JsonParseException;
+//import com.fasterxml.jackson.annotation.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import javax.persistence.EntityManager;
 
 import java.text.ParseException;
@@ -22,13 +28,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-
 @Path("fromDB")
 public class OrderManager {
-	
-	@GET
+    @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("allOrders/")
+<<<<<<< HEAD
 	public List<Order> getAllOrders(){
 		  List<Order> allOrders = new ArrayList<Order>();
 		  try {
@@ -122,6 +127,28 @@ public class OrderManager {
 		}
 		return orders;
 	}
+=======
+    public List<Order> getAllOrders() {
+        List<Order> allOrders = new ArrayList<>();
+        try
+		{
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
+            EntityManager em = emf.createEntityManager();
+            allOrders = em.createQuery("Select e from Order e", Order.class).getResultList();
+
+            em.close();
+            emf.close();
+            em = null;
+            emf = null;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return allOrders;
+    }
+
+>>>>>>> d8024596d1d62f9ed1b3aad17d096361fde4fd54
 
 }
 

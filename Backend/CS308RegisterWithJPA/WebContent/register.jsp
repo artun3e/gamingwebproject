@@ -73,7 +73,7 @@
                         			/* out.println("<a href=\"#account\">Account</a>");
                         			out.println("<a href=\"#liked\">Liked Ones</a>"); */
 									%><script>alert("You can't access this page when you're logged in..."); window.location = "index.jsp"; </script><%
-                        			out.println("<a href=\"myOrders.jsp\">My Orders</a>");
+                        			out.println("<a href=\"myAccount.jsp\">My Account</a>");
                         			out.println("<a onclick=\"Log_User_Out(this)\" href=\"#\">Logout</a>");
 
 	                        	}
