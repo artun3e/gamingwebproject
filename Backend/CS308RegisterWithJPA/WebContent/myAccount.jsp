@@ -19,7 +19,7 @@
         <!-- Library CSS -->
         <link rel="stylesheet" href="css_myAccount/bootstrap.css">
         <link rel="stylesheet" href="css_myAccount/bootstrap-theme.css">
-        <link rel="stylesheet" href="css_myAccount/fonts/font-awesome/css_myAccount/font-awesome.css">
+       
         <link rel="stylesheet" href="css_myAccount/animations.css" media="screen">
         <link rel="stylesheet" href="css_myAccount/superfish.css" media="screen">
         <link rel="stylesheet" href="css_myAccount/team-member.css" media="screen">
@@ -34,11 +34,7 @@
         <link href="css_myAccount/switcher.css" rel="stylesheet">
         <link href="css_myAccount/spectrum.css" rel="stylesheet">
         <!-- Favicons -->
-        <link rel="shortcut icon" href="img/ico/favicon.ico">
-        <link rel="apple-touch-icon" href="img/ico/apple-touch-icon.png">
-        <link rel="apple-touch-icon" sizes="72x72" href="img/ico/apple-touch-icon-72.png">
-        <link rel="apple-touch-icon" sizes="114x114" href="img/ico/apple-touch-icon-114.png">
-        <link rel="apple-touch-icon" sizes="144x144" href="img/ico/apple-touch-icon-144.png">
+
         <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
 		<link rel="stylesheet"
 		   href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -228,17 +224,18 @@
                                          var cpw = document.getElementById("cnewpassword").value;
                                          if (pw != cpw)
                                          	alert("Your passwords do not match!");
-                                         
+                                    }
                                     function updateInfo(){
+                                    	
                                     	var name = document.querySelector("#name").value;
                                     	var cpw =document.querySelector("#cpassword").value;
                                     	var pw1 =document.querySelector("#npassword").value;
                                     	var pw2 =document.querySelector("#cnewpassword").value;
                                     	if (pw1 == pw2){
                                     		var xhr = new XMLHttpRequest();
-                                    	    var url = "";//function is needed
+                                    	    var url = "UpdateUserServlet";//function is needed
                                     	    xhr.open("POST", url, true);
-                                    		var params = 'name='+name+'&cpassword='+cp+'&npassword='+pw1;
+                                    		var params = 'name='+name+'&cpassword='+cpw+'&npassword='+pw1;
                                     		console.log(params);
                                     	    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                                     	    xhr.send(params);
@@ -248,8 +245,6 @@
                                     		alert("Your new passwords do not match please change them and try again!");
                                     	}
                                     }
-                                    }
-                                   
                                     </script>
                                     <div class="buttons-box clearfix">
                                         <button onclick="updateInfo()"class="btn btn-color">Save</button>
