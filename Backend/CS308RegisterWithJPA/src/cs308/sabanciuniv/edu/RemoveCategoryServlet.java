@@ -91,14 +91,20 @@ public class RemoveCategoryServlet extends HttpServlet {
 			while(rs.next())
 			{
 				String categoryString = rs.getString("categories");
+				System.out.println("CategoryString is: " + categoryString);
 				String[] arrayString = categoryString.split(";");
 				categoryString = "";
+				int count = 0;
 				for(String s : arrayString){
+					System.out.println("	"+ count+ ".)" + s);
 					if(!s.equals(toBeDeleted)){
 						categoryString += s + ";";
 					}
+					count++;
 				}
-				categoryString = categoryString.substring(0,categoryString.length()-1);
+				System.out.println("_________________________________");
+				if(categoryString.length()!= 0)
+					categoryString = categoryString.substring(0,categoryString.length()-1);
 				rs.updateString("categories",categoryString);
 				rs.updateString("steamspy_tags", categoryString);
 				rs.updateRow();

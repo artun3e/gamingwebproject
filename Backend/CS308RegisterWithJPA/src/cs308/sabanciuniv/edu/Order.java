@@ -1,5 +1,6 @@
 package cs308.sabanciuniv.edu;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -20,6 +21,7 @@ public class Order {
 	private String date;
 	@Enumerated(EnumType.STRING)
 	private orderStatus status;
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "User_Email")
 	private User owner;
@@ -63,6 +65,10 @@ public class Order {
 	}
 	public Order() {
 		//super();
+		this.products = new HashMap<>();
+	}
+	public Order(int id) {
+		this.id = id;
 		this.products = new HashMap<>();
 	}
 	public Order(String address, User owner){
@@ -111,4 +117,5 @@ public class Order {
 	public int hashCode() {
 		return id;
 	}
+
 }

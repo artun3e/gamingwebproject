@@ -11,9 +11,15 @@ import cs308.sabanciuniv.edu.Order.orderStatus;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import javax.persistence.EntityManager;
 
+import java.sql.*;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;  
-import java.util.Date;  
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+import java.util.Date;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
@@ -22,32 +28,58 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
 
 @Path("fromDB")
 public class OrderManager {
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("allOrders/")
     public List<Order> getAllOrders() {
+		Connection conn;
+		PreparedStatement ps;
+		ResultSet rs;
         List<Order> allOrders = new ArrayList<>();
         try
 		{
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
-            EntityManager em = emf.createEntityManager();
-            allOrders = em.createQuery("Select e from Order e", Order.class).getResultList();
-
-            em.close();
-            emf.close();
-            em = null;
-            emf = null;
+			conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
+			ps = conn.prepareStatement("select User.name as username,Orders.*, Games.header_image, Games.name, Orders_Games.Quantity, Games.price from Orders left join Orders_Games on Orders.id = Orders_Games.Order_id left join Games on Orders_Games.products_KEY = Games.appid left join User on Orders.User_Email = User.Email");
+			rs = ps.executeQuery();
+			while(rs.next()){
+				if(!allOrders.contains(new Order(rs.getInt("id")))){
+					Order temp = new Order(rs.getInt("id"));
+					temp.setAddress(rs.getString("address"));
+					temp.setDate(rs.getString("date"));
+					User user = new User();
+					user.setEmail(rs.getString("User_Email"));
+					user.setName(rs.getString("username"));
+					temp.setOwner(user);
+					String statusEnumValue = rs.getString("status");
+					Order.orderStatus statusEnum = orderStatus.valueOf(statusEnumValue);
+					temp.setStatus(statusEnum);
+					Games game = new Games();
+					game.setHeader_image(rs.getString("header_image"));
+					game.setName(rs.getString("name"));
+					game.setPrice(rs.getDouble("price"));
+					temp.addProduct(game,rs.getInt("Quantity"));
+					allOrders.add(temp);
+				}
+				else
+				{
+					int index = 0;
+					for(Order temp : allOrders)
+					{
+						if(temp.getId() == rs.getInt("id"))
+						{
+							Games game = new Games();
+							game.setHeader_image(rs.getString("header_image"));
+							game.setName(rs.getString("name"));
+							game.setPrice(rs.getDouble("price"));
+							temp.addProduct(game,rs.getInt("Quantity"));
+						}
+					}
+				}
+			}
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -151,17 +183,76 @@ public class OrderManager {
 	}
 
 	@GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("ChangeStatus/{OrderID}/{status}")
-	public void ChangeStatus(@PathParam("OrderID") String OrderID , @PathParam("status") String status) {
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("ChangeStatus/{OrderID}/{status}")
+	public void ChangeStatus(@PathParam("OrderID") String OrderID , @PathParam("status") String status){
+		int int_orderID = Integer.parseInt(OrderID);
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
-        EntityManager em = emf.createEntityManager();
-		Order order= em.find(Order.class, OrderID);
+		EntityManager em = emf.createEntityManager();
+		Order order= em.find(Order.class, int_orderID);
 		orderStatus orderstatus = orderStatus.valueOf(status);
-        em.getTransaction().begin();
+		em.getTransaction().begin();
 		order.setStatus(orderstatus);
-        em.getTransaction().commit();
-	}	
+		em.getTransaction().commit();
+
+	}
+
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("oneMonthSummary")
+	public HashMap<String,Double> oneMonthSummary()
+	{
+
+		Connection conn;
+		PreparedStatement ps;
+		ResultSet rs;
+		HashMap<String,Double> summary = new HashMap<>();
+		try {
+			conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
+			ps = conn.prepareStatement("select Orders.date, Games.price from Orders_Games left join Orders on Orders_Games.Order_id = Orders.id left join Games on Orders_Games.products_KEY = Games.appid where Order_id in (Select id from Orders WHERE date >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH))");
+			rs = ps.executeQuery();
+			//2020/04/26 18:22:28
+			Date today = new Date();
+			Calendar cal = new GregorianCalendar();
+			cal.setTime(today);
+			cal.add(Calendar.DAY_OF_MONTH, -30);
+			Date today30 = cal.getTime();
+			while(rs.next())
+			{
+				String monthAndDay = rs.getString("date").substring(0,10).replace("/","-");
+				Double price = rs.getDouble("price");
+				if(summary.containsKey(monthAndDay))
+				{
+					double oldPrice = summary.get(monthAndDay);
+					oldPrice += price;
+					summary.put(monthAndDay,oldPrice);
+				}
+				else
+				{
+					summary.put(monthAndDay,price);
+				}
+			}
+			for (LocalDate date = today30.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(); date.isBefore(LocalDate.now()); date = date.plusDays(1))
+			{
+				String formattedDate = date.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+				//System.out.println("formatted date is: " + formattedDate);
+				if(!summary.containsKey(formattedDate))
+				{
+					summary.put(formattedDate,0.0);
+				}
+			}
+			conn.close();
+			ps.close();
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		conn = null;
+		ps = null;
+		rs = null;
+		return summary;
+	}
 }
    
 
