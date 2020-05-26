@@ -33,23 +33,26 @@ public class OrderManager {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("allOrders/")
-<<<<<<< HEAD
-	public List<Order> getAllOrders(){
-		  List<Order> allOrders = new ArrayList<Order>();
-		  try {
-			    EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
-				EntityManager em = emf.createEntityManager();
-				allOrders = em.createQuery("Select * from Orders", Order.class).getResultList();
-				em.close();
-				emf.close();
-				em=null;
-				emf=null;
-		  }catch(Exception e){
-			  e.printStackTrace();
-		  }
-		  return allOrders;
-	}
-	
+    public List<Order> getAllOrders() {
+        List<Order> allOrders = new ArrayList<>();
+        try
+		{
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
+            EntityManager em = emf.createEntityManager();
+            allOrders = em.createQuery("Select e from Order e", Order.class).getResultList();
+
+            em.close();
+            emf.close();
+            em = null;
+            emf = null;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return allOrders;
+    }
+
 	//byName/{n}
 	// possible filters: date, e-mail, price , product
 	@GET
@@ -57,7 +60,6 @@ public class OrderManager {
     @Path("filteredOrders/{date}/{email}/{price}/{product}")
 	public List<Order> filteredOrders(@PathParam("date") String date , @PathParam("email") String email,
 			@PathParam("price") String price , @PathParam("product") String product){
-		
 		
 		OrderManager uselessOBJ = new OrderManager();
 		List<Order> orders = uselessOBJ.getAllOrders();
@@ -80,29 +82,23 @@ public class OrderManager {
 	}
 	
 	// I'm accepting date in the format of dd/MM/yyyy-dd/MM/yyyy where the part before - is the lower date constraint and the part after - is the upper date constraint. 
-	//the second date should be bigger
+	//the second date should be bigger (please)
 	private List<Order> DateConstraint(List<Order> orders,String date){
-		/*
-		  EXAMPLE USAGE OF DATE OBJECTS
-		  String sDate1="31/12/1998";  
-    	  Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);  
-          System.out.println(sDate1+"\t"+date1)
-		 */
 		String [] dates = date.split("-");
 		try {
 			Date lowerDate =new SimpleDateFormat("dd/MM/yyyy").parse(dates[0]);
 			Date upperDate =new SimpleDateFormat("dd/MM/yyyy").parse(dates[1]);
+			for(Order order : orders) {
+				Date our_date = new SimpleDateFormat("yyyy/MM/dd").parse(order.getDate()); // our database was this format, i might change the input if it can't compare properly but i think it will
+				// compare to returns 0 if dates are equal, a positive integer if the object calling it(ourdate) occurs after the parameter(lowerdate), negative otherwise
+				if(our_date.compareTo(lowerDate) < 0 || our_date.compareTo(upperDate) > 0) { // our date occurs before lowerdate or our date occurs after upperdate
+					orders.remove(order);
+				}
+			}
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}  
-		for(Order order : orders) {
-			Date our_date = new SimpleDateFormat("yyyy/MM/dd").parse(order.getDate());
-			if(our_date >= upperDate) {
-				orders.remove(order);
-			}
-		}
-		
+			}  
 		return orders;
 	}
 	
@@ -116,39 +112,41 @@ public class OrderManager {
 	}
 	
 	private List<Order> priceConstraint(List<Order> orders,String price){
-		return orders;
-	}
-	
-	private List<Order> productConstraint(List<Order> orders,String product){
+		String [] prices = price.split("-");
+		Double lowerprice = Double.parseDouble(prices[0]);
+		Double upperprice = Double.parseDouble(prices[1]);
 		for(Order order : orders) {
-			if(order.getOwner().getEmail() != product) {
+			double total_price = 0;
+			Map<Games, Integer> hashmap = order.getProducts();
+			for (Map.Entry mapElement : hashmap.entrySet()) {       // for each game in the order
+	            Games game = (Games) mapElement.getKey(); 
+	            double quantity = (double)mapElement.getValue(); 
+	            total_price = total_price + (game.getPrice() * quantity);
+	        }
+			if(total_price > upperprice || total_price < lowerprice){ // price doesn't fit our range so we remove the order
 				orders.remove(order);
 			}
 		}
 		return orders;
 	}
-=======
-    public List<Order> getAllOrders() {
-        List<Order> allOrders = new ArrayList<>();
-        try
-		{
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
-            EntityManager em = emf.createEntityManager();
-            allOrders = em.createQuery("Select e from Order e", Order.class).getResultList();
-
-            em.close();
-            emf.close();
-            em = null;
-            emf = null;
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-
-        }
-        return allOrders;
-    }
-
->>>>>>> d8024596d1d62f9ed1b3aad17d096361fde4fd54
-
+	
+	private List<Order> productConstraint(List<Order> orders,String product){
+		for(Order order : orders) {
+			boolean GameExists = false;
+			Map<Games, Integer> hashmap = order.getProducts();
+			for (Map.Entry mapElement : hashmap.entrySet()) {       // for each game in the order
+	            Games game = (Games) mapElement.getKey(); 
+	            if(product == game.getName()) {
+	            	GameExists = true;	// the desired game exists in our list of games so we will display the whole order
+	            }
+			}
+			if(!GameExists){ // game doesn't exist in this order so we delete the order
+				orders.remove(order);
+			}
+		}
+		return orders;
+	}
+	
 }
+   
 
