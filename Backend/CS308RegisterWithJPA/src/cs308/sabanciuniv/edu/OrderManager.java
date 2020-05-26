@@ -1,14 +1,9 @@
 package cs308.sabanciuniv.edu;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.core.JsonParseException;
-//import com.fasterxml.jackson.annotation.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import cs308.sabanciuniv.edu.Order.orderStatus;
 
-import com.fasterxml.jackson.databind.JsonMappingException;
+
 import javax.persistence.EntityManager;
 
 import java.text.ParseException;
@@ -16,20 +11,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;  
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 @Path("fromDB")
 public class OrderManager {
@@ -37,9 +26,12 @@ public class OrderManager {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("allOrders/")
     public List<Order> getAllOrders() {
+
         List<Order> allOrders = new ArrayList<>();
         try
 		{
+    		System.out.println("Returning all orders");
+
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
             EntityManager em = emf.createEntityManager();
             allOrders = em.createQuery("Select e from Order e", Order.class).getResultList();
@@ -65,20 +57,23 @@ public class OrderManager {
 			@PathParam("price") String price , @PathParam("product") String product){
 		
 		OrderManager uselessOBJ = new OrderManager();
-		List<Order> orders = uselessOBJ.getAllOrders();
 		
-		if(date != null) {
+		List<Order> orders = uselessOBJ.getAllOrders();
+		System.out.println("Time to filter orders");
+		if(!date.contentEquals("null")) {
+			System.out.println("filtering date");
 			orders = DateConstraint(orders,date);
 		}
-		if(email != null) {
+		if(!email.contentEquals("null")) {
+			System.out.println("filtering email");
 			orders = emailConstraint(orders , email);
-
 		}	
-		if(price != null) {
+		if(!price.contentEquals("null")) {
+			System.out.println("filtering price");
 			orders = priceConstraint(orders,price);
-
 		}
-		if(product != null) {
+		if(!product.contentEquals("null")) {
+			System.out.println("filtering product");
 			orders = productConstraint(orders,product);
 		}	
 		return orders;
@@ -153,14 +148,16 @@ public class OrderManager {
 	@GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("ChangeStatus/{OrderID}/{status}")
-	public void ChangeStatus(@PathParam("OrderID") String OrderID , @PathParam("status") String status) {
+	public void ChangeStatus(@PathParam("OrderID") String OrderID , @PathParam("status") String status){
+		int int_orderID = Integer.parseInt(OrderID);
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
         EntityManager em = emf.createEntityManager();
-		Order order= em.find(Order.class, OrderID);
+		Order order= em.find(Order.class, int_orderID);
 		orderStatus orderstatus = orderStatus.valueOf(status);
         em.getTransaction().begin();
 		order.setStatus(orderstatus);
         em.getTransaction().commit();
+        
 	}	
 }
    
