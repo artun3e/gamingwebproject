@@ -194,7 +194,7 @@
                                                 <a href="myAddress.jsp"><i class="fa fa-pencil-square-o item-icon"></i>Address Book</a>
                                             </li>
                                             <li>
-                                                <a href="myOrders.html"><i class="fa fa-shopping-cart item-icon"></i>My Orders</a>
+                                                <a href="myOrdersss.jsp"><i class="fa fa-shopping-cart item-icon"></i>My Orders</a>
                                             </li>
                                         </ul>
                                     </div>
