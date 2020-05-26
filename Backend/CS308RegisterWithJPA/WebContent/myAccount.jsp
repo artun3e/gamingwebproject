@@ -98,9 +98,8 @@
                         		session = request.getSession();
                         		if(session.getAttribute("user") != null)
 	                        	{
-                        			/* out.println("<a href=\"#account\">Account</a>");
-                        			out.println("<a href=\"#liked\">Liked Ones</a>"); */
-                        			out.println("<a href=\"myOrders.jsp\">My Orders</a>");
+                        			
+                        			out.println("<a href=\"myAccount.jsp\">My Account</a>");
                         			out.println("<a onclick=\"Log_User_Out(this)\" href=\"#\">Logout</a>");
 	                        	}
                         		else{
@@ -178,18 +177,23 @@
                                             <ul class="list-unstyled">
                                                 <li>
                                                     <div class="form-group">
-                                                        <label for="fname">First Name <span class="required">*</span></label>
-                                                        <input type="text" name="fname" id="fname" class="form-control" placeholder="Mr.">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="lname">Last Name <span class="required">*</span></label>
-                                                        <input type="text" name="lname" id="lname" class="form-control" placeholder="Atiar">
+                                                        <label for="name"> Name <span class="required">*</span></label>
+														<% 
+                                                    	Object temp = session.getAttribute("user");
+                         							    User user = (User) temp;
+                         							    String name = user.getName();
+                                                        out.println("<input type='text' name='name' id='name' class='form-control' placeholder='Mr.' value='"+name+"'>" ); 
+                                                        %>
+                                                        
                                                     </div>
                                                 </li>
                                                 <li>
                                                     <div class="form-group">
                                                         <label for="emailAddress">Email Address <span class="required">*</span></label>
-                                                        <input type="email" name="email" id="emailAddress" class="form-control" placeholder="mr-atiar@example.com">
+                                                        <%
+                         							    String email = user.getEmail();
+                                                       	out.println("<input type='email' name='email' id='emailAddress' class='form-control' value='"+email+"'>");                                            
+                                                       	%>
                                                     </div>
                                                 </li>
                                             </ul>
@@ -212,14 +216,42 @@
                                                 <li>
                                                     <div class="form-group">
                                                         <label for="cnewpassword">Confirm New Password <span class="required">*</span></label>
-                                                        <input type="password" name="cnewpassword" id="cnewpassword" class="form-control">
+                                                        <input type="password" name="cnewpassword" onblur="validate()" id="cnewpassword" class="form-control">
                                                     </div>
                                                 </li>
                                             </ul>
                                         </div>
                                     </div>
+                                    <script>
+                                    function validate(){
+                                    	 var pw = document.getElementById("npassword").value;
+                                         var cpw = document.getElementById("cnewpassword").value;
+                                         if (pw != cpw)
+                                         	alert("Your passwords do not match!");
+                                         
+                                    function updateInfo(){
+                                    	var name = document.querySelector("#name").value;
+                                    	var pw1 =document.querySelector("#npassword").value;
+                                    	var pw2 =document.querySelector("#cnewpassword").value;
+                                    	if (pw1 == pw2){
+                                    		var xhr = new XMLHttpRequest();
+                                    	    var url = "";//function is needed
+                                    	    xhr.open("POST", url, true);
+                                    		var params = 'name='+name+"&password="+pw1;
+                                    		console.log(params);
+                                    	    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                                    	    xhr.send(params);
+                                    		
+                                    	}
+                                    	else{
+                                    		alert("Your new passwords do not match please change them and try again!");
+                                    	}
+                                    }
+                                    }
+                                   
+                                    </script>
                                     <div class="buttons-box clearfix">
-                                        <button class="btn btn-color">Save</button>
+                                        <button onclick="updateInfo()"class="btn btn-color">Save</button>
                                         <span class="required pull-right"><b>*</b> Required Field</span>
                                     </div>
                                 </div>
