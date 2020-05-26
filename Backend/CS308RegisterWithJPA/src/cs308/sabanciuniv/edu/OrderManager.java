@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonParseException;
 //import com.fasterxml.jackson.annotation.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import cs308.sabanciuniv.edu.Order.orderStatus;
+
 import com.fasterxml.jackson.databind.JsonMappingException;
 import javax.persistence.EntityManager;
 
@@ -146,6 +149,19 @@ public class OrderManager {
 		}
 		return orders;
 	}
+
+	@GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("ChangeStatus/{OrderID}/{status}")
+	public void ChangeStatus(@PathParam("OrderID") String OrderID , @PathParam("status") String status) {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
+        EntityManager em = emf.createEntityManager();
+		Order order= em.find(Order.class, OrderID);
+		orderStatus orderstatus = orderStatus.valueOf(status);
+        em.getTransaction().begin();
+		order.setStatus(orderstatus);
+        em.getTransaction().commit();
+	}	
 	
 }
    
