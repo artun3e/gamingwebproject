@@ -1,6 +1,10 @@
 package cs308.sabanciuniv.edu;
 
 import javax.persistence.EntityManager;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;  
+import java.util.Date;  
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
@@ -26,71 +30,98 @@ public class OrderManager {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("allOrders/")
 	public List<Order> getAllOrders(){
-		  List<Order> resultList = new ArrayList<Order>();
-		  
+		  List<Order> allOrders = new ArrayList<Order>();
 		  try {
-			  
-			  Connection conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
-	          PreparedStatement ps = conn.prepareStatement("Select * from Orders");
-	          ResultSet rs = ps.executeQuery();
-	          
-	          
-	          while (rs.next()) 
-	          {
-	        	  
-	          Order obj = new Order();
-	          obj.setId(rs.getInt("id"));
-	          obj.setAddress(rs.getString("address"));
-	          obj.setDate(rs.getString("date"));
-	          
-	          User user = new User();
-	          // fetch user from email
-	          String email = rs.getString("User_Email");
-	          PreparedStatement getuser = conn.prepareStatement("Select * from Users Where Email = "+email+" ");
-	          ResultSet userRs = getuser.executeQuery();
-	          // fill user 
-	          while(userRs.next()){
-	        	  user.setName(userRs.getString("name"));
-	        	  user.setEmail(email);
-	        	  user.setPassword(userRs.getString("password"));
-	        	  String userType = userRs.getString("user_type");
-	        	  //below code is fucking retarded
-	        	  if(userType == "Admin")
-	        		  user.setUserType(User.userType.Admin);
-	        	  else if(userType == "User")
-	        		  user.setUserType(User.userType.User);
-	        	  else if(userType == "SalesManager")
-	        		  user.setUserType(User.userType.SalesManager);
-	        	  else
-	        		  user.setUserType(User.userType.ProductManager);
-	        	  //user.setUserType();
-	          }
-	          obj.setOwner(user);
-	          
-	          Map<Games, Integer> products; // get the names
-	          
-	          PreparedStatement games = conn.prepareStatement("Select * from Games Where Email = "+email+" ");
-	          ResultSet gamers = getuser.executeQuery();
-	          
-	          /*
-	           * TODO
-	           * Get games using appid from orders_games table with below algorithm
-	           * use the id to get product_key from the orders_games table which is the
-	           * equivalent to appid in Games table -> update the map as game and how many games are there
-	           * complete obj(Order variable) by using setters.
-	           * Do not forget to close the CONNECTIONS!!!!	
-	           */
-	          
-	          }
-			  
+			    EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
+				EntityManager em = emf.createEntityManager();
+				allOrders = em.createQuery("Select * from Orders", Order.class).getResultList();
+				em.close();
+				emf.close();
+				em=null;
+				emf=null;
 		  }catch(Exception e){
 			  e.printStackTrace();
-			  
 		  }
-		  
-		  
-		  return resultList;
+		  return allOrders;
 	}
 	
+	//byName/{n}
+	// possible filters: date, e-mail, price , product
+	@GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("filteredOrders/{date}/{email}/{price}/{product}")
+	public List<Order> filteredOrders(@PathParam("date") String date , @PathParam("email") String email,
+			@PathParam("price") String price , @PathParam("product") String product){
+		
+		
+		OrderManager uselessOBJ = new OrderManager();
+		List<Order> orders = uselessOBJ.getAllOrders();
+		
+		if(date != null) {
+			orders = DateConstraint(orders,date);
+		}
+		if(email != null) {
+			orders = emailConstraint(orders , email);
+
+		}	
+		if(price != null) {
+			orders = priceConstraint(orders,price);
+
+		}
+		if(product != null) {
+			orders = productConstraint(orders,product);
+		}	
+		return orders;
+	}
+	
+	// I'm accepting date in the format of dd/MM/yyyy-dd/MM/yyyy where the part before - is the lower date constraint and the part after - is the upper date constraint. 
+	//the second date should be bigger
+	private List<Order> DateConstraint(List<Order> orders,String date){
+		/*
+		  EXAMPLE USAGE OF DATE OBJECTS
+		  String sDate1="31/12/1998";  
+    	  Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);  
+          System.out.println(sDate1+"\t"+date1)
+		 */
+		String [] dates = date.split("-");
+		try {
+			Date lowerDate =new SimpleDateFormat("dd/MM/yyyy").parse(dates[0]);
+			Date upperDate =new SimpleDateFormat("dd/MM/yyyy").parse(dates[1]);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+		for(Order order : orders) {
+			Date our_date = new SimpleDateFormat("yyyy/MM/dd").parse(order.getDate());
+			if(our_date >= upperDate) {
+				orders.remove(order);
+			}
+		}
+		
+		return orders;
+	}
+	
+	private List<Order> emailConstraint(List<Order> orders, String email){
+		for(Order order : orders) {
+			if(order.getOwner().getEmail() != email) {
+				orders.remove(order);
+			}
+		}
+		return orders;
+	}
+	
+	private List<Order> priceConstraint(List<Order> orders,String price){
+		return orders;
+	}
+	
+	private List<Order> productConstraint(List<Order> orders,String product){
+		for(Order order : orders) {
+			if(order.getOwner().getEmail() != product) {
+				orders.remove(order);
+			}
+		}
+		return orders;
+	}
 
 }
+
