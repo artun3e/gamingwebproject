@@ -95,7 +95,7 @@
 	                        	{
                         			/* out.println("<a href=\"#account\">Account</a>");
                         			out.println("<a href=\"#liked\">Liked Ones</a>"); */
-                        			out.println("<a href=\"myOrders.jsp\">My Orders</a>");
+                        			out.println("<a href=\"myAccount.jsp\">My Account</a>");
                         			out.println("<a onclick=\"Log_User_Out(this)\" href=\"#\">Logout</a>");
 	                        	}
                         		else{
