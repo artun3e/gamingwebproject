@@ -231,13 +231,14 @@
                                          
                                     function updateInfo(){
                                     	var name = document.querySelector("#name").value;
+                                    	var cpw =document.querySelector("#cpassword").value;
                                     	var pw1 =document.querySelector("#npassword").value;
                                     	var pw2 =document.querySelector("#cnewpassword").value;
                                     	if (pw1 == pw2){
                                     		var xhr = new XMLHttpRequest();
                                     	    var url = "";//function is needed
                                     	    xhr.open("POST", url, true);
-                                    		var params = 'name='+name+"&password="+pw1;
+                                    		var params = 'name='+name+'&cpassword='+cp+'&npassword='+pw1;
                                     		console.log(params);
                                     	    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                                     	    xhr.send(params);
