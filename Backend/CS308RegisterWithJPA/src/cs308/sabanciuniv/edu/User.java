@@ -3,6 +3,8 @@ package cs308.sabanciuniv.edu;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonParseException;
 //import com.fasterxml.jackson.annotation.JsonMappingException;
@@ -21,12 +23,14 @@ public class User {
 	private String email;
 	private String password;
 
-	@JsonIgnore
+	@JsonBackReference
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
 	private List<Order> orders;
 	
-	@Column(name = "payment_method")
+	@Column(name = "payment_method",nullable = true)
 	private String paymentMethod;
+	
+	@Column(nullable = true)
 	private String Address;
 	
 	public void setPaymentMethod(String payment_method) {
