@@ -3,7 +3,11 @@ package cs308.sabanciuniv.edu;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.JsonParseException;
+//import com.fasterxml.jackson.annotation.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.JsonMappingException;
 
 @Entity
 public class User {
@@ -16,6 +20,8 @@ public class User {
 	@Column(name="Email")
 	private String email;
 	private String password;
+
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
 	private List<Order> orders;
 	
