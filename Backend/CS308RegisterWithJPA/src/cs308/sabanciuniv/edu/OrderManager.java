@@ -162,7 +162,6 @@ public class OrderManager {
 		order.setStatus(orderstatus);
         em.getTransaction().commit();
 	}	
-	
 }
    
 
