@@ -1,9 +1,14 @@
 package cs308.sabanciuniv.edu;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.JsonParseException;
+//import com.fasterxml.jackson.annotation.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import cs308.sabanciuniv.edu.Order.orderStatus;
 
-
+import com.fasterxml.jackson.databind.JsonMappingException;
 import javax.persistence.EntityManager;
 
 import java.sql.*;
@@ -17,17 +22,12 @@ import java.util.*;
 import java.util.Date;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-<<<<<<< HEAD
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-=======
->>>>>>> 7f9f9b9971555ff2e5d125c4cb3c6cbbbb5018b8
 
 @Path("fromDB")
 public class OrderManager {
@@ -36,22 +36,6 @@ public class OrderManager {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("allOrders/")
     public List<Order> getAllOrders() {
-<<<<<<< HEAD
-
-        List<Order> allOrders = new ArrayList<>();
-        try
-		{
-    		System.out.println("Returning all orders");
-
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
-            EntityManager em = emf.createEntityManager();
-            allOrders = em.createQuery("Select e from Order e", Order.class).getResultList();
-
-            em.close();
-            emf.close();
-            em = null;
-            emf = null;
-=======
 		Connection conn;
 		PreparedStatement ps;
 		ResultSet rs;
@@ -96,7 +80,6 @@ public class OrderManager {
 					}
 				}
 			}
->>>>>>> 7f9f9b9971555ff2e5d125c4cb3c6cbbbb5018b8
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -114,9 +97,8 @@ public class OrderManager {
 			@PathParam("price") String price , @PathParam("product") String product){
 		
 		OrderManager uselessOBJ = new OrderManager();
-		
 		List<Order> orders = uselessOBJ.getAllOrders();
-		System.out.println("Time to filter orders");
+		
 		if(!date.contentEquals("null")) {
 			System.out.println("filtering date");
 			orders = DateConstraint(orders,date);
@@ -203,30 +185,16 @@ public class OrderManager {
 	}
 
 	@GET
-<<<<<<< HEAD
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("ChangeStatus/{OrderID}/{status}")
-	public void ChangeStatus(@PathParam("OrderID") String OrderID , @PathParam("status") String status){
-		int int_orderID = Integer.parseInt(OrderID);
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
-        EntityManager em = emf.createEntityManager();
-=======
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("ChangeStatus/{OrderID}/{status}")
 	public void ChangeStatus(@PathParam("OrderID") String OrderID , @PathParam("status") String status){
 		int int_orderID = Integer.parseInt(OrderID);
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
 		EntityManager em = emf.createEntityManager();
->>>>>>> 7f9f9b9971555ff2e5d125c4cb3c6cbbbb5018b8
 		Order order= em.find(Order.class, int_orderID);
 		orderStatus orderstatus = orderStatus.valueOf(status);
 		em.getTransaction().begin();
 		order.setStatus(orderstatus);
-<<<<<<< HEAD
-        em.getTransaction().commit();
-        
-	}	
-=======
 		em.getTransaction().commit();
 
 	}
@@ -287,7 +255,4 @@ public class OrderManager {
 		rs = null;
 		return summary;
 	}
->>>>>>> 7f9f9b9971555ff2e5d125c4cb3c6cbbbb5018b8
 }
-   
-
