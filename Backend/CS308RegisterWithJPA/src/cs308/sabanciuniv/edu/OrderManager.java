@@ -55,6 +55,7 @@ public class OrderManager {
 					String statusEnumValue = rs.getString("status");
 					Order.orderStatus statusEnum = orderStatus.valueOf(statusEnumValue);
 					temp.setStatus(statusEnum);
+					temp.setTotalCost(rs.getDouble("totalCost"));
 					Games game = new Games();
 					game.setHeader_image(rs.getString("header_image"));
 					game.setName(rs.getString("name"));
@@ -120,69 +121,92 @@ public class OrderManager {
 		return orders;
 	}
 	
-	// I'm accepting date in the format of dd/MM/yyyy-dd/MM/yyyy where the part before - is the lower date constraint and the part after - is the upper date constraint. 
+	// I'm accepting date in the format of dd-MM-yyyydd-MM-yyyy where the part before - is the lower date constraint and the part after - is the upper date constraint. 
 	//the second date should be bigger (please)
 	private List<Order> DateConstraint(List<Order> orders,String date){
-		String [] dates = date.split("-");
+		List<Order> toRemove = new ArrayList<>();
+		String [] dates = date.split("_");
 		try {
-			Date lowerDate =new SimpleDateFormat("dd/MM/yyyy").parse(dates[0]);
-			Date upperDate =new SimpleDateFormat("dd/MM/yyyy").parse(dates[1]);
+			Date lowerDate =new SimpleDateFormat("dd-MM-yyyy").parse(dates[0]);
+            Date upperDate =new SimpleDateFormat("dd-MM-yyyy").parse(dates[1]);
 			for(Order order : orders) {
 				Date our_date = new SimpleDateFormat("yyyy/MM/dd").parse(order.getDate()); // our database was this format, i might change the input if it can't compare properly but i think it will
 				// compare to returns 0 if dates are equal, a positive integer if the object calling it(ourdate) occurs after the parameter(lowerdate), negative otherwise
 				if(our_date.compareTo(lowerDate) < 0 || our_date.compareTo(upperDate) > 0) { // our date occurs before lowerdate or our date occurs after upperdate
-					orders.remove(order);
+					//orders.remove(order);
+					toRemove.add(order);
 				}
 			}
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			}  
+			} 
+		orders.removeAll(toRemove);
 		return orders;
 	}
+	
 	
 	private List<Order> emailConstraint(List<Order> orders, String email){
+	    List<Order> toRemove = new ArrayList<>();
+
 		for(Order order : orders) {
-			if(order.getOwner().getEmail() != email) {
-				orders.remove(order);
+			if(!order.getOwner().getEmail().contentEquals(email)) {
+				//orders.remove(order);
+				toRemove.add(order);
+
 			}
 		}
+		orders.removeAll(toRemove);
 		return orders;
 	}
-	
+    
+
 	private List<Order> priceConstraint(List<Order> orders,String price){
+        List<Order> toRemove = new ArrayList<>();
 		String [] prices = price.split("-");
 		Double lowerprice = Double.parseDouble(prices[0]);
 		Double upperprice = Double.parseDouble(prices[1]);
-		for(Order order : orders) {
+		/*for(Order order : orders) {
 			double total_price = 0;
 			Map<Games, Integer> hashmap = order.getProducts();
 			for (Map.Entry mapElement : hashmap.entrySet()) {       // for each game in the order
 	            Games game = (Games) mapElement.getKey(); 
-	            double quantity = (double)mapElement.getValue(); 
+	            int quantity = (int) mapElement.getValue(); 
 	            total_price = total_price + (game.getPrice() * quantity);
 	        }
+	    */
+		for(Order order : orders) {
+			Double total_price = order.getTotalCost();
 			if(total_price > upperprice || total_price < lowerprice){ // price doesn't fit our range so we remove the order
-				orders.remove(order);
+				//orders.remove(order); // uncomment this to see the ConcurrentModificationException :)
+				toRemove.add(order);
 			}
 		}
+		orders.removeAll(toRemove);
 		return orders;
 	}
 	
+	
+	
+	
 	private List<Order> productConstraint(List<Order> orders,String product){
+		List<Order> toRemove = new ArrayList<>();
 		for(Order order : orders) {
 			boolean GameExists = false;
 			Map<Games, Integer> hashmap = order.getProducts();
 			for (Map.Entry mapElement : hashmap.entrySet()) {       // for each game in the order
 	            Games game = (Games) mapElement.getKey(); 
-	            if(product == game.getName()) {
+	            if(game.getName().contentEquals(product)) {
 	            	GameExists = true;	// the desired game exists in our list of games so we will display the whole order
 	            }
 			}
 			if(!GameExists){ // game doesn't exist in this order so we delete the order
-				orders.remove(order);
+				//orders.remove(order);
+				toRemove.add(order);
+
 			}
 		}
+		orders.removeAll(toRemove);	
 		return orders;
 	}
 
@@ -198,7 +222,6 @@ public class OrderManager {
 		em.getTransaction().begin();
 		order.setStatus(orderstatus);
 		em.getTransaction().commit();
-
 	}
 
 	public class denizIstedi
