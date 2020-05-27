@@ -43,7 +43,7 @@ public class OrderManager {
         try
 		{
 			conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
-			ps = conn.prepareStatement("select User.name as username,Orders.*, Games.header_image, Games.name, Orders_Games.Quantity, Games.price from Orders left join Orders_Games on Orders.id = Orders_Games.Order_id left join Games on Orders_Games.products_KEY = Games.appid left join User on Orders.User_Email = User.Email");
+			ps = conn.prepareStatement("select Games.appid as appid,User.name as username,Orders.*, Games.header_image, Games.name, Orders_Games.Quantity, Games.price from Orders left join Orders_Games on Orders.id = Orders_Games.Order_id left join Games on Orders_Games.products_KEY = Games.appid left join User on Orders.User_Email = User.Email");
 			rs = ps.executeQuery();
 			while(rs.next()){
 				if(!allOrders.contains(new Order(rs.getInt("id")))){
@@ -61,21 +61,25 @@ public class OrderManager {
 					game.setHeader_image(rs.getString("header_image"));
 					game.setName(rs.getString("name"));
 					game.setPrice(rs.getDouble("price"));
+					game.setAppID(rs.getInt("appid"));
 					temp.addProduct(game,rs.getInt("Quantity"));
 					allOrders.add(temp);
 				}
 				else
 				{
 					int index = 0;
-					for(Order temp : allOrders)
+					for(int i = 0; i < allOrders.size(); i++)
 					{
+						Order temp = allOrders.get(i);
 						if(temp.getId() == rs.getInt("id"))
 						{
 							Games game = new Games();
 							game.setHeader_image(rs.getString("header_image"));
 							game.setName(rs.getString("name"));
 							game.setPrice(rs.getDouble("price"));
+							game.setAppID(rs.getInt("appid"));
 							temp.addProduct(game,rs.getInt("Quantity"));
+							allOrders.set(i, temp);
 						}
 					}
 				}
