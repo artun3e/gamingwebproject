@@ -41,11 +41,12 @@ public class OrderManager {
         try
 		{
 			conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
-			ps = conn.prepareStatement("select Games.appid as appid,User.name as username,Orders.*, Games.header_image, Games.name, Orders_Games.Quantity, Games.price from Orders left join Orders_Games on Orders.id = Orders_Games.Order_id left join Games on Orders_Games.products_KEY = Games.appid left join User on Orders.User_Email = User.Email");
+			ps = conn.prepareStatement("select Games.appid as appid,User.name as username,Orders.*, Games.header_image, Games.name, Orders_Games.Quantity, Games.price, Orders_Games_Prices.Price as priceAtThatTime from Orders left join Orders_Games on Orders.id = Orders_Games.Order_id left join Games on Orders_Games.products_KEY = Games.appid left join User on Orders.User_Email = User.Email inner join Orders_Games_Prices on (Orders_Games_Prices.pricesAtThatTime_KEY = Games.appid and Orders_Games_Prices.Order_id = Orders.id)");
 			rs = ps.executeQuery();
 			while(rs.next()){
 				if(!allOrders.contains(new Order(rs.getInt("id")))){
 					Order temp = new Order(rs.getInt("id"));
+					Map<Games, Double> pricesAtThatTime = new HashMap<>();
 					temp.setAddress(rs.getString("address"));
 					temp.setDate(rs.getString("date"));
 					User user = new User();
@@ -62,6 +63,8 @@ public class OrderManager {
 					game.setPrice(rs.getDouble("price"));
 					game.setAppID(rs.getInt("appid"));
 					temp.addProduct(game,rs.getInt("Quantity"));
+					pricesAtThatTime.put(game,rs.getDouble("priceAtThatTime"));
+					temp.setPricesAtThatTime(pricesAtThatTime);
 					allOrders.add(temp);
 				}
 				else
@@ -78,6 +81,9 @@ public class OrderManager {
 							game.setPrice(rs.getDouble("price"));
 							game.setAppID(rs.getInt("appid"));
 							temp.addProduct(game,rs.getInt("Quantity"));
+							Map<Games, Double> pricesAtThatTime = temp.getPricesAtThatTime();
+							pricesAtThatTime.put(game,rs.getDouble("priceAtThatTime"));
+							temp.setPricesAtThatTime(pricesAtThatTime);
 							allOrders.set(i, temp);
 						}
 					}
