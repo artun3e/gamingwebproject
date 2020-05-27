@@ -80,7 +80,10 @@ public class OrderServlet extends HttpServlet {
 						temp.reduceFromStock(Integer.parseInt(itemQuantities[countingVariable]));
 						em.merge(temp);
 						em.getTransaction().commit();
-						totalCost += (temp.getPrice()*Integer.parseInt(itemQuantities[countingVariable]));
+						if(temp.isOnSale())
+							totalCost += (temp.getSalePrice()*Integer.parseInt(itemQuantities[countingVariable]));
+						else
+							totalCost += (temp.getPrice()*Integer.parseInt(itemQuantities[countingVariable]));
 					}
 					catch(NoResultException e)
 					{
