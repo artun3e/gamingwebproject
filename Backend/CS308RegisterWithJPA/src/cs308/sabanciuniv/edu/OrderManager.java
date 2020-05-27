@@ -210,19 +210,7 @@ public class OrderManager {
 		return orders;
 	}
 
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("ChangeStatus/{OrderID}/{status}")
-	public void ChangeStatus(@PathParam("OrderID") String OrderID , @PathParam("status") String status){
-		int int_orderID = Integer.parseInt(OrderID);
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
-		EntityManager em = emf.createEntityManager();
-		Order order= em.find(Order.class, int_orderID);
-		orderStatus orderstatus = orderStatus.valueOf(status);
-		em.getTransaction().begin();
-		order.setStatus(orderstatus);
-		em.getTransaction().commit();
-	}
+	
 
 	public class denizIstedi
 	{
