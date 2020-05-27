@@ -9,7 +9,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import cs308.sabanciuniv.edu.Order.orderStatus;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
-import javax.persistence.EntityManager;
+
+import javax.persistence.*;
 
 import java.sql.*;
 import java.text.ParseException;
@@ -20,9 +21,6 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.Date;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -227,7 +225,8 @@ public class OrderManager {
 		HashMap<String,Double> summary = new HashMap<>();
 		try {
 			conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
-			ps = conn.prepareStatement("select Orders.date, Games.price from Orders_Games left join Orders on Orders_Games.Order_id = Orders.id left join Games on Orders_Games.products_KEY = Games.appid where Order_id in (Select id from Orders WHERE date >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH))");
+			//ps = conn.prepareStatement("select Orders.date, Games.price from Orders_Games left join Orders on Orders_Games.Order_id = Orders.id left join Games on Orders_Games.products_KEY = Games.appid where Order_id in (Select id from Orders WHERE date >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH))");
+			ps = conn.prepareStatement("select Orders.date, Orders.totalCost from Orders where Orders.id in (Select id from Orders WHERE date >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH))");
 			rs = ps.executeQuery();
 			//2020/04/26 18:22:28
 			Date today = new Date();
@@ -238,7 +237,7 @@ public class OrderManager {
 			while(rs.next())
 			{
 				String monthAndDay = rs.getString("date").substring(0,10).replace("/","-");
-				Double price = rs.getDouble("price");
+				/*Double price = rs.getDouble("price");
 				if(summary.containsKey(monthAndDay))
 				{
 					double oldPrice = summary.get(monthAndDay);
@@ -248,6 +247,17 @@ public class OrderManager {
 				else
 				{
 					summary.put(monthAndDay,price);
+				}*/
+				Double totalCost = rs.getDouble("totalCost");
+				if(summary.containsKey(monthAndDay))
+				{
+					double oldPrice = summary.get(monthAndDay);
+					oldPrice += totalCost;
+					summary.put(monthAndDay,oldPrice);
+				}
+				else
+				{
+					summary.put(monthAndDay,totalCost);
 				}
 			}
 			for (LocalDate date = today30.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(); date.isBefore(LocalDate.now()); date = date.plusDays(1))
@@ -280,4 +290,44 @@ public class OrderManager {
 		}
 		return sortedList;
 	}
+/* DONT RUN THE BELOW CODE, IT WAS FOR FIXING THE TOTALCOSTS OF ORDERS.
+	@GET
+	@Path("fixOrderTotalCost")
+	public void fixOrderTotalCost()
+	{
+		EntityManagerFactory emf;
+		EntityManager em;
+
+		try
+		{
+			emf = Persistence.createEntityManagerFactory("cs308");
+			em = emf.createEntityManager();
+
+			List<Order> allOrders = em.createQuery("Select e from Order e", Order.class).getResultList();
+			for(Order o : allOrders)
+			{
+				em.getTransaction().begin();
+				double totalCost = 0;
+				Map<Games, Integer> products = o.getProducts();
+				for(Games game : products.keySet())
+				{
+					totalCost += (game.getPrice()*products.get(game));
+				}
+				o.setTotalCost(totalCost);
+				em.merge(o);
+				em.getTransaction().commit();
+			}
+
+			emf.close();
+			em.close();
+
+			emf = null;
+			em = null;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
+
+	}*/
 }

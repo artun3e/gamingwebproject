@@ -19,6 +19,8 @@ public class Order {
 	private int id;
 	private String address;
 	private String date;
+	@Column(name = "totalCost" ,columnDefinition = "double")
+	private double totalCost;
 	@Enumerated(EnumType.STRING)
 	private orderStatus status;
 	@JsonManagedReference
@@ -111,6 +113,15 @@ public class Order {
 
 	public void setStatus(orderStatus status) {
 		this.status = status;
+	}
+
+
+	public double getTotalCost() {
+		return totalCost;
+	}
+
+	public void setTotalCost(double totalCost) {
+		this.totalCost = totalCost;
 	}
 
 	@Override

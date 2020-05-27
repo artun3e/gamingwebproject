@@ -13,6 +13,12 @@ public class Games {
 	//'required_age', 'categories', 'genres', A'steamspy_tags',
 	//'number_of_players', 'price', 'rating'],
 
+	@Column(name = "onSale", columnDefinition = "tinyint(1) default 0")
+	private boolean onSale;
+	@Column(name = "stock", columnDefinition = "int default 100")
+	private int stock;
+	@Column(name = "salePrice")
+	private double salePrice;
 	private String name;
 	@Column(name = "release_date")
 	private String releaseDate;
@@ -201,6 +207,30 @@ public class Games {
 
 	public void setShort_description(String short_description) {
 		this.short_description = short_description;
+	}
+
+	public boolean isOnSale() {
+		return onSale;
+	}
+
+	public void setOnSale(boolean onSale) {
+		this.onSale = onSale;
+	}
+
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+
+	public double getSalePrice() {
+		return salePrice;
+	}
+
+	public void setSalePrice(double salePrice) {
+		this.salePrice = salePrice;
 	}
 
 	public Games(int appID, String name, String releaseDate, String developer, String publisher, String platforms, int requiredAge, String categories, String genres, String steampsyTags, String owners, double price, double rating, String header_image, String screenshots, String background, String minimum, String detailed_description, String about_the_game, String short_description) {
