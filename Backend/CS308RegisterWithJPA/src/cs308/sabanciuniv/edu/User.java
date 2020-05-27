@@ -23,10 +23,10 @@ public class User {
 	private String email;
 	private String password;
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+	@OneToMany( mappedBy = "user")
 	List<Address> addressList;
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+	@OneToMany(mappedBy = "user")
 	List<Payment> paymentList;
 
 	@JsonBackReference
