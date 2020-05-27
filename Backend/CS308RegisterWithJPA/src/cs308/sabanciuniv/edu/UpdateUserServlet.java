@@ -1,6 +1,8 @@
 package cs308.sabanciuniv.edu;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -62,25 +64,28 @@ public class UpdateUserServlet extends HttpServlet {
 			EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
 			EntityManager em = emf.createEntityManager();
 			
-			// update user info from the database
-			//if(oldPassword == user.getPassword()){
-			user.setName(name);
-			//user.setEmail(email); // to do
-			user.setPassword(newPassword);
-			Object obj = em.createQuery("from Users where Email:=emailTemp").setParameter("emailTemp", email).getSingleResult();
-			em.getTransaction().begin();
-			em.merge(user);
-			em.getTransaction().commit(); // updated the database 
-			em.close();
-			emf.close();
 			
-			//}
-			/*
-			else {
-				/*TODO
-				 * print passwords dont match 
-				 */
-			//}
+			MessageDigest digest = MessageDigest.getInstance("SHA-256");
+			byte[] hash = digest.digest(newPassword.getBytes(StandardCharsets.UTF_8));
+			
+			if(oldPassword == user.getPassword())
+			{
+				User myuser = em.find(User.class,email);
+				//Object obj = em.createQuery("from Users where Email:=emailTemp").setParameter("emailTemp", email).getSingleResult();
+				em.getTransaction().begin();
+				myuser.setName(name);
+				myuser.setPassword(newPassword);
+				em.getTransaction().commit(); // updated the database 
+				em.close();
+				emf.close();
+			}
+			
+			else
+			{
+				System.out.println("passwords don't match!!!!!");
+				em.close();
+				emf.close();
+			}
          }
 		}catch(Exception e){
 			e.printStackTrace();
