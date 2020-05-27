@@ -209,6 +209,16 @@ public class Games {
 		this.short_description = short_description;
 	}
 
+	public void reduceFromStock(int count)
+	{
+		this.stock -= count;
+	}
+
+	public void addToStock(int count)
+	{
+		this.stock += count;
+	}
+
 	public boolean isOnSale() {
 		return onSale;
 	}

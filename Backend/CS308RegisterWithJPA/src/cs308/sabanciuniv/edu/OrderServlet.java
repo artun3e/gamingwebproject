@@ -74,8 +74,12 @@ public class OrderServlet extends HttpServlet {
 					{
 						Object obj = em.createQuery("from Games where name=:nameTemp").setParameter("nameTemp", itemName).setMaxResults(1).getSingleResult();
 						Games temp = (Games) obj;
+						em.getTransaction().begin();
 						hashmap.put(temp, Integer.parseInt(itemQuantities[countingVariable]));
 						htmlText += "<H2>"+itemQuantities[countingVariable] + " copies of " + itemName + "\n"+"</H2><img src=\""+ temp.getHeader_image() +"\"><br>";
+						temp.reduceFromStock(Integer.parseInt(itemQuantities[countingVariable]));
+						em.merge(temp);
+						em.getTransaction().commit();
 					}
 					catch(NoResultException e)
 					{
