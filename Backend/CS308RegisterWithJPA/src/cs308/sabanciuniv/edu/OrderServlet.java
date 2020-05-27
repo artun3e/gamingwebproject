@@ -66,7 +66,7 @@ public class OrderServlet extends HttpServlet {
 				EntityManager em = emf.createEntityManager();
 				int countingVariable = 0;
 				String htmlText = "<H1>"+"Hello " + user.getName()+"\n" + "You have made the following purchase from our website: "+"<H1>";
-
+				double totalCost = 0;
 				for(String itemName : itemNames)
 				{
 					System.out.println("Query is " + itemName);
@@ -80,6 +80,7 @@ public class OrderServlet extends HttpServlet {
 						temp.reduceFromStock(Integer.parseInt(itemQuantities[countingVariable]));
 						em.merge(temp);
 						em.getTransaction().commit();
+						totalCost += (temp.getPrice()*Integer.parseInt(itemQuantities[countingVariable]));
 					}
 					catch(NoResultException e)
 					{
@@ -91,6 +92,7 @@ public class OrderServlet extends HttpServlet {
 				Order newOrder = new Order("TODO", user);
 				newOrder.setStatus(Order.orderStatus.PreparingPackage);
 				newOrder.setMap(hashmap);
+				newOrder.setTotalCost(totalCost);
 				em.persist(newOrder);
 				System.out.println("We are here!v3");
 				user.addOrder(newOrder);
