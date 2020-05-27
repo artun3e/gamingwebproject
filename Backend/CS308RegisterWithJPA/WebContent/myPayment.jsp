@@ -17,6 +17,7 @@
                 <!-- Library CSS -->
         <link rel="stylesheet" href="css_myAccount/bootstrap.css">
         <link rel="stylesheet" href="css_myAccount/bootstrap-theme.css">
+
         <link rel="stylesheet" href="css_myAccount/animations.css" media="screen">
         <link rel="stylesheet" href="css_myAccount/superfish.css" media="screen">
         <link rel="stylesheet" href="css_myAccount/team-member.css" media="screen">
@@ -155,7 +156,9 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-6 col-md-6 info-box">
-                                        <h3>Default Payment Method</h3>
+                                    <div class="additionalPayments">
+                                    
+                                                                            <h3>Default Payment Method</h3>
                                         <ul class="list-unstyled">
                                                 <li>
                                                     <div class="form-group">
@@ -188,6 +191,9 @@
                                             <a href="#" onclick="updateCard()" class="btn btn-color margin-top"><i class="fa fa-pencil"></i> Update</a>
                                             <a href=""  onclick="deleteCard()"class="btn btn-color margin-top"><i class="fa fa-pencil"></i> Delete</a>
                                             <br><br>
+                                    
+                                    </div>
+
                                     </div>
                                    <div class="col-sm-6 col-md-6 info-box">
                                         <h3>Add Payment Method</h3>
@@ -225,11 +231,13 @@
                                     </div>
                                     
                                 </div>
-                                <div class="title-box">
+                               
+                                
+                                                                <div class="title-box">
                                     <h3>Additional Payments</h3>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-6 col-md-6 info-box">
+<%--                                     <div class="col-sm-6 col-md-6 info-box">
                                         <ul class="list-unstyled">
                                                 <li>
                                                     <div class="form-group">
@@ -262,9 +270,12 @@
                                             <a href="#"  onclick="updateCard()" class="btn btn-color margin-top"><i class="fa fa-pencil"></i> Update</a>
                                              <a href="#" onclick="deleteCard()" class="btn btn-color margin-top"><i class="fa fa-pencil"></i> Delete</a></p>
                                        
-                                    </div>
+                                    </div> --%>
                                     
                                 </div>
+                                
+                                
+
                             </div>
                             <!-- /Left Section -->
                             <!-- Sidebar -->
