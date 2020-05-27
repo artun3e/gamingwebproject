@@ -502,6 +502,40 @@ public class GamesManager {
         rs = null;
         return categories;
     }
+
+    @GET
+    @Path("changeEmail/{oldEmail}/{newEmail}")
+    public String changeUserEmail(@PathParam("oldEmail")String oldEmail,@PathParam("newEmail") String newEmail)
+    {
+        EntityManagerFactory emf;
+        EntityManager em;
+
+
+        try
+        {
+            emf = Persistence.createEntityManagerFactory("cs308");
+            em = emf.createEntityManager();
+
+            User user = em.find(User.class,oldEmail);
+            User user2 = new User(user);
+            user2.setEmail(newEmail);
+            for(Order o : user2.getOrders())
+            {
+                o.setOwner(user2);
+            }
+            em.getTransaction().begin();
+            System.out.println("Transaction beginning.");
+            em.remove(user);
+            em.persist(user2);
+            em.getTransaction().commit();
+
+            return "Successfully changed the email!";
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "An error occured! :(";
+    }
 }
 
 /*
