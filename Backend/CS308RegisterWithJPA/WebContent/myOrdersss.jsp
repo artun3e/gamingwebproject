@@ -344,7 +344,8 @@ if(session.getAttribute("user") != null)
 	    System.out.println(o.getDate());
 	    
 	    Map<Games, Integer> gameList = new HashMap<>();
-	    gameList  = o.getProducts();	    
+	    gameList  = o.getProducts();
+	    Map<Games, Double> prices = o.getPricesAtThatTime();
 	    
 	    
 	    
@@ -375,14 +376,14 @@ if(session.getAttribute("user") != null)
 	    		out.println("<td><a onclick=\"toDetails(this)\" href=\"#\">" + game.getName()+ "</a></td>");
 	    		out.println("<td><a>" + gameList.get(game) + "</a></td>");
 	    		//out.println("<td><a href=\"#\">" + gameList.get(game)* 0 + "</a></td>");
-	    		out.println("<td><a>" + game.getPrice()+ "$</a></td>");
-	    		out.println("<td><a>" + game.getPrice() * gameList.get(game) + "$</a></td>");
+	    		out.println("<td><a>" + prices.get(game)+ "$</a></td>");
+	    		out.println("<td><a>" + prices.get(game) * gameList.get(game) + "$</a></td>");
 	    	out.println("</tr>");
 	    	
-	    	total = total + (game.getPrice() * gameList.get(game));
+	    	total = total + (prices.get(game) * gameList.get(game));
 	    		System.out.println(game.getName());
 	    		System.out.println(gameList.get(game));
-	    		System.out.println(game.getPrice());
+	    		System.out.println(prices.get(game));
 	    					
 	    }
 	    out.println("<div class=\"total\">");
