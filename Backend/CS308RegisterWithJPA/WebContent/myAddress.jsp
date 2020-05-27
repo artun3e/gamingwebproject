@@ -171,8 +171,43 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-6 col-md-6 info-box">
-                                        <h3>Default  Address</h3>
+                                        <h3>Current  Address</h3>
                                         <ul class="list-unstyled">
+                                                <li>
+                                                    <div class="form-group">
+                                                        <label for="number"> Address <span class="required">*</span></label>
+														<% 
+                                                        out.println("<input type='text' name='address' id='address' class='form-control'  >" ); 
+                                                        %>
+
+                                                    </div>
+                                                </li>
+                                                                                                <li>
+                                                    <div class="form-group">
+                                                        <label for="number"> Region / City <span class="required">*</span></label>
+														<% 
+                                                        out.println("<input type='text' name='city' id='city' class='form-control'  >" ); 
+                                                        %>
+                                                        
+                                                    </div>
+                                                </li>
+                                                                                                <li>
+                                                    <div class="form-group">
+                                                        <label for="number"> Phone Number <span class="required">*</span></label>
+														<% 
+                                                        out.println("<input type='text' name='phone' id='phone' class='form-control' >" ); 
+                                                        %>
+                                                        
+                                                    </div>
+                                                </li>
+                                                </ul>
+                                            <a href="#" class="btn btn-color margin-top"><i class="fa fa-pencil"></i> Update </a>
+                                            <a href="#" class="btn btn-color margin-top"><i class="fa fa-trash"></i> Delete</a>
+                                            <br><br>
+                                    </div>
+                                   <div class="col-sm-6 col-md-6 info-box">
+                                        <h3>Add an Address</h3>
+                                                                                <ul class="list-unstyled">
                                                 <li>
                                                     <div class="form-group">
                                                         <label for="number"> Address <span class="required">*</span></label>
@@ -201,22 +236,21 @@
                                                     </div>
                                                 </li>
                                                 </ul>
-                                            <a href="#" class="btn btn-color margin-top"><i class="fa fa-pencil"></i> Update </a>
+                                            <a href="#" class="btn btn-color margin-top"><i class="fa fa-plus"></i> Add </a>
                                             <br><br>
                                     </div>
-                                   
                                 </div>
                                 <div class="title-box">
                                     <h3>Additional Address Entries</h3>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-6 col-md-6 info-box">
+                                   <%--  <div class="col-sm-6 col-md-6 info-box">
                                         <ul class="list-unstyled">
                                                 <li>
                                                     <div class="form-group">
                                                         <label for="number"> Address <span class="required">*</span></label>
 														<% 
-                                                        out.println("<input type='text' name='name' id='name' class='form-control' placeholder='Orta Mah. Universite Cad.' >" ); 
+                                                        out.println("<input type='text' name='name' id='name' class='form-control' >" ); 
                                                         %>
                                                         
                                                     </div>
@@ -225,7 +259,7 @@
                                                     <div class="form-group">
                                                         <label for="number"> Region / City <span class="required">*</span></label>
 														<% 
-                                                        out.println("<input type='text' name='name' id='name' class='form-control' placeholder='Tuzla / Istanbul' >" ); 
+                                                        out.println("<input type='text' name='name' id='name' class='form-control'  >" ); 
                                                         %>
                                                         
                                                     </div>
@@ -234,14 +268,14 @@
                                                     <div class="form-group">
                                                         <label for="number"> Phone Number <span class="required">*</span></label>
 														<% 
-                                                        out.println("<input type='text' name='name' id='name' class='form-control' placeholder='5555555555' >" ); 
+                                                        out.println("<input type='text' name='name' id='name' class='form-control' >" ); 
                                                         %>
                                                         
                                                     </div>
                                                 </li>
                                                 </ul>
                                             <a href="#" class="btn btn-color margin-top"><i class="fa fa-pencil"></i> Update</a> <a href="#" class="btn btn-color margin-top"><i class="fa fa-pencil"></i> Delete</a></p>
-                                    </div>
+                                    </div> --%>
                                     
                                 </div>
                             </div>

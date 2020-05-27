@@ -15,7 +15,9 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class UpdatePaymentServlet
  */
-@WebServlet("/UpdatePaymentServlet")
+
+@WebServlet(name = "UpdatePaymentServlet", urlPatterns = {
+"/UpdatePaymentServlet"})
 public class UpdatePaymentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -53,10 +55,10 @@ public class UpdatePaymentServlet extends HttpServlet {
 	             System.out.println("You are logged in!!!");
 	             
 	             String email = user.getEmail(); // also you can use request.getParameter for email
-	             int id =Integer.parseInt(request.getParameter("user_id")); // get users id
-	             String cardNumber = request.getParameter("card_number");
+	             int id =Integer.parseInt(request.getParameter("payment_id")); // get users id
+	             String cNumber = request.getParameter("card_number");
 	             String cvc = request.getParameter("cvc");
-	 	    	 String expirationDate = request.getParameter("expiration_date");
+	 	    	 String date = request.getParameter("expiration_date");
 	 	    	 
 	 	    	 EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
 				 EntityManager em = emf.createEntityManager();
@@ -64,10 +66,10 @@ public class UpdatePaymentServlet extends HttpServlet {
 				Payment payment = em.find(Payment.class,id);
 				
 				em.getTransaction().begin();
-				payment.setCardNumber(cardNumber);
+				payment.setCardNumber(cNumber);
 				payment.setCVC(cvc);
 				payment.setEmail(email);
-				payment.setExpirationDate(expirationDate);
+				payment.setExpirationDate(date);
 				payment.setID(id);
 				em.getTransaction().commit();
 				em.close();

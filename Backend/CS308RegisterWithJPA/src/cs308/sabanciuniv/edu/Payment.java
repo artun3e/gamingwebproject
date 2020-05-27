@@ -13,14 +13,19 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.persistence.*;
 
-import javax.persistence.EntityManager;
-
+@Entity
+@Table(name="Payment")
 @Path("fromDB")
 public class Payment {
-			private int id;
+    @Id
+    @GeneratedValue
+    private int id;
+    @Column(name = "cNumber")
 	    	private String cardNumber;
 	    	private String cvc;
+	    	 @Column(name = "date")
 	    	private String expirationDate;
 	    	private String email;
 	    	public int getID() {
