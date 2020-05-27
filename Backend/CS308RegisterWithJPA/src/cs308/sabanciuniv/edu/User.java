@@ -86,6 +86,16 @@ public class User {
 		this.email = email;
 		this.password = password;
 	}
+	public User(User temp)
+	{
+		this.name = temp.getName();
+		this.password = temp.getPassword();
+		this.type = temp.getUserType();
+		this.paymentMethod = temp.getPaymentMethod();
+		this.orders = temp.getOrders();
+		this.Address = temp.getAddress();
+		this.email = temp.getEmail();
+	}
 	public String getPassword() {
 		return password;
 	}
