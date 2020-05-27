@@ -17,7 +17,6 @@
                 <!-- Library CSS -->
         <link rel="stylesheet" href="css_myAccount/bootstrap.css">
         <link rel="stylesheet" href="css_myAccount/bootstrap-theme.css">
-        <link rel="stylesheet" href="css_myAccount/fonts/font-awesome/css_myAccount/font-awesome.css">
         <link rel="stylesheet" href="css_myAccount/animations.css" media="screen">
         <link rel="stylesheet" href="css_myAccount/superfish.css" media="screen">
         <link rel="stylesheet" href="css_myAccount/team-member.css" media="screen">
@@ -186,8 +185,42 @@
                                                     </div>
                                                 </li>
                                                 </ul>
-                                            <a href="#" onclick="updateCardInfo()" class="btn btn-color margin-top"><i class="fa fa-pencil"></i> Update</a>
-                                            <a href=""  class="btn btn-color margin-top"><i class="fa fa-pencil"></i> Delete</a>
+                                            <a href="#" onclick="updateCard()" class="btn btn-color margin-top"><i class="fa fa-pencil"></i> Update</a>
+                                            <a href=""  onclick="deleteCard()"class="btn btn-color margin-top"><i class="fa fa-pencil"></i> Delete</a>
+                                            <br><br>
+                                    </div>
+                                   <div class="col-sm-6 col-md-6 info-box">
+                                        <h3>Add Payment Method</h3>
+                                        <ul class="list-unstyled">
+                                                <li>
+                                                    <div class="form-group">
+                                                        <label for="number"> Card Number <span class="required">*</span></label>
+														<% 
+                                                        out.println("<input type='text' name='add_cardNumber' id='add_cardNumber' class='form-control' placeholder='' >" ); 
+                                                        %>
+                                                        
+                                                    </div>
+                                                </li>
+                                                                                                <li>
+                                                    <div class="form-group">
+                                                        <label for="number"> CVC <span class="required">*</span></label>
+														<% 
+                                                        out.println("<input type='text' name='add_cvc' id='add_cvc' class='form-control' placeholder='3 DIGIT' >" ); 
+                                                        %>
+                                                        
+                                                    </div>
+                                                </li>
+                                                                                                <li>
+                                                    <div class="form-group">
+                                                        <label for="number"> DATE <span class="required">*</span></label>
+														<% 
+                                                        out.println("<input type='text' name='add_expDate' id='add_expDate' class='form-control' placeholder='MM/YY' >" ); 
+                                                        %>
+                                                        
+                                                    </div>
+                                                </li>
+                                                </ul>
+                                            <a href="#" onclick="addCard()" class="btn btn-color margin-top"><i class="fa fa-plus"></i> Add </a>
                                             <br><br>
                                     </div>
                                     
@@ -226,8 +259,9 @@
                                                     </div>
                                                 </li>
                                                 </ul>
-                                            <a href="#" class="btn btn-color margin-top"><i class="fa fa-pencil"></i> Update</a> <a href="#" class="btn btn-color margin-top"><i class="fa fa-pencil"></i> Delete</a></p>
-                                        </address>
+                                            <a href="#"  onclick="updateCard()" class="btn btn-color margin-top"><i class="fa fa-pencil"></i> Update</a>
+                                             <a href="#" onclick="deleteCard()" class="btn btn-color margin-top"><i class="fa fa-pencil"></i> Delete</a></p>
+                                       
                                     </div>
                                     
                                 </div>
@@ -265,88 +299,7 @@
             </section>
             <!-- /Main Section -->
             
-            <!-- Modal -->
-            <section id="modals">
-                <!-- Login Modal -->
-                <div class="modal login fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h2 class="form-signin-heading modal-title" id="myModalLabel">Login</h2>
-                            </div>
-                            <form method="post" id="login">
-                                <div class="modal-body">
-                                    <fieldset>
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                <input class="form-control" id="username" name="username" type="text" placeholder="Username" value="" required>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                <input class="form-control" type="email" id="email" name="email" placeholder="Email" value="" required>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                </div>
-                                <div class="modal-footer">
-                                    <a href="password-recovery.html" class="pull-left">(Lost Password?)</a>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-color">Login</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <!-- /Login Modal -->
-                <!-- Registration Modal -->
-                <div class="modal register fade" id="registrationModal" tabindex="-1" role="dialog" aria-labelledby="registrationModal" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <h2 class="form-signin-heading modal-title" id="registrationModalLabel">Create a new account</h2>
-                        </div>
-                        <form method="post" id="registration">
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <div class="col-md-6">
-                                                <input type="text" value="" class="form-control" placeholder="First Name">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <input type="text" value="" class="form-control" placeholder="Last Name">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <div class="col-md-12">
-                                                <input type="text" value="" class="form-control" placeholder="E-mail Address">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <div class="col-md-6">
-                                                <input type="password" value="" class="form-control" placeholder="Password">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <input type="password" value="" class="form-control" placeholder="Re-enter Password">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-color">Register</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <!-- /Registration Modal -->
-            </section>
-            <!-- /Modal -->
+           
             <!-- Scroll To Top --> 
             <a href="#" class="scrollup"><i class="fa fa-angle-up"></i></a>
         </div>

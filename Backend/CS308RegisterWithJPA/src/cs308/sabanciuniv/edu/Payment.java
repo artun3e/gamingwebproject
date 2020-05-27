@@ -20,7 +20,7 @@ import javax.persistence.*;
 @Path("fromDB")
 public class Payment {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "cNumber")
 	    	private String cardNumber;

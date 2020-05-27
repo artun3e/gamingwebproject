@@ -15,7 +15,9 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class AddPaymentServlet
  */
-@WebServlet("/AddPaymentServlet")
+
+@WebServlet(name = "AddPaymentServlet", urlPatterns = {
+"/AddPaymentServlet"})
 public class AddPaymentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
