@@ -45,6 +45,7 @@
 <link rel="stylesheet" href="css/searchBar.css">
 <link rel="stylesheet" href="css/register.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="js/paymentMethods.js"></script>
     </head>
     <body class="page">
         <!-- Wrap
@@ -106,6 +107,14 @@
 							        Object temp = session.getAttribute("user");
 							        User user = (User) temp;
 							        out.println("<h2>Welcome "+user.getName()+"</h2>");	//Admin
+							        %> 
+							        <script>
+                                                        
+							        getData("<%=user.getEmail()%>");
+                                                        
+                                   </script> 
+                                                        
+                                    <%
 							        
 							    }
 							    else
@@ -148,14 +157,36 @@
                                 <div class="row">
                                     <div class="col-sm-6 col-md-6 info-box">
                                         <h3>Default Payment Method</h3>
-                                        <address>
-                                            Mr. Atiar<br>
-                                            Address<br>
-                                            Dhaka, 1216<br>
-                                            Bangladesh<br>
-                                            T: 000111222333<br>
+                                        <ul class="list-unstyled">
+                                                <li>
+                                                    <div class="form-group">
+                                                        <label for="number"> Card Number <span class="required">*</span></label>
+														<% 
+                                                        out.println("<input type='text' name='cardNumber' id='cardNumber' class='form-control' placeholder='' >" ); 
+                                                        %>
+                                                        
+                                                    </div>
+                                                </li>
+                                                                                                <li>
+                                                    <div class="form-group">
+                                                        <label for="number"> CVC <span class="required">*</span></label>
+														<% 
+                                                        out.println("<input type='text' name='cvc' id='cvc' class='form-control' placeholder='3 DIGIT' >" ); 
+                                                        %>
+                                                        
+                                                    </div>
+                                                </li>
+                                                                                                <li>
+                                                    <div class="form-group">
+                                                        <label for="number"> DATE <span class="required">*</span></label>
+														<% 
+                                                        out.println("<input type='text' name='expDate' id='expDate' class='form-control' placeholder='MM/YY' >" ); 
+                                                        %>
+                                                        
+                                                    </div>
+                                                </li>
+                                                </ul>
                                             <a href="#" class="btn btn-color margin-top"><i class="fa fa-pencil"></i> Update</a>
-                                        </address>
                                     </div>
                                     
                                 </div>
@@ -164,12 +195,35 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-6 col-md-6 info-box">
-                                        <address>
-                                            Mr. Atiar<br>
-                                            Address 2<br>
-                                            Dhaka, 1216<br>
-                                            Bangladesh<br>
-                                            T: 000111222333<br>
+                                        <ul class="list-unstyled">
+                                                <li>
+                                                    <div class="form-group">
+                                                        <label for="number"> Card Number <span class="required">*</span></label>
+														<% 
+                                                        out.println("<input type='text' name='cardNumber' id='cardNumber' class='form-control' placeholder='' >" ); 
+                                                        %>
+                                                        
+                                                    </div>
+                                                </li>
+                                                                                                <li>
+                                                    <div class="form-group">
+                                                        <label for="number"> CVC <span class="required">*</span></label>
+														<% 
+                                                        out.println("<input type='text' name='ccv' id='ccv' class='form-control' placeholder='3 DIGIT' >" ); 
+                                                        %>
+                                                        
+                                                    </div>
+                                                </li>
+                                                                                                <li>
+                                                    <div class="form-group">
+                                                        <label for="number"> DATE <span class="required">*</span></label>
+														<% 
+                                                        out.println("<input type='text' name='expDate' id='expDate' class='form-control' placeholder='MM/YY' >" ); 
+                                                        %>
+                                                        
+                                                    </div>
+                                                </li>
+                                                </ul>
                                             <a href="#" class="btn btn-color margin-top"><i class="fa fa-pencil"></i> Update</a> <a href="#" class="btn btn-color margin-top"><i class="fa fa-pencil"></i> Delete</a></p>
                                         </address>
                                     </div>
