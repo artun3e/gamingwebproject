@@ -7,12 +7,20 @@ import org.hibernate.annotations.FetchMode;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Entity
 @Table(name="Orders") 
 public class Order {
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name = "Orders_Games_Prices", joinColumns =  @JoinColumn(name = "Order_id"))
+	@MapKeyJoinColumn(unique = false)
+	@Column(name = "Price")
+	@Fetch(FetchMode.SELECT)
+	private Map<Games, Double> pricesAtThatTime;
 	public enum orderStatus {PreparingPackage,Shipped,OutOnDelivery,Delivered}
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -81,6 +89,7 @@ public class Order {
 		LocalDateTime now = LocalDateTime.now();  
 		this.date = dtf.format(now);
 		this.products = new HashMap<>();
+		this.pricesAtThatTime = new HashMap<>();
 	}
 	public void setMap(Map<Games,Integer> hashmap)
 	{
@@ -122,6 +131,18 @@ public class Order {
 
 	public void setTotalCost(double totalCost) {
 		this.totalCost = totalCost;
+	}
+
+	public void setPricesAtThatTime(Map<Games,Double> pricesAtThatTime) {
+		this.pricesAtThatTime = pricesAtThatTime;
+	}
+
+	public void setProducts(Map<Games, Integer> products) {
+		this.products = products;
+	}
+
+	public Map<Games,Double> getPricesAtThatTime() {
+		return pricesAtThatTime;
 	}
 
 	@Override

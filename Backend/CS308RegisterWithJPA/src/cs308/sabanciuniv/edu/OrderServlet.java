@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -66,6 +68,7 @@ public class OrderServlet extends HttpServlet {
 				EntityManager em = emf.createEntityManager();
 				int countingVariable = 0;
 				String htmlText = "<H1>"+"Hello " + user.getName()+"\n" + "You have made the following purchase from our website: "+"<H1>";
+				Map<Games, Double> pricesAtThatTime = new HashMap<>();
 				double totalCost = 0;
 				for(String itemName : itemNames)
 				{
@@ -80,10 +83,14 @@ public class OrderServlet extends HttpServlet {
 						temp.reduceFromStock(Integer.parseInt(itemQuantities[countingVariable]));
 						em.merge(temp);
 						em.getTransaction().commit();
-						if(temp.isOnSale())
+						if(temp.isOnSale()){
 							totalCost += (temp.getSalePrice()*Integer.parseInt(itemQuantities[countingVariable]));
-						else
-							totalCost += (temp.getPrice()*Integer.parseInt(itemQuantities[countingVariable]));
+							pricesAtThatTime.put(temp,temp.getSalePrice());
+						}
+						else {
+							totalCost += (temp.getPrice() * Integer.parseInt(itemQuantities[countingVariable]));
+							pricesAtThatTime.put(temp,temp.getPrice());
+						}
 					}
 					catch(NoResultException e)
 					{
@@ -96,6 +103,7 @@ public class OrderServlet extends HttpServlet {
 				newOrder.setStatus(Order.orderStatus.PreparingPackage);
 				newOrder.setMap(hashmap);
 				newOrder.setTotalCost(totalCost);
+				newOrder.setPricesAtThatTime(pricesAtThatTime);
 				em.persist(newOrder);
 				System.out.println("We are here!v3");
 				user.addOrder(newOrder);

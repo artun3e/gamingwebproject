@@ -341,4 +341,45 @@ public class OrderManager {
 
 
 	}*/
+
+/*  DONT RUN THE BELOW CODE, IT WAS FOR FIXING THE PRICES OF GAMES AT THE TIME OF SPECIFIC ORDERS.
+	@GET
+	@Path("fixOrderPriceAtThatTime")
+	public void fixOrderPriceAtThatTime()
+	{
+		EntityManagerFactory emf;
+		EntityManager em;
+
+		try
+		{
+			emf = Persistence.createEntityManagerFactory("cs308");
+			em = emf.createEntityManager();
+
+			List<Order> allOrders = em.createQuery("Select e from Order e", Order.class).getResultList();
+			for(Order o : allOrders)
+			{
+				em.getTransaction().begin();
+				Map<Games, Integer> products = o.getProducts();
+				Map<Games, Double> priceAtThatTime = new HashMap<>();
+				for(Games game : products.keySet())
+				{
+					priceAtThatTime.put(game, game.getPrice());
+				}
+				o.setPricesAtThatTime(priceAtThatTime);
+				em.merge(o);
+				em.getTransaction().commit();
+			}
+
+			emf.close();
+			em.close();
+
+			emf = null;
+			em = null;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
+
+	}*/
 }
