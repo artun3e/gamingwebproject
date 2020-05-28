@@ -22,6 +22,12 @@ public class User {
 	@Column(name="Email")
 	private String email;
 	private String password;
+	
+	@OneToMany( mappedBy = "user")
+	List<Address> addressList;
+	
+	@OneToMany(mappedBy = "user")
+	List<Payment> paymentList;
 
 	@JsonBackReference
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
@@ -86,6 +92,11 @@ public class User {
 		this.email = email;
 		this.password = password;
 	}
+	
+	public User(String email) {
+		this.email = email;
+	}
+	
 	public User(User temp)
 	{
 		this.name = temp.getName();

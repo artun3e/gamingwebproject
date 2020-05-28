@@ -13,16 +13,34 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
+import javax.persistence.Entity;
 import javax.persistence.EntityManager;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="Addresses")
 @Path("fromDB")
 public class Address {
+			@Id
+			@GeneratedValue(strategy = GenerationType.IDENTITY)
 			private int id;
 	    	private String address;
 	    	private String city;
 	    	private String phoneNumber;
-	    	private String email;
+	    	
+	    	@ManyToOne
+	        @JoinColumn(name = "email")
+	    	private User user;
+	    	
+	    	public void setUser(User myUser) {
+	    		this.user = myUser;
+	    	}
+	    	//private String email;
 	    	public int getID() {
 	    		return id;
 	    	}
@@ -43,12 +61,10 @@ public class Address {
 	    		this.city = city;
 	    	}
 	    	public String getEmail() {
-	    		return email;
+	    		return user.getEmail();
 	    	}
-
-	    	public void setEmail(String email) {
-	    		this.email = email;
-	    	}
+	    	
+	    	
 	    	public String getPhoneNumber() {
 	    		return phoneNumber;
 	    	}
@@ -57,13 +73,18 @@ public class Address {
 	    		this.phoneNumber = phoneNumber;
 	    	}
 	    	
-	    	public Address(int id,String address, String email, String city, String phoneNumber) {
+	    	public Address(int id,String address, User user, String city, String phoneNumber) {
 	    		this.id = id;
 	    		this.address = address;
-	    		this.email = email;
+	    		this.user = user;
 	    		this.city = city;	
 	    		this.phoneNumber = phoneNumber;
 	    }
+	    	
+	    	public Address(User user){
+	    		this.user = user;
+	    	}
+	    	
 	    	public Address() {
 	    	}	
 	    	  @GET
@@ -81,7 +102,7 @@ public class Address {
 	    	            	Address a = new Address();
 	    	            	 a.setID(rs.getInt("id"));
 	    	            	 a.setAddress(rs.getString("address"));
-	    	            	 a.setEmail(rs.getString("email"));
+	    	            	 a.setUser(new User(rs.getString("email")));
 	    	            	 a.setCity(rs.getString("city"));
 	    	            	 a.setPhoneNumber(rs.getString("phoneNumber"));
 //	    	            	 System.out.println("Review " + r.getComment());

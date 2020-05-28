@@ -19,28 +19,36 @@ async function getData (variable){
 		additionalPaymentFields.append(divPayment);
 	}
 	for(var i=0; i<data.length; i++){		
+		var addPaymentDiv = document.getElementsByClassName("additionalPayments")[i];
+		console.log(addPaymentDiv);
 		var additionalNumber = document.getElementsByClassName("additionalPayments")[i].getElementsByTagName("input")[0];
 		var additionalCVC = document.getElementsByClassName("additionalPayments")[i].getElementsByTagName("input")[1];
 		var additionalDate = document.getElementsByClassName("additionalPayments")[i].getElementsByTagName("input")[2];
+		var hiddenID = document.getElementsByClassName("additionalPayments")[i].getElementsByTagName("input")[3];
+		addPaymentDiv.id = i;
 		console.log(additionalNumber);
 		console.log(additionalCVC);
 		console.log(additionalDate);
 		additionalNumber.value = data[i].cardNumber;
 		additionalCVC.value = data[i].cvc;
 		additionalDate.value = data[i].expirationDate;
+		hiddenID.value = data[i].id;
 	}
 
 
 }
-function updateCard(){
+function updateCard(card){
+	var i = card.parentNode.id;
+	
 	console.log("updating...");
-	var number = document.getElementById("cardNumber").value;
-	var cvc = document.getElementById("cvc").value;
-	var date = document.getElementById("expDate").value;
+	var number = document.getElementsByClassName("additionalPayments")[i].getElementsByTagName("input")[0].value;
+	var cvc = document.getElementsByClassName("additionalPayments")[i].getElementsByTagName("input")[1].value;
+	var date = document.getElementsByClassName("additionalPayments")[i].getElementsByTagName("input")[2].value;
+	var id = document.getElementsByClassName("additionalPayments")[i].getElementsByTagName("input")[3].value;
 	var xhr = new XMLHttpRequest();
 	var url = "UpdatePaymentServlet";
 	xhr.open("POST", url, true);
-	var params = "payment_id="+2+"&card_number="+number+"&cvc="+cvc+"&expiration_date="+date;
+	var params = "payment_id="+id+"&card_number="+number+"&cvc="+cvc+"&expiration_date="+date;
 	console.log(params);
 	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhr.send(params);
@@ -59,15 +67,16 @@ function addCard(){
 	xhr.send(params);
 }
 
-function deleteCard(){
+function deleteCard(card){
 	console.log("deleting...");
-	var number = document.getElementById("cardNumber").value;
-	var cvc = document.getElementById("cvc").value;
-	var date = document.getElementById("expDate").value;
+	var i = card.parentNode.id;
+	
+	var id = document.getElementsByClassName("additionalPayments")[i].getElementsByTagName("input")[3].value;
+	
 	var xhr = new XMLHttpRequest();
 	var url = "DeletePaymentServlet";
 	xhr.open("POST", url, true);
-	var params = "payment_id="+2+"&card_number="+number+"&cvc="+cvc+"&expiration_date="+date;
+	var params = "payment_id="+id;
 	console.log(params);
 	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhr.send(params);
@@ -81,7 +90,7 @@ var myvar = '                                        <div class="additionalPayme
 '                                                <li>'+
 '                                                    <div class="form-group">'+
 '                                                        <label for="number"> Card Number <span class="required">*</span></label>'+
-'														<input type="text" name="cardNumber" id="" class="form-control" placeholder="">'+
+'														<input type="text" name="cardNumber" id="" class="form-control">'+
 ''+
 '                                                        '+
 '                                                    </div>'+
@@ -89,7 +98,7 @@ var myvar = '                                        <div class="additionalPayme
 '                                                                                                <li>'+
 '                                                    <div class="form-group">'+
 '                                                        <label for="number"> CVC <span class="required">*</span></label>'+
-'														<input type="text" name="ccv" id="" class="form-control" placeholder="3 DIGIT">'+
+'														<input type="text" name="ccv" id="" class="form-control" >'+
 ''+
 '                                                        '+
 '                                                    </div>'+
@@ -97,13 +106,13 @@ var myvar = '                                        <div class="additionalPayme
 '                                                                                                <li>'+
 '                                                    <div class="form-group">'+
 '                                                        <label for="number"> DATE <span class="required">*</span></label>'+
-'														<input type="text" name="expDate" id="" class="form-control" placeholder="MM/YY">'+
-''+
+'														<input type="text" name="expDate" id="" class="form-control" >'+
+'														<input type="hidden" value="">																				'+
 '                                                        '+
 '                                                    </div>'+
 '                                                </li>'+
 '                                                </ul>'+
-'                                            <a href="#" onclick="updateCard()" class="btn btn-color margin-top"><i class="fa fa-pencil"></i> Update</a>'+
-'                                             <a href="#" onclick="deleteCard()" class="btn btn-color margin-top"><i class="fa fa-pencil"></i> Delete</a><p></p>'+
+'                                            <a href="#" onclick="updateCard(this)" class="btn btn-color margin-top"><i class="fa fa-pencil"></i> Update</a>'+
+'                                             <a href="#" onclick="deleteCard(this)" class="btn btn-color margin-top"><i class="fa fa-pencil"></i> Delete</a><p></p>'+
 '                                     </div>  ';
 	

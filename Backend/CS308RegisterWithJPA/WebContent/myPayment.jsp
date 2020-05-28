@@ -164,7 +164,7 @@
                                                     <div class="form-group">
                                                         <label for="number"> Card Number <span class="required">*</span></label>
 														<% 
-                                                        out.println("<input type='text' name='cardNumber' id='cardNumber' class='form-control' placeholder='' >" ); 
+                                                        out.println("<input type='text' name='cardNumber' id='cardNumber' class='form-control' placeholder='16 Digit Card Number' >" ); 
                                                         %>
                                                         
                                                     </div>
@@ -184,12 +184,12 @@
 														<% 
                                                         out.println("<input type='text' name='expDate' id='expDate' class='form-control' placeholder='MM/YY' >" ); 
                                                         %>
-                                                        
+                                                        <input type="hidden" id="paymentID" name="paymentID" value="">
                                                     </div>
                                                 </li>
                                                 </ul>
-                                            <a href="#" onclick="updateCard()" class="btn btn-color margin-top"><i class="fa fa-pencil"></i> Update</a>
-                                            <a href=""  onclick="deleteCard()"class="btn btn-color margin-top"><i class="fa fa-pencil"></i> Delete</a>
+                                            <a href="#" onclick="updateCard(this)" class="btn btn-color margin-top"><i class="fa fa-pencil"></i> Update</a>
+                                            <a href=""  onclick="deleteCard(this)"class="btn btn-color margin-top"><i class="fa fa-pencil"></i> Delete</a>
                                             <br><br>
                                     
                                     </div>

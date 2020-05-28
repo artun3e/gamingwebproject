@@ -53,7 +53,7 @@ public class AddAddressServlet extends HttpServlet {
 	             System.out.println("You are logged in!!!");
 	             
 	             String email = user.getEmail(); // also you can use request.getParameter for email
-	             int id = Integer.parseInt(request.getParameter("address_id"));
+//	             int id = Integer.parseInt(request.getParameter("address_id")); // not necessary since id is created automatically 
 	 	    	 String address = request.getParameter("address");
 	 	    	 String city = request.getParameter("city");
 	 	    	 String phoneNumber = request.getParameter("phone_number");
@@ -63,11 +63,10 @@ public class AddAddressServlet extends HttpServlet {
 				 EntityManager em = emf.createEntityManager();
 				 
 				 //Payment(int id,String cardNumber, String email, String cvc, String expirationDate)
-				Address myaddress = new Address();
+				Address myaddress = new Address(user);
 				myaddress.setAddress(address);
 				myaddress.setCity(city);
 				myaddress.setPhoneNumber(phoneNumber);
-				
 				//payment.setID(id);
 				em.getTransaction().begin();
 				em.persist(myaddress);

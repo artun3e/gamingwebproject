@@ -99,6 +99,11 @@ public class OrderServlet extends HttpServlet {
 					countingVariable++;
 				}
 				em.getTransaction().begin();
+				/*
+				 * TODO : orderda adresi string olarak tutalim
+				 * constructor TODO -> address
+				 *  sectigi addressi tek stringte yollanmasi lazim -> parametre olarak al
+				 */
 				Order newOrder = new Order("TODO", user);
 				newOrder.setStatus(Order.orderStatus.PreparingPackage);
 				newOrder.setMap(hashmap);

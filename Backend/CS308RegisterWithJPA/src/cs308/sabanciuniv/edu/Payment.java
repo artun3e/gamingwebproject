@@ -27,7 +27,16 @@ public class Payment {
 	    	private String cvc;
 	    	 @Column(name = "date")
 	    	private String expirationDate;
-	    	private String email;
+	    	//private String email;
+	    	 
+	    	 @ManyToOne
+		     @JoinColumn(name = "email")
+	    	private User user;
+	    	 
+	    	public void setUser(User user){
+	    		this.user = user;
+	    	}
+	    	 
 	    	public int getID() {
 	    		return id;
 	    	}
@@ -48,12 +57,10 @@ public class Payment {
 	    		this.cvc = cvc;
 	    	}
 	    	public String getEmail() {
-	    		return email;
+	    		return user.getEmail();
 	    	}
 
-	    	public void setEmail(String email) {
-	    		this.email = email;
-	    	}
+	    	
 	    	public String getExpirationDate() {
 	    		return expirationDate;
 	    	}
@@ -62,13 +69,18 @@ public class Payment {
 	    		this.expirationDate = expirationDate;
 	    	}
 	    	
-	    	public Payment(int id,String cardNumber, String email, String cvc, String expirationDate) {
+	    	public Payment(int id,String cardNumber, User user, String cvc, String expirationDate) {
 	    		this.id = id;
 	    		this.cardNumber = cardNumber;
-	    		this.email = email;
+	    		this.user = user;
 	    		this.cvc = cvc;	
 	    		this.expirationDate = expirationDate;
 	    }
+	    	
+	    	public Payment(User user){
+	    		this.user = user;	
+	    	}
+	    	
 	    	public Payment() {
 	    	}	
 	    	  @GET
@@ -86,7 +98,7 @@ public class Payment {
 	    	            	Payment p = new Payment();
 	    	            	 p.setID(rs.getInt("id"));
 	    	            	 p.setCardNumber(rs.getString("cNumber"));
-	    	            	 p.setEmail(rs.getString("email"));
+	    	            	 p.setUser(new User(rs.getString("email")));
 	    	            	 p.setCVC(rs.getString("cvc"));
 	    	            	 p.setExpirationDate(rs.getString("date"));
 //	    	            	 System.out.println("Review " + r.getComment());

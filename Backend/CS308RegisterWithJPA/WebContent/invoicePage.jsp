@@ -105,6 +105,12 @@ border:3px solid black;
   color: white;
   margin: 20px;
   padding: 20px;
+  width: 1000px;
+}
+.border-top-0{
+
+width: 1000px;
+
 }
 </style>
 </head>
@@ -427,8 +433,23 @@ border:3px solid black;
                             <h2>Invoices</h2>
                             <p>This panel is for Admin to view and change order status.</p>
                         </div>
+<table>
+<tr>
+    <td>DATE</td>
+    <td>E-MAIL</td>
+    <td>PRICE</td>
+    <td>PRODUCT</td>
+</tr>
+<tr>
+    <td><input type="text" name="date"></td>
+    <td><input type="text" name="email"></td>
+    <td><input type="text" name="price"></td>
+    <td><input type="text" name="product"></td>
+</tr>
+</table>
+
                          <a class='btn btn-success btn-block btn-lg' href="#"
-										style="margin-left: auto; margin-right: auto; display: block; margin-top: 10px; margin-bottom: 10px">UPDATE STATUS</a>
+										style="margin-left: auto; margin-right: auto; display: block; margin-top: 10px; margin-bottom: 10px">FILTER</a>
 <%
 
 session = request.getSession();
@@ -449,8 +470,6 @@ if(session.getAttribute("user") != null)
 	for(Order o : orderList){		
 		double total = 0;		
 		
-	    System.out.println(o.getOwner().getEmail());
-	    System.out.println(o.getDate());
 	    
 	    Map<Games, Integer> gameList = new HashMap<>();
 	    gameList  = o.getProducts();	    
@@ -458,14 +477,14 @@ if(session.getAttribute("user") != null)
 	    
 	    
 	    out.println("<div class=\"box\">");
-			out.println("<div class=\"table-responsive\">");
+			out.println("<div class=\"table-responsive\"style=\"width:100%\">");
 				out.println("<table class=\"table\">");
 				
 				
 					out.println("<thead>");
 					out.println("<th class=\"border-top-0\">User: " + o.getOwner().getEmail() + "</th>"); //get user name
 					out.println("<th class=\"border-top-0\">Date: " + o.getDate() + "</th>"); //get order date
-					out.println("<th class=\"border-top-0\">Status: Delivered</th>");
+					out.println("<th class=\"border-top-0\">Status: " + o.getStatus() + "</th>");
 					out.println("<th class=\"border-top-0\">Change Status</th>");
 					out.println("<td><select id=\"orderStatus\">");
 						out.println("<option value=\"Null\">---</option>");
@@ -474,7 +493,11 @@ if(session.getAttribute("user") != null)
 						out.println("<option value=\"OutonDelivery\">Out on Delivery</option>");
 						out.println("<option value=\"Delivered\">Delivered</option>");					
 					out.println("</td>");
-						out.println("<tr>");							
+					out.println("<td>");
+					out.println("<button type=\"button\" onclick=\"alert('Hello world!')\">UPDATE</button>");
+					out.println("</td>");
+						out.println("<tr>");				
+							out.println("<th class=\"border-top-0\"></th>");
 							out.println("<th class=\"border-top-0\">Product</th>");
 							out.println("<th class=\"border-top-0\">Quantity</th>");
 							out.println("<th class=\"border-top-0\">Unit Price</th>");
@@ -484,9 +507,8 @@ if(session.getAttribute("user") != null)
 					out.println("<tbody>");
 	    for(Games game : gameList.keySet())
 	    {
-	    	System.out.println(game.getHeader_image());
 	    	out.println("<tr>");
-	    		
+	    		out.println("<td><a href=\"#\"><img src=" + game.getHeader_image() +  "alt=" + game.getName() + "width=\"100\" height=\"100\"\"></a></td>");
 	    		out.println("<td><a onclick=\"toDetails(this)\" href=\"#\">" + game.getName()+ "</a></td>");
 	    		out.println("<td><a>" + gameList.get(game) + "</a></td>");
 	    		out.println("<td><a>" + game.getPrice()+ "$</a></td>");
@@ -495,9 +517,6 @@ if(session.getAttribute("user") != null)
 	    	out.println("</tr>");
 	    	
 	    	total = total + (game.getPrice() * gameList.get(game));
-	    		System.out.println(game.getName());
-	    		System.out.println(gameList.get(game));
-	    		System.out.println(game.getPrice());
 	    					
 	    }
 	    out.println("<div class=\"total\">");
