@@ -22,25 +22,29 @@ async function getData (variable){
 		var additionalNumber = document.getElementsByClassName("additionalPayments")[i].getElementsByTagName("input")[0];
 		var additionalCVC = document.getElementsByClassName("additionalPayments")[i].getElementsByTagName("input")[1];
 		var additionalDate = document.getElementsByClassName("additionalPayments")[i].getElementsByTagName("input")[2];
+		var hiddenID = document.getElementsByClassName("additionalPayments")[i].getElementsByTagName("input")[3];
 		console.log(additionalNumber);
 		console.log(additionalCVC);
 		console.log(additionalDate);
 		additionalNumber.value = data[i].cardNumber;
 		additionalCVC.value = data[i].cvc;
 		additionalDate.value = data[i].expirationDate;
+		hiddenID.value = data[i].id;
 	}
 
 
 }
-function updateCard(){
+function updateCard(card){
+	console.log(card);
 	console.log("updating...");
 	var number = document.getElementById("cardNumber").value;
 	var cvc = document.getElementById("cvc").value;
 	var date = document.getElementById("expDate").value;
+	var id = document.getElementById("paymentID").value;
 	var xhr = new XMLHttpRequest();
 	var url = "UpdatePaymentServlet";
 	xhr.open("POST", url, true);
-	var params = "payment_id="+2+"&card_number="+number+"&cvc="+cvc+"&expiration_date="+date;
+	var params = "payment_id="+id+"&card_number="+number+"&cvc="+cvc+"&expiration_date="+date;
 	console.log(params);
 	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhr.send(params);
@@ -98,7 +102,7 @@ var myvar = '                                        <div class="additionalPayme
 '                                                    <div class="form-group">'+
 '                                                        <label for="number"> DATE <span class="required">*</span></label>'+
 '														<input type="text" name="expDate" id="" class="form-control" placeholder="MM/YY">'+
-''+
+'														<input type="hidden" value="">																				'+
 '                                                        '+
 '                                                    </div>'+
 '                                                </li>'+

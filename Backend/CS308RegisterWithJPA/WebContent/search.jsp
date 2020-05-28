@@ -116,7 +116,7 @@
                     <div id="aside" class="col-md-3">
                         <!-- aside Widget -->
                         <div class="aside">
-                            <h3 class="aside-title">Categories</h3>
+<!--                             <h3 class="aside-title">Categories</h3>
                             <div class="checkbox-filter">
 
                                 <div class="input-checkbox">
@@ -127,7 +127,7 @@
                                         <small>(120)</small>
                                     </label>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <!-- /aside Widget -->
 

@@ -66,7 +66,7 @@ public class AddPaymentServlet extends HttpServlet {
 				Payment payment = new Payment();
 				payment.setCardNumber(cardNumber);
 				payment.setCVC(cvc);
-				payment.setEmail(email);
+//				payment.setEmail(email);
 				payment.setExpirationDate(expirationDate);
 				//payment.setID(id);
 				em.getTransaction().begin();

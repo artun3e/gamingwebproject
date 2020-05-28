@@ -68,7 +68,6 @@ public class UpdatePaymentServlet extends HttpServlet {
 				em.getTransaction().begin();
 				payment.setCardNumber(cNumber);
 				payment.setCVC(cvc);
-				payment.setEmail(email);
 				payment.setExpirationDate(date);
 				payment.setID(id);
 				em.getTransaction().commit();
