@@ -1,3 +1,187 @@
+$(document).ready(function() {
+
+	var date = [];
+	var total_money = [];
+	var trial = [];
+	
+	async function getData(trial) {	
+		const url = '/CS308RegisterWithJPA/search/fromDB/oneMonthSummary/';
+		const response = await
+			fetch(url);
+		const data_2 = await
+			response.json();
+		
+		//var string_data = JSON.stringify(data_2);
+		//console.log(string_data);
+		//var parsed = JSON.parse(string_data);
+		//console.log(parsed);
+		//console.log(typeof data_2);
+		//console.log(parsed.length);
+		for(var i = 0; i < data_2.length; i++){
+			//console.log(data_2[i].profit);
+			
+			trial.push(data_2[i].profit);
+		}
+		
+		return trial;
+		//parsed.forEach(element => parsed.push(element));
+		//for(var k in parsed) {
+		//	date.push(k);
+		//	total_money.push(parsed[k]);
+		//}
+	}
+	var json_data;
+	getData(trial).then(response => {
+	    json = JSON.stringify(response);
+	    
+	    console.log(response)
+	    console.log(response[3])
+	    json_data = response;
+	    
+	    for (var d1 = [], i = 0; 5 >= i; i += 1){
+	    	d1.push([i, 15]);
+	    	//console.log(d1[i]);
+		}
+	    for (var d2 = [], i = 0; 20 >= i; i += 1) 
+	    	d2.push([i, 10]);
+	    for (var d3 = [], i = 0; 31 >= i; i += 1) 
+	    	d3.push([i, response[i]]);
+	    	
+	    var options = {
+	        series: {
+	            shadowSize: 0,
+	            curvedLines: {
+	                apply: !0,
+	                active: !0,
+	                monotonicFit: !0
+	            },
+	            lines: {
+	                show: !1,
+	                lineWidth: 0,
+	                fill: 1
+	            }
+	        },
+	        grid: {
+	            borderWidth: 0,
+	            labelMargin: 10,
+	            hoverable: !0,
+	            clickable: !0,
+	            mouseActiveRadius: 6
+	        },
+	        xaxis: {
+	            tickDecimals: 0,
+	            ticks: !1
+	        },
+	        yaxis: {
+	            tickDecimals: 0,
+	            ticks: !1
+	        },
+	        legend: {
+	            show: !1
+	        }
+	    };
+	    $("#curved-line-chart")[0] && $.plot($("#curved-line-chart"), [{
+	        data: total_money,
+	        lines: {
+	            show: !0,
+	            fill: .98
+	        },
+	        label: "Product 1",
+	        stack: !0,
+	        color: "#e3e3e3"
+	    }, {
+	        data: d3,
+	        lines: {
+	            show: !0,
+	            fill: .98
+	        },
+	        label: "Product 2",
+	        stack: !0,
+	        color: "#00c292"
+	    }], options), $(".flot-chart")[0] && ($(".flot-chart").bind("plothover", function(event, pos, item) {
+	        if (item) {
+	            var x = item.datapoint[0].toFixed(2),
+	                y = item.datapoint[1].toFixed(2);
+	            $(".flot-tooltip").html(item.series.label + " of " + x + " = " + y).css({
+	                top: item.pageY + 5,
+	                left: item.pageX + 5
+	            }).show()
+	        } else $(".flot-tooltip").hide()
+	    }), $("<div class='flot-tooltip' class='chart-tooltip'></div>").appendTo("body"));
+
+		
+		
+			
+			function sparklineBar(id, values, height, barWidth, barColor, barSpacing) {
+				$("." + id).sparkline(values, {
+					type: "bar",
+					height: height,
+					barWidth: barWidth,
+					barColor: barColor,
+					barSpacing: barSpacing
+				})
+			}
+
+			function sparklineLine(id, values, width, height, lineColor, fillColor, lineWidth, maxSpotColor, minSpotColor, spotColor, spotRadius, hSpotColor, hLineColor) {
+				$("." + id).sparkline(values, {
+					type: "line",
+					width: width,
+					height: height,
+					lineColor: lineColor,
+					fillColor: fillColor,
+					lineWidth: lineWidth,
+					maxSpotColor: maxSpotColor,
+					minSpotColor: minSpotColor,
+					spotColor: spotColor,
+					spotRadius: spotRadius,
+					highlightSpotColor: hSpotColor,
+					highlightLineColor: hLineColor
+				})
+			}
+
+			function sparklinePie(id, values, width, height, sliceColors) {
+				$("." + id).sparkline(values, {
+					type: "pie",
+					width: width,
+					height: height,
+					sliceColors: sliceColors,
+					offset: 0,
+					borderWidth: 0
+				})
+			}
+
+			function easyPieChart(id, trackColor, scaleColor, barColor, lineWidth, lineCap, size) {
+				$("." + id).easyPieChart({
+					trackColor: trackColor,
+					scaleColor: scaleColor,
+					barColor: barColor,
+					lineWidth: lineWidth,
+					lineCap: lineCap,
+					size: size
+				})
+			}
+			$(".stats-bar")[0] && sparklineBar("stats-bar", [6, 4, 8, 6, 5, 6, 7, 8, 3, 5, 9, 5, 8, 4], "35px", 3, "#00c292", 2), $(".stats-bar-2")[0] && sparklineBar("stats-bar-2", [4, 7, 6, 2, 5, 3, 8, 6, 6, 4, 8, 6, 5, 8], "35px", 3, "#01c0c8", 2), $(".stats-line")[0] && sparklineLine("stats-line", [9, 4, 6, 5, 6, 4, 5, 7, 9, 3, 6, 5], 68, 35, "#fb9678", "#fb9678", 1.25, "#fb9678", "#fb9678", "#fb9678", 3, "#fb9678", "#fb9678"), $(".stats-line-2")[0] && sparklineLine("stats-line-2", [5, 6, 3, 9, 7, 5, 4, 6, 5, 6, 4, 9], 68, 35, "#00c292", "#00c292", 1.25, "#00c292", "#00c292", "#00c292", 3, "#00c292", "#00c292"), $(".stats-pie")[0] && sparklinePie("stats-pie", [20, 35, 30, 5], 45, 45, ["#fff", "rgba(255,255,255,0.7)", "rgba(255,255,255,0.4)", "rgba(255,255,255,0.2)"]), $(".dash-widget-visits")[0] && sparklineLine("dash-widget-visits", [9, 4, 6, 5, 6, 4, 5, 7, 9, 3, 6, 5], "100%", "70px", "#00c292", "#00c292", 2, "#00c292", "#00c292", "#00c292", 5, "#00c292", "#00c292"), $(".main-pie")[0] && easyPieChart("main-pie", "rgba(255,255,255,0.2)", "rgba(255,255,255,0)", "rgba(255,255,255,0.7)", 2, "butt", 148), $(".sub-pie-1")[0] && easyPieChart("sub-pie-1", "rgba(255,255,255,0.2)", "rgba(255,255,255,0)", "rgba(255,255,255,0.7)", 2, "butt", 90), $(".sub-pie-2")[0] && easyPieChart("sub-pie-2", "rgba(255,255,255,0.2)", "rgba(255,255,255,0)", "rgba(255,255,255,0.7)", 2, "butt", 90)
+		
+
+	});
+	//console.log(date);
+	
+	//console.log(trial.length);
+	console.log(json_data);
+	//var trial_2 = trial.values();
+	//console.log(trial_2 );
+	//
+	//var my_profit = [];
+	//for(var k in total_money) {
+	//	my_profit.push(total_money[k]);
+	//}
+	//console.log(my_profit);
+	//
+	//
+	//console.log(total_money[0]);
+});
+
+
 (function ($) {
  "use strict";
  
@@ -81,160 +265,11 @@
  /*----------------------------
  jQuery curvedLines
 ------------------------------ */
-	
-	async function getData() {	
-		const url = '/CS308RegisterWithJPA/search/fromDB/oneMonthSummary/';
-		const response = await
-			fetch(url);
-		const data_2 = await
-			response.json();
-		
-		var string_data = JSON.stringify(data_2);
-		//console.log(string_data);
-		var parsed = JSON.parse(string_data);
-		//console.log(parsed);
-		//console.log(typeof data_2);
-		//console.log(parsed.length);
-		
-		for(var k in parsed) {
-			date.push(k);
-			total_money.push(parsed[k]);
-		}
-	}
-	var date = [];
-	var total_money = [];
-	getData();
-	
-	console.log(date);
-	console.log(total_money);
-	
-	console.log(total_money[0]);
-	
-    for (var d1 = [], i = 0; 5 >= i; i += 1){
-    	d1.push([i, 15]);
-    	//console.log(d1[i]);
-	}
-    console.log(d1);
-    for (var d2 = [], i = 0; 20 >= i; i += 1) 
-    	d2.push([i, 10]);
-    for (var d3 = [], i = 0; 5 >= i; i += 1) 
-    	d3.push([i, 1]);
-    var options = {
-        series: {
-            shadowSize: 0,
-            curvedLines: {
-                apply: !0,
-                active: !0,
-                monotonicFit: !0
-            },
-            lines: {
-                show: !1,
-                lineWidth: 0,
-                fill: 1
-            }
-        },
-        grid: {
-            borderWidth: 0,
-            labelMargin: 10,
-            hoverable: !0,
-            clickable: !0,
-            mouseActiveRadius: 6
-        },
-        xaxis: {
-            tickDecimals: 0,
-            ticks: !1
-        },
-        yaxis: {
-            tickDecimals: 0,
-            ticks: !1
-        },
-        legend: {
-            show: !1
-        }
-    };
-    $("#curved-line-chart")[0] && $.plot($("#curved-line-chart"), [{
-        data: total_money,
-        lines: {
-            show: !0,
-            fill: .98
-        },
-        label: "Product 1",
-        stack: !0,
-        color: "#e3e3e3"
-    }, {
-        data: d3,
-        lines: {
-            show: !0,
-            fill: .98
-        },
-        label: "Product 2",
-        stack: !0,
-        color: "#00c292"
-    }], options), $(".flot-chart")[0] && ($(".flot-chart").bind("plothover", function(event, pos, item) {
-        if (item) {
-            var x = item.datapoint[0].toFixed(2),
-                y = item.datapoint[1].toFixed(2);
-            $(".flot-tooltip").html(item.series.label + " of " + x + " = " + y).css({
-                top: item.pageY + 5,
-                left: item.pageX + 5
-            }).show()
-        } else $(".flot-tooltip").hide()
-    }), $("<div class='flot-tooltip' class='chart-tooltip'></div>").appendTo("body"));
 
 	
 	
-		
-		function sparklineBar(id, values, height, barWidth, barColor, barSpacing) {
-			$("." + id).sparkline(values, {
-				type: "bar",
-				height: height,
-				barWidth: barWidth,
-				barColor: barColor,
-				barSpacing: barSpacing
-			})
-		}
-
-		function sparklineLine(id, values, width, height, lineColor, fillColor, lineWidth, maxSpotColor, minSpotColor, spotColor, spotRadius, hSpotColor, hLineColor) {
-			$("." + id).sparkline(values, {
-				type: "line",
-				width: width,
-				height: height,
-				lineColor: lineColor,
-				fillColor: fillColor,
-				lineWidth: lineWidth,
-				maxSpotColor: maxSpotColor,
-				minSpotColor: minSpotColor,
-				spotColor: spotColor,
-				spotRadius: spotRadius,
-				highlightSpotColor: hSpotColor,
-				highlightLineColor: hLineColor
-			})
-		}
-
-		function sparklinePie(id, values, width, height, sliceColors) {
-			$("." + id).sparkline(values, {
-				type: "pie",
-				width: width,
-				height: height,
-				sliceColors: sliceColors,
-				offset: 0,
-				borderWidth: 0
-			})
-		}
-
-		function easyPieChart(id, trackColor, scaleColor, barColor, lineWidth, lineCap, size) {
-			$("." + id).easyPieChart({
-				trackColor: trackColor,
-				scaleColor: scaleColor,
-				barColor: barColor,
-				lineWidth: lineWidth,
-				lineCap: lineCap,
-				size: size
-			})
-		}
-		$(".stats-bar")[0] && sparklineBar("stats-bar", [6, 4, 8, 6, 5, 6, 7, 8, 3, 5, 9, 5, 8, 4], "35px", 3, "#00c292", 2), $(".stats-bar-2")[0] && sparklineBar("stats-bar-2", [4, 7, 6, 2, 5, 3, 8, 6, 6, 4, 8, 6, 5, 8], "35px", 3, "#01c0c8", 2), $(".stats-line")[0] && sparklineLine("stats-line", [9, 4, 6, 5, 6, 4, 5, 7, 9, 3, 6, 5], 68, 35, "#fb9678", "#fb9678", 1.25, "#fb9678", "#fb9678", "#fb9678", 3, "#fb9678", "#fb9678"), $(".stats-line-2")[0] && sparklineLine("stats-line-2", [5, 6, 3, 9, 7, 5, 4, 6, 5, 6, 4, 9], 68, 35, "#00c292", "#00c292", 1.25, "#00c292", "#00c292", "#00c292", 3, "#00c292", "#00c292"), $(".stats-pie")[0] && sparklinePie("stats-pie", [20, 35, 30, 5], 45, 45, ["#fff", "rgba(255,255,255,0.7)", "rgba(255,255,255,0.4)", "rgba(255,255,255,0.2)"]), $(".dash-widget-visits")[0] && sparklineLine("dash-widget-visits", [9, 4, 6, 5, 6, 4, 5, 7, 9, 3, 6, 5], "100%", "70px", "#00c292", "#00c292", 2, "#00c292", "#00c292", "#00c292", 5, "#00c292", "#00c292"), $(".main-pie")[0] && easyPieChart("main-pie", "rgba(255,255,255,0.2)", "rgba(255,255,255,0)", "rgba(255,255,255,0.7)", 2, "butt", 148), $(".sub-pie-1")[0] && easyPieChart("sub-pie-1", "rgba(255,255,255,0.2)", "rgba(255,255,255,0)", "rgba(255,255,255,0.7)", 2, "butt", 90), $(".sub-pie-2")[0] && easyPieChart("sub-pie-2", "rgba(255,255,255,0.2)", "rgba(255,255,255,0)", "rgba(255,255,255,0.7)", 2, "butt", 90)
 	
-
+    
 	
 		/*--------------------------
 		 Bar chart Active Class
@@ -406,5 +441,5 @@
     }
 
 	
- 
+    
 })(jQuery); 
