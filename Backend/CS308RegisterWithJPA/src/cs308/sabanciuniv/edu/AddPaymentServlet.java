@@ -63,10 +63,10 @@ public class AddPaymentServlet extends HttpServlet {
 				 EntityManager em = emf.createEntityManager();
 				 
 				 //Payment(int id,String cardNumber, String email, String cvc, String expirationDate)
-				Payment payment = new Payment();
+				Payment payment = new Payment(user);
 				payment.setCardNumber(cardNumber);
 				payment.setCVC(cvc);
-//				payment.setEmail(email);
+				payment.getEmail(); // new email get it from user
 				payment.setExpirationDate(expirationDate);
 				//payment.setID(id);
 				em.getTransaction().begin();

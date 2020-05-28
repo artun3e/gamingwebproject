@@ -76,6 +76,11 @@ public class Payment {
 	    		this.cvc = cvc;	
 	    		this.expirationDate = expirationDate;
 	    }
+	    	
+	    	public Payment(User user){
+	    		this.user = user;	
+	    	}
+	    	
 	    	public Payment() {
 	    	}	
 	    	  @GET
