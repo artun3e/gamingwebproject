@@ -87,7 +87,7 @@
                     <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="RPG">RPG</a></li>
                     <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="Strategy">Strategy</span></a>
 
-                    <li style="margin-left: 5%; margin-top: 12px;"><input id="search"  type="text" placeholder="What are you looking for?" onkeydown="if (event.keyCode == 13) { search(); }"></li>
+                    <li style="margin-left: 5%; margin-top: 6px;"><input id="search"  type="text" placeholder="What are you looking for?" onkeydown="if (event.keyCode == 13) { search(); }"></li>
                     <li class="dropdown" style="margin-left: 5%;">
                     	<a class="fa fa-user" style="font-size: 34px; color: grey;"></a>
 
@@ -111,14 +111,20 @@
                      <li class="dropdown" style="margin-left: 5%;">
                     	<a class="fa fa-shopping-cart" href="shoppingCart.jsp" style="font-size: 34px; color: grey;"></a>
                     </li>
-                    
-                   	<%
-                        if(session.getAttribute("user") != null)
-                        {
-                            Object obj = session.getAttribute("user");
-                            User user = (User) obj;
+                    <% 
+	                    session = request.getSession();
+	                    session = request.getSession();
+					    if(session.getAttribute("user") != null)
+					    {
+					        Object temp = session.getAttribute("user");
+					        User user = (User) temp;
+					        if(user.getUserType() == User.userType.Admin || user.getUserType() == User.userType.ProductManager || user.getUserType() == User.userType.SalesManager){
+					        	out.println("<li class=\"dropdown\" style=\"margin-left: 5%;\">");	
+					        		out.println("<a class=\"fa fa-shield\" href=\"adminPanel.jsp\" style=\"font-size: 34px; color: grey;\"></a>");	
+					        	out.println("</li>");	
+					        }
                             out.print("<p style=\"margin-left: 5%;margin-top: 8px;\">"+user.getName()+"</p>");
-                        }
+					    }
                    	%>
                 </ul>
             </div>
@@ -206,6 +212,7 @@
                         </div> -->
                     </div>
                 </div>
+                <div class="aside">
                 <h3 class="aside-title">RATINGS</h3>
                             <div class="checkbox-filter">
                                 <div class="input-checkbox" >
@@ -261,7 +268,7 @@
                                 </div>
 
                             </div>
-
+  </div>
                 
                 <div class="aside">
                     <h3 class="aside-title">YOU MIGHT LIKE</h3>
