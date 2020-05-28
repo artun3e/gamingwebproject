@@ -189,7 +189,7 @@
                                                 </li>
                                                 </ul>
                                             <a href="#" onclick="updateCard(this)" class="btn btn-color margin-top"><i class="fa fa-pencil"></i> Update</a>
-                                            <a href=""  onclick="deleteCard()"class="btn btn-color margin-top"><i class="fa fa-pencil"></i> Delete</a>
+                                            <a href=""  onclick="deleteCard(this)"class="btn btn-color margin-top"><i class="fa fa-pencil"></i> Delete</a>
                                             <br><br>
                                     
                                     </div>
