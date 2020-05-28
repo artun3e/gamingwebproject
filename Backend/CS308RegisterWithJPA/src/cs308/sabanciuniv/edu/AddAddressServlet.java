@@ -53,7 +53,7 @@ public class AddAddressServlet extends HttpServlet {
 	             System.out.println("You are logged in!!!");
 	             
 	             String email = user.getEmail(); // also you can use request.getParameter for email
-	             int id = Integer.parseInt(request.getParameter("address_id"));
+//	             int id = Integer.parseInt(request.getParameter("address_id")); // not necessary since id is created automatically 
 	 	    	 String address = request.getParameter("address");
 	 	    	 String city = request.getParameter("city");
 	 	    	 String phoneNumber = request.getParameter("phone_number");

@@ -17,7 +17,6 @@
                <!-- Library CSS -->
         <link rel="stylesheet" href="css_myAccount/bootstrap.css">
         <link rel="stylesheet" href="css_myAccount/bootstrap-theme.css">
-        <link rel="stylesheet" href="css_myAccount/fonts/font-awesome/css_myAccount/font-awesome.css">
         <link rel="stylesheet" href="css_myAccount/animations.css" media="screen">
         <link rel="stylesheet" href="css_myAccount/superfish.css" media="screen">
         <link rel="stylesheet" href="css_myAccount/team-member.css" media="screen">
@@ -32,7 +31,6 @@
         <link href="css_myAccount/switcher.css" rel="stylesheet">
         <link href="css_myAccount/spectrum.css" rel="stylesheet">
         <!-- Favicons -->
-        <link rel="shortcut icon" href="img/ico/favicon.ico">
         <link rel="apple-touch-icon" href="img/ico/apple-touch-icon.png">
         <link rel="apple-touch-icon" sizes="72x72" href="img/ico/apple-touch-icon-72.png">
         <link rel="apple-touch-icon" sizes="114x114" href="img/ico/apple-touch-icon-114.png">
@@ -166,12 +164,14 @@
                         <div class="row">
                             <!-- Left Section -->
                             <div class="col-sm-9 col-md-9 col-lg-9">
+                            
                                 <div class="title-box">
                                     <hr/>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-6 col-md-6 info-box">
-                                        <h3>Current  Address</h3>
+										<div class="additionalAddress">
+											                                        <h3>Current  Address</h3>
                                         <ul class="list-unstyled">
                                                 <li>
                                                     <div class="form-group">
@@ -197,13 +197,14 @@
 														<% 
                                                         out.println("<input type='text' name='phone' id='phone' class='form-control' >" ); 
                                                         %>
-                                                        
+                                                        <input type="hidden" value="">	
                                                     </div>
                                                 </li>
                                                 </ul>
-                                            <a href="#" class="btn btn-color margin-top"><i class="fa fa-pencil"></i> Update </a>
-                                            <a href="#" class="btn btn-color margin-top"><i class="fa fa-trash"></i> Delete</a>
+                                            <a href="#" onclick="updateAddress(this)" class="btn btn-color margin-top"><i class="fa fa-pencil"></i> Update </a>
+                                            <a href="#" onclick="deleteAddress(this)" class="btn btn-color margin-top"><i class="fa fa-trash"></i> Delete</a>
                                             <br><br>
+										</div>
                                     </div>
                                    <div class="col-sm-6 col-md-6 info-box">
                                         <h3>Add an Address</h3>
@@ -212,7 +213,7 @@
                                                     <div class="form-group">
                                                         <label for="number"> Address <span class="required">*</span></label>
 														<% 
-                                                        out.println("<input type='text' name='address' id='address' class='form-control' placeholder='Orta Mah. Universite Cad.' >" ); 
+                                                        out.println("<input type='text' name='add_address' id='add_address' class='form-control' placeholder='Orta Mah. Universite Cad.' >" ); 
                                                         %>
 
                                                     </div>
@@ -221,7 +222,7 @@
                                                     <div class="form-group">
                                                         <label for="number"> Region / City <span class="required">*</span></label>
 														<% 
-                                                        out.println("<input type='text' name='city' id='city' class='form-control' placeholder='Tuzla / Istanbul' >" ); 
+                                                        out.println("<input type='text' name='add_city' id='add_city' class='form-control' placeholder='Tuzla / Istanbul' >" ); 
                                                         %>
                                                         
                                                     </div>
@@ -230,13 +231,13 @@
                                                     <div class="form-group">
                                                         <label for="number"> Phone Number <span class="required">*</span></label>
 														<% 
-                                                        out.println("<input type='text' name='phone' id='phone' class='form-control' placeholder='5555555555' >" ); 
+                                                        out.println("<input type='text' name='add_phone' id='add_phone' class='form-control' placeholder='5555555555' >" ); 
                                                         %>
                                                         
                                                     </div>
                                                 </li>
                                                 </ul>
-                                            <a href="#" class="btn btn-color margin-top"><i class="fa fa-plus"></i> Add </a>
+                                            <a href="#" onclick="addAddress()" class="btn btn-color margin-top"><i class="fa fa-plus"></i> Add </a>
                                             <br><br>
                                     </div>
                                 </div>
