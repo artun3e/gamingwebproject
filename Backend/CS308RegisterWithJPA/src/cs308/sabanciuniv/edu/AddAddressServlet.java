@@ -63,11 +63,10 @@ public class AddAddressServlet extends HttpServlet {
 				 EntityManager em = emf.createEntityManager();
 				 
 				 //Payment(int id,String cardNumber, String email, String cvc, String expirationDate)
-				Address myaddress = new Address();
+				Address myaddress = new Address(user);
 				myaddress.setAddress(address);
 				myaddress.setCity(city);
 				myaddress.setPhoneNumber(phoneNumber);
-				
 				//payment.setID(id);
 				em.getTransaction().begin();
 				em.persist(myaddress);

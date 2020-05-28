@@ -78,6 +78,11 @@ public class Address {
 	    		this.city = city;	
 	    		this.phoneNumber = phoneNumber;
 	    }
+	    	
+	    	public Address(User user){
+	    		this.user = user;
+	    	}
+	    	
 	    	public Address() {
 	    	}	
 	    	  @GET
