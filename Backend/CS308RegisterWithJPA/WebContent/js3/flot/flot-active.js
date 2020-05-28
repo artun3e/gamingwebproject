@@ -23,7 +23,7 @@ $(document).ready(function() {
 			trial.push(data_2[i].profit);
 		}
 		
-		return trial;
+		return data_2;
 		//parsed.forEach(element => parsed.push(element));
 		//for(var k in parsed) {
 		//	date.push(k);
@@ -32,11 +32,14 @@ $(document).ready(function() {
 	}
 	var json_data;
 	getData(trial).then(response => {
-	    json = JSON.stringify(response);
+json = JSON.stringify(response);
 	    
-	    console.log(response)
-	    console.log(response[3])
-	    json_data = response;
+	    for(var i = 0; i < response.length; i++){
+			//console.log(data_2[i].profit);
+			
+			trial.push(response[i].profit);
+			date.push(response[i].date.substring(5, 10));
+		}
 	    
 	    for (var d1 = [], i = 0; 5 >= i; i += 1){
 	    	d1.push([i, 15]);
@@ -44,8 +47,8 @@ $(document).ready(function() {
 		}
 	    for (var d2 = [], i = 0; 20 >= i; i += 1) 
 	    	d2.push([i, 10]);
-	    for (var d3 = [], i = 0; 31 >= i; i += 1) 
-	    	d3.push([i, response[i]]);
+	    for (var d3 = [], i = 0; 29 >= i; i += 1) 
+	    	d3.push([i, trial[i]]);
 	    	
 	    var options = {
 	        series: {
@@ -95,7 +98,7 @@ $(document).ready(function() {
 	            show: !0,
 	            fill: .98
 	        },
-	        label: "Product 2",
+	        label: "Total Profit",
 	        stack: !0,
 	        color: "#00c292"
 	    }], options), $(".flot-chart")[0] && ($(".flot-chart").bind("plothover", function(event, pos, item) {

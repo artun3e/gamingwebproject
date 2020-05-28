@@ -151,13 +151,9 @@
                         </div>
                         <div id="Charts" class="tab-pane notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
-                                <li><a href="flot-charts.html">Flot Charts</a>
+                                <li><a href="admin_charts_flot.jsp">Flot Charts</a>
                                 </li>
-                                <li><a href="bar-charts.html">Bar Charts</a>
-                                </li>
-                                <li><a href="line-charts.html">Line Charts</a>
-                                </li>
-                                <li><a href="area-charts.html">Area Charts</a>
+                                <li><a href="admin_charts_area.jsp">Area Charts</a>
                                 </li>
                             </ul>
                         </div>
@@ -424,8 +420,6 @@
 <!-- main JS
     ============================================ -->
 <script src="./js3/main.js"></script>
-<!-- tawk chat JS
-    ============================================ -->
 
 </body>
 

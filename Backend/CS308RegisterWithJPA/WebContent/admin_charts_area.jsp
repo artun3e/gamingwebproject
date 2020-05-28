@@ -1,9 +1,9 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ page import="java.util.*"%>
-<%@ page import="cs308.sabanciuniv.edu.User" %>
-<%@ page import="cs308.sabanciuniv.edu.Games" %>
-<%@ page import="cs308.sabanciuniv.edu.GamesManager" %>
+<%@ page import="cs308.sabanciuniv.edu.User"%>
+<%@ page import="cs308.sabanciuniv.edu.Games"%>
 <%@ page import="cs308.sabanciuniv.edu.Order"%>
+<%@ page import="java.io.PrintWriter"%>
 <!DOCTYPE html>
 
 <html class="no-js" lang="">
@@ -41,6 +41,8 @@
     <!-- normalize CSS
 		============================================ -->
     <link rel="stylesheet" href="./css3/normalize.css">
+    <link rel="stylesheet" href="./css3/wave/waves.min.css">
+    <link rel="stylesheet" href="./css3/wave/button.css">
     <!-- mCustomScrollbar CSS
 		============================================ -->
     <link rel="stylesheet" href="./css3/scrollbar/jquery.mCustomScrollbar.min.css">
@@ -57,9 +59,7 @@
 		============================================ -->
     <link rel="stylesheet" href="./css3/main.css">
     <!-- style CSS
-    
 		============================================ -->
-	<link rel="stylesheet" href="./css3/jquery.dataTables.min.css">
     <link rel="stylesheet" href="style.css">
     <!-- responsive CSS
 		============================================ -->
@@ -67,11 +67,7 @@
     <!-- modernizr JS
 		============================================ -->
     <script src="./js3/vendor/modernizr-2.8.3.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="js/data_table_Cats.js"></script>
 </head>
-
 <body>
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -128,8 +124,8 @@
                     <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
                         <li ><a data-toggle="tab" href="#Home"><i class="notika-icon notika-house"></i> Home</a></li>
                         <li><a data-toggle="tab" href="#mailbox"><i class="notika-icon notika-mail"></i> Email</a></li>
-                        <li><a data-toggle="tab" href="#Charts"><i class="notika-icon notika-bar-chart"></i> Charts</a></li>
-                        <li class="active"><a data-toggle="tab" href="#Tables"><i class="notika-icon notika-windows"></i> Tables</a></li>
+                        <li class="active"><a data-toggle="tab" href="#Charts"><i class="notika-icon notika-bar-chart"></i> Charts</a></li>
+                        <li><a data-toggle="tab" href="#Tables"><i class="notika-icon notika-windows"></i> Tables</a></li>
                     </ul>
                     <div class="tab-content custom-menu-content">
                     	<div id="Home" class="tab-pane  notika-tab-menu-bg animated flipInX">
@@ -142,7 +138,7 @@
                             	<li><a href="mailPage.jsp">Compose Email</a></li>
                             </ul>
                         </div>
-                        <div id="Charts" class="tab-pane notika-tab-menu-bg animated flipInX">
+                        <div id="Charts" class="tab-pane active notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
                                 <li><a href="admin_charts_flot.jsp">Flot Charts</a>
                                 </li>
@@ -150,7 +146,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <div id="Tables" class="tab-pane active notika-tab-menu-bg animated flipInX">
+                        <div id="Tables" class="tab-pane notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
                             	<%
                             	session = request.getSession();
@@ -189,87 +185,27 @@
         </div>
     </div>
     <!-- Main Menu area End-->
-	<!-- Breadcomb area Start-->
-	<div class="breadcomb-area">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<div class="breadcomb-list">
-						<div class="row">
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-								<div class="breadcomb-wp">
-									<div class="breadcomb-icon">
-										<i class="notika-icon notika-windows"></i>
-									</div>
-									<div class="breadcomb-ctn">
-										<h2>Categories Table</h2>
-										<p>Welcome to Tech Market <span class="bread-ntd">Admin Panel Categories Table</span></p>
-									</div>
-								</div>
-							</div>
-							<!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
-								<div class="breadcomb-report">
-									<button data-toggle="tooltip" data-placement="left" title="Download Report" class="btn"><i class="notika-icon notika-sent"></i></button>
-								</div>
-							</div> -->
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Breadcomb area End-->
-    <!-- Data Table area Start-->
-    <div class="data-table-area">
+    <!-- Start Sale Statistic area-->
+    <div class="sale-statistic-area">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="data-table-list">
-                        <div class="basic-tb-hd">
-                            <h2>Games</h2>
-                            <p>This panel is for Admin to insert, update and delete categories.</p>
+            <div class="row" style="margin-top: -44px;">
+                <div class="col-lg-12 col-md-8 col-sm-7 col-xs-12">
+                    <div class="sale-statistic-inner notika-shadow mg-tb-30">
+                        <div class="curved-inner-pro">
+                            <div class="curved-ctn">
+                                <h2>Sales Statistics</h2>
+                                <p>Daily Total Margin for Past Month</p>
+                            </div>
                         </div>
-                        <a class='btn btn-success btn-block btn-lg' href="admin_Cat_add.jsp"
-										style="margin-left: auto; margin-right: auto; display: block; margin-top: 10px; margin-bottom: 10px">ADD CATEGORY</a>
-                        <div class="table-responsive">
-		                                <table id="data-table-basic" class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Update</th>
-                                        <th>Delete</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-	                                <%
-		                                GamesManager mg = new GamesManager();
-	                                	Set<String> AllCategories = (Set<String>)mg.getAllCategories();
-		                                for(String cat : AllCategories)
-		                                {
-		               						out.println("<tr>");
-		               							out.println("<td class=\"myName\">"+ cat +"</td>");
-		               							out.println("<td class=\"update\"> <a type='button' class='btn btn-success' onclick=\"toUpdate(this)\"> Update </a > </td>");
-	              								out.println("<td class=\"delete\"> <a type='button' class='btn btn-danger'  onclick=\"toDelete(this)\"> Delete </a > </td>");
-	           								out.println("</tr>");	
-		                                }
-	                                %>
-                                    
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Update</th>
-                                        <th>Delete</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
+                        <div class="area-chart-wp">
+	                        <canvas height="300px;" width="auto;" id="areachartfalse"></canvas>
+	                    </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Data Table area End-->
+    <!-- End Sale Statistic area-->
     <!-- Start Footer area-->
     <div class="footer-copyright-area">
         <div class="container">
@@ -307,42 +243,49 @@
     <!-- counterup JS
 		============================================ -->
     <script src="./js3/counterup/jquery.counterup.min.js"></script>
-    <script src="js/counterup/waypoints.min.js"></script>
+    <script src="./js3/counterup/waypoints.min.js"></script>
     <script src="./js3/counterup/counterup-active.js"></script>
     <!-- mCustomScrollbar JS
 		============================================ -->
     <script src="./js3/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <!-- jvectormap JS
+		============================================ -->
+    <script src="./js3/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="./js3/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="./js3/jvectormap/jvectormap-active.js"></script>
     <!-- sparkline JS
 		============================================ -->
     <script src="./js3/sparkline/jquery.sparkline.min.js"></script>
     <script src="./js3/sparkline/sparkline-active.js"></script>
-    <!-- flot JS
+    <!-- sparkline JS
 		============================================ -->
     <script src="./js3/flot/jquery.flot.js"></script>
     <script src="./js3/flot/jquery.flot.resize.js"></script>
+    <script src="./js3/flot/curvedLines.js"></script>
     <script src="./js3/flot/flot-active.js"></script>
     <!-- knob JS
 		============================================ -->
     <script src="./js3/knob/jquery.knob.js"></script>
     <script src="./js3/knob/jquery.appear.js"></script>
     <script src="./js3/knob/knob-active.js"></script>
-    <!--  Chat JS
-		============================================ -->
+    
     <script src="./js3/chat/jquery.chat.js"></script>
-    <!--  todo JS
-		============================================ -->
-    <script src="./js3/todo/jquery.todo.js"></script>
-	<!--  wave JS
+    <script src="./js3/charts/Chart.js"></script>
+    <script src="./js3/charts/area-chart.js"></script>
+    <!--  wave JS
 		============================================ -->
     <script src="./js3/wave/waves.min.js"></script>
     <script src="./js3/wave/wave-active.js"></script>
+    <!--  todo JS
+		============================================ -->
+    <script src="./js3/todo/jquery.todo.js"></script>
     <!-- plugins JS
 		============================================ -->
     <script src="./js3/plugins.js"></script>
-    <!-- Data Table JS
+	<!--  Chat JS
 		============================================ -->
-    <script src="./js3/data-table/jquery.dataTables.min.js"></script>
-    <script src="./js3/data-table/data-table-act.js"></script>
+    <script src="./js3/chat/moment.min.js"></script>
+    <script src="./js3/chat/jquery.chat.js"></script>
     <!-- main JS
 		============================================ -->
     <script src="./js3/main.js"></script>

@@ -41,6 +41,8 @@
     <!-- normalize CSS
 		============================================ -->
     <link rel="stylesheet" href="./css3/normalize.css">
+    <link rel="stylesheet" href="./css3/wave/waves.min.css">
+    <link rel="stylesheet" href="./css3/wave/button.css">
     <!-- mCustomScrollbar CSS
 		============================================ -->
     <link rel="stylesheet" href="./css3/scrollbar/jquery.mCustomScrollbar.min.css">
@@ -138,13 +140,9 @@
                         </div>
                         <div id="Charts" class="tab-pane notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
-                                <li><a href="flot-charts.html">Flot Charts</a>
+                                <li><a href="admin_charts_flot.jsp">Flot Charts</a>
                                 </li>
-                                <li><a href="bar-charts.html">Bar Charts</a>
-                                </li>
-                                <li><a href="line-charts.html">Line Charts</a>
-                                </li>
-                                <li><a href="area-charts.html">Area Charts</a>
+                                <li><a href="admin_charts_area.jsp">Area Charts</a>
                                 </li>
                             </ul>
                         </div>
@@ -187,63 +185,27 @@
         </div>
     </div>
     <!-- Main Menu area End-->
-    <!-- Start Status area -->
-    <div class="notika-status-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
-                        <div class="website-traffic-ctn">
-                            <h2><span class="counter">50,000</span></h2>
-                            <p>Total Website Traffics</p>
-                        </div>
-                        <div class="sparkline-bar-stats1">9,4,8,6,5,6,4,8,3,5,9,5</div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
-                        <div class="website-traffic-ctn">
-                            <h2><span class="counter">90,000</span>k</h2>
-                            <p>Website Impressions</p>
-                        </div>
-                        <div class="sparkline-bar-stats2">1,4,8,3,5,6,4,8,3,3,9,5</div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30 dk-res-mg-t-30">
-                        <div class="website-traffic-ctn">
-                            <h2>$<span class="counter">40,000</span></h2>
-                            <p>Total Online Sales</p>
-                        </div>
-                        <div class="sparkline-bar-stats3">4,2,8,2,5,6,3,8,3,5,9,5</div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30 dk-res-mg-t-30">
-                        <div class="website-traffic-ctn">
-                            <h2><span class="counter">1,000</span></h2>
-                            <p>Total Support Tickets</p>
-                        </div>
-                        <div class="sparkline-bar-stats4">2,4,8,4,5,7,4,7,3,5,7,5</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Status area-->
     <!-- Start Sale Statistic area-->
     <div class="sale-statistic-area">
         <div class="container">
-            <div class="row">
+            <div class="row" style="margin-top: -44px;">
                 <div class="col-lg-12 col-md-8 col-sm-7 col-xs-12">
                     <div class="sale-statistic-inner notika-shadow mg-tb-30">
                         <div class="curved-inner-pro">
                             <div class="curved-ctn">
                                 <h2>Sales Statistics</h2>
-                                <p>Vestibulum purus quam scelerisque, mollis nonummy metus</p>
+                                <p>Daily Total Margin for Past Month</p>
                             </div>
                         </div>
-                        <div id="curved-line-chart" class="flot-chart-sts flot-chart"></div>
+                        <div class="area-chart-wp">
+	                        <canvas height="300px;" width="auto;" id="areachartfalse"></canvas>
+	                    </div>
+	                    <div class="curved-inner-pro">
+	                    	<div class="curved-ctn">
+		                    	<p>Softened Curved Line Representation</p>
+		                    </div>
+                        </div>
+                        <div id="curved-line-chart" class="flot-chart-sts flot-chart" style="margin-left: 50px; margin-rigth: 50px; width:1028px;"></div>
                     </div>
                 </div>
             </div>
@@ -312,6 +274,10 @@
     <script src="./js3/knob/jquery.knob.js"></script>
     <script src="./js3/knob/jquery.appear.js"></script>
     <script src="./js3/knob/knob-active.js"></script>
+    
+    <script src="./js3/chat/jquery.chat.js"></script>
+    <script src="./js3/charts/Chart.js"></script>
+    <script src="./js3/charts/area-chart.js"></script>
     <!--  wave JS
 		============================================ -->
     <script src="./js3/wave/waves.min.js"></script>
@@ -329,9 +295,6 @@
     <!-- main JS
 		============================================ -->
     <script src="./js3/main.js"></script>
-	<!-- tawk chat JS
-		============================================ -->
-    <script src="./js3/tawk-chat.js"></script>
 </body>
 
 </html>
