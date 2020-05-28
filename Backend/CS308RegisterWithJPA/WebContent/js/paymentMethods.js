@@ -19,10 +19,13 @@ async function getData (variable){
 		additionalPaymentFields.append(divPayment);
 	}
 	for(var i=0; i<data.length; i++){		
+		var addPaymentDiv = document.getElementsByClassName("additionalPayments")[i];
+		console.log(addPaymentDiv);
 		var additionalNumber = document.getElementsByClassName("additionalPayments")[i].getElementsByTagName("input")[0];
 		var additionalCVC = document.getElementsByClassName("additionalPayments")[i].getElementsByTagName("input")[1];
 		var additionalDate = document.getElementsByClassName("additionalPayments")[i].getElementsByTagName("input")[2];
 		var hiddenID = document.getElementsByClassName("additionalPayments")[i].getElementsByTagName("input")[3];
+		addPaymentDiv.id = i;
 		console.log(additionalNumber);
 		console.log(additionalCVC);
 		console.log(additionalDate);
@@ -35,12 +38,13 @@ async function getData (variable){
 
 }
 function updateCard(card){
-	console.log(card);
+	var i = card.parentNode.id;
+	
 	console.log("updating...");
-	var number = document.getElementById("cardNumber").value;
-	var cvc = document.getElementById("cvc").value;
-	var date = document.getElementById("expDate").value;
-	var id = document.getElementById("paymentID").value;
+	var number = document.getElementsByClassName("additionalPayments")[i].getElementsByTagName("input")[0].value;
+	var cvc = document.getElementsByClassName("additionalPayments")[i].getElementsByTagName("input")[1].value;
+	var date = document.getElementsByClassName("additionalPayments")[i].getElementsByTagName("input")[2].value;
+	var id = document.getElementsByClassName("additionalPayments")[i].getElementsByTagName("input")[3].value;
 	var xhr = new XMLHttpRequest();
 	var url = "UpdatePaymentServlet";
 	xhr.open("POST", url, true);
@@ -85,7 +89,7 @@ var myvar = '                                        <div class="additionalPayme
 '                                                <li>'+
 '                                                    <div class="form-group">'+
 '                                                        <label for="number"> Card Number <span class="required">*</span></label>'+
-'														<input type="text" name="cardNumber" id="" class="form-control" placeholder="">'+
+'														<input type="text" name="cardNumber" id="" class="form-control">'+
 ''+
 '                                                        '+
 '                                                    </div>'+
@@ -93,7 +97,7 @@ var myvar = '                                        <div class="additionalPayme
 '                                                                                                <li>'+
 '                                                    <div class="form-group">'+
 '                                                        <label for="number"> CVC <span class="required">*</span></label>'+
-'														<input type="text" name="ccv" id="" class="form-control" placeholder="3 DIGIT">'+
+'														<input type="text" name="ccv" id="" class="form-control" >'+
 ''+
 '                                                        '+
 '                                                    </div>'+
@@ -101,13 +105,13 @@ var myvar = '                                        <div class="additionalPayme
 '                                                                                                <li>'+
 '                                                    <div class="form-group">'+
 '                                                        <label for="number"> DATE <span class="required">*</span></label>'+
-'														<input type="text" name="expDate" id="" class="form-control" placeholder="MM/YY">'+
+'														<input type="text" name="expDate" id="" class="form-control" >'+
 '														<input type="hidden" value="">																				'+
 '                                                        '+
 '                                                    </div>'+
 '                                                </li>'+
 '                                                </ul>'+
-'                                            <a href="#" onclick="updateCard()" class="btn btn-color margin-top"><i class="fa fa-pencil"></i> Update</a>'+
+'                                            <a href="#" onclick="updateCard(this)" class="btn btn-color margin-top"><i class="fa fa-pencil"></i> Update</a>'+
 '                                             <a href="#" onclick="deleteCard()" class="btn btn-color margin-top"><i class="fa fa-pencil"></i> Delete</a><p></p>'+
 '                                     </div>  ';
 	

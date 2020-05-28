@@ -164,7 +164,7 @@
                                                     <div class="form-group">
                                                         <label for="number"> Card Number <span class="required">*</span></label>
 														<% 
-                                                        out.println("<input type='text' name='cardNumber' id='cardNumber' class='form-control' placeholder='' >" ); 
+                                                        out.println("<input type='text' name='cardNumber' id='cardNumber' class='form-control' placeholder='16 Digit Card Number' >" ); 
                                                         %>
                                                         
                                                     </div>
