@@ -51,7 +51,6 @@ async function getData(value) {
 	var id = document.getElementById('id');
 	var name = document.getElementById('name');
 	var publisher = document.getElementById('publisher');
-	var categories = document.getElementById('categories');
 	var price = document.getElementById('price');
 	var shortdescription = document.getElementById('shortdescription');
 	var detaileddescription = document.getElementById('detaileddescription');
@@ -61,7 +60,10 @@ async function getData(value) {
 	var screenshots = document.getElementById('screenshots');
 	var headerimage = document.getElementById('headerimage');
 	var platforms = document.getElementById('platforms');
-
+	var sale_price = document.getElementById('sale_price');
+	var stock = document.getElementById('stock');
+	var checkbox_new = document.getElementById('checkbox_new');
+	
 	id.value = data[0].appID;
 	name.value = data[0].name;
 	publisher.value = data[0].publisher;
@@ -87,6 +89,8 @@ async function getData(value) {
 	options.innerHTML = str_html;
 	
 	price.value = data[0].price + "$";
+	sale_price.value = data[0].salePrice + "$";
+	stock.value = data[0].stock;
 	shortdescription.value = data[0].short_description;
 	detaileddescription.value = data[0].detailed_description;
 	minimum.value = data[0].minimum;
@@ -108,7 +112,8 @@ async function getData(value) {
 	screenshots.value = string_we_need;
 
 	headerimage.value = data[0].header_image;
-	platforms.value = data[0].platforms.replace(/;/g, ',');;
+	platforms.value = data[0].platforms.replace(/;/g, ',');
+	checkbox_new.checked = data[0].onSale;
 }
 
 var parsed = parseURLParams(window.location.href);

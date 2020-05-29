@@ -77,6 +77,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 	<script src="js/update_item_update.js"></script>
+	
+	<link rel="stylesheet" href="./css3/checkbox_new.css">
 </head>
 
 <body>
@@ -259,12 +261,12 @@
 										<input type="text" class="form-control" name="publisher" id="publisher" placeholder="Publisher"/>
 									</div>
 								</div>
-								<div class="form-group row" style="margin-left: 14px;">
+								<div class="form-group row" width="700px;" style="margin-left: 14px;">
 									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">Categories: </label>
 									<div class="col-sm-10">
 										
 										<div class="selectRow" >
-										    <select class="" id="multipleSelectExample" data-placeholder="Select an option" multiple="" style="width: 745px;">
+										    <select class="" id="multipleSelectExample" data-placeholder="Select an option" multiple="" style="width: 910px;">
 										        <option selected=1 value="1">Option 1</option>
 										        <option value="2">Option 2</option>
 										        <option value="3">Option 3</option>
@@ -279,6 +281,18 @@
 									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">Price: </label>
 									<div class="col-sm-10">
 										<input type="text" class="form-control" name="price" id="price" placeholder="Price"/>
+									</div>
+								</div>
+								<div class="form-group row" style="margin-left: 14px;">
+									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">Sale Price: </label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" name="sale_price" id="sale_price" placeholder="Sale Price"/>
+									</div>
+								</div>
+								<div class="form-group row" style="margin-left: 14px;">
+									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">Stock: </label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" name="stock" id="stock" placeholder="Stock"/>
 									</div>
 								</div>
 								<div class="form-group row" style="margin-left: 14px;">
@@ -329,6 +343,17 @@
 										<input type="text" class="form-control" name="platforms" id="platforms" placeholder="Platforms"/>
 									</div>
 								</div>
+								<div class="form-group row" style="margin-left: 28px;">
+								
+									<div class="checkbox_2">
+							            <label style="font-size: 1.8em">
+							                <input id="checkbox_new" type="checkbox" value="" checked>
+							                <span class="cr_2"><i class="cr-icon fa fa-check"></i></span>
+							                On Sale
+							            </label>
+							        </div>
+						        </div>
+								<br/>
 								<button type="submit" class="btn btn-primary btn-block btn-lg" name="edit" id="update_button" >Update</button>
 
 								<a class='btn btn-success btn-block btn-lg' href="admin_Games_table.jsp"

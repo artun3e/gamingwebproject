@@ -1,0 +1,39 @@
+.checkbox_2 label:after{
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.checkbox_2 .cr_2{
+    position: relative;
+    display: inline-block;
+    border: 1px solid #a9a9a9;
+    border-radius: .25em;
+    width: 1.3em;
+    height: 1.3em;
+    float: left;
+    margin-right: .5em;
+}
+
+.checkbox_2 .cr_2 .cr-icon{
+    position: absolute;
+    font-size: .8em;
+    line-height: 0;
+    top: 50%;
+    left: 20%;
+}
+
+.checkbox_2 label input[type="checkbox"]{
+    display: none;
+}
+
+.checkbox_2 label input[type="checkbox"] + .cr_2 > .cr-icon{
+    transform: scale(3) rotateZ(-20deg);
+    opacity: 0;
+    transition: all .3s ease-in;
+}
+
+.checkbox_2 label input[type="checkbox"]:checked + .cr_2 > .cr-icon {
+    transform: scale(1) rotateZ(0deg);
+    opacity: 1;
+}

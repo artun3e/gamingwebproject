@@ -53,8 +53,13 @@ public class GamesManager {
                 obj.setDetailed_description(rs.getString("detailed_description"));
                 obj.setAbout_the_game(rs.getString("about_the_game"));
                 obj.setShort_description(rs.getString("short_description"));
+                obj.setSalePrice(rs.getDouble("salePrice"));
+                obj.setOnSale(rs.getBoolean("onSale"));
+                obj.setStock(rs.getInt("stock"));
                 resultList.add(obj);
             }
+            System.out.println("New Try");
+            
             conn.close();
             conn = null;
             ps = null;
