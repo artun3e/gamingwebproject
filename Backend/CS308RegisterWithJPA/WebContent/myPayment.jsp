@@ -156,7 +156,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-6 col-md-6 info-box">
-                                    <div class="additionalPayments">
+                                    <div class="additionalPayments" id=0>
                                     
                                                                             <h3>Default Payment Method</h3>
                                         <ul class="list-unstyled">
@@ -184,7 +184,7 @@
 														<% 
                                                         out.println("<input type='text' name='expDate' id='expDate' class='form-control' placeholder='MM/YY' >" ); 
                                                         %>
-                                                        <input type="hidden" id="paymentID" name="paymentID" value="">
+                                                        <input type="hidden" id="paymentID" name="paymentID" value=-1>
                                                     </div>
                                                 </li>
                                                 </ul>

@@ -38,48 +38,93 @@ async function getData (variable){
 
 }
 function updateCard(card){
-	var i = card.parentNode.id;
 	
-	console.log("updating...");
-	var number = document.getElementsByClassName("additionalPayments")[i].getElementsByTagName("input")[0].value;
-	var cvc = document.getElementsByClassName("additionalPayments")[i].getElementsByTagName("input")[1].value;
-	var date = document.getElementsByClassName("additionalPayments")[i].getElementsByTagName("input")[2].value;
+	var i = card.parentNode.id;
+	console.log(i);
 	var id = document.getElementsByClassName("additionalPayments")[i].getElementsByTagName("input")[3].value;
-	var xhr = new XMLHttpRequest();
-	var url = "UpdatePaymentServlet";
-	xhr.open("POST", url, true);
-	var params = "payment_id="+id+"&card_number="+number+"&cvc="+cvc+"&expiration_date="+date;
-	console.log(params);
-	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhr.send(params);
+	console.log(id);
+	if (id != -1){
+		console.log("updating...");
+		var number = document.getElementsByClassName("additionalPayments")[i].getElementsByTagName("input")[0].value;
+		if(number.length == 16){
+			var cvc = document.getElementsByClassName("additionalPayments")[i].getElementsByTagName("input")[1].value;
+			if(cvc.length == 3){
+				var date = document.getElementsByClassName("additionalPayments")[i].getElementsByTagName("input")[2].value;
+				if(date.length == 5){
+					
+					var xhr = new XMLHttpRequest();
+					var url = "UpdatePaymentServlet";
+					xhr.open("POST", url, true);
+					var params = "payment_id="+id+"&card_number="+number+"&cvc="+cvc+"&expiration_date="+date;
+					console.log(params);
+					xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+					xhr.send(params);
+				}
+				else
+					alert("You entered a wrong expiration date.")
+
+			}
+			else
+				alert("You entered a wrong CVC code.")
+			
+		}
+		else
+			alert("You entered a wrong card number.");
+	}
+	else 
+		alert("You do not have any payment methods to update. Please add one.")
 }
 function addCard(){
 	console.log("adding...");
 	var number = document.getElementById("add_cardNumber").value;
-	var cvc = document.getElementById("add_cvc").value;
-	var date = document.getElementById("add_expDate").value;
-	var xhr = new XMLHttpRequest();
-	var url = "AddPaymentServlet";
-	xhr.open("POST", url, true);
-	var params = "card_number="+number+"&cvc="+cvc+"&expiration_date="+date;
-	console.log(params);
-	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhr.send(params);
+	if(number.length == 16){
+		var cvc = document.getElementById("add_cvc").value;
+		if(cvc.length == 3){
+			var date = document.getElementById("add_expDate").value;
+				if (date.length == 5){
+				var xhr = new XMLHttpRequest();
+				var url = "AddPaymentServlet";
+				xhr.open("POST", url, true);
+				var params = "card_number="+number+"&cvc="+cvc+"&expiration_date="+date;
+				console.log(params);
+				xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xhr.send(params);
+				}
+				else
+					alert("Your expiration date is not valid.");
+				}
+		else
+			alert("Your CVC code should be 3 digits.");
+		}
+	else 
+		alert("Your card number should be 16 digits.")
 }
 
 function deleteCard(card){
-	console.log("deleting...");
 	var i = card.parentNode.id;
-	
 	var id = document.getElementsByClassName("additionalPayments")[i].getElementsByTagName("input")[3].value;
+	if (id != -1){
+		var result = confirm("Want to delete?");
+		if (result == true){
+			window.stop();
+			console.log("deleting...");
+			var xhr = new XMLHttpRequest();
+			var url = "DeletePaymentServlet";
+			xhr.open("POST", url, true);
+			var params = "payment_id="+id;
+			console.log(params);
+			xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xhr.send(params);
+		}
+		else
+			window.stop();
 	
-	var xhr = new XMLHttpRequest();
-	var url = "DeletePaymentServlet";
-	xhr.open("POST", url, true);
-	var params = "payment_id="+id;
-	console.log(params);
-	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhr.send(params);
+	}
+	else{
+		window.stop();
+		alert("You do not have any payment methods to delete. Please add one.")
+	}
+		
 }
 
 
