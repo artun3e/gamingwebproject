@@ -109,7 +109,7 @@ border:3px solid black;
     <script type="text/javascript" src="./vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
     <script type="text/javascript" src="./vendor/jquery.scrollto/jquery.scrollTo.min.js"></script>
     <script type="text/javascript" src="./js/front.js"></script>
-	
+	<script src="js/index.js"></script>	
 	<script src="js/search.js"></script>
         <script src="js/toDetails.js"></script>
     <link rel="stylesheet" href="css/register.css">
