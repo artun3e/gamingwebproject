@@ -188,7 +188,10 @@
 
        <div class="container" id="apDiv">
        <%
-       Map<Games, Integer> cartMap = (HashMap)request.getSession().getAttribute("cart");
+           Map<Games, Integer> cartMap = new HashMap<>();
+           if(request.getSession().getAttribute("cart") != null) {
+               cartMap = (HashMap) request.getSession().getAttribute("cart");
+           }
        if(session.getAttribute("user") != null){
 	       if(cartMap.size() > 0){
 	       out.println("        <div class=\"row-checkout\">");
