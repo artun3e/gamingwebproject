@@ -177,12 +177,84 @@
                          //System.out.println(game.getName() + ": " + cartMap.get(game));
                          //out.println(game.getName() + ": " + cartMap.get(game) + "</br>");
                       }
+                  
+                      
+                      
+                      
                   }
                %>
          </section>
       </div>
-      <div class="container">
-         <div class="row-checkout">
+
+       <div class="container" id="apDiv">
+       <%
+       Map<Games, Integer> cartMap = (HashMap)request.getSession().getAttribute("cart");
+       if(session.getAttribute("user") != null){
+	       if(cartMap.size() > 0){
+	       out.println("        <div class=\"row-checkout\">");
+	       out.println("           <div class=\"column-75\">");
+	       out.println("              <div class=\"storage\">");
+	       out.println("                 <div class=\"row-checkout\">");
+	       out.println("                    <div class=\"column-50\">");
+	       out.println("                    <div id=\"addressOptionDiv\">");
+	       out.println("                                         <form id=\"adrOption\">");
+	       out.println("                          <label> Select an address</label>");
+	       out.println("                          <select onchange=\"checkOptions()\" id=\"selectAddress\">");
+	       out.println("                          </select>");
+	       out.println("                       </form>");
+	       out.println("                    </div>");
+	       out.println("                        <h3> Address</h3>");
+	       out.println("                       <br><br><br>                ");
+	       out.println("                       <!--             <label for=\"fname\"><i class=\"fa fa-user\"></i> Full Name</label>");
+	       out.println("                          <input type=\"text\" id=\"fname\" name=\"firstname\" placeholder=\"John M. Doe\">");
+	       out.println("                          <label for=\"email\"><i class=\"fa fa-envelope\"></i> Email</label>");
+	       out.println("                          <input type=\"text\" id=\"email\" name=\"email\" placeholder=\"john@example.com\"> -->");
+	       out.println("                       <label for=\"adr\"><i class=\"fa fa-address-card-o\"></i> Address</label>");
+	       out.println("                       <input type=\"text\" id=\"adr\" name=\"address\" placeholder=\"542 W. 15th Street\">");
+	       out.println("                       <label for=\"city\"><i class=\"fa fa-institution\"></i> City</label>");
+	       out.println("                       <input type=\"text\" id=\"city\" name=\"city\" placeholder=\"New York\">");
+	       out.println("                       <label for=\"phone\" class=\"fa fa-phone\">Phone Number</label>");
+	       out.println("                       <input type=\"text\" id=\"phone\" name=\"phone\" placeholder=\"0(5xx)\">");
+	       out.println(" ");
+	       out.println("                       <label>");
+	       out.println("                       <input type=\"checkbox\" checked=\"checked\" name=\"sameadr\"> Shipping address same as billing");
+	       out.println("                       </label>");
+	       out.println("                    </div>");
+	       out.println("                    <div class=\"column-50\">");
+	       out.println("                       <h3>Payment</h3>");
+	       out.println("                       <div id=\"paymentOptionDiv\">");
+	       out.println("                       ");
+	       out.println("                                              <form id=\"payOption\">");
+	       out.println("                          <label> Select a payment method</label>");
+	       out.println("                          <select onchange=\"checkOptions()\" id=\"selectPayment\">");
+	       out.println("                          </select>");
+	       out.println("                       </form>");
+	       out.println("                       </div>");
+	       out.println("                       <label for=\"fname\">Accepted Cards</label>");
+	       out.println("                       <div class=\"icon-storage\">");
+	       out.println("                          <i class=\"fa fa-cc-visa\" style=\"color:navy;\"></i>");
+	       out.println("                          <i class=\"fa fa-cc-amex\" style=\"color:blue;\"></i>");
+	       out.println("                          <i class=\"fa fa-cc-mastercard\" style=\"color:red;\"></i>");
+	       out.println("                          <i class=\"fa fa-cc-discover\" style=\"color:orange;\"></i>");
+	       out.println("                       </div>");
+	       out.println("                       <!--             <label for=\"cname\">Name on Card</label>");
+	       out.println("                          <input type=\"text\" id=\"cname\" name=\"cardname\" placeholder=\"John More Doe\"> -->");
+	       out.println("                       <label for=\"ccnum\">Credit card number</label>");
+	       out.println("                       <input type=\"text\" id=\"ccnum\" name=\"cardnumber\" placeholder=\"1111-2222-3333-4444\">");
+	       out.println("                       <label for=\"expmonth\">Expiration Date</label>");
+	       out.println("                       <input type=\"text\" id=\"expDate\" name=\"expmonth\" placeholder=\"September\">");
+	       out.println("                       <label for=\"cvv\">CVV</label>");
+	       out.println("                       <input type=\"text\" id=\"cvv\" name=\"cvv\" placeholder=\"352\">");
+	       out.println("                    </div>");
+	       out.println("                 </div>");
+	       out.println("              </div>");
+	       out.println("           </div>");
+	       out.println("        </div>");
+	       }
+       }
+       %>
+       
+      <!--   <div class="row-checkout">
             <div class="column-75">
                <div class="storage">
                   <div class="row-checkout">
@@ -197,10 +269,10 @@
 
                         <h3> Address</h3>
                         <br><br><br>                
-                        <!--             <label for="fname"><i class="fa fa-user"></i> Full Name</label>
+                                    <label for="fname"><i class="fa fa-user"></i> Full Name</label>
                            <input type="text" id="fname" name="firstname" placeholder="John M. Doe">
                            <label for="email"><i class="fa fa-envelope"></i> Email</label>
-                           <input type="text" id="email" name="email" placeholder="john@example.com"> -->
+                           <input type="text" id="email" name="email" placeholder="john@example.com">
                         <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
                         <input type="text" id="adr" name="address" placeholder="542 W. 15th Street">
                         <label for="city"><i class="fa fa-institution"></i> City</label>
@@ -230,8 +302,8 @@
                            <i class="fa fa-cc-mastercard" style="color:red;"></i>
                            <i class="fa fa-cc-discover" style="color:orange;"></i>
                         </div>
-                        <!--             <label for="cname">Name on Card</label>
-                           <input type="text" id="cname" name="cardname" placeholder="John More Doe"> -->
+                                    <label for="cname">Name on Card</label>
+                           <input type="text" id="cname" name="cardname" placeholder="John More Doe">
                         <label for="ccnum">Credit card number</label>
                         <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
                         <label for="expmonth">Expiration Date</label>
@@ -242,7 +314,8 @@
                   </div>
                </div>
             </div>
-         </div>
+         </div> -->
+        </div> 
          <style>
             .row-checkout {
             display: -ms-flexbox; /* IE10 */
@@ -318,7 +391,7 @@
             }
             }
          </style>
-      </div>
+      
    </body>
    <footer id="site-footer">
       <div class="container clearfix">
