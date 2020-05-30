@@ -93,6 +93,7 @@
                               	out.println("<a href=\"#liked\">Liked Ones</a>"); */
                               	out.println("<a href=\"myAccount.jsp\">My Account</a>");
                               	out.println("<a onclick=\"Log_User_Out(this)\" href=\"#\">Logout</a>");
+                              	
                               }
                               else{
                               	out.println("<a href=\"login.jsp\">Login</a>");
@@ -121,6 +122,9 @@
                    Object obj = session.getAttribute("user");
                    User user = (User) obj;
                    out.print("Hello, " + user.getName());
+                   %> <script> 
+                   getData("<%=user.getEmail()%>")
+                   </script> <% 
                }
                else{
                	out.print("Hello, you must login in order to give an order.");
@@ -199,7 +203,19 @@
             <label for="city"><i class="fa fa-institution"></i> City</label>
             <input type="text" id="city" name="city" placeholder="New York">
             <label for="phone" class="fa fa-phone">Phone Number</label>
-            <input type="text" id="phone" name="phone" placeholder="0(5xx)">             
+            <input type="text" id="phone" name="phone" placeholder="0(5xx)">
+            
+            <form id="adrOption">
+            <label> Select an address</label>
+  <select onchange="checkOptions()" id="selectAddress">
+  </select>
+</form>   
+				
+             <form id="payOption">
+             <label> Select a payment method</label>
+  <select onchange="checkOptions()" id="selectPayment">
+  </select>
+</form>  
         <label>
           <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
         </label>
@@ -234,14 +250,6 @@
   </div>
 
 </div>
-
-<% 
-Object temp = session.getAttribute("user");
-User user = (User) temp;
-%>
-<script> 
-getData("<%=user.getEmail()%>")
-</script>
 
 <style>
 	.row-checkout {
