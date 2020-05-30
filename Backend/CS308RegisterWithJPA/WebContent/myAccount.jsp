@@ -49,7 +49,8 @@
 		<link rel="stylesheet" href="css/searchBar.css">
 		<link rel="stylesheet" href="css/register.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+		<script src="js/index.js"></script>	
+	<script src="js/search.js"></script>
         <!--[if lt IE 9]>
         <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <script src="js/respond.min.js"></script>

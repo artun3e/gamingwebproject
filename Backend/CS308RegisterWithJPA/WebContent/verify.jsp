@@ -108,9 +108,16 @@
           </form>
         </div>
         <div class="register-right">
-<p> Yinelenen bir sayfa içeriğinin okuyucunun dikkatini dağıttığı bilinen bir gerçektir. Lorem Ipsum kullanmanın amacı, sürekli 'buraya metin gelecek, buraya metin gelecek' yazmaya kıyasla daha dengeli bir harf dağılımı sağlayarak okunurluğu artırmasıdır. Şu anda birçok masaüstü yayıncılık paketi ve web sayfa düzenleyicisi, varsayılan mıgır metinler olarak Lorem Ipsum kullanmaktadır. Ayrıca arama motorlarında 'lorem ipsum' anahtar sözcükleri ile arama yapıldığında henüz tasarım aşamasında olan çok sayıda site listelenir. Yıllar içinde, bazen kazara, bazen bilinçli olarak (örneğin mizah katılarak), çeşitli sürümleri geliştirilmiştir.</p>
+<p>  Games Markt website is the virtual supermarket for gaming. 
+If you like shopping the traditional way, our stores offer you the same experience. 
+Products offered online as well as in our stores, include, consoles like PS4, PS3, Xbox One, Nintendo Switch. 
+We also offer the softwares for your consoles and accessories to enhance your gaming. 
+You can also order Playstation Digital Cards & get voucher code immediately delivered on your address.</p>
+		<img src="img/games.png" height="300px" weight="150px">
         </div>
+        
       </div>
+      
 
     </body>
 

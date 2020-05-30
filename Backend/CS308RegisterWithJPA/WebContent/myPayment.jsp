@@ -46,6 +46,8 @@
 <link rel="stylesheet" href="css/register.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="js/paymentMethods.js"></script>
+	<script src="js/index.js"></script>	
+	<script src="js/search.js"></script>
     </head>
     <body class="page">
         <!-- Wrap
