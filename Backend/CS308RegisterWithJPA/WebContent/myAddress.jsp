@@ -197,7 +197,7 @@
 														<% 
                                                         out.println("<input type='text' name='phone' id='phone' class='form-control' >" ); 
                                                         %>
-                                                        <input type="hidden" value="">	
+                                                        <input type="hidden" value=-1>	
                                                     </div>
                                                 </li>
                                                 </ul>

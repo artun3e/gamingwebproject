@@ -187,11 +187,14 @@
                <div class="storage">
                   <div class="row-checkout">
                      <div class="column-50">
-                     <form id="adrOption">
+                     <div id="addressOptionDiv">
+                                          <form id="adrOption">
                            <label> Select an address</label>
                            <select onchange="checkOptions()" id="selectAddress">
                            </select>
                         </form>
+                     </div>
+
                         <h3> Address</h3>
                         <br><br><br>                
                         <!--             <label for="fname"><i class="fa fa-user"></i> Full Name</label>
@@ -212,11 +215,14 @@
                      </div>
                      <div class="column-50">
                         <h3>Payment</h3>
+                        <div id="paymentOptionDiv">
+                        
                                                <form id="payOption">
                            <label> Select a payment method</label>
                            <select onchange="checkOptions()" id="selectPayment">
                            </select>
                         </form>
+                        </div>
                         <label for="fname">Accepted Cards</label>
                         <div class="icon-storage">
                            <i class="fa fa-cc-visa" style="color:navy;"></i>

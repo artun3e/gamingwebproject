@@ -40,47 +40,84 @@ async function getData (variable){
 
 function updateAddress(address){
 	var i = address.parentNode.id;
-	
-	console.log("updating...");
-	var address = document.getElementsByClassName("additionalAddress")[i].getElementsByTagName("input")[0].value;
-	var city = document.getElementsByClassName("additionalAddress")[i].getElementsByTagName("input")[1].value;
-	var phone = document.getElementsByClassName("additionalAddress")[i].getElementsByTagName("input")[2].value;
 	var id = document.getElementsByClassName("additionalAddress")[i].getElementsByTagName("input")[3].value;
-	var xhr = new XMLHttpRequest();
-	var url = "UpdateAddressServlet";
-	xhr.open("POST", url, true);
-	var params = "address_id="+id+"&address="+address+"&city="+city+"&phone_number="+phone;
-	console.log(params);
-	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhr.send(params);
+	if (id != -1){
+		var address = document.getElementsByClassName("additionalAddress")[i].getElementsByTagName("input")[0].value;
+		if (address.length != 0){
+			var city = document.getElementsByClassName("additionalAddress")[i].getElementsByTagName("input")[1].value;
+			if(city.length != 0){
+				var phone = document.getElementsByClassName("additionalAddress")[i].getElementsByTagName("input")[2].value;
+				if(phone.length != 0){
+					console.log("updating...");
+					var xhr = new XMLHttpRequest();
+					var url = "UpdateAddressServlet";
+					xhr.open("POST", url, true);
+					var params = "address_id="+id+"&address="+address+"&city="+city+"&phone_number="+phone;
+					console.log(params);
+					xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+					xhr.send(params);
+				}
+				else
+					alert("You cannot leave phone field empty.")
+			}
+			else
+				alert("You cannot leave city field empty.");	
+
+		}
+		else
+			alert("You cannot leave address field empty.");	
+		
+	}
+	else 
+		alert("You do not have any address to update. Please add one.")
+
 }
 function addAddress(){
 	console.log("adding...");
 	var address = document.getElementById("add_address").value;
-	var city = document.getElementById("add_city").value;
-	var phone = document.getElementById("add_phone").value;
-	var xhr = new XMLHttpRequest();
-	var url = "AddAddressServlet";
-	xhr.open("POST", url, true);
-	var params = "address="+address+"&city="+city+"&phone_number="+phone;
-	console.log(params);
-	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhr.send(params);
+	if(address.length != 0){
+		var city = document.getElementById("add_city").value;
+		if(city.length != 0){
+			var phone = document.getElementById("add_phone").value;
+			if(phone.length !=0){
+				var xhr = new XMLHttpRequest();
+				var url = "AddAddressServlet";
+				xhr.open("POST", url, true);
+				var params = "address="+address+"&city="+city+"&phone_number="+phone;
+				console.log(params);
+				xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xhr.send(params);
+			}
+			else
+				alert("You cannot leave phone field empty.")
+		}
+		else
+			alert("You cannot leave city field empty.");
+	}
+	else
+		alert("You cannot leave address field empty.");	
+	
 }
 
 function deleteAddress(address){
 	console.log("deleting...");
     var i = address.parentNode.id;
-    
     var id = document.getElementsByClassName("additionalAddress")[i].getElementsByTagName("input")[3].value;
-	
-	var xhr = new XMLHttpRequest();
-	var url = "DeleteAddressServlet";
-	xhr.open("POST", url, true);
-	var params = "address_id="+id;
-	console.log(params);
-	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhr.send(params);
+	if(id != -1){
+		var result = confirm("Want to delete?");
+		if (result == true){
+		var xhr = new XMLHttpRequest();
+		var url = "DeleteAddressServlet";
+		xhr.open("POST", url, true);
+		var params = "address_id="+id;
+		console.log(params);
+		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xhr.send(params);
+		}
+	}
+	else
+		alert("You do not have any address to delete. Please add one.")
+
 }
 
 var extraAddress = 

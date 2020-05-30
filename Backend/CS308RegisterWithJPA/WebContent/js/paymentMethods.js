@@ -77,11 +77,11 @@ function updateCard(card){
 function addCard(){
 	console.log("adding...");
 	var number = document.getElementById("add_cardNumber").value;
-	if(number.length == 16){
+	if(number.length == 16 && number.length != 0){
 		var cvc = document.getElementById("add_cvc").value;
-		if(cvc.length == 3){
+		if(cvc.length == 3 && cvc.length != 0){
 			var date = document.getElementById("add_expDate").value;
-				if (date.length == 5){
+				if (date.length == 5 && date.length !=0){
 				var xhr = new XMLHttpRequest();
 				var url = "AddPaymentServlet";
 				xhr.open("POST", url, true);

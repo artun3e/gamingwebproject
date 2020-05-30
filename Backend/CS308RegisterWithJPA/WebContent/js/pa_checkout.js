@@ -12,14 +12,43 @@ async function getData (variable){
 	const addressResponse = await fetch(addressURL);
 	const addressData = await addressResponse.json(); 
 
+	if(addressData.length != 0){
+		document.getElementById("adr").value = addressData[0].address;
+		document.getElementById("city").value = addressData[0].city;
+		document.getElementById("phone").value = addressData[0].phoneNumber;
+	}
+	else
+	{
+		var optDiv = document.getElementById("addressOptionDiv");
+		optDiv.innerHTML = "";
+		var info = document.createElement("h3");
+		info.innerText = "You do not have any address.";
+		var link = document.createElement("a");
+		link.innerText = "Please add through this link!";
+		link.setAttribute("href", "/CS308RegisterWithJPA/myAddress.jsp");
+		optDiv.append(info);
+		optDiv.append(link);
+	}
 	
-	document.getElementById("adr").value = addressData[0].address;
-	document.getElementById("city").value = addressData[0].city;
-	document.getElementById("phone").value = addressData[0].phoneNumber;
-	
-	document.getElementById("ccnum").value = paymentData[0].cardNumber;
-	document.getElementById("cvv").value = paymentData[0].cvc;
-	document.getElementById("expDate").value = paymentData[0].expirationDate;
+	if(paymentData.length != 0){
+		document.getElementById("ccnum").value = paymentData[0].cardNumber;
+		document.getElementById("cvv").value = paymentData[0].cvc;
+		document.getElementById("expDate").value = paymentData[0].expirationDate;
+	}
+	else{
+		console.log("elseteyim");
+		var optDiv = document.getElementById("paymentOptionDiv");
+		optDiv.innerHTML = "";
+		var info = document.createElement("h3");
+		info.innerText = "You do not have any payment methods.";
+		var link = document.createElement("a");
+		link.innerText = "Please add through this link!";
+		link.setAttribute("href", "/CS308RegisterWithJPA/myPayment.jsp");
+		optDiv.append(info);
+		optDiv.append(link);
+	}
+
+
 	
 	
 
@@ -54,11 +83,16 @@ async function getData (variable){
 }
 
 function checkOptions(){
-	var selA = document.getElementById('selectAddress');
-	var selP = document.getElementById('selectPayment');
+	if(addressOption.length != 0)
+		var selA = document.getElementById('selectAddress');
+	if(paymentOption.length != 0)
+		var selP = document.getElementById('selectPayment');
+	
 	// display value property of select list (from selected option)
-	console.log("this is addressID " , selA.value );
-	console.log("this is paymentID " , selP.value);
+	if(selA != null)
+		console.log("this is addressID " , selA.value );
+	if(selP != null)
+	 console.log("this is paymentID " , selP.value);
 	
 	for(var i=0; i<addressOption.length; i++){
 		var found;
@@ -73,7 +107,7 @@ function checkOptions(){
 	}
 
 
-	for(var i=0; i<addressOption.length; i++){
+	for(var i=0; i<paymentOption.length; i++){
 	var found;
 	if (paymentOption[i].id == selP.value){
 		found = paymentOption[i];
