@@ -12,6 +12,10 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 
 import javax.persistence.*;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -307,6 +311,219 @@ public class OrderManager {
 		}
 		return sortedList;
 	}
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("drawChart/{date1}/{date2}")
+	public List<denizIstedi> drawChart(@PathParam("date1") String date1, @PathParam("date2") String date2){
+		Connection conn;
+		PreparedStatement ps;
+		ResultSet rs;
+		HashMap<String,Double> summary = new HashMap<>();
+		try {
+			conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
+			//ps = conn.prepareStatement("select Orders.date, Games.price from Orders_Games left join Orders on Orders_Games.Order_id = Orders.id left join Games on Orders_Games.products_KEY = Games.appid where Order_id in (Select id from Orders WHERE date >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH))");
+			ps = conn.prepareStatement("select Orders.date, Orders.totalCost from Orders where Orders.id in (Select id from Orders WHERE date between ? and ?)");
+			date1 = date1.replace("-","/");
+			date2 = date2.replace("-","/");
+			ps.setString(1,date1);
+			ps.setString(2,date2);
+			rs = ps.executeQuery();
+			SimpleDateFormat formatter = new SimpleDateFormat( "yyyy/MM/dd");
+			Date parsedDate1 = formatter.parse(date1.substring(0,10));
+			Date parsedDate2 = formatter.parse(date2.substring(0,10));
+			//2020/04/26 18:22:28
+			Date today = new Date();
+			Calendar cal = new GregorianCalendar();
+			cal.setTime(today);
+			cal.add(Calendar.DAY_OF_MONTH, -30);
+			Date today30 = cal.getTime();
+			while(rs.next())
+			{
+				String monthAndDay = rs.getString("date").substring(0,10).replace("/","-");
+				/*Double price = rs.getDouble("price");
+				if(summary.containsKey(monthAndDay))
+				{
+					double oldPrice = summary.get(monthAndDay);
+					oldPrice += price;
+					summary.put(monthAndDay,oldPrice);
+				}
+				else
+				{
+					summary.put(monthAndDay,price);
+				}*/
+				Double totalCost = rs.getDouble("totalCost");
+				if(summary.containsKey(monthAndDay))
+				{
+					double oldPrice = summary.get(monthAndDay);
+					oldPrice += totalCost;
+					summary.put(monthAndDay,oldPrice);
+				}
+				else
+				{
+					summary.put(monthAndDay,totalCost);
+				}
+			}
+			for (LocalDate date = parsedDate1.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(); date.isBefore(parsedDate2.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()); date = date.plusDays(1))
+			{
+				String formattedDate = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+				//System.out.println("formatted date is: " + formattedDate);
+				if(!summary.containsKey(formattedDate))
+				{
+					summary.put(formattedDate,0.0);
+				}
+			}			conn.close();
+			ps.close();
+			rs.close();
+		} catch (SQLException | ParseException e) {
+			e.printStackTrace();
+		}
+		conn = null;
+		ps = null;
+		rs = null;
+
+		SortedSet<String> keys = new TreeSet<>(summary.keySet());
+		HashMap<String, Double> sortedSummary = new HashMap<>();
+		List<denizIstedi> sortedList = new ArrayList<>();
+		for (String key : keys) {
+			//System.out.println(key);
+			//System.out.println("_____________");
+			Double value = summary.get(key);
+			sortedList.add(new denizIstedi(key, value));
+		}
+		return sortedList;
+	}
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("getTotalProfit")
+	public double getTotalProfit()
+	{
+		Connection conn;
+		PreparedStatement ps;
+		ResultSet rs;
+		double totalProfit = 0.0;
+		try
+		{
+			conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
+			ps = conn.prepareStatement("select sum(totalCost) as totalProfit from Orders");
+			rs = ps.executeQuery();
+			while(rs.next())
+			{
+				totalProfit = rs.getDouble("totalProfit");
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return totalProfit;
+	}
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("getNumberOfOrders")
+	public double getNumberOfOrders()
+	{
+		Connection conn;
+		PreparedStatement ps;
+		ResultSet rs;
+		int totalCount = 0;
+		try
+		{
+			conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
+			ps = conn.prepareStatement("select count(*) as totalcount from Orders");
+			rs = ps.executeQuery();
+			while(rs.next())
+			{
+				totalCount = rs.getInt("totalcount");
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return totalCount;
+	}
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("getNumberOfShippedOrders")
+	public double getNumberOfShippedOrders()
+	{
+		Connection conn;
+		PreparedStatement ps;
+		ResultSet rs;
+		int totalCount = 0;
+		try
+		{
+			conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
+			ps = conn.prepareStatement("select count(*) as totalcount from Orders where status='Delivered'");
+			rs = ps.executeQuery();
+			while(rs.next())
+			{
+				totalCount = rs.getInt("totalcount");
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return totalCount;
+	}
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("getTotalNumberOfGamesSold")
+	public double getTotalNumberOfGamesSold()
+	{
+		Connection conn;
+		PreparedStatement ps;
+		ResultSet rs;
+		int totalCount = 0;
+		try
+		{
+			conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
+			ps = conn.prepareStatement("select sum(Quantity) as totalGamesSold from Orders_Games");
+			rs = ps.executeQuery();
+			while(rs.next())
+			{
+				totalCount = rs.getInt("totalGamesSold");
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return totalCount;
+	}
+
+/* DONT RUN THE BELOW CODE, IT WAS FOR FIXING THE ARTUN'S PASSWORD.
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("fixPassword")
+	public String fixPassword()
+	{
+		Connection conn;
+		PreparedStatement ps;
+		ResultSet rs;
+		try
+		{
+			conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
+			ps = conn.prepareStatement("select * from User where Email=?",ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
+			ps.setString(1,"pri.dilemma@gmail.com");
+			rs = ps.executeQuery();
+			while(rs.next())
+			{
+				String password = rs.getString("password");
+				MessageDigest digest = MessageDigest.getInstance("SHA-256");
+				byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+				rs.updateString("password",new String(hash, "UTF-8"));
+				rs.updateRow();
+			}
+			return "Successfully updated the password :)";
+		}
+		catch (SQLException | NoSuchAlgorithmException | UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return "An error occured while updating the password :(";
+	}
+*/
 /* DONT RUN THE BELOW CODE, IT WAS FOR FIXING THE TOTALCOSTS OF ORDERS.
 	@GET
 	@Path("fixOrderTotalCost")
