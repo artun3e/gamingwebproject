@@ -88,6 +88,11 @@ public class AddProductServlet extends HttpServlet {
 			}
 			screenshots = screenshots.substring(0,screenshots.length()-2);
 			screenshots += "]";
+			
+			double salePrice = Double.parseDouble(request.getParameter("salePrice").replace("$", ""));
+			int stock = Integer.parseInt(request.getParameter("stock"));
+			boolean onSale = Boolean.parseBoolean(request.getParameter("onSale"));
+			
 			System.out.println("Trying to add following game: ");
 			System.out.println("______________________________________");
 			System.out.println("Name: "+ gameName);
@@ -115,7 +120,9 @@ public class AddProductServlet extends HttpServlet {
 			game.setHeader_image(headerImage);
 			game.setDeveloper(publisher);
 			game.setReleaseDate(timeStamp);
-
+			game.setStock(stock);
+			game.setSalePrice(salePrice);
+			game.setOnSale(onSale);
 
 			em.getTransaction().begin();
 			em.persist(game);

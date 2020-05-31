@@ -76,7 +76,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="js/add_item_button.js"></script>		
-    
+    <link rel="stylesheet" href="./css3/checkbox_new.css">
 </head>
 
 <body>
@@ -276,6 +276,46 @@
 									</div>
 								</div>
 								<div class="form-group row" style="margin-left: 14px;">
+									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">Sale Price: </label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" name="sale_price" id="sale_price" placeholder="Sale Price"/>
+									</div>
+								</div>
+								<script type="text/javascript">
+								$(document).on('click', '.number-spinner button', function () {    
+									var btn = $(this),
+										oldValue = btn.closest('.number-spinner').find('input').val().trim(),
+										newVal = 0;
+									
+									if (btn.attr('data-dir') == 'up') {
+										newVal = parseInt(oldValue) + 1;
+									} else {
+										if (oldValue > 0) {
+											newVal = parseInt(oldValue) - 1;
+										} else {
+											newVal = 0;
+										}
+									}
+									btn.closest('.number-spinner').find('input').val(newVal);
+								});
+								</script>
+								
+								<div class="form-group row" style="margin-left: 14px;">
+									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">Stock: </label>
+									<!-- <div class="col-sm-10">
+										<input type="text" class="form-control" name="stock" id="stock" placeholder="Stock"/>
+									</div> -->
+									<div class="input-group number-spinner" >
+										<span class="input-group-btn">
+											<button class="btn btn-default" data-dir="dwn"  style="margin-left: 15px ;"><span class="glyphicon glyphicon-minus"></span></button>
+										</span>
+										<input type="text" class="form-control text-center" value="1" name="stock" id="stock" placeholder="Stock">
+										<span class="input-group-btn">
+											<button class="btn btn-default" data-dir="up"  style="margin-right: 15px ;"><span class="glyphicon glyphicon-plus"></span></button>
+										</span>
+									</div>
+								</div>
+								<div class="form-group row" style="margin-left: 14px;">
 									<label style="margin-top: 7px;" class="col-sm-2 col-form-label">Short Description: </label>
 									<div class="col-sm-10">
 										<input type="text" class="form-control" name="shortdescription" id="shortdescription" placeholder="Short Description"/>
@@ -323,6 +363,17 @@
 										<input type="text" class="form-control" name="platforms" id="platforms" placeholder="Platforms"/>
 									</div>
 								</div>
+								<div class="form-group row" style="margin-left: 28px;">
+								
+									<div class="checkbox_2">
+							            <label style="font-size: 1.8em">
+							                <input id="checkbox_new" type="checkbox" value="" checked>
+							                <span class="cr_2"><i class="cr-icon fa fa-check"></i></span>
+							                On Sale
+							            </label>
+							        </div>
+						        </div>
+								<br/>
 								<button type="submit" class="btn btn-primary btn-block btn-lg"
 										name="edit" id="add_button" >ADD</button>
 

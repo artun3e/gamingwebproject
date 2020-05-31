@@ -63,6 +63,7 @@ async function getData(value) {
 	var sale_price = document.getElementById('sale_price');
 	var stock = document.getElementById('stock');
 	var checkbox_new = document.getElementById('checkbox_new');
+	console.log(checkbox_new);
 	
 	id.value = data[0].appID;
 	name.value = data[0].name;

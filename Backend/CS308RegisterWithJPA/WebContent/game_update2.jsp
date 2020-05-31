@@ -1,28 +1,59 @@
-<html>
+<html lang="en">
 <head>
-    <title>multiple select</title>
-    <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Spinner - Default functionality</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="/resources/demos/external/jquery-mousewheel/jquery.mousewheel.js"></script>
+  <script>
+  $( function() {
+    var spinner = $( "#spinner" ).spinner();
+ 
+    $( "#disable" ).on( "click", function() {
+      if ( spinner.spinner( "option", "disabled" ) ) {
+        spinner.spinner( "enable" );
+      } else {
+        spinner.spinner( "disable" );
+      }
+    });
+    $( "#destroy" ).on( "click", function() {
+      if ( spinner.spinner( "instance" ) ) {
+        spinner.spinner( "destroy" );
+      } else {
+        spinner.spinner();
+      }
+    });
+    $( "#getvalue" ).on( "click", function() {
+      alert( spinner.spinner( "value" ) );
+    });
+    $( "#setvalue" ).on( "click", function() {
+      spinner.spinner( "value", 5 );
+    });
+ 
+    $( "button" ).button();
+  } );
+  </script>
 </head>
-
 <body>
-<p>Multiple select example</p>
-	<div class="selectRow">
-	    <!--     Using data-placeholder below to set place holder value versus putting in configuration-->
-	    <select class="" id="multipleSelectExample" data-placeholder="Select an option" multiple="">
-	        <option selected="1" value="1">Option 1</option>
-	        <option value="2">Option 2</option>
-	        <option value="3">Option 3</option>
-	        <option value="4">Option 4</option>
-	        <option value="5">Option 5</option>
-	    </select>
-	</div>
+ 
+<p>
+  <label for="spinner">Select a value:</label>
+  <input id="spinner" name="value">
+</p>
+ 
+<p>
+  <button id="disable">Toggle disable/enable</button>
+  <button id="destroy">Toggle widget</button>
+</p>
+ 
+<p>
+  <button id="getvalue">Get value</button>
+  <button id="setvalue">Set value to 5</button>
+</p>
+ 
+ 
 </body>
-<script>
-    $(document).ready(function () {
-            $('#multipleSelectExample').select2();
-            
-	});
-</script>
 </html>

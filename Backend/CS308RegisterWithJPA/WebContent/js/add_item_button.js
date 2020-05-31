@@ -19,6 +19,11 @@ $(document).ready(function () {
     	var headerimage = document.getElementById('headerimage').value;
     	var platforms = document.getElementById('platforms').value;
     	
+    	//New Attributes
+    	var salePrice = document.getElementById('sale_price').value;
+    	var stock = document.getElementById('stock').value;
+    	var onSale = document.getElementById('checkbox_new').checked;
+    	
     	var cats_coma ="";
     	$('.select2-selection__choice').each(function(){
     		cats_coma += $(this)[0].title + ",";
@@ -27,6 +32,7 @@ $(document).ready(function () {
     	
     	var params = 'id='+id+'&name='+name+'&publisher='+publisher+'&categories='+cats_coma +'&price='+price+'&shortdescription='+shortdescription+'&detaileddescription='+detaileddescription;
     	params = params + '&minimum='+minimum+'&aboutthegame='+aboutthegame+'&background='+background+'&screenshots='+screenshots+'&headerimage='+headerimage+'&platforms='+platforms;
+    	params = params + '&salePrice='+salePrice +'&stock='+stock +'&onSale='+onSale;
     	
     	var xhr = new XMLHttpRequest();
         var url = "addproductservlet";

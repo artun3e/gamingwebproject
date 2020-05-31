@@ -42,7 +42,7 @@ public class UpdateProductServlet extends HttpServlet {
 		EntityManagerFactory emf;
 		EntityManager em;
 		try {
-			
+			System.out.println("Edited for new items.");
 			int gameID = Integer.parseInt(request.getParameter("id"));
 			String gameName = request.getParameter("name");
 			String publisher = request.getParameter("publisher");
@@ -57,6 +57,9 @@ public class UpdateProductServlet extends HttpServlet {
 			String[] screenshotsArray = request.getParameter("screenshots").split(",");
 			String headerImage = request.getParameter("headerimage");
 			String platforms = request.getParameter("platforms");
+			double salePrice = Double.parseDouble(request.getParameter("salePrice").replace("$", ""));
+			int stock = Integer.parseInt(request.getParameter("stock"));
+			boolean onSale = Boolean.parseBoolean(request.getParameter("onSale"));
 			String steamspyTags = categories;
 
 			String screenshots = "[";
@@ -93,6 +96,10 @@ public class UpdateProductServlet extends HttpServlet {
 			game.setScreenshots(screenshots);
 			game.setPlatforms(platforms);
 			game.setHeader_image(headerImage);
+			game.setStock(stock);
+			game.setSalePrice(salePrice);
+			game.setOnSale(onSale);
+			
 			//game.setOwners(); We shouldn't be able to edit how many people own the game or the rating from the admin panel...
 			//game.setRating();
 
