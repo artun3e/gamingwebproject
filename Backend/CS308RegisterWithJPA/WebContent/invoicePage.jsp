@@ -11,6 +11,14 @@
 <html class="no-js" lang="">
 
 <head>
+<script type="text/javascript" src="libs/png_support/zlib.js"></script>
+<script type="text/javascript" src="libs/png_support/png.js"></script>
+<script type="text/javascript" src="jspdf.plugin.addimage.js"></script>
+<script type="text/javascript" src="jspdf.plugin.png_support.js"></script>
+<script type="text/javascript" src="jspdf.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+	<script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -125,7 +133,7 @@ width: 1000px;
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <div class="logo-area">
-                        <a href="#"><img src="img/logo/logo.png" alt="" /></a>
+                        
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
@@ -441,15 +449,16 @@ width: 1000px;
     <td>PRODUCT</td>
 </tr>
 <tr>
-    <td><input type="text" name="date"></td>
-    <td><input type="text" name="email"></td>
-    <td><input type="text" name="price"></td>
-    <td><input type="text" name="product"></td>
+    <td><input type="text" name="date" id="date"></td>
+    <td><input type="text" name="email" id="email"></td>
+    <td><input type="text" name="price" id="price"></td>
+    <td><input type="text" name="product" id="product"></td>
 </tr>
 </table>
 
-                         <a class='btn btn-success btn-block btn-lg' href="#"
-										style="margin-left: auto; margin-right: auto; display: block; margin-top: 10px; margin-bottom: 10px">FILTER</a>
+ <a class='btn btn-success btn-block btn-lg' onclick="filterFunction()" href="#"style="margin-left: auto; margin-right: auto; display: block; margin-top: 10px; margin-bottom: 10px">FILTER</a>
+
+<a class='btn btn-success btn-block btn-lg' onclick="downloadPDF()" href="#"style="margin-left: auto; margin-right: auto; display: block; margin-top: 10px; margin-bottom: 10px">DOWNLOAD AS PDF</a>
 <%
 
 session = request.getSession();
@@ -460,7 +469,7 @@ if(session.getAttribute("user") != null)
 	List<Order> orderList = om.getAllOrders();
 	
 	
-	out.println("<div id=\"all\">");
+	out.println("<div id=\"all\" class=\"all\">");
 	out.println("<div id=\"content\">");
     out.println("<div class=\"container\">");
     out.println("<div class=\"row bar\">");
@@ -473,7 +482,7 @@ if(session.getAttribute("user") != null)
 	    
 	    Map<Games, Integer> gameList = new HashMap<>();
 	    gameList  = o.getProducts();	    
-	    
+	    Map<Games, Double> prices = o.getPricesAtThatTime();
 	    
 	    
 	    out.println("<div class=\"box\">");
@@ -508,15 +517,15 @@ if(session.getAttribute("user") != null)
 	    for(Games game : gameList.keySet())
 	    {
 	    	out.println("<tr>");
-	    		out.println("<td><a href=\"#\"><img src=" + game.getHeader_image() +  "alt=" + game.getName() + "width=\"100\" height=\"100\"\"></a></td>");
+	    		out.println("<td><a href=\"#\"><img crossorigin=\"anonymous\" src=" + game.getHeader_image() +  "alt=" + game.getName() + "width=\"100\" height=\"100\"\"></a></td>");
 	    		out.println("<td><a onclick=\"toDetails(this)\" href=\"#\">" + game.getName()+ "</a></td>");
 	    		out.println("<td><a>" + gameList.get(game) + "</a></td>");
-	    		out.println("<td><a>" + game.getPrice()+ "$</a></td>");
-	    		out.println("<td><a>" + game.getPrice() * gameList.get(game) + "$</a></td>");    		
+	    		out.println("<td><a>" + prices.get(game)+ "$</a></td>");
+	    		out.println("<td><a>" + prices.get(game) * gameList.get(game) + "$</a></td>");    		
 	    		
 	    	out.println("</tr>");
 	    	
-	    	total = total + (game.getPrice() * gameList.get(game));
+	    	total = total + (prices.get(game) * gameList.get(game));
 	    					
 	    }
 	    out.println("<div class=\"total\">");
@@ -633,6 +642,124 @@ else
 	<!-- tawk chat JS
 		============================================ -->
     <script src="./js3/tawk-chat.js"></script>
+    
+    
+<script>
+/* var products = [];
+async function filterFunction() {
+	var date = document.getElementById('date').value;
+	var email = document.getElementById('email').value;
+	var price = document.getElementById('price').value;
+	var product = document.getElementById('product').value;
+if(date.length == 0)
+{
+	date = "null";
+}
+if(email.length == 0)
+{
+	email = "null";
+}
+if(price.length == 0)
+{
+	price = "null";
+}
+if(product.length == 0)
+{
+	product = "null";
+}
+	console.log("date: " + date);
+	console.log("email: " + email);
+	console.log("price: " + price);
+	console.log("producct: " + product);
+
+	const url = '/CS308RegisterWithJPA/search/fromDB/filteredOrders/' + date + '/' + email + '/'+ price +'/'+ product; 
+
+	const response = await fetch(url);
+	const data = await response.json();
+
+	var all = document.querySelector("#all");
+	all.innerHTML = "";
+
+	if(data.length == 0){
+		document.getElementsByClassName("main")[0].innerHTML = noResult;
+	}
+	else{		
+    	for (var k = 0; k < data.length; k++){
+    		products.push(data[k]);
+    		fillCard(data[k], k);    	
+    	} 
+	}
+	
+	
+}
+
+var productHTML = 
+    '                                <div class="product">'+
+    '                                    <div class="product-img">'+
+    '                                        <img crossorigin="anonymous" src="./img/product01.png" alt="">'+
+    '                                        <div class="product-label">'+
+    '                                        </div>'+
+    '                                    </div>'+
+    '                                    <div class="product-body">'+
+    '                                        <p class="product-category">Category</p>'+
+    '                                        <h3 class="product-name"><a href="#">product name goes here</a></h3>'+
+    '                                        <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>'+
+    '                                        <div class="product-rating">'+
+    '                                            <i class="fa fa-star"></i>'+
+    '                                            <i class="fa fa-star"></i>'+
+    '                                            <i class="fa fa-star"></i>'+
+    '                                            <i class="fa fa-star"></i>'+
+    '                                            <i class="fa fa-star"></i>'+
+    '                                        </div>'+
+    '                                    </div>'+
+    '                                    <div class="add-to-cart">'+
+    '                                        <button onclick="addToCart(this)" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Add </button>'+
+    '                                    </div>'+
+    '                                </div>';
+
+    function fillCard(element, k){
+    	console.log("started"); 
+    	console.log(element.pricesAtThatTime);
+        
+
+    } */
+
+
+
+    function downloadPDF(){
+    	console.log("download as pdf"); 
+
+    	var data = document.getElementById('all');
+    	var date = new Date();
+    	html2canvas(data).then(canvas => {
+    	var imgWidth = 210;
+    	var pageHeight = 295;
+    	var imgHeight = canvas.height * imgWidth / canvas.width;
+    	var heightLeft = imgHeight;
+
+    	  //enter code here
+    	  const imgData = canvas.toDataURL('image/png')
+
+    	  var doc = new jsPDF('p', 'mm');
+    	  var position = 0;
+
+    	  doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight+15);
+    	  heightLeft -= pageHeight;
+
+    	  while (heightLeft >= 0) {
+    	    position = heightLeft - imgHeight;
+    	    doc.addPage();
+    	    doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight + 15);
+    	    heightLeft -= pageHeight;
+    	  }
+    	doc.save ('invoice'+ '_'+date.getTime()+'.pdf')
+
+    	});
+    	
+    }
+    
+</script>
+    
 </body>
 
 </html>
