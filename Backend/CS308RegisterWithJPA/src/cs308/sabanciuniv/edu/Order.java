@@ -26,6 +26,7 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private Address address;
+	private Payment payment;
 	private String date;
 	@Column(name = "totalCost" ,columnDefinition = "double")
 	private double totalCost;
@@ -66,6 +67,12 @@ public class Order {
 	}
 	public void setAddress(Address address) {
 		this.address = address;
+	}
+	public Payment getPayment() {
+		return this.payment;
+	}
+	public void setPayment(Payment payment) {
+		this.payment = payment;
 	}
 	public User getOwner() {
 		return owner;
