@@ -12,6 +12,10 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 
 import javax.persistence.*;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -464,6 +468,37 @@ public class OrderManager {
 		return totalCount;
 	}
 
+/* DONT RUN THE BELOW CODE, IT WAS FOR FIXING THE ARTUN'S PASSWORD.
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("fixPassword")
+	public String fixPassword()
+	{
+		Connection conn;
+		PreparedStatement ps;
+		ResultSet rs;
+		try
+		{
+			conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
+			ps = conn.prepareStatement("select * from User where Email=?",ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
+			ps.setString(1,"pri.dilemma@gmail.com");
+			rs = ps.executeQuery();
+			while(rs.next())
+			{
+				String password = rs.getString("password");
+				MessageDigest digest = MessageDigest.getInstance("SHA-256");
+				byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+				rs.updateString("password",new String(hash, "UTF-8"));
+				rs.updateRow();
+			}
+			return "Successfully updated the password :)";
+		}
+		catch (SQLException | NoSuchAlgorithmException | UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return "An error occured while updating the password :(";
+	}
+*/
 /* DONT RUN THE BELOW CODE, IT WAS FOR FIXING THE TOTALCOSTS OF ORDERS.
 	@GET
 	@Path("fixOrderTotalCost")
