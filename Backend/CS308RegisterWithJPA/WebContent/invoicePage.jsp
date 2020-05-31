@@ -108,9 +108,9 @@ font-weight:bold;
 
 .box {
 border:3px solid black;
-  background-color: #E8A2A2;
-  background-image: url("data:image/jpeg;base64,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");
-  
+  background-color: white;
+  /* background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQpizgTqXwu_qPrqX-7VMso67IJbE73M36wSaNeStJ8zvVs0gy4&usqp=CAU");
+   */
   color: white;
   margin: 20px;
   padding: 20px;
@@ -442,24 +442,28 @@ width: 1000px;
                             <h2>Invoices</h2>
                             <p>This panel is for Admin to view and change order status.</p>
                         </div>
-<table>
-<tr>
-    <td>DATE</td>
-    <td>E-MAIL</td>
-    <td>PRICE</td>
-    <td>PRODUCT</td>
-</tr>
-<tr>
-    <td><input type="text" name="date" id="date"></td>
-    <td><input type="text" name="email" id="email"></td>
-    <td><input type="text" name="price" id="price"></td>
-    <td><input type="text" name="product" id="product"></td>
-</tr>
-</table>
+						<table style="width:100%">
+							<tr align="center">
+								<td>DATE </td>
+								<td>E-MAIL</td>
+								<td>PRICE</td>
+								<td>PRODUCT</td>
+							</tr>
+							<tr>
+								<td><input style="width:100%" type="text" name="date" id="date"></td>
+								<td><input style="width:100%" type="text" name="email" id="email"></td>
+								<td><input style="width:100%" type="text" name="price" id="price"></td>
+								<td><input style="width:100%" type="text" name="product" id="product"></td>
+							</tr>
+						</table>
 
- <a class='btn btn-success btn-block btn-lg' onclick="filterFunction()" href="#"style="margin-left: auto; margin-right: auto; display: block; margin-top: 10px; margin-bottom: 10px">FILTER</a>
-
-<a class='btn btn-success btn-block btn-lg' onclick="downloadPDF()" href="#"style="margin-left: auto; margin-right: auto; display: block; margin-top: 10px; margin-bottom: 10px">DOWNLOAD AS PDF</a>
+						<a class='btn btn-success btn-block btn-lg'
+							onclick="filterFunction()" href="#"
+							style="margin-left: auto; margin-right: auto; display: block; margin-top: 10px; margin-bottom: 10px">FILTER</a> 
+							<a class='btn btn-success btn-block btn-lg'
+							onclick="downloadPDF()" href="#"
+							style="margin-left: auto; margin-right: auto; display: block; margin-top: 10px; margin-bottom: 10px">DOWNLOAD
+							AS PDF</a>
 
 
 <%
@@ -490,9 +494,7 @@ if(session.getAttribute("user") != null)
 	}
 	
 	
-	out.println("<div id=\"all\" class=\"all\">");
-	out.println("<div id=\"content\">");
-    out.println("<div class=\"container\">");
+	
     out.println("<div class=\"row bar\">");
     out.println("<div id=\"customer-order\" class=\"col-lg-9\">");
     
@@ -512,21 +514,23 @@ if(session.getAttribute("user") != null)
 				
 				
 					out.println("<thead>");
+					out.println("<th class=\"border-top-0\">Order ID: " + o.getId() + "</th>");
 					out.println("<th class=\"border-top-0\">User: " + o.getOwner().getEmail() + "</th>"); //get user name
 					out.println("<th class=\"border-top-0\">Date: " + o.getDate() + "</th>"); //get order date
 					out.println("<th class=\"border-top-0\">Status: " + o.getStatus() + "</th>");
 					out.println("<th class=\"border-top-0\">Change Status</th>");
-					out.println("<td><select id=\"orderStatus\">");
+					out.println("<th><select id=\"orderStatus"+orderid+"\">");
 						out.println("<option value=\"Null\">---</option>");
-						out.println("<option value=\"PreparingPackaage\">Preparing Package</option>");
+						out.println("<option value=\"PreparingPackage\">Preparing Package</option>");
 						out.println("<option value=\"Shipped\">Shipped</option>");
-						out.println("<option value=\"OutonDelivery\">Out on Delivery</option>");
+						out.println("<option value=\"OutOnDelivery\">Out on Delivery</option>");
 						out.println("<option value=\"Delivered\">Delivered</option>");					
-					out.println("</td>");
+					out.println("</th>");
 					out.println("<td>");
-					out.println("<button type=\"button\" onclick=\"alert('Hello world!')\">UPDATE</button>");
+					out.println("<button type=\"button\" onclick=\"updateStatus(this)\">UPDATE</button>");
 					out.println("</td>");
 						out.println("<tr>");				
+							out.println("<th class=\"border-top-0\"></th>");
 							out.println("<th class=\"border-top-0\"></th>");
 							out.println("<th class=\"border-top-0\">Product</th>");
 							out.println("<th class=\"border-top-0\">Quantity</th>");
@@ -562,9 +566,6 @@ if(session.getAttribute("user") != null)
 		orderid = orderid + 1;
 		    
 	}
-	out.println("</div>");
-	out.println("</div>");
-	out.println("</div>");
 	out.println("</div>");
 	out.println("</div>");
 	
@@ -673,22 +674,22 @@ function filterFunction() {
 	var email = document.getElementById('email').value;
 	var price = document.getElementById('price').value;
 	var product = document.getElementById('product').value;
-if(date.length == 0)
-{
-	date = "null";
-}
-if(email.length == 0)
-{
-	email = "null";
-}
-if(price.length == 0)
-{
-	price = "null";
-}
-if(product.length == 0)
-{
-	product = "null";
-}
+	if(date.length == 0)
+	{
+		date = "null";
+	}	
+	if(email.length == 0)
+	{
+		email = "null";
+	}
+	if(price.length == 0)
+	{
+		price = "null";
+	}
+	if(product.length == 0)
+	{
+		product = "null";
+	}
 	
 	var url = 'http://localhost:8080/CS308RegisterWithJPA/invoicePage.jsp?';
 	url += '&date=' + date +'&email=' + email+'&price=' + price+'&product=' + product ;
@@ -724,6 +725,47 @@ if(product.length == 0)
 
     	});
     	
+    }
+
+    function updateStatus(order)
+    {
+		var $row  = $(order).closest("tr");
+		var $ths = $row.find("th");
+		//console.log($ths);
+		
+		var itemName = $ths[0].innerHTML;
+		itemName = itemName.substr(10,2);
+		console.log(itemName);
+
+		var itemName1 = $ths[5].innerHTML;
+		
+		itemName1 = itemName1.substr(12,12);
+		console.log(itemName1);
+		
+
+    	var e = document.getElementById(itemName1);
+    	var strUser = e.options[e.selectedIndex].value;
+    	console.log(strUser);
+
+
+    	var params = 'order_id='+itemName+'&status='+strUser;
+    	console.log(params);
+
+    	var xhr = new XMLHttpRequest();
+        var url = "ChangeStatusServlet";
+        xhr.open("POST", url, true);
+        
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.addEventListener('readystatechange', function (e) {
+            if(this.readyState === 4 )
+            {
+                alert("You have successfuly changed the status of the order " + itemName);    // Then Refresh Page
+                window.location = "invoicePage.jsp";
+            }
+        });
+    	
+        xhr.send(params);
+        
     }
 
     
