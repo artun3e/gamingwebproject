@@ -6,6 +6,7 @@
 <%@ page import="cs308.sabanciuniv.edu.Order"%>
 <%@ page import="cs308.sabanciuniv.edu.OrderManager"%>
 <%@ page buffer="522kb" autoFlush="false" %>
+
 <!DOCTYPE html>
 
 <html class="no-js" lang="">
@@ -108,7 +109,7 @@ font-weight:bold;
 .box {
 border:3px solid black;
   background-color: #E8A2A2;
-  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQfbeY07Hj35CsKASs4BAyDuaAGBg-GOxVpws5yqFBILOgaFySW&usqp=CAU");
+  background-image: url("data:image/jpeg;base64,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");
   
   color: white;
   margin: 20px;
@@ -459,14 +460,34 @@ width: 1000px;
  <a class='btn btn-success btn-block btn-lg' onclick="filterFunction()" href="#"style="margin-left: auto; margin-right: auto; display: block; margin-top: 10px; margin-bottom: 10px">FILTER</a>
 
 <a class='btn btn-success btn-block btn-lg' onclick="downloadPDF()" href="#"style="margin-left: auto; margin-right: auto; display: block; margin-top: 10px; margin-bottom: 10px">DOWNLOAD AS PDF</a>
-<%
 
+
+<%
 session = request.getSession();
 if(session.getAttribute("user") != null)
 {
 	
+	
 	OrderManager om = new OrderManager();
-	List<Order> orderList = om.getAllOrders();
+	List<Order> orderList;
+	
+	if(request.getParameter("email") == null)
+	{
+		System.out.println("not filtered");
+		orderList = om.getAllOrders();
+		
+	}
+	else
+	{
+		System.out.println("filtered");
+		
+		String date = request.getParameter("date");
+		String email = request.getParameter("email");
+		String price = request.getParameter("price");
+		String product = request.getParameter("product");
+		
+		orderList =om.filteredOrders(date,email,price,product);		
+	}
 	
 	
 	out.println("<div id=\"all\" class=\"all\">");
@@ -517,11 +538,11 @@ if(session.getAttribute("user") != null)
 	    for(Games game : gameList.keySet())
 	    {
 	    	out.println("<tr>");
-	    		out.println("<td><a href=\"#\"><img crossorigin=\"anonymous\" src=" + game.getHeader_image() +  "alt=" + game.getName() + "width=\"100\" height=\"100\"\"></a></td>");
+	    		out.println("<td><a href=\"#\"><img crossorigin=\"anonymous\" src=" + game.getHeader_image() +  "alt=" + game.getName() + "width=\"212\" height=\"100\"\"></a></td>");
 	    		out.println("<td><a onclick=\"toDetails(this)\" href=\"#\">" + game.getName()+ "</a></td>");
-	    		out.println("<td><a>" + gameList.get(game) + "</a></td>");
-	    		out.println("<td><a>" + prices.get(game)+ "$</a></td>");
-	    		out.println("<td><a>" + prices.get(game) * gameList.get(game) + "$</a></td>");    		
+	    		out.println("<td><p>" + gameList.get(game) + "</p></td>");
+	    		out.println("<td><p>" + prices.get(game)+ "$</p></td>");
+	    		out.println("<td><p>" + prices.get(game) * gameList.get(game) + "$</p></td>");    		
 	    		
 	    	out.println("</tr>");
 	    	
@@ -529,7 +550,7 @@ if(session.getAttribute("user") != null)
 	    					
 	    }
 	    out.println("<div class=\"total\">");
-	    out.println("<td><a><td><a><td><a><td><a><td><a>" + "Total: "+ total + "$</a></td>");
+	    out.println("<td><a><td><a><td><a><td><a><td><b>" + "Total: "+ total + "$</b></td>");
 	    out.println("</div>");
 	    			out.println("</tbody>");
 	    				out.println("</tr>");
@@ -556,7 +577,10 @@ else
     response.sendRedirect("login.jsp");
     return;
 }
+
 %>
+
+
                     </div>
                 </div>
             </div>
@@ -643,10 +667,8 @@ else
 		============================================ -->
     <script src="./js3/tawk-chat.js"></script>
     
-    
 <script>
-/* var products = [];
-async function filterFunction() {
+function filterFunction() {
 	var date = document.getElementById('date').value;
 	var email = document.getElementById('email').value;
 	var price = document.getElementById('price').value;
@@ -667,65 +689,11 @@ if(product.length == 0)
 {
 	product = "null";
 }
-	console.log("date: " + date);
-	console.log("email: " + email);
-	console.log("price: " + price);
-	console.log("producct: " + product);
-
-	const url = '/CS308RegisterWithJPA/search/fromDB/filteredOrders/' + date + '/' + email + '/'+ price +'/'+ product; 
-
-	const response = await fetch(url);
-	const data = await response.json();
-
-	var all = document.querySelector("#all");
-	all.innerHTML = "";
-
-	if(data.length == 0){
-		document.getElementsByClassName("main")[0].innerHTML = noResult;
-	}
-	else{		
-    	for (var k = 0; k < data.length; k++){
-    		products.push(data[k]);
-    		fillCard(data[k], k);    	
-    	} 
-	}
 	
-	
+	var url = 'http://localhost:8080/CS308RegisterWithJPA/invoicePage.jsp?';
+	url += '&date=' + date +'&email=' + email+'&price=' + price+'&product=' + product ;
+	window.location.search = url;
 }
-
-var productHTML = 
-    '                                <div class="product">'+
-    '                                    <div class="product-img">'+
-    '                                        <img crossorigin="anonymous" src="./img/product01.png" alt="">'+
-    '                                        <div class="product-label">'+
-    '                                        </div>'+
-    '                                    </div>'+
-    '                                    <div class="product-body">'+
-    '                                        <p class="product-category">Category</p>'+
-    '                                        <h3 class="product-name"><a href="#">product name goes here</a></h3>'+
-    '                                        <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>'+
-    '                                        <div class="product-rating">'+
-    '                                            <i class="fa fa-star"></i>'+
-    '                                            <i class="fa fa-star"></i>'+
-    '                                            <i class="fa fa-star"></i>'+
-    '                                            <i class="fa fa-star"></i>'+
-    '                                            <i class="fa fa-star"></i>'+
-    '                                        </div>'+
-    '                                    </div>'+
-    '                                    <div class="add-to-cart">'+
-    '                                        <button onclick="addToCart(this)" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Add </button>'+
-    '                                    </div>'+
-    '                                </div>';
-
-    function fillCard(element, k){
-    	console.log("started"); 
-    	console.log(element.pricesAtThatTime);
-        
-
-    } */
-
-
-
     function downloadPDF(){
     	console.log("download as pdf"); 
 
@@ -733,7 +701,7 @@ var productHTML =
     	var date = new Date();
     	html2canvas(data).then(canvas => {
     	var imgWidth = 210;
-    	var pageHeight = 295;
+    	var pageHeight = 310; //295
     	var imgHeight = canvas.height * imgWidth / canvas.width;
     	var heightLeft = imgHeight;
 
@@ -757,6 +725,7 @@ var productHTML =
     	});
     	
     }
+
     
 </script>
     
