@@ -495,8 +495,8 @@ if(session.getAttribute("user") != null)
 	
 	
 	
-    out.println("<div class=\"row bar\">");
-    out.println("<div id=\"customer-order\" class=\"col-lg-9\">");
+    out.println("<div class=\"row bar\" id=\"row bar\">");
+    //out.println("<div id=\"customer-order\" class=\"col-lg-9\">");
     
     int orderid = 1;
 	for(Order o : orderList){		
@@ -566,7 +566,7 @@ if(session.getAttribute("user") != null)
 		orderid = orderid + 1;
 		    
 	}
-	out.println("</div>");
+	//out.println("</div>");
 	out.println("</div>");
 	
 	
@@ -698,11 +698,11 @@ function filterFunction() {
     function downloadPDF(){
     	console.log("download as pdf"); 
 
-    	var data = document.getElementById('all');
+    	var data = document.getElementById('row bar');
     	var date = new Date();
     	html2canvas(data).then(canvas => {
     	var imgWidth = 210;
-    	var pageHeight = 310; //295
+    	var pageHeight = 295; //295
     	var imgHeight = canvas.height * imgWidth / canvas.width;
     	var heightLeft = imgHeight;
 
