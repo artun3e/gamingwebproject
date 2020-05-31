@@ -25,7 +25,7 @@ public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String address;
+	private Address address;
 	private String date;
 	@Column(name = "totalCost" ,columnDefinition = "double")
 	private double totalCost;
@@ -61,10 +61,10 @@ public class Order {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getAddress() {
+	public Address getAddress() {
 		return address;
 	}
-	public void setAddress(String address) {
+	public void setAddress(Address address) {
 		this.address = address;
 	}
 	public User getOwner() {
@@ -81,7 +81,7 @@ public class Order {
 		this.id = id;
 		this.products = new HashMap<>();
 	}
-	public Order(String address, User owner){
+	public Order(Address address, User owner){
 		this.id = 0;
 		this.owner = owner;
 		this.address = address;
@@ -94,6 +94,12 @@ public class Order {
 	public void setMap(Map<Games,Integer> hashmap)
 	{
 		this.products = hashmap;
+	}
+	
+	public String convertAddress()
+	{
+		String returnAddress = this.address.getAddress();
+		return returnAddress;
 	}
 
 	@Override
