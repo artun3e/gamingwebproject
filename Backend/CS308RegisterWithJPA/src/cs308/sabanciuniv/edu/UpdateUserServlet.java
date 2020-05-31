@@ -68,6 +68,7 @@ public class UpdateUserServlet extends HttpServlet {
 			MessageDigest digest = MessageDigest.getInstance("SHA-256");
 			byte[] hash = digest.digest(oldPassword.getBytes(StandardCharsets.UTF_8)); // hash the input password
 			
+			byte[] hash2 = digest.digest(newPassword.getBytes(StandardCharsets.UTF_8));
 			
 			if(user.getPassword().contentEquals(new String(hash, "UTF-8"))) // check whether users match
 			{
@@ -75,7 +76,7 @@ public class UpdateUserServlet extends HttpServlet {
 				//Object obj = em.createQuery("from Users where Email:=emailTemp").setParameter("emailTemp", email).getSingleResult();
 				em.getTransaction().begin();
 				myuser.setName(name);
-				myuser.setPassword(newPassword);
+				myuser.setPassword(new String(hash2, "UTF-8"));
 				em.getTransaction().commit(); // updated the database 
 				em.close();
 				emf.close();

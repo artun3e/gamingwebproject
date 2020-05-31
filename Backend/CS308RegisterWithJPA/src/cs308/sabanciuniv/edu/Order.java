@@ -68,12 +68,13 @@ public class Order {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	/*
 	public Payment getPayment() {
 		return this.payment;
 	}
 	public void setPayment(Payment payment) {
 		this.payment = payment;
-	}
+	}*/
 	public User getOwner() {
 		return owner;
 	}
