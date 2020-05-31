@@ -314,7 +314,7 @@ public class OrderManager {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("drawChart/{date1}/{date2}")
-	public List<denizIstedi> oneMonthSummary(@PathParam("date1") String date1, @PathParam("date2") String date2){
+	public List<denizIstedi> drawChart(@PathParam("date1") String date1, @PathParam("date2") String date2){
 		Connection conn;
 		PreparedStatement ps;
 		ResultSet rs;
