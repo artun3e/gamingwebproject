@@ -468,6 +468,31 @@ public class OrderManager {
 		return totalCount;
 	}
 
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("getTotalNumberOfGamesSold")
+	public double getTotalNumberOfGamesSold()
+	{
+		Connection conn;
+		PreparedStatement ps;
+		ResultSet rs;
+		int totalCount = 0;
+		try
+		{
+			conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
+			ps = conn.prepareStatement("select sum(Quantity) as totalGamesSold from Orders_Games");
+			rs = ps.executeQuery();
+			while(rs.next())
+			{
+				totalCount = rs.getInt("totalGamesSold");
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return totalCount;
+	}
+
 /* DONT RUN THE BELOW CODE, IT WAS FOR FIXING THE ARTUN'S PASSWORD.
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
