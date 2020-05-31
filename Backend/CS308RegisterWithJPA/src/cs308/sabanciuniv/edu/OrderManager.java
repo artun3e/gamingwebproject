@@ -389,6 +389,81 @@ public class OrderManager {
 		return sortedList;
 	}
 
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("getTotalProfit")
+	public double getTotalProfit()
+	{
+		Connection conn;
+		PreparedStatement ps;
+		ResultSet rs;
+		double totalProfit = 0.0;
+		try
+		{
+			conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
+			ps = conn.prepareStatement("select sum(totalCost) as totalProfit from Orders");
+			rs = ps.executeQuery();
+			while(rs.next())
+			{
+				totalProfit = rs.getDouble("totalProfit");
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return totalProfit;
+	}
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("getNumberOfOrders")
+	public double getNumberOfOrders()
+	{
+		Connection conn;
+		PreparedStatement ps;
+		ResultSet rs;
+		int totalCount = 0;
+		try
+		{
+			conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
+			ps = conn.prepareStatement("select count(*) as totalcount from Orders");
+			rs = ps.executeQuery();
+			while(rs.next())
+			{
+				totalCount = rs.getInt("totalcount");
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return totalCount;
+	}
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("getNumberOfShippedOrders")
+	public double getNumberOfShippedOrders()
+	{
+		Connection conn;
+		PreparedStatement ps;
+		ResultSet rs;
+		int totalCount = 0;
+		try
+		{
+			conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
+			ps = conn.prepareStatement("select count(*) as totalcount from Orders where status='Delivered'");
+			rs = ps.executeQuery();
+			while(rs.next())
+			{
+				totalCount = rs.getInt("totalcount");
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return totalCount;
+	}
+
 /* DONT RUN THE BELOW CODE, IT WAS FOR FIXING THE TOTALCOSTS OF ORDERS.
 	@GET
 	@Path("fixOrderTotalCost")
