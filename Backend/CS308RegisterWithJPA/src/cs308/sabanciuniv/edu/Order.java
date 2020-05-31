@@ -25,8 +25,8 @@ public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private Address address;
-	private Payment payment;
+	private String address;
+	//private Payment payment;
 	private String date;
 	@Column(name = "totalCost" ,columnDefinition = "double")
 	private double totalCost;
@@ -62,10 +62,10 @@ public class Order {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Address getAddress() {
+	public String  getAddress() {
 		return address;
 	}
-	public void setAddress(Address address) {
+	public void setAddress(String address) {
 		this.address = address;
 	}
 	public Payment getPayment() {
@@ -88,7 +88,8 @@ public class Order {
 		this.id = id;
 		this.products = new HashMap<>();
 	}
-	public Order(Address address, User owner){
+	
+	public Order(String address, User owner){
 		this.id = 0;
 		this.owner = owner;
 		this.address = address;
@@ -102,12 +103,7 @@ public class Order {
 	{
 		this.products = hashmap;
 	}
-	
-	public String convertAddress()
-	{
-		String returnAddress = this.address.getAddress();
-		return returnAddress;
-	}
+
 
 	@Override
 	public String toString() {

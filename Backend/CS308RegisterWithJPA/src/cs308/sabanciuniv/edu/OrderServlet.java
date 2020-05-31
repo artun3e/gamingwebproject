@@ -104,7 +104,8 @@ public class OrderServlet extends HttpServlet {
 				 * constructor TODO -> address
 				 *  sectigi addressi tek stringte yollanmasi lazim -> parametre olarak al
 				 */
-				Order newOrder = new Order("TODO", user);
+				// get users address 
+				Order newOrder = new Order(user.getAddress(), user);
 				newOrder.setStatus(Order.orderStatus.PreparingPackage);
 				newOrder.setMap(hashmap);
 				newOrder.setTotalCost(totalCost);
