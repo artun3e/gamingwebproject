@@ -3,13 +3,16 @@
 	
 	var paymentID;
 	var addressID;
+	var user;
+	
 async function getData (variable){
-	const user = variable;
-	const paymentURL = '/CS308RegisterWithJPA/search/fromDB/byPayment/' + user; 
+	const query = variable;
+	user = query;
+	const paymentURL = '/CS308RegisterWithJPA/search/fromDB/byPayment/' + query; 
 	const paymentResponse = await fetch(paymentURL);
 	const paymentData = await paymentResponse.json();
 	
-	const addressURL = '/CS308RegisterWithJPA/search/fromDB/byAddress/' + user; 
+	const addressURL = '/CS308RegisterWithJPA/search/fromDB/byAddress/' + query; 
 	const addressResponse = await fetch(addressURL);
 	const addressData = await addressResponse.json(); 
 
@@ -135,4 +138,9 @@ function getAddressID(){
 	console.log("getAddressID");
 	console.log(addressID);
 	return addressID;
+}
+
+function getUser(){
+	console.log(user);
+	return user;
 }
