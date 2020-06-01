@@ -544,6 +544,56 @@ public class GamesManager {
         }
         return "An error occured! :(";
     }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("getByCategory/{category}")
+    public List<Games> getByCategory(@PathParam("category")String category)
+    {
+        List<Games> resultArray = new ArrayList<>();
+        System.out.println("Function called...");
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
+            //PreparedStatement ps = conn.prepareStatement();
+            String sqlQuery = "Select onSale,header_image,steamspy_tags,price,salePrice,name from Games where steamspy_tags like CONCAT( '%',?,'%')";
+            String[] categories = category.split(",");
+            //ps.setString(1,categories[0]);
+            System.out.println("Category 1 is " + categories[0]);
+            for(int i = 1; i < categories.length; i++)
+            {
+                System.out.println("Category " + Integer.toString(i+1) + " is " + categories[i]);
+                sqlQuery += " and steamspy_tags like CONCAT( '%',?,'%')";
+            }
+            PreparedStatement ps = conn.prepareStatement(sqlQuery);
+            ps.setString(1,categories[0]);
+            for(int i = 1; i < categories.length; i++)
+            {
+                ps.setString(i+1,categories[i]);
+            }
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                Games game = new Games();
+                game.setPrice(rs.getDouble("price"));
+                game.setOnSale(rs.getBoolean("onSale"));
+                game.setSalePrice(rs.getDouble("salePrice"));
+                game.setName(rs.getString("name"));
+                game.setHeader_image(rs.getString("header_image"));
+                game.setSteampsyTags(rs.getString("steamspy_tags"));
+                game.setCategories(rs.getString("steamspy_tags"));
+                resultArray.add(game);
+            }
+            conn.close();
+            ps.close();
+            rs.close();
+            conn = null;
+            ps = null;
+            rs = null;
+            return resultArray;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
 
 /*
