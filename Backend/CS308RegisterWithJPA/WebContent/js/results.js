@@ -154,7 +154,10 @@ async function getData(value){
             var price = document.getElementsByClassName("product-body")[k].getElementsByTagName('h4')[0];
             brand.innerHTML = element.publisher;
             name.innerHTML = '<a onclick="toDetails(this)" href="#">' + element.name + '</a>' ;
-            price.innerHTML = "$" + element.price;
+            if(element.onSale == true)
+            	price.innerHTML = "$" + element.salePrice + '<del class="product-old-price">$' + element.price + '</del>';
+            else
+            	price.innerHTML = "$" + element.salePrice;
             
             var rating = element.rating;
             addStars(k, rating);
@@ -177,7 +180,10 @@ async function getData(value){
             var price = document.getElementsByClassName("product-body")[j].getElementsByTagName('h4')[0];
             brand.innerHTML = element.publisher;
             name.innerHTML = '<a onclick="toDetails(this)" href="#">' + element.name + '</a>' ;
-            price.innerHTML = "$" + element.price;
+            if(element.onSale == true)
+            	price.innerHTML = "$" + element.salePrice + '<del class="product-old-price">$' + element.price + '</del>';
+            else
+            	price.innerHTML = "$" + element.salePrice;
             var rating = element.rating;
             addStars(j, rating);
             }
@@ -217,13 +223,13 @@ function addToCart(game){
 
 function sortByPrice(type){	
 	if (type == "p-asc"){
-		products.sort(function(a, b){return a.price - b.price});
+		products.sort(function(a, b){return a.salePrice - b.salePrice});
 		for(var j=0; j<products.length; j++){
 			reFill(products[j], j);
 		}
 	}
 	else if (type == "p-desc"){
-		products.sort(function(a, b){return b.price - a.price});
+		products.sort(function(a, b){return b.salePrice - a.salePrice});
 		for(var j=0; j<products.length; j++){
 			reFill(products[j], j);
 		}
@@ -269,7 +275,7 @@ function filter(min, max){
 	var row = document.querySelector("#store > div.row");
 	row.innerHTML = "";
 	for(var j=0; j<products.length; j++){
-		if(products[j].price >= min && products[j].price <= max){
+		if(products[j].salePrice >= min && products[j].salePrice <= max){
 			fillCard(products[j],count)
 			filtered.push(products[j]);
 			count++;

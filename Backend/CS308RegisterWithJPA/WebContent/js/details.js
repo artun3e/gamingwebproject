@@ -139,9 +139,9 @@ async function getData(value){
          
          
          if(data[0].onSale == true)
-        	 price.innerHTML = data[0].salePrice + "$";
+         	price.innerHTML = "$" + data[0].salePrice + '<del class="product-old-price">$' + data[0].price + '</del>';
          else
-        	 price.innerHTML = data[0].price + "$";
+         	price.innerHTML = "$" + data[0].salePrice;
          
          var stockField = document.querySelector("body > div.main > div > div > div.col-md-5 > div > div:nth-child(2) > span");
          if(data[0].stock == 0){
