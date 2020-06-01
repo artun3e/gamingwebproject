@@ -157,32 +157,43 @@ $(document).ready(function(){
     }
     var addressID = getAddressID();
     var paymentID = getPaymentID();
+    if(addressID == undefined || addressID == null){
+    	alert("Please create an address before placing an order.");    	
+    }
+    else{
+    	if(paymentID == undefined || paymentID == null){
+    		alert("Please create a payment method before placing an order.")
+    	}
+    	else{
+            var xhr = new XMLHttpRequest();
+            var url = "placeorder";
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.addEventListener('readystatechange', function (e) {
+              if(this.readyState === 4 )
+              {
+                console.log("we are done!!!!");
+                var returnedResponse = xhr.getResponseHeader("order-error");
+                if(returnedResponse === "true")
+                {
+                  console.log("No login.");
+                  window.location = "login.jsp";
+                }
+                else
+                {
+                    alert("Your order has been placed!");
+                    window.location = "index.jsp";
+                }
+              }
+            });
+            var data_about = JSON.stringify({"list_names": Item_Names, "list_q": Item_Q });
+            var params = 'list_names='+Item_Names+'&list_q='+Item_Q+'&addressID='+addressID+'&paymentID='+paymentID; // + '&quantity' + 12;
+            console.log(data_about);
+            xhr.send(params);
+    	}
 
-    var xhr = new XMLHttpRequest();
-    var url = "placeorder";
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.addEventListener('readystatechange', function (e) {
-      if(this.readyState === 4 )
-      {
-        console.log("we are done!!!!");
-        var returnedResponse = xhr.getResponseHeader("order-error");
-        if(returnedResponse === "true")
-        {
-          console.log("No login.");
-          window.location = "login.jsp";
-        }
-        else
-        {
-            alert("Your order has been placed!");
-            window.location = "index.jsp";
-        }
-      }
-    });
-    var data_about = JSON.stringify({"list_names": Item_Names, "list_q": Item_Q });
-    var params = 'list_names='+Item_Names+'&list_q='+Item_Q+'&addressID='+addressID+'&paymentID='+paymentID; // + '&quantity' + 12;
-    console.log(data_about);
-    xhr.send(params);
+    }
+
   });
   
 });

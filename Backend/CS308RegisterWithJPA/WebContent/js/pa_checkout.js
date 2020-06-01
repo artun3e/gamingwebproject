@@ -21,6 +21,7 @@ async function getData (variable){
 	}
 	else
 	{
+		document.getElementById("aDiv").innerHTML = "";
 		var optDiv = document.getElementById("addressOptionDiv");
 		optDiv.innerHTML = "";
 		var info = document.createElement("h3");
@@ -39,7 +40,7 @@ async function getData (variable){
 		paymentID= paymentData[0].id;
 	}
 	else{
-		console.log("elseteyim");
+		document.getElementById("pDiv").innerHTML = "";
 		var optDiv = document.getElementById("paymentOptionDiv");
 		optDiv.innerHTML = "";
 		var info = document.createElement("h3");
