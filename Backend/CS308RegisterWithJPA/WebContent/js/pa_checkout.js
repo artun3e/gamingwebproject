@@ -1,8 +1,9 @@
 	var addressOption = []; 
-	var paymentOption = []; 
+	var paymentOption = [];
+	
+	var paymentID;
+	var addressID;
 async function getData (variable){
-	console.log("pa_checkout js'teyim");
-	console.log(variable);
 	const user = variable;
 	const paymentURL = '/CS308RegisterWithJPA/search/fromDB/byPayment/' + user; 
 	const paymentResponse = await fetch(paymentURL);
@@ -16,6 +17,7 @@ async function getData (variable){
 		document.getElementById("adr").value = addressData[0].address;
 		document.getElementById("city").value = addressData[0].city;
 		document.getElementById("phone").value = addressData[0].phoneNumber;
+		addressID= addressData[0].id;
 	}
 	else
 	{
@@ -34,6 +36,7 @@ async function getData (variable){
 		document.getElementById("ccnum").value = paymentData[0].cardNumber;
 		document.getElementById("cvv").value = paymentData[0].cvc;
 		document.getElementById("expDate").value = paymentData[0].expirationDate;
+		paymentID= paymentData[0].id;
 	}
 	else{
 		console.log("elseteyim");
@@ -99,10 +102,10 @@ function checkOptions(){
 		console.log(addressOption);
 		if (addressOption[i].id == selA.value){
 			found = addressOption[i];
-			console.log(found);
 			document.getElementById("adr").value = found.address;
 			document.getElementById("city").value = found.city;
 			document.getElementById("phone").value = found.phoneNumber;
+			addressID = found.id;
 		}
 	}
 
@@ -114,8 +117,21 @@ function checkOptions(){
 		document.getElementById("ccnum").value = found.cardNumber;
 		document.getElementById("cvv").value = found.cvc;
 		document.getElementById("expDate").value = found.expirationDate;
+		paymentID = found.id;
 	}
 
 	}
 	
+}
+
+function getPaymentID(){
+	console.log("getPaymentID");
+	console.log(paymentID);
+	return paymentID;
+}
+
+function getAddressID(){
+	console.log("getAddressID");
+	console.log(addressID);
+	return addressID;
 }

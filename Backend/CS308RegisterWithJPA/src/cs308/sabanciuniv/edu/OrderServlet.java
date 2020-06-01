@@ -63,6 +63,8 @@ public class OrderServlet extends HttpServlet {
 				//String userEmail = user.getEmail();
 				String[] itemNames = request.getParameter("list_names").split(",");
 				String[] itemQuantities = request.getParameter("list_q").split(",");
+				String aID = request.getParameter("addressID");
+				String pID = request.getParameter("paymentID");
 				Map<Games, Integer> hashmap = new HashMap<>();
 				EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
 				EntityManager em = emf.createEntityManager();
@@ -72,6 +74,8 @@ public class OrderServlet extends HttpServlet {
 				double totalCost = 0;
 				for(String itemName : itemNames)
 				{
+					System.out.println("Address ID sent is: " + aID);
+					System.out.println("Payment ID sent is: " +pID);
 					System.out.println("Query is " + itemName);
 					try
 					{
