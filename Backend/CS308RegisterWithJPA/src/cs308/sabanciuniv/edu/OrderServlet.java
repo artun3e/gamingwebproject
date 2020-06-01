@@ -109,9 +109,14 @@ public class OrderServlet extends HttpServlet {
 				 *  sectigi addressi tek stringte yollanmasi lazim -> parametre olarak al
 				 */
 				// get users address 
-				Order newOrder = new Order(user.getAddress(), user);
+	
+				Address address = em.find(Address.class, Integer.parseInt(aID));
+				String orderAddress = address.getAddress();
+				System.out.println("address is: " + orderAddress);
+				Order newOrder = new Order(orderAddress, user);
 				newOrder.setStatus(Order.orderStatus.PreparingPackage);
 				newOrder.setMap(hashmap);
+				//newOrder.setAddress(user.getAddress());
 				newOrder.setTotalCost(totalCost);
 				newOrder.setPricesAtThatTime(pricesAtThatTime);
 				em.persist(newOrder);
