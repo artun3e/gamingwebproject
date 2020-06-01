@@ -3,6 +3,7 @@
 <%@ page import="cs308.sabanciuniv.edu.User"%>
 <%@ page import="cs308.sabanciuniv.edu.Games"%>
 <%@ page import="cs308.sabanciuniv.edu.Order"%>
+<%@ page import="cs308.sabanciuniv.edu.OrderManager"%>
 <%@ page import="java.io.PrintWriter"%>
 <!DOCTYPE html>
 
@@ -144,6 +145,8 @@
                                 </li>
                                 <li><a href="admin_charts_area.jsp">Area Charts</a>
                                 </li>
+                                <li><a href="admin_charts_area.jsp">Interval Charts</a>
+                                </li>
                             </ul>
                         </div>
                         <div id="Tables" class="tab-pane notika-tab-menu-bg animated flipInX">
@@ -185,6 +188,71 @@
         </div>
     </div>
     <!-- Main Menu area End-->
+   <!-- Start Status area -->
+    <div class="notika-status-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
+                        <div class="website-traffic-ctn">
+                            <h2>$<span class="counter"><% 
+                            	OrderManager om = new OrderManager();
+                            	double prof = om.getTotalProfit();
+                            	String str = Double.toString(prof);
+                            	out.println(str);
+                            	
+                            %></span></h2>
+                            <p>Total Profit</p>
+                        </div>
+                        <div class="sparkline-bar-stats1">9,4,8,6,5,6,4,8,3,5,9,5</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
+                        <div class="website-traffic-ctn">
+                            <h2><span class="counter"><% 
+                            	double total_order = om.getNumberOfOrders();
+                            	String str_2 = Double.toString(total_order);
+                            	out.println(str_2);
+                            	
+                            %></span></h2>
+                            <p>Total Online Orders</p>
+                        </div>
+                        <div class="sparkline-bar-stats2">1,4,8,3,5,6,4,8,3,3,9,5</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30 dk-res-mg-t-30">
+                        <div class="website-traffic-ctn">
+                            <h2><span class="counter"><% 
+                            	double total_games_sold = om.getTotalNumberOfGamesSold();
+                            	String str_3 = Double.toString(total_games_sold);
+                            	out.println(str_3);
+                            	
+                            %></span></h2>
+                            <p>Total Games Sold</p>
+                        </div>
+                        <div class="sparkline-bar-stats3">4,2,8,2,5,6,3,8,3,5,9,5</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30 dk-res-mg-t-30">
+                        <div class="website-traffic-ctn">
+                            <h2><span class="counter"><% 
+                            	double total_shipped = om.getNumberOfShippedOrders();
+                            	String str_4 = Double.toString(total_shipped);
+                            	out.println(str_4);
+                            	
+                            %></span></h2>
+                            <p>Total Shipped Orders</p>
+                        </div>
+                        <div class="sparkline-bar-stats4">2,4,8,4,5,7,4,7,3,5,7,5</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Status area-->
     <!-- Start Sale Statistic area-->
     <div class="sale-statistic-area">
         <div class="container">
