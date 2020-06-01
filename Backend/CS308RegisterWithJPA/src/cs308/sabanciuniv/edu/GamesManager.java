@@ -358,6 +358,9 @@ public class GamesManager {
                 obj.setDetailed_description(rs.getString("detailed_description"));
                 obj.setAbout_the_game(rs.getString("about_the_game"));
                 obj.setShort_description(rs.getString("short_description"));
+                obj.setOnSale(rs.getBoolean("onSale"));
+                obj.setStock(rs.getInt("stock"));
+                obj.setSalePrice(rs.getDouble("salePrice"));
                 resultList.add(obj);
             }
             ps.close();
