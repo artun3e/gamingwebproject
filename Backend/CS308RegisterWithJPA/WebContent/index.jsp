@@ -131,7 +131,42 @@
         </div>
     </nav>
 </header>
+     <script type = "text/javascript">
+          function displayNextImage() {
+              x = (x === images.length - 1) ? 0 : x + 1;
+              document.getElementById("landing-img").src = images[x];
+          }
 
+          function displayPreviousImage() {
+              x = (x <= 0) ? images.length - 1 : x - 1;
+              document.getElementById("landing-img").src = images[x];
+          }
+
+          function startTimer() {
+        	  console.log("buradayim");
+              setInterval(displayNextImage, 3000);
+          }
+
+          var images = [], x = -1;
+          images[0] = "img/campaign0.jpg";
+          images[1] = "img/campaign1.png";
+          images[2] = "img/campaign2.jpg";
+          images[3] = "img/campaign3.jpg";
+      </script>
+      
+<div class="img-div">
+<script> startTimer() </script>
+	<img id="landing-img" src="img/campaign0.jpg" height= "650" width="1200">
+</div>
+
+<style>
+         .img-div {
+        text-align: center;
+      }
+      #landing-img{
+      border-radius: 7%;
+      }
+</style>
 <div class="section">
     <!-- container -->
     <p style='color: #a94442' style="margin-left: 500px;">
