@@ -136,7 +136,20 @@ async function getData(value){
 //         sid6.src =sideValue2;
 //         sid7.src =sideValue3;
 //         sid8.src =sideValue4;
-    	 price.innerHTML = data[0].price + "$";
+         
+         
+         if(data[0].onSale == true)
+        	 price.innerHTML = data[0].salePrice + "$";
+         else
+        	 price.innerHTML = data[0].price + "$";
+         
+         var stockField = document.querySelector("body > div.main > div > div > div.col-md-5 > div > div:nth-child(2) > span");
+         if(data[0].stock == 0){
+        	 stockField.innerText = "Out of stock!";
+        	 var addToCartField = document.querySelector("body > div.main > div > div > div.col-md-5 > div > div.add-to-cart");
+        	 addToCartField.innerHTML = "";
+         }
+
     	 description.innerHTML = data[0].short_description;
     	 descriptionTab.innerHTML = data[0].detailed_description;
     	 requirementTab.innerHTML = data[0].minimum;
