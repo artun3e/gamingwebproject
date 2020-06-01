@@ -81,11 +81,15 @@ async function getData(value){
     '                                            <i class="fa fa-star"></i>'+
     '                                        </div>'+
     '                                    </div>'+
+    '                                    <div class="atcField">'+
+    '                                    	<div class="add-to-cart">'+
+    '                                        <button onclick="addToCart(this)" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Add </button>'+
+    '                                     	</div>'+
+    '                                     </div>'+
     '                                </div>';
     
-    var atcHTML =     
-    '                                        <button onclick="addToCart(this)" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Add </button>';
-
+        
+    
         function addStars(k, rating){
         	var stars = document.getElementsByClassName("product-rating")[k];
         	stars.innerHTML = "";
@@ -109,21 +113,21 @@ async function getData(value){
 
         }
         
-        function createNewCard(element, k){ //creates new element in html for each product
+        function createNewCard(){ //creates new element in html for each product
             var p = document.querySelector("#store > div.row")
             var newElement = document.createElement('div');
-            var atcElement = document.createElement('div');
+//            var atcElement = document.createElement('div');
             
             //// newElement.setAttribute('id', elementId);
             newElement.innerHTML = productHTML;
             newElement.setAttribute('class', "col-md-4 col-xs-6");
-            atcElement.innerHTML = atcHTML;
-            atcElement.setAttribute('class', 'add-to-cart');
+//            atcElement.innerHTML = atcHTML;
+//            atcElement.setAttribute('class', 'add-to-cart');
             p.appendChild(newElement);
-            if(element.stock != 0){
-            	var productDiv = document.getElementsByClassName("product")[k];
-            	productDiv.appendChild(atcElement); 	
-            }
+//            if(element.stock != 0){
+//            	var productDiv = document.getElementsByClassName("product")[k];
+//            	productDiv.appendChild(atcElement); 	
+//            }
 
             
             
@@ -133,6 +137,9 @@ async function getData(value){
         
         function fillCard(element, k){ //fill the card with necessary information
         	createNewCard(element, k);
+        	var atcField= document.getElementsByClassName("atcField")[k];
+        	if(element.stock == 0)
+        		atcField.innerHTML = "";
         	var images = element.screenshots;
         	var newImg = element.header_image;
         	imagesArr = images.split(',');
@@ -148,11 +155,16 @@ async function getData(value){
             brand.innerHTML = element.publisher;
             name.innerHTML = '<a onclick="toDetails(this)" href="#">' + element.name + '</a>' ;
             price.innerHTML = "$" + element.price;
+            
             var rating = element.rating;
             addStars(k, rating);
             }
         
-        function reFill(element, j){ //fill the card with necessary information
+        function reFill(element, j){
+        	//fill the card with necessary information
+        	var atcField= document.getElementsByClassName("atcField")[j];
+        	if(element.stock == 0)
+        		atcField.innerHTML = "";
         	var images = element.screenshots;
         	var newImg = element.header_image;
         	imagesArr = images.split(',');
