@@ -81,11 +81,10 @@ async function getData(value){
     '                                            <i class="fa fa-star"></i>'+
     '                                        </div>'+
     '                                    </div>'+
-    '                                    <div class="add-to-cart">'+
-    '                                        <button onclick="addToCart(this)" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Add </button>'+
-    '                                    </div>'+
     '                                </div>';
-    	
+    
+    var atcHTML =     
+    '                                        <button onclick="addToCart(this)" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Add </button>';
 
         function addStars(k, rating){
         	var stars = document.getElementsByClassName("product-rating")[k];
@@ -110,18 +109,30 @@ async function getData(value){
 
         }
         
-        function createNewCard(){ //creates new element in html for each product
+        function createNewCard(element, k){ //creates new element in html for each product
             var p = document.querySelector("#store > div.row")
             var newElement = document.createElement('div');
+            var atcElement = document.createElement('div');
+            
             //// newElement.setAttribute('id', elementId);
             newElement.innerHTML = productHTML;
             newElement.setAttribute('class', "col-md-4 col-xs-6");
+            atcElement.innerHTML = atcHTML;
+            atcElement.setAttribute('class', 'add-to-cart');
             p.appendChild(newElement);
+            if(element.stock != 0){
+            	var productDiv = document.getElementsByClassName("product")[k];
+            	productDiv.appendChild(atcElement); 	
+            }
+
+            
+            
+            
             
             }
         
         function fillCard(element, k){ //fill the card with necessary information
-        	createNewCard();
+        	createNewCard(element, k);
         	var images = element.screenshots;
         	var newImg = element.header_image;
         	imagesArr = images.split(',');
