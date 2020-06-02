@@ -147,7 +147,7 @@
                         </div>
                         <div id="mailbox" class="tab-pane notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
-                            	<li><a href="mailPage.jsp">Compose Email</a></li>
+                            	<li><a href="admin_mailPage.jsp">Compose Email</a></li>
                             </ul>
                         </div>
                         <div id="Charts" class="tab-pane notika-tab-menu-bg animated flipInX">
@@ -169,14 +169,14 @@
 							        if(user.getUserType() == User.userType.Admin){
 							        	out.println("<li><a href=\"admin_Cats_table.jsp\">Category Table</a></li>");	//Category
 							        	out.println("<li><a href=\"admin_Games_table.jsp\">Games Table</a></li>");	//Game
-							        	out.println("<li><a href=\"admin_Orders_table.jsp\">Orders Table</a></li>");	//Orders
+							        	out.println("<li><a href=\"admin_Invoice_table.jsp\">Invoice Table</a></li>");	//Orders
 							        }
 							        else if(user.getUserType() == User.userType.ProductManager){
 							        	out.println("<li><a href=\"admin_Cats_table.jsp\">Category Table</a></li>");	//Category
 							        	out.println("<li><a href=\"admin_Games_table.jsp\">Games Table</a></li>");	//Game
 							        }
 									else if(user.getUserType() == User.userType.SalesManager){
-							        	out.println("<li><a href=\"admin_Orders_table.jsp\">Orders Table</a></li>");	//Orders
+							        	out.println("<li><a href=\"admin_Invoice_table.jsp\">Invoice Table</a></li>");	//Orders
 							        }
 							        else {
 							            %><script> alert("you are not authourized to see this page");

@@ -4,6 +4,7 @@
 <%@ page import="cs308.sabanciuniv.edu.Games"%>
 <%@ page import="cs308.sabanciuniv.edu.Order"%>
 <%@ page import="java.io.PrintWriter"%>
+<%@page import="java.io.*, java.util.Date, java.util.Enumeration, java.text.*" %> 
 <!DOCTYPE html>
 
 <html class="no-js" lang="">
@@ -135,7 +136,7 @@
                         </div>
                         <div id="mailbox" class="tab-pane notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
-                            	<li><a href="mailPage.jsp">Compose Email</a></li>
+                            	<li><a href="admin_mailPage.jsp">Compose Email</a></li>
                             </ul>
                         </div>
                         <div id="Charts" class="tab-pane active notika-tab-menu-bg animated flipInX">
@@ -157,14 +158,14 @@
 							        if(user.getUserType() == User.userType.Admin){
 							        	out.println("<li><a href=\"admin_Cats_table.jsp\">Category Table</a></li>");	//Category
 							        	out.println("<li><a href=\"admin_Games_table.jsp\">Games Table</a></li>");	//Game
-							        	out.println("<li><a href=\"admin_Orders_table.jsp\">Orders Table</a></li>");	//Orders
+							        	out.println("<li><a href=\"admin_Invoice_table.jsp\">Invoice Table</a></li>");	//Orders
 							        }
 							        else if(user.getUserType() == User.userType.ProductManager){
 							        	out.println("<li><a href=\"admin_Cats_table.jsp\">Category Table</a></li>");	//Category
 							        	out.println("<li><a href=\"admin_Games_table.jsp\">Games Table</a></li>");	//Game
 							        }
 									else if(user.getUserType() == User.userType.SalesManager){
-							        	out.println("<li><a href=\"admin_Orders_table.jsp\">Orders Table</a></li>");	//Orders
+							        	out.println("<li><a href=\"admin_Invoice_table.jsp\">Invoice Table</a></li>");	//Orders
 							        }
 							        else {
 							            %><script> alert("you are not authourized to see this page");
@@ -194,9 +195,29 @@
                         <div class="curved-inner-pro">
                             <div class="curved-ctn">
                                 <h2>Sales Statistics</h2>
-                                <p>Daily Total Margin for Past Month</p>
+                                <p>Daily Total Margin for Defined Interval</p>
                             </div>
                         </div>
+                        <div >
+                        <%
+	                        SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
+	                        
+	                        
+	                        Calendar cal = Calendar.getInstance();
+                            cal.add(Calendar.DATE, -1);
+                            Date day_ago = cal.getTime();
+	                        cal.add(Calendar.DATE, -29);
+	                        Date month_ago = cal.getTime();
+	                        
+	                        out.println("<label for=\"start\">Start date:</label>");
+	                        out.println("<input id=\"start\" type=\"date\" value=" + sdf.format(month_ago) +" >");
+	                        out.println("<label for=\"start\" style=\"margin-left: 30px;\">End date:</label>");
+	                        out.println("<input id=\"end\" type=\"date\" value=" + sdf.format(day_ago) +" max= "+ sdf.format(day_ago) +" >");
+                        %>
+                        <a class='btn btn-success btn-block'
+										id='interval'style="width:410px; margin-left: 500px; margin-right: auto; display: block; margin-top: -34px;">Get Margin Interval</a>
+										
+						</div>
                         <div class="area-chart-wp">
 	                        <canvas height="300px;" width="auto;" id="areachartfalse"></canvas>
 	                    </div>
@@ -271,7 +292,7 @@
     
     <script src="./js3/chat/jquery.chat.js"></script>
     <script src="./js3/charts/Chart.js"></script>
-    <script src="./js3/charts/area-chart.js"></script>
+    <script src="./js3/charts/area-chart_interval.js"></script>
     <!--  wave JS
 		============================================ -->
     <script src="./js3/wave/waves.min.js"></script>
