@@ -65,8 +65,10 @@ public class OrderServlet extends HttpServlet {
 		
 			else{
 				//String userEmail = user.getEmail();
-				String[] itemNames = request.getParameter("list_names").split(",");
+				//System.out.println("itemQuantitiesBeforeSplit is " + request.getParameter("list_q"));
+				String[] itemNames = request.getParameter("list_names").split(";;;");
 				String[] itemQuantities = request.getParameter("list_q").split(",");
+				//System.out.println("After Split is " + itemQuantities);
 				String aID = request.getParameter("addressID");
 				String pID = request.getParameter("paymentID");
 				Map<Games, Integer> hashmap = new HashMap<>();

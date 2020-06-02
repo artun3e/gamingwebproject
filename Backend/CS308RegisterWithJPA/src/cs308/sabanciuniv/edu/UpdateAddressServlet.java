@@ -61,10 +61,11 @@ public class UpdateAddressServlet extends HttpServlet {
                 String phoneNumber = request.getParameter("phone_number");
                 //String email;
 				conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
-				ps = conn.prepareStatement("UPDATE Addresses set address=?, city=?, phoneNumber=?");
+				ps = conn.prepareStatement("UPDATE Addresses set address=?, city=?, phoneNumber=? where id =?");
 				ps.setString(1,address);
 				ps.setString(2,city);
 				ps.setString(3,phoneNumber);
+				ps.setInt(4, id);
 				conn.close();
 				ps.close();
             }
