@@ -17,6 +17,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -326,17 +327,23 @@ public class OrderManager {
 			date1 = date1.replace("-","/");
 			date2 = date2.replace("-","/");
 			ps.setString(1,date1);
-			ps.setString(2,date2);
-			rs = ps.executeQuery();
+			//ps.setString(2,date2);
 			SimpleDateFormat formatter = new SimpleDateFormat( "yyyy/MM/dd");
 			Date parsedDate1 = formatter.parse(date1.substring(0,10));
 			Date parsedDate2 = formatter.parse(date2.substring(0,10));
+			Calendar c = Calendar.getInstance();
+			c.setTime(parsedDate2);
+			c.add(Calendar.DATE, 1);
+			parsedDate2 = c.getTime();
+			date2 = new SimpleDateFormat("yyyy/MM/dd").format(parsedDate2);
+			ps.setString(2,date2);
+			c = null;
+			rs = ps.executeQuery();
 			//2020/04/26 18:22:28
-			Date today = new Date();
-			Calendar cal = new GregorianCalendar();
-			cal.setTime(today);
-			cal.add(Calendar.DAY_OF_MONTH, -30);
-			Date today30 = cal.getTime();
+			/*System.out.println("Parsed Date1: " + parsedDate1);
+			System.out.println("Parsed Date2: " + parsedDate2);
+			System.out.println("String Date1: " + date1);
+			System.out.println("String Date2: " + date2);*/
 			while(rs.next())
 			{
 				String monthAndDay = rs.getString("date").substring(0,10).replace("/","-");
