@@ -189,7 +189,7 @@
                                                         <label for="emailAddress">Email Address <span class="required">*</span></label>
                                                         <%
                          							    String email = user.getEmail();
-                                                       	out.println("<input type='email' name='email' id='emailAddress' class='form-control' value='"+email+"' readonly>");                                            
+                                                       	out.println("<input type='email' name='email' id='emailAddress' class='form-control' value='"+email+"'  >");
                                                        	%>
                                                     </div>
                                                 </li>
