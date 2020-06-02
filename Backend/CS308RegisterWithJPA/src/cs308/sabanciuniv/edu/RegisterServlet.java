@@ -12,6 +12,10 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.SecureRandom;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  * Servlet implementation class RegisterServlet
@@ -41,16 +45,26 @@ public class RegisterServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
-		EntityManager em = emf.createEntityManager();
+		//EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
+		//EntityManager em = emf.createEntityManager();
+		Connection conn;
+		PreparedStatement ps;
+		ResultSet rs;
 		try{
 			String name = request.getParameter("name");
 			String password = request.getParameter("pass");
 			String email = request.getParameter("email");
+			conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
+			ps = conn.prepareStatement("Select * from User WHERE Email=?");
+			ps.setString(1,email);
+			rs = ps.executeQuery();
 			//User searchResult = User.findByEmail(email);
-			User searchResult = em.find(User.class, email);
-			if(searchResult != null)
+			//User searchResult = em.find(User.class, email);
+			if(rs.next())
 			{
+				conn.close();
+				rs.close();
+				ps.close();
 				HttpSession session = request.getSession();
 				session.setAttribute("register-error", "The e-mail is already in use.");
 				response.sendRedirect("register.jsp");
@@ -63,40 +77,47 @@ public class RegisterServlet extends HttpServlet {
 				EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
 				EntityManager entityManager = emf.createEntityManager();
 				entityManager.getTransaction().begin();
-				
+
 				entityManager.persist(temp);
-				
+
 				entityManager.getTransaction().commit();
 				*/
-				
+				conn.close();
+				rs.close();
+				ps.close();
 				SecureRandom random = new SecureRandom();
 				int num = random.nextInt(1000000);
-				String formatted = String.format("%05d", num); 
-				
+				String formatted = String.format("%05d", num);
+
 				JavaMailUtil.sendMail(name, request.getParameter("email"), formatted);
-				
+
 				HttpSession session = request.getSession();
-				
+
 				session.setAttribute("mycode", formatted);
 				session.setAttribute("name", name);
 				session.setAttribute("email", email);
 				session.setAttribute("password", password);
-				
+
 				response.sendRedirect("verify.jsp");
-				
+
 				//RequestDispatcher rd = request.getRequestDispatcher("verify.html");
-				
+
 				//rd.forward(request, response);
 
 			}
+
+
 		} catch (Exception e) {
 			HttpSession session = request.getSession();
 			session.setAttribute("register-error", "Make sure to fill all the entries.");
 			response.sendRedirect("register.jsp");
 			e.printStackTrace();
 		}
-		em.close();
-		emf.close();
+		//em.close();
+		//emf.close();
+		conn = null;
+		ps = null;
+		rs = null;
 	}
 
 }

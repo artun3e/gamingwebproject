@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -42,6 +46,9 @@ public class verifyEmail extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Connection conn;
+		PreparedStatement ps;
+		ResultSet rs;
 		try {
 			
 			HttpSession session = request.getSession();
@@ -54,14 +61,20 @@ public class verifyEmail extends HttpServlet {
 			if(correctCode.contentEquals(userInput))
 			{
 				User temp = new User(session.getAttribute("name").toString(), session.getAttribute("email").toString(), new String(hash, "UTF-8"));
-				
-				EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
-				EntityManager entityManager = emf.createEntityManager();
-				entityManager.getTransaction().begin();
-				temp.setUserType(User.userType.User);
-				entityManager.persist(temp);
-				
-				entityManager.getTransaction().commit();
+
+				conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
+				ps = conn.prepareStatement("insert into User(Email,name,password,user_type) VALUES(?,?,?,?)");
+				ps.setString(1,session.getAttribute("email").toString());
+				ps.setString(2,session.getAttribute("name").toString());
+				ps.setString(3,new String(hash, "UTF-8"));
+				ps.setString(4,"User");
+				ps.execute();
+				//EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
+				//EntityManager entityManager = emf.createEntityManager();
+				//entityManager.getTransaction().begin();
+				//temp.setUserType(User.userType.User);
+				//entityManager.persist(temp);
+				//entityManager.getTransaction().commit();
 				response.sendRedirect("index.jsp");
 			}
 			else
