@@ -326,7 +326,7 @@ title {
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
 								<div class="breadcomb-report">
 									
-									<button data-toggle="tooltip" data-placement="left" title="" class="btn waves-effect" data-original-title="Download Report"><i class="notika-icon notika-sent"  onclick="downloadPDF()"></i></button>
+									<button data-toggle="tooltip" data-placement="left" title="" class="btn waves-effect" data-original-title="Download Report"><i class="notika-icon notika-sent"  onclick="createPDF()"></i></button>
 								</div>
 							</div>
 						</div>
@@ -426,7 +426,6 @@ title {
 													out.println("</th>");
 												out.println("</tr>");
 												out.println("<tr>");
-													out.println("<th class=\"border-top-0\"></th>");
 													out.println("<th class=\"border-top-0\"></th>");
 													out.println("<th class=\"border-top-0\">Product</th>");
 													out.println("<th class=\"border-top-0\">Quantity</th>");
@@ -611,6 +610,34 @@ function filterFunction() {
 
     	});
     	
+    }
+
+    function createPDF(){
+    	console.log("download as pdf");
+    	var date = new Date();
+    	var sTable = document.getElementById('row bar').innerHTML;
+
+        var style = "<style>";
+        style = style + "table {width: 100%;font: 17px Calibri;}";
+        style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
+        style = style + "padding: 2px 3px;text-align: center;}";
+        style = style + "</style>";
+
+        // CREATE A WINDOW OBJECT.
+        var win = window.open('', '', 'height=700,width=700');
+
+        win.document.write('<html><head>');
+        win.document.write('<title>Invoice_' + date.getTime()+ '</title>');   // <title> FOR PDF HEADER.
+        win.document.write(style);          // ADD STYLE INSIDE THE HEAD TAG.
+        win.document.write('</head>');
+        win.document.write('<body>');
+        win.document.write(sTable);         // THE TABLE CONTENTS INSIDE THE BODY TAG.
+        win.document.write('</body></html>');
+
+        win.document.close(); 	// CLOSE THE CURRENT WINDOW.
+
+        win.print();    // PRINT THE CONTENTS.
+
     }
 
     function updateStatus(order)

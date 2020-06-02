@@ -236,6 +236,9 @@ border:3px solid black;
 
 	<section class="container content-section">
 		<h1 style="color:black; text-align:justify;" class="section-header">Your Orders</h1>
+		<a class='btn btn-success btn-block btn-lg'
+							onclick="createPDF()" href="#"
+							style="margin-left: auto; margin-right: auto; display: block; margin-top: 10px; margin-bottom: 10px">DOWNLOAD AS PDF</a>
 		<div id="cart-items"></div>
 	</section>
 
@@ -306,7 +309,7 @@ if(session.getAttribute("user") != null)
 	    					
 	    }
 	    out.println("<div class=\"total\">");
-	    out.println("<td><a><td><a><td><a><td><a><td><a>" + "Total: "+ total + "$</a></td>");
+	    out.println("<td><a><td><a><td><a><td><a><td><b>" + "Total: "+ total + "$</b></td>");
 	    out.println("</div>");
 	    			out.println("</tbody>");
 	    				out.println("</tr>");
@@ -334,6 +337,18 @@ else
     return;
 }
 %>
+
+<div class="footer-copyright-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="footer-copy-right">
+						<p>Copyright 2020. All rights reserved.</p>
+					</div>
+                </div>
+            </div>
+        </div>
+    </div>
 <script>
 $(document).ready(function () {
     var butEl = document.getElementsByClassName("accordion");
@@ -360,6 +375,34 @@ for (i = 0; i < acc.length; i++) {
       panel.style.display = "block";
     }
   });
+}
+
+function createPDF(){
+	console.log("download as pdf");
+	var date = new Date();
+	var sTable = document.getElementById('customer-order').innerHTML;
+
+    var style = "<style>";
+    style = style + "table {width: 100%;font: 17px Calibri;}";
+    style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
+    style = style + "padding: 2px 3px;text-align: center;}";
+    style = style + "</style>";
+
+    // CREATE A WINDOW OBJECT.
+    var win = window.open('', '', 'height=700,width=700');
+
+    win.document.write('<html><head>');
+    win.document.write('<title>Invoice_' + date.getTime()+ '</title>');   // <title> FOR PDF HEADER.
+    win.document.write(style);          // ADD STYLE INSIDE THE HEAD TAG.
+    win.document.write('</head>');
+    win.document.write('<body>');
+    win.document.write(sTable);         // THE TABLE CONTENTS INSIDE THE BODY TAG.
+    win.document.write('</body></html>');
+
+    win.document.close(); 	// CLOSE THE CURRENT WINDOW.
+
+    win.print();    // PRINT THE CONTENTS.
+
 }
 </script>
 
