@@ -164,11 +164,11 @@ public class OrderServlet extends HttpServlet {
 				conn.close();
 				ps.close();
 				rs.close();
-				Order newOrder = new Order(orderAddress, user);
-				newOrder.setStatus(Order.orderStatus.PreparingPackage);
-				newOrder.setMap(hashmap);
-				newOrder.setTotalCost(totalCost);
-				newOrder.setPricesAtThatTime(pricesAtThatTime);
+				//Order newOrder = new Order(orderAddress, user);
+				//newOrder.setStatus(Order.orderStatus.PreparingPackage);
+				//newOrder.setMap(hashmap);
+				//newOrder.setTotalCost(totalCost);
+				//newOrder.setPricesAtThatTime(pricesAtThatTime);
 				//em.persist(newOrder);
 				//System.out.println("We are here!v3");
 				//user.addOrder(newOrder);
@@ -178,14 +178,14 @@ public class OrderServlet extends HttpServlet {
 				//emf.close();
 				//System.out.println("Done v2!!!!!");
 				System.out.println("Done placing the order in the database.");
-				System.out.println("Added order is : ");
+				/*System.out.println("Added order is : ");
 				int countTime = 1;
 				for(Order o : user.getOrders())
 				{
 					System.out.println("-------------------------- "+ countTime + "  --------------------------");
 					System.out.println(o);
 					countTime++;
-				}
+				}*/
 				session.removeAttribute("cart");
 				htmlText += "<H3>Thank you for your purchase! You can always check your order status from our website. We will also e-mail you when your order status changes<H3>";
 				JavaMailUtil.sendHTMLMail(htmlText,user.getEmail());
