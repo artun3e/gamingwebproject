@@ -427,6 +427,14 @@ function getChecked(){
 	var selectedCats = ""
 	for(var i=0; i<checked.length; i++)
 		selectedCats += checked[i].value + ",";
-	getCategoricalData(selectedCats);
+	if(checked.length == 0){
+		products = firstData;
+		var pageNum = (Math.ceil(products.length/9));
+	    addPages(pageNum);
+		showPage(1);
+		
+	}
+	else
+		getCategoricalData(selectedCats);
 }
 
