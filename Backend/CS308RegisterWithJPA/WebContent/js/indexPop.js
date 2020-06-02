@@ -102,10 +102,13 @@ function fillCard(element, k) { //fill the card with necessary information
     var price = document.getElementsByClassName("product")[k].getElementsByTagName('h4')[0];
     brand.innerHTML = element.publisher;
     name.innerHTML = '<a onclick="toDetails(this)" href="#">' + element.name + '</a>';
-    if (element.onSale == true)
-        price.innerHTML = "$" + element.salePrice + '<del class="product-old-price">$' + element.price + '</del>';
+	var pLabel = document.getElementsByClassName("product-label")[k];
+    if(element.onSale == true){
+    	price.innerHTML = "$" + element.salePrice + '<del class="product-old-price">$' + element.price + '</del>';
+    	pLabel.innerHTML = "<span class='sale'>SALE!</span>"
+    }	
     else
-        price.innerHTML = "$" + element.salePrice;
+    	price.innerHTML = "$" + element.salePrice;
     var rating = element.rating;
     addStars(k, rating);
 }
@@ -124,10 +127,15 @@ function reFill(element, j) { //fill the card with necessary information
 	    var price = document.getElementsByClassName("product")[j].getElementsByTagName('h4')[0];
 	    brand.innerHTML = element.publisher;
 	    name.innerHTML = '<a onclick="toDetails(this)" href="#">' + element.name + '</a>';
-	    if (element.onSale == true)
-	        price.innerHTML = "$" + element.salePrice + '<del class="product-old-price">$' + element.price + '</del>';
-	    else
-	        price.innerHTML = "$" + element.salePrice;
+        var pLabel = document.getElementsByClassName("product-label")[j];
+        if(element.onSale == true){
+        	price.innerHTML = "$" + element.salePrice + '<del class="product-old-price">$' + element.price + '</del>';
+        	pLabel.innerHTML = "<span class='sale'>SALE!</span>"
+        }
+        else{
+        	pLabel.innerHTML = "";
+        	price.innerHTML = "$" + element.salePrice;
+        }
 	    var rating = element.rating;
 	    addStars(j, rating);
 	}

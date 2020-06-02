@@ -134,7 +134,11 @@ async function getData(value){
             
             
             }
-        
+
+        var onSale = 
+        '													<span class="sale">-30%</span>';
+        	
+
         function fillCard(element, k){ //fill the card with necessary information
         	createNewCard(element, k);
         	var atcField= document.getElementsByClassName("atcField")[k];
@@ -154,8 +158,11 @@ async function getData(value){
             var price = document.getElementsByClassName("product-body")[k].getElementsByTagName('h4')[0];
             brand.innerHTML = element.publisher;
             name.innerHTML = '<a onclick="toDetails(this)" href="#">' + element.name + '</a>' ;
-            if(element.onSale == true)
+            var pLabel = document.getElementsByClassName("product-label")[k];
+            if(element.onSale == true){
             	price.innerHTML = "$" + element.salePrice + '<del class="product-old-price">$' + element.price + '</del>';
+            	pLabel.innerHTML = "<span class='sale'>SALE!</span>"
+            }	
             else
             	price.innerHTML = "$" + element.salePrice;
             
@@ -180,10 +187,18 @@ async function getData(value){
             var price = document.getElementsByClassName("product-body")[j].getElementsByTagName('h4')[0];
             brand.innerHTML = element.publisher;
             name.innerHTML = '<a onclick="toDetails(this)" href="#">' + element.name + '</a>' ;
-            if(element.onSale == true)
+            var pLabel = document.getElementsByClassName("product-label")[j];
+            if(element.onSale == true){
+            	
             	price.innerHTML = "$" + element.salePrice + '<del class="product-old-price">$' + element.price + '</del>';
-            else
+            	pLabel.innerHTML = "<span class='sale'>SALE!</span>"
+            }
+            else{
+            	pLabel.innerHTML = "";
             	price.innerHTML = "$" + element.salePrice;
+            }
+            	
+            	
             var rating = element.rating;
             addStars(j, rating);
             }
