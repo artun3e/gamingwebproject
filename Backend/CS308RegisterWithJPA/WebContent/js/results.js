@@ -4,7 +4,7 @@ var filtered  = [];
 
 async function getData(value){
 	const query  = value.name[0];
-	const url = '/CS308RegisterWithJPA/search/fromDB/byName/' + query; 
+	const url = '/CS308RegisterWithJPA/search/fromDB/bySimilarName/' + query;
 //	window.location.href = url;
 	const response = await fetch(url);
 	const data = await response.json();
