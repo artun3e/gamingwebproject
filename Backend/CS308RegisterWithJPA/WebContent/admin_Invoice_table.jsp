@@ -680,6 +680,36 @@ function filterFunction() {
     	
         xhr.send(params);
 
+         var email = $ths[1].innerHTML;
+        email = email.substr(6);
+
+        var oldstatus = $ths[3].innerHTML;
+        oldstatus = oldstatus.substr(8);
+
+        
+        console.log("your email: "+ email);
+
+        var emailarray = email.split("@");
+        var recipient = emailarray[0];
+
+        var newparams = 'messageInput='+'Hello '+recipient+ '\n\nYour order with the order id '+ itemName +' has changed it\'s status from '+ oldstatus+' to '+ strUser+'.\n\nThanks for your purchase!!!&topic=Updated Order Status'+'&RecipientString=' + email;
+    	console.log(newparams);
+
+    	var xhr2 = new XMLHttpRequest();
+        var url2 = "http://localhost:8080/CS308RegisterWithJPA/SendMailsServlet";
+        xhr2.open("POST", url2, true);
+        
+        xhr2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        /* xhr2.addEventListener('readystatechange', function (e) {
+             if(this.readyState === 4 )
+            {
+                alert("You have successfuly changed the status of the order " + itemName);    // Then Refresh Page
+                window.location = "admin_Invoice_table.jsp";
+            } 
+        }); */
+    	
+        xhr2.send(newparams);
+
         
     }
 
