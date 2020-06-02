@@ -316,7 +316,11 @@ border:3px solid black;
                             </div>
                         </div>
                     </div>
+                    
                 </div>
+                <a class='btn btn-success btn-block btn-lg'
+							onclick="createPDF()" href="#"
+							style="margin-left: auto; margin-right: auto; display: block; margin-top: 10px; margin-bottom: 10px">DOWNLOAD AS PDF</a>
                 <!-- Main Content -->
                 <div class="content margin-top60 margin-bottom60">
                     <div class="container">
@@ -538,7 +542,7 @@ $(document).ready(function () {
         count = butEl.length;
     for (i = 0; i < count; i++){
         butEl[i].click();
-        butEl[i].click();
+        //butEl[i].click();
     }
 });
 
@@ -558,6 +562,34 @@ for (i = 0; i < acc.length; i++) {
       panel.style.display = "block";
     }
   });
+}
+
+function createPDF(){
+	console.log("download as pdf");
+	var date = new Date();
+	var sTable = document.getElementById('customer-order').innerHTML;
+
+    var style = "<style>";
+    style = style + "table {width: 100%;font: 17px Calibri;}";
+    style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
+    style = style + "padding: 2px 3px;text-align: center;}";
+    style = style + "</style>";
+
+    // CREATE A WINDOW OBJECT.
+    var win = window.open('', '', 'height=700,width=700');
+
+    win.document.write('<html><head>');
+    win.document.write('<title>Invoice_' + date.getTime()+ '</title>');   // <title> FOR PDF HEADER.
+    win.document.write(style);          // ADD STYLE INSIDE THE HEAD TAG.
+    win.document.write('</head>');
+    win.document.write('<body>');
+    win.document.write(sTable);         // THE TABLE CONTENTS INSIDE THE BODY TAG.
+    win.document.write('</body></html>');
+
+    win.document.close(); 	// CLOSE THE CURRENT WINDOW.
+
+    win.print();    // PRINT THE CONTENTS.
+
 }
 </script>
                 <!-- /Main Content -->
