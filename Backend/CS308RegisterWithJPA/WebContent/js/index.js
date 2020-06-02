@@ -123,42 +123,42 @@ $(document).ready(function() {
 ////	    $(this).parent().addClass('active').siblings().removeClass('active')
 //	   
 //	});
-	$(".nav-link").click(function(e){
-		e.stopPropagation();
-		e.stopImmediatePropagation();
-		var el = $(this);
-	    var element = el[0].innerHTML;
-	    //console.log(element);
-	    
-	    var url_2 = "/CS308RegisterWithJPA/search/fromDB/byCategory/";
-	    for(var i = 0; i< 5; i++)
-    	{
-	    	if(i==0){
-	    		url_2 += element + "/"
-	    	}
-	    	else{
-	    		url_2 += "null/"
-	    	}
-    	}
-	    var string_html = "";
-	    document.getElementById("About_To_Change").innerHTML = "";
-	    async function getData(){
-	    	const response = await fetch(url_2);
-	    	const data = await response.json();
-	       	
-	    	for (var k = 0; k < data.length; k++){
-	    		console.log(data[k]);
-	    		var p = document.getElementById("About_To_Change");
-	    		var newElement = document.createElement('div');
-	            //// newElement.setAttribute('id', elementId);
-	            newElement.innerHTML = data[k];
-	            newElement.setAttribute('class', "col-md-4 col-xs-6");
-	    		p.appendChild(newElement);
-	    	}
-	    }
-	    $( ".aside-title" )[0].innerText="";
-	    $( ".checkbox-filter" ).remove();
-	    $( ".store-pagination" ).remove();
-	    getData();
-	});
+//	$(".nav-link").click(function(e){
+//		e.stopPropagation();
+//		e.stopImmediatePropagation();
+//		var el = $(this);
+//	    var element = el[0].innerHTML;
+//	    //console.log(element);
+//	    
+//	    var url_2 = "/CS308RegisterWithJPA/search/fromDB/byCategory/";
+//	    for(var i = 0; i< 5; i++)
+//    	{
+//	    	if(i==0){
+//	    		url_2 += element + "/"
+//	    	}
+//	    	else{
+//	    		url_2 += "null/"
+//	    	}
+//    	}
+//	    var string_html = "";
+//	    document.getElementById("About_To_Change").innerHTML = "";
+//	    async function getData(){
+//	    	const response = await fetch(url_2);
+//	    	const data = await response.json();
+//	       	
+//	    	for (var k = 0; k < data.length; k++){
+//	    		console.log(data[k]);
+//	    		var p = document.getElementById("About_To_Change");
+//	    		var newElement = document.createElement('div');
+//	            //// newElement.setAttribute('id', elementId);
+//	            newElement.innerHTML = data[k];
+//	            newElement.setAttribute('class', "col-md-4 col-xs-6");
+//	    		p.appendChild(newElement);
+//	    	}
+//	    }
+//	    $( ".aside-title" )[0].innerText="";
+//	    $( ".checkbox-filter" ).remove();
+//	    $( ".store-pagination" ).remove();
+//	    getData();
+//	});
 });

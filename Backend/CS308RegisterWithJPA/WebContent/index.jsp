@@ -73,12 +73,12 @@
                </button>
                <div class="collapse navbar-collapse" id="navbarNav">
                   <ul class="navbar-nav mr-auto">
-                     <li class="dropdown"><a class="nav-link" href="#" value="Action">Action</a></li>
-                     <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="Multiplayer">Multiplayer</a></li>
-                     <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="Sports">Sports</a></li>
-                     <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="FPS">FPS</a></li>
-                     <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="RPG">RPG</a></li>
-                     <li class="dropdown" style="margin-left: 5%;"><a class="nav-link" href="#" value="Strategy">Strategy</span></a>
+                     <li class="dropdown"><a onclick="getCategoricalData('action')" class="nav-link" href="#" value="Action">Action</a></li>
+                     <li class="dropdown" style="margin-left: 5%;"><a onclick="getCategoricalData('multiplayer')" class="nav-link" href="#" value="Multiplayer">Multiplayer</a></li>
+                     <li class="dropdown" style="margin-left: 5%;"><a onclick="getCategoricalData('sports')" class="nav-link" href="#" value="Sports">Sports</a></li>
+                     <li class="dropdown" style="margin-left: 5%;"><a  onclick="getCategoricalData('fps')"class="nav-link" href="#" value="FPS">FPS</a></li>
+                     <li class="dropdown" style="margin-left: 5%;"><a  onclick="getCategoricalData('rpg')"class="nav-link" href="#" value="RPG">RPG</a></li>
+                     <li class="dropdown" style="margin-left: 5%;"><a  onclick="getCategoricalData('strategy')"class="nav-link" href="#" value="Strategy">Strategy</span></a>
                      <li style="margin-left: 5%; margin-top: 6px;"><input id="search"  type="text" placeholder="What are you looking for?" onkeydown="if (event.keyCode == 13) { search(); }"></li>
                      <li class="dropdown" style="margin-left: 5%;">
                         <a class="fa fa-user" style="font-size: 34px; color: grey;"></a>
