@@ -10,6 +10,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  * Servlet implementation class LoginServlet
@@ -38,22 +42,35 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Connection conn;
+		PreparedStatement ps;
+		ResultSet rs;
 		try {
 			String emailInput = request.getParameter("email");
 			String passInput = request.getParameter("pass");
-			EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
-			EntityManager em = emf.createEntityManager();
-			User searchResult = em.find(User.class,emailInput);
+			conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
+			//ps = conn.prepareStatement("select Orders.date, Games.price from Orders_Games left join Orders on Orders_Games.Order_id = Orders.id left join Games on Orders_Games.products_KEY = Games.appid where Order_id in (Select id from Orders WHERE date >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH))");
+			ps = conn.prepareStatement("select * from User where Email=?");
+			ps.setString(1,emailInput);
+			rs = ps.executeQuery();
+			//EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
+			//EntityManager em = emf.createEntityManager();
+			//User searchResult = em.find(User.class,emailInput);
 			//PrintWriter out = response.getWriter();
 			//User.userType type = em.find(arg0, arg1)
-			emf.close();
-			em.close();
-			em=null;
-			emf=null;
-			if(searchResult != null)
+			//emf.close();
+			//em.close();
+			//em=null;
+			//emf=null;
+			if(rs.next())
 			{
 				MessageDigest digest = MessageDigest.getInstance("SHA-256");
 				byte[] hash = digest.digest(passInput.getBytes(StandardCharsets.UTF_8));
+				User searchResult = new User();
+				searchResult.setName(rs.getString("name"));
+				searchResult.setEmail(rs.getString("Email"));
+				searchResult.setPassword(rs.getString("password"));
+				searchResult.setUserType(User.userType.valueOf(rs.getString("user_type")));
 				if(searchResult.getPassword().contentEquals(new String(hash, "UTF-8")))
 				{
 					HttpSession session = request.getSession();
@@ -83,9 +100,15 @@ public class LoginServlet extends HttpServlet {
 				session.setAttribute("order-error", "No such e-mail found!!!");
 				response.sendRedirect("login.jsp");
 			}
+			conn.close();
+			rs.close();
+			ps.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		conn = null;
+		ps = null;
+		rs = null;
 	}
 
 }

@@ -30,7 +30,7 @@ public class User {
 	List<Payment> paymentList;
 
 	@JsonBackReference
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "owner")
 	private List<Order> orders;
 	
 	@Column(name = "payment_method",nullable = true)
@@ -84,6 +84,7 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public void setOrders(List<Order> orders){ this.orders = orders; }
 	public User(String name, String email, String password) {
 		//super();
 		//this.id = 0;

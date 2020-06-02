@@ -15,7 +15,7 @@ import java.util.Map;
 @Entity
 @Table(name="Orders") 
 public class Order {
-	@ElementCollection(fetch = FetchType.EAGER)
+	@ElementCollection(fetch = FetchType.LAZY)
 	@CollectionTable(name = "Orders_Games_Prices", joinColumns =  @JoinColumn(name = "Order_id"))
 	@MapKeyJoinColumn(unique = false)
 	@Column(name = "Price")
@@ -36,7 +36,7 @@ public class Order {
 	@ManyToOne
 	@JoinColumn(name = "User_Email")
 	private User owner;
-	@ElementCollection(fetch = FetchType.EAGER)
+	@ElementCollection(fetch = FetchType.LAZY)
 	@CollectionTable(name = "Orders_Games", joinColumns =  @JoinColumn(name = "Order_id"))
 	@MapKeyJoinColumn(unique = false)
 	@Column(name = "Quantity")

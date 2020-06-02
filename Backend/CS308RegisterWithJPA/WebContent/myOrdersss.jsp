@@ -4,6 +4,10 @@
 <%@ page import="cs308.sabanciuniv.edu.Games"%>
 <%@ page import="cs308.sabanciuniv.edu.Order"%>
 <%@ page import="java.io.PrintWriter"%>
+<%@ page import="java.sql.Connection"%>
+<%@ page import="java.sql.DriverManager"%>
+<%@ page import="java.sql.PreparedStatement"%>
+<%@ page import="java.sql.ResultSet"%>
 <html> 
     <head>
     <style>
@@ -329,7 +333,91 @@ if(session.getAttribute("user") != null)
 	User user = (User) temp;
 	
 	List<Order> orderList = new ArrayList<Order>();
-	orderList = user.getOrders();
+	if(user.getOrders().size() != 0)
+	    orderList = user.getOrders();
+	else {
+	    Connection conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
+	    PreparedStatement ps = conn.prepareStatement("select Games.name,Games.header_image,id,date,address,User_Email,status,totalCost,Quantity,products_KEY,Orders_Games_Prices.Price from Orders left join Orders_Games on Orders.id = Orders_Games.Order_id left join Orders_Games_Prices on Orders.id = Orders_Games_Prices.Order_id and pricesAtThatTime_KEY = products_KEY left join Games on products_KEY = appid where User_Email=?");
+	    ps.setString(1,user.getEmail());
+	    ResultSet rs = ps.executeQuery();
+	    boolean first = true;
+	    int oldID = 0;
+	    int index = 0;
+	    while(rs.next())
+        {
+            System.out.println("Order id is: " + rs.getInt("id") + " product key is: " + rs.getInt("products_KEY"));
+            if (first)
+            {
+                Order order = new Order();
+                order.setOwner(user);
+                order.setTotalCost(rs.getDouble("totalCost"));
+                order.setStatus(Order.orderStatus.valueOf(rs.getString("status")));
+                order.setDate(rs.getString("date"));
+                order.setId(rs.getInt("id"));
+                Map<Games,Integer> gameMap = new HashMap<>();
+                Games game = new Games();
+                game.setAppID(rs.getInt("products_KEY"));
+                game.setHeader_image(rs.getString("header_image"));
+                game.setName(rs.getString("name"));
+                gameMap.put(game,rs.getInt("Quantity"));
+                order.setProducts(gameMap);
+                Map<Games,Double> pricesAtThatTime = new HashMap<>();
+                pricesAtThatTime.put(game,rs.getDouble("Price"));
+                order.setPricesAtThatTime(pricesAtThatTime);
+                orderList.add(order);
+                first = false;
+                oldID = rs.getInt("id");
+            }
+            else
+            {
+                if(rs.getInt("id") == oldID)
+                {
+                    Order order = orderList.get(index);
+                    Map<Games,Integer> gamesMap = order.getProducts();
+                    Games game = new Games();
+                    game.setName(rs.getString("name"));
+                    game.setHeader_image(rs.getString("header_image"));
+                    game.setAppID(rs.getInt("products_KEY"));
+                    gamesMap.put(game,rs.getInt("Quantity"));
+                    Map<Games,Double> pricesAtThatTime = order.getPricesAtThatTime();
+                    pricesAtThatTime.put(game,rs.getDouble("Price"));
+                    order.setPricesAtThatTime(pricesAtThatTime);
+                    order.setProducts(gamesMap);
+                }
+                else
+                {
+                    oldID = rs.getInt("id");
+                    Order order = new Order();
+                    order.setOwner(user);
+                    order.setTotalCost(rs.getDouble("totalCost"));
+                    order.setStatus(Order.orderStatus.valueOf(rs.getString("status")));
+                    order.setDate(rs.getString("date"));
+                    order.setId(rs.getInt("id"));
+                    Map<Games,Integer> gameMap = new HashMap<>();
+                    Games game = new Games();
+                    game.setAppID(rs.getInt("products_KEY"));
+                    game.setHeader_image(rs.getString("header_image"));
+                    game.setName(rs.getString("name"));
+                    gameMap.put(game,rs.getInt("Quantity"));
+                    order.setProducts(gameMap);
+                    Map<Games,Double> pricesAtThatTime = new HashMap<>();
+                    pricesAtThatTime.put(game,rs.getDouble("Price"));
+                    order.setPricesAtThatTime(pricesAtThatTime);
+                    orderList.add(order);
+                    index++;
+                }
+            }
+        }
+	    conn.close();
+	    ps.close();
+	    rs.close();
+	    conn = null;
+	    ps = null;
+	    rs = null;
+	    user.setOrders(orderList);
+	    session.removeAttribute("user");
+	    session.setAttribute("user", user);
+    }
 	out.println("<div id=\"all\">");
 	out.println("<div id=\"content\">");
     out.println("<div class=\"container\">");

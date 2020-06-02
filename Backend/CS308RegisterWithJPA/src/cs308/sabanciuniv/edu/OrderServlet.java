@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.ResultSet;
+import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,6 +47,9 @@ public class OrderServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("In do post of order servlet!!!!");
+		Connection conn;
+		PreparedStatement ps;
+		ResultSet rs;
 		try
 		{			
 			HttpSession session = request.getSession();
@@ -59,19 +64,20 @@ public class OrderServlet extends HttpServlet {
 			
 		
 			else{
-				ResultSet rs = null;
 				//String userEmail = user.getEmail();
 				String[] itemNames = request.getParameter("list_names").split(",");
 				String[] itemQuantities = request.getParameter("list_q").split(",");
 				String aID = request.getParameter("addressID");
 				String pID = request.getParameter("paymentID");
 				Map<Games, Integer> hashmap = new HashMap<>();
-				EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
-				EntityManager em = emf.createEntityManager();
+				//EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
+				//EntityManager em = emf.createEntityManager();
+				conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
 				int countingVariable = 0;
 				String htmlText = "<H1>"+"Hello " + user.getName()+"\n" + "You have made the following purchase from our website: "+"<H1>";
 				Map<Games, Double> pricesAtThatTime = new HashMap<>();
 				double totalCost = 0;
+
 				for(String itemName : itemNames)
 				{
 					System.out.println("Address ID sent is: " + aID);
@@ -79,14 +85,28 @@ public class OrderServlet extends HttpServlet {
 					System.out.println("Query is " + itemName);
 					try
 					{
-						Object obj = em.createQuery("from Games where name=:nameTemp").setParameter("nameTemp", itemName).setMaxResults(1).getSingleResult();
-						Games temp = (Games) obj;
-						em.getTransaction().begin();
+						//Object obj = em.createQuery("from Games where name=:nameTemp").setParameter("nameTemp", itemName).setMaxResults(1).getSingleResult();
+						ps = conn.prepareStatement("Select onSale,stock,salePrice,Price,appid,header_image from Games where name like CONCAT( '%',?,'%')");
+						ps.setString(1,itemName);
+						rs = ps.executeQuery();
+						rs.next();
+						Games temp = new Games();
+						temp.setAppID(rs.getInt("appid"));
+						temp.setHeader_image(rs.getString("header_image"));
+						temp.setSalePrice(rs.getDouble("salePrice"));
+						temp.setPrice(rs.getDouble("price"));
+						temp.setStock(rs.getInt("stock"));
+						temp.setOnSale(rs.getBoolean("onSale"));
+						//em.getTransaction().begin();
 						hashmap.put(temp, Integer.parseInt(itemQuantities[countingVariable]));
 						htmlText += "<H2>"+itemQuantities[countingVariable] + " copies of " + itemName + "\n"+"</H2><img src=\""+ temp.getHeader_image() +"\"><br>";
-						temp.reduceFromStock(Integer.parseInt(itemQuantities[countingVariable]));
-						em.merge(temp);
-						em.getTransaction().commit();
+						//temp.reduceFromStock(Integer.parseInt(itemQuantities[countingVariable]));
+						ps = conn.prepareStatement("UPDATE Games SET stock = ? where appid = ?");
+						ps.setInt(1,temp.getStock()-Integer.parseInt(itemQuantities[countingVariable]));
+						ps.setInt(2,temp.getAppID());
+						ps.executeUpdate();
+						//em.merge(temp);
+						//em.getTransaction().commit();
 						if(temp.isOnSale()){
 							totalCost += (temp.getSalePrice()*Integer.parseInt(itemQuantities[countingVariable]));
 							pricesAtThatTime.put(temp,temp.getSalePrice());
@@ -102,33 +122,63 @@ public class OrderServlet extends HttpServlet {
 					}
 					countingVariable++;
 				}
-				em.getTransaction().begin();
+				//em.getTransaction().begin();
 				/*
 				 * TODO : orderda adresi string olarak tutalim
 				 * constructor TODO -> address
 				 *  sectigi addressi tek stringte yollanmasi lazim -> parametre olarak al
 				 */
-				// get users address 
-	
-				Address address = em.find(Address.class, Integer.parseInt(aID));
-				String orderAddress = address.getAddress();
+				// get users address
+				ps = conn.prepareStatement("select address from Addresses where id=?");
+				ps.setInt(1,Integer.parseInt(aID));
+				rs = ps.executeQuery();
+				rs.next();
+				//Address address = em.find(Address.class, Integer.parseInt(aID));
+				String orderAddress = rs.getString("address");
 				System.out.println("address is: " + orderAddress);
+				ps = conn.prepareStatement("INSERT into Orders(address,date,User_Email,status,totalCost) VALUES(?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+				ps.setString(1,orderAddress);
+				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+				LocalDateTime now = LocalDateTime.now();
+				ps.setString(2,dtf.format(now));
+				ps.setString(3,user.getEmail());
+				ps.setString(4,"PreparingPackage");
+				ps.setDouble(5,totalCost);
+				ps.execute();
+				rs = ps.getGeneratedKeys();
+				rs.next();
+				for(Games game: hashmap.keySet())
+				{
+					ps = conn.prepareStatement("insert into Orders_Games(Order_id,Quantity,products_KEY) VALUES(?,?,?)");
+					int tempId = rs.getInt(1);
+					ps.setInt(1,tempId);
+					ps.setInt(2,hashmap.get(game));
+					ps.setInt(3,game.getAppID());
+					ps.execute();
+					ps = conn.prepareStatement("insert into Orders_Games_Prices(Order_id,Price,pricesAtThatTime_KEY) VALUES(?,?,?)");
+					ps.setInt(1,tempId);
+					ps.setDouble(2,pricesAtThatTime.get(game));
+					ps.setInt(3,game.getAppID());
+					ps.execute();
+				}
+				conn.close();
+				ps.close();
+				rs.close();
 				Order newOrder = new Order(orderAddress, user);
 				newOrder.setStatus(Order.orderStatus.PreparingPackage);
 				newOrder.setMap(hashmap);
-				//newOrder.setAddress(user.getAddress());
 				newOrder.setTotalCost(totalCost);
 				newOrder.setPricesAtThatTime(pricesAtThatTime);
-				em.persist(newOrder);
-				System.out.println("We are here!v3");
-				user.addOrder(newOrder);
-				em.merge(user);
-				em.getTransaction().commit();
-				em.close();
-				emf.close();
-				System.out.println("Done v2!!!!!");
-				System.out.println("Done placing the order in the database v2.");
-				System.out.println("All user orders are : ");
+				//em.persist(newOrder);
+				//System.out.println("We are here!v3");
+				//user.addOrder(newOrder);
+				//em.merge(user);
+				//em.getTransaction().commit();
+				//em.close();
+				//emf.close();
+				//System.out.println("Done v2!!!!!");
+				System.out.println("Done placing the order in the database.");
+				System.out.println("Added order is : ");
 				int countTime = 1;
 				for(Order o : user.getOrders())
 				{
@@ -145,7 +195,9 @@ public class OrderServlet extends HttpServlet {
 		{
 			e.printStackTrace();
 		}
-
+		conn = null;
+		rs = null;
+		ps = null;
 	}
 
 }
