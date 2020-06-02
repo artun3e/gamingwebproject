@@ -232,13 +232,29 @@
                                     	var cpw =document.querySelector("#cpassword").value;
                                     	var pw1 =document.querySelector("#npassword").value;
                                     	var pw2 =document.querySelector("#cnewpassword").value;
+                                    	var email = document.querySelector("#emailAddress").value;
                                     	if (pw1 == pw2){
                                     		var xhr = new XMLHttpRequest();
                                     	    var url = "UpdateUserServlet";//function is needed
                                     	    xhr.open("POST", url, true);
-                                    		var params = 'name='+name+'&cpassword='+cpw+'&npassword='+pw1;
+                                    		var params = 'name='+name+'&cpassword='+cpw+'&npassword='+pw1+'&newEmail='+email;
                                     		console.log(params);
                                     	    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                                    	    xhr.addEventListener("readystatechange",function (e) {
+                                    	        if(this.readyState===4)
+                                                {
+                                                    var response = xhr.getResponseHeader("userUpdateError");
+                                                    if(response === "true")
+                                                    {
+                                                        alert("Make sure you enter your current password correctly.");
+                                                    }
+                                                    else
+                                                    {
+                                                        alert("You have successfully updated your profile!");
+                                                        window.location.replace("myAccount.jsp");
+                                                    }
+                                                }
+                                            })
                                     	    xhr.send(params);
                                     		
                                     	}

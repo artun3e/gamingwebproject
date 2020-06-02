@@ -3,6 +3,10 @@ package cs308.sabanciuniv.edu;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -44,7 +48,9 @@ public class UpdateUserServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doGet(request, response);
+		Connection conn;
+		PreparedStatement ps;
+		ResultSet rs;
 		try {
 		 HttpSession session = request.getSession();
          User user = (User) session.getAttribute("user");
@@ -55,38 +61,79 @@ public class UpdateUserServlet extends HttpServlet {
              System.out.println("You are logged in!!!");
          
 			String name = request.getParameter("name");
-			System.out.println(name);
 			String oldPassword = request.getParameter("cpassword");
-			System.out.println(oldPassword);
 			String newPassword = request.getParameter("npassword");
-			System.out.println(newPassword);
 			String email = user.getEmail();
-			EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
-			EntityManager em = emf.createEntityManager();
-			
-			
+			String newEmail = request.getParameter("newEmail");
+
 			MessageDigest digest = MessageDigest.getInstance("SHA-256");
-			byte[] hash = digest.digest(oldPassword.getBytes(StandardCharsets.UTF_8)); // hash the input password
-			
+			byte[] hash = digest.digest(oldPassword.getBytes(StandardCharsets.UTF_8));  // hash the input password
 			byte[] hash2 = digest.digest(newPassword.getBytes(StandardCharsets.UTF_8));
-			
-			if(user.getPassword().contentEquals(new String(hash, "UTF-8"))) // check whether users match
+
+			 if(user.getPassword().contentEquals(new String(hash, "UTF-8"))) // check whether users match
 			{
-				User myuser = em.find(User.class,email);
-				//Object obj = em.createQuery("from Users where Email:=emailTemp").setParameter("emailTemp", email).getSingleResult();
-				em.getTransaction().begin();
-				myuser.setName(name);
-				myuser.setPassword(new String(hash2, "UTF-8"));
-				em.getTransaction().commit(); // updated the database 
-				em.close();
-				emf.close();
+				if(newEmail.contentEquals(email))
+				{
+					request.removeAttribute("user");
+					conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
+					ps = conn.prepareStatement("UPDATE User set name=?, password=? where Email=?");
+					ps.setString(1,name);
+					if(newPassword.length()!=0) {
+						ps.setString(2, new String(hash2, "UTF-8"));
+						user.setPassword(newPassword);
+					}
+					else {
+						ps.setString(2, new String(hash, "UTF-8"));
+					}
+					ps.setString(3, email);
+					ps.executeUpdate();
+					conn.close();
+					ps.close();
+					user.setName(name);
+					request.setAttribute("user",user);
+				}
+				else
+				{
+					EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
+					EntityManager em = emf.createEntityManager();
+					User myuser = em.find(User.class,email);
+					User user2 = new User(user);
+					user2.setEmail(newEmail);
+					user2.setName(name);
+					if(newPassword.length()!=0)
+						user2.setPassword(new String(hash2, "UTF-8"));
+					else
+						user2.setPassword(new String(hash, "UTF-8"));
+					for(Order o : user2.getOrders())
+					{
+						o.setOwner(user2);
+					}
+					for(Address a : user2.getAddress())
+					{
+						a.setUser(user2);
+					}
+					for(Payment p : user2.getPayment())
+					{
+						p.setUser(user2);
+					}
+					System.out.println("Transaction beginning.");
+					em.remove(user);
+					em.persist(user2);
+					em.getTransaction().commit();
+					em.close();
+					emf.close();
+					em = null;
+					emf = null;
+					request.removeAttribute("user");
+					request.setAttribute("user",user2);
+					System.out.println("Done changing email and other parameters.");
+				}
+				response.setHeader("userUpdateError", "false");
 			}
 			
 			else
 			{
-				System.out.println("passwords don't match!!!!!");
-				em.close();
-				emf.close();
+				response.setHeader("userUpdateError", "true");
 			}
          }
 		}catch(Exception e){
