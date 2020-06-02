@@ -13,10 +13,10 @@ async function getData() {
     for (var k = 0; k < data.length; k++) {
         products.push(data[k]);
     }
-    for(var z=0; z<9 ; z++){
-    	fillCard(data[z], z);
+    for (var z = 0; z < 9; z++) {
+        fillCard(data[z], z);
     }
-    	
+    addPages();
     firstData = products;
 }
 
@@ -82,6 +82,7 @@ function createNewCard() { //creates new element in html for each product
     newElement.innerHTML = productHTML;
     newElement.setAttribute('class', "col-md-4 col-xs-6");
     p.appendChild(newElement);
+    
 
 }
 
@@ -101,33 +102,36 @@ function fillCard(element, k) { //fill the card with necessary information
     var price = document.getElementsByClassName("product")[k].getElementsByTagName('h4')[0];
     brand.innerHTML = element.publisher;
     name.innerHTML = '<a onclick="toDetails(this)" href="#">' + element.name + '</a>';
-    if(element.onSale == true)
-    	price.innerHTML = "$" + element.salePrice + '<del class="product-old-price">$' + element.price + '</del>';
+    if (element.onSale == true)
+        price.innerHTML = "$" + element.salePrice + '<del class="product-old-price">$' + element.price + '</del>';
     else
-    	price.innerHTML = "$" + element.salePrice;
+        price.innerHTML = "$" + element.salePrice;
     var rating = element.rating;
     addStars(k, rating);
 }
 
 function reFill(element, j) { //fill the card with necessary information
-    var images = element.screenshots;
-    var newImg = element.header_image;
-    imagesArr = images.split(',');
-    var image = imagesArr[1].split("': ");
-    var imgvalue = image[1].replace(/['"]+/g, '');
-    var img = document.getElementsByClassName("product")[j].getElementsByTagName('img')[0];
-    img.src = newImg;
-    var brand = document.getElementsByClassName("product")[j].getElementsByTagName('p')[0];
-    var name = document.getElementsByClassName("product")[j].getElementsByTagName('h3')[0];
-    var price = document.getElementsByClassName("product")[j].getElementsByTagName('h4')[0];
-    brand.innerHTML = element.publisher;
-    name.innerHTML = '<a onclick="toDetails(this)" href="#">' + element.name + '</a>';
-    if(element.onSale == true)
-    	price.innerHTML = "$" + element.salePrice + '<del class="product-old-price">$' + element.price + '</del>';
-    else
-    	price.innerHTML = "$" + element.salePrice;
-    var rating = element.rating;
-    addStars(j, rating);
+	if(element != null && element != undefined){
+	    var images = element.screenshots;
+	    var newImg = element.header_image;
+	    imagesArr = images.split(',');
+	    var image = imagesArr[1].split("': ");
+	    var imgvalue = image[1].replace(/['"]+/g, '');
+	    var img = document.getElementsByClassName("product")[j].getElementsByTagName('img')[0];
+	    img.src = newImg;
+	    var brand = document.getElementsByClassName("product")[j].getElementsByTagName('p')[0];
+	    var name = document.getElementsByClassName("product")[j].getElementsByTagName('h3')[0];
+	    var price = document.getElementsByClassName("product")[j].getElementsByTagName('h4')[0];
+	    brand.innerHTML = element.publisher;
+	    name.innerHTML = '<a onclick="toDetails(this)" href="#">' + element.name + '</a>';
+	    if (element.onSale == true)
+	        price.innerHTML = "$" + element.salePrice + '<del class="product-old-price">$' + element.price + '</del>';
+	    else
+	        price.innerHTML = "$" + element.salePrice;
+	    var rating = element.rating;
+	    addStars(j, rating);
+	}
+
 }
 
 
@@ -247,86 +251,167 @@ function ratingCheckbox() {
 
     ratingCount = 0;
     var row = document.querySelector("#store > div.row");
-    row.innerHTML = "";
-    for (var j = 0; j < 9; j++) {
-        if (five.checked == true) {
-            if (products[j].rating >= 0.95) {
-                fillCard(products[j], ratingCount)
-                ratingFiltered.push(products[j]);
-                ratingCount++;
-            }
-        }
-        if (four.checked == true) {
-            if (products[j].rating >= 0.80 && products[j].rating < 0.95) {
-                fillCard(products[j], ratingCount)
-                ratingFiltered.push(products[j]);
-                ratingCount++;
-            }
-        }
-        if (three.checked == true) {
-            if (products[j].rating >= 0.60 && products[j].rating < 0.80) {
-                fillCard(products[j], ratingCount)
-                ratingFiltered.push(products[j]);
-                ratingCount++;
-            }
-        }
-        if (two.checked == true) {
-            if (products[j].rating >= 0.40 && products[j].rating < 0.60) {
-                fillCard(products[j], ratingCount)
-                ratingFiltered.push(products[j]);
-                ratingCount++;
-            }
-        }
-        if (one.checked == true) {
-            if (products[j].rating >= 0 && products[j].rating < 0.40) {
-                fillCard(products[j], ratingCount)
-                ratingFiltered.push(products[j]);
-                ratingCount++;
-            }
-        }
+//    row.innerHTML = "";
+    for (var j = 0; j < firstData.length; j++) {
+    	var element = firstData[j];
         if (five.checked == false && four.checked == false && three.checked == false && two.checked == false && one.checked == false) {
-            for (var j = 0; j < 9; j++) {
-                fillCard(products[j], j)
-            }
+        	ratingFiltered = firstData;
+//            for (var j = 0; j < 9; j++) {
+////                fillCard(products[j], j)
+//            }
         }
+        else{
+            if (five.checked == true) {
+                if (element.rating >= 0.95) {
+//                    fillCard(products[j], ratingCount)
+                    ratingFiltered.push(element);
+                    ratingCount++;
+                }
+            }
+            if (four.checked == true) {
+                if (element.rating >= 0.80 && element.rating < 0.95) {
+//                    fillCard(products[j], ratingCount)
+                    ratingFiltered.push(element);
+                    ratingCount++;
+                }
+            }
+            if (three.checked == true) {
+                if (element.rating >= 0.60 && element.rating < 0.80) {
+//                    fillCard(products[j], ratingCount)
+                    ratingFiltered.push(element);
+                    ratingCount++;
+                }
+            }
+            if (two.checked == true) {
+                if (element.rating >= 0.40 && element.rating < 0.60) {
+//                    fillCard(products[j], ratingCount)
+                    ratingFiltered.push(element);
+                    ratingCount++;
+                }
+            }
+            if (one.checked == true) {
+                if (element.rating >= 0 && element.rating < 0.40) {
+//                    fillCard(products[j], ratingCount)
+                    ratingFiltered.push(element);
+                    ratingCount++;
+                }
+            }
+            
+        }
+        	
+        
+    }
+    products = ratingFiltered;
 
+    addPages();
+    	
+    
+    showPage1();
+}
+
+function addPages(){
+	var pagination = document.getElementById("store-pagination");
+	pagination.innerHTML = "";
+	var p1 = '<li><a onclick="showPage1()" href="#1" class="page_number_1" >1</a></li>';
+	var p2 = '<li><a onclick="showPage2()" href="#2" class="page_number_2" >2</a></li>';
+	var p3 = '<li><a onclick="showPage3()" href="#3" class="page_number_3" >3</a></li>';
+	var p4 = '<li><a onclick="showPage4()" href="#4" class="page_number_4" >4</a></li>';
+	var p5 = '<li><a onclick="showPage5()" href="#5" class="page_number_5" >5</a></li>';	
+	var liElement = document.createElement("li");
+	liElement.innerHTML = p1;
+	pagination.appendChild(liElement);
+    if(products.length > 9 && products.length <= 18){
+    	var pagination = document.getElementById("store-pagination");
+    	var liElement = document.createElement("li");
+    	liElement.innerHTML = p2;
+    	pagination.appendChild(liElement);
+    }
+    else if(products.length > 18 && products.length <= 27){
+    	var pagination = document.getElementById("store-pagination");
+    	var liElement = document.createElement("li");
+    	liElement.innerHTML = p2;
+    	pagination.appendChild(liElement);
+    	var liElement = document.createElement("li");
+    	liElement.innerHTML = p3;
+    	pagination.appendChild(liElement);
+    }
+    else if(products.length > 27 && products.length <= 36){
+    	var pagination = document.getElementById("store-pagination");
+    	var liElement = document.createElement("li");
+    	liElement.innerHTML = p2;
+    	pagination.appendChild(liElement);
+    	var liElement = document.createElement("li");
+    	liElement.innerHTML = p3;
+    	pagination.appendChild(liElement);
+    	var liElement = document.createElement("li");
+    	liElement.innerHTML = p4;
+    	pagination.appendChild(liElement);
+    }
+    else if(products.length > 36 && products.length <= 45){
+    	var pagination = document.getElementById("store-pagination");
+    	var liElement = document.createElement("li");
+    	liElement.innerHTML = p2;
+    	pagination.appendChild(liElement);
+    	var liElement = document.createElement("li");
+    	liElement.innerHTML = p3;
+    	pagination.appendChild(liElement);
+    	var liElement = document.createElement("li");
+    	liElement.innerHTML = p4;
+    	pagination.appendChild(liElement);
+    	var liElement = document.createElement("li");
+    	liElement.innerHTML = p5;
+    	pagination.appendChild(liElement);
+    }
+}
+
+
+function showPage1() {
+	document.getElementById("About_To_Change").innerHTML = "";
+	var boundary = 9;
+	if (products.length < 9)
+		boundary = products.length;
+    for (var j = 0; j < boundary; j++) {
+        fillCard(products[j], j);
+    }
+}
+
+function showPage2() {
+	document.getElementById("About_To_Change").innerHTML = "";
+	var boundary = 18;
+	if (products.length < 18)
+		boundary = products.length;
+    for (var j = 9; j < boundary; j++) {
+    	fillCard(products[j], j - 9);
+    }
+}
+
+function showPage3() {
+	document.getElementById("About_To_Change").innerHTML = "";
+	var boundary = 27;
+	if (products.length < 27)
+		boundary = products.length;
+    for (var j = 18; j < boundary; j++) {
+    	fillCard(products[j], j - 18);
+    }
+}
+
+function showPage4() {
+	document.getElementById("About_To_Change").innerHTML = "";
+	var boundary = 36;
+	if (products.length < 36)
+		boundary = products.length;
+    for (var j = 27; j < boundary; j++) {
+    	fillCard(products[j], j - 27);
     }
 
 }
-function showPage1(){
-		for (var j = 0; j < 9; j++) {
-            reFill(products[j], j);
-        }
-		var page1 = document.querySelector("#store-pagination > li:nth-child(1)")
-		 $(this).parent().addClass('active').siblings().removeClass('active')
-}
-function showPage2(){
-		for (var j = 9; j < 18; j++) {
-            reFill(products[j], j-9);
-	}
-		var page2 = document.querySelector("#store-pagination > li:nth-child(2)")
-		 page2.parent().addClass('active').siblings().removeClass('active')
-}
-function showPage3(){
-			for (var j = 18; j < 27; j++) {
-	            reFill(products[j], j-18);
-		}
-			var page3 = document.querySelector("#store-pagination > li:nth-child(3)")
-			page3.parent().addClass('active').siblings().removeClass('active')
-}
-function showPage4(){
-		for (var j = 27; j < 36; j++) {
-            reFill(products[j], j-27);
-        }
-		var page4 = document.querySelector("#store-pagination > li:nth-child(4)")
-		 page4.parent().addClass('active').siblings().removeClass('active')
 
+function showPage5() {
+	document.getElementById("About_To_Change").innerHTML = "";
+	var boundary = 45;
+	if (products.length < 45)
+		boundary = products.length;
+    for (var j = 36; j < boundary; j++) {
+    	fillCard(products[j], j - 36);
+    }
 }
-function showPage5(){
-			for (var j = 36; j < 45; j++) {
-	            reFill(products[j], j-36);
-	        }
-			var page5 = document.querySelector("#store-pagination > li:nth-child(5)")
-			 page5.parent().addClass('active').siblings().removeClass('active')
-}
-
