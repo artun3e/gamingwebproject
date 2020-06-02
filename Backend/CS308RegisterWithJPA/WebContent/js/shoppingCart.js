@@ -142,7 +142,7 @@ $(document).ready(function(){
   $(".btn").click(function(){
     var cartItemContainer = document.getElementsByClassName('products')[0]
     var cartRows = cartItemContainer.getElementsByClassName('product')
-    Item_Names = []
+    Item_Names = ""
     Item_Q = []
     for(var i = 0; i < cartRows.length; i++){
     	var cartRow = cartRows[i]
@@ -152,9 +152,10 @@ $(document).ready(function(){
     	
     	var product_name = product_name_element.innerText
     	var quantity = parseFloat(quantity_element.innerText)
-    	Item_Names.push(product_name)
+    	Item_Names+= product_name + ";;;";
     	Item_Q.push(quantity)
     }
+    Item_Names = Item_Names.substr(0,Item_Names.length-3);
     var addressID = getAddressID();
     var paymentID = getPaymentID();
     var user = getUser();

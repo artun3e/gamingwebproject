@@ -65,10 +65,11 @@ public class UpdatePaymentServlet extends HttpServlet {
 	 	    	 String date = request.getParameter("expiration_date");
 
 				 conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
-				 ps = conn.prepareStatement("Update Payment set cNumber=?, cvc=?, date=?");
+				 ps = conn.prepareStatement("Update Payment set cNumber=?, cvc=?, date=? where id=?");
 				 ps.setString(1,cNumber);
 				 ps.setString(2,cvc);
 				 ps.setString(3,date);
+				 ps.setInt(4,id);
 				 ps.executeUpdate();
 
 				 ps.close();
