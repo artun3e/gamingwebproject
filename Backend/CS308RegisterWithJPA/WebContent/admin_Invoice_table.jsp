@@ -7,6 +7,7 @@
 <%@ page import="cs308.sabanciuniv.edu.Order"%>
 <%@ page import="cs308.sabanciuniv.edu.OrderManager"%>
 <%@ page buffer="522kb" autoFlush="false"%>
+<%@page import="java.text.DecimalFormat" %>
 
 <!DOCTYPE html>
 
@@ -265,7 +266,7 @@ title {
                         </div>
                         <div id="Tables" class="tab-pane active notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
-                            	<%
+                            	<%                            	
                             	session = request.getSession();
 							    if(session.getAttribute("user") != null)
 							    {
@@ -371,6 +372,8 @@ title {
 						
 
 						<%
+                    	DecimalFormat priceFormatter = new DecimalFormat("#.##");
+						
 						session = request.getSession();
 						if (session.getAttribute("user") != null) {
 
@@ -439,14 +442,17 @@ title {
 													out.println("<td><a href=\"#\"><img crossorigin=\"anonymous\" src=" + game.getHeader_image() + "alt=" + game.getName() + "width=\"212\" height=\"100\"\"></a></td>");
 													out.println("<td><a onclick=\"toDetails(this)\" href=\"#\">" + game.getName() + "</a></td>");
 													out.println("<td><p>" + gameList.get(game) + "</p></td>");
-													out.println("<td><p>" + prices.get(game) + "$</p></td>");
-													out.println("<td><p>" + prices.get(game) * gameList.get(game) + "$</p></td>");
+													out.println("<td><p>" + priceFormatter.format(prices.get(game))  + "$</p></td>");
+													out.println("<td><p>" + priceFormatter.format(prices.get(game) * gameList.get(game)) + "$</p></td>");
 												out.println("</tr>");
 												total = total + (prices.get(game) * gameList.get(game));
 												}
+												//double finaltotal = Double.toString(total);
+												String asd = priceFormatter.format(total);
+												
 												out.println("<tr>");
 													out.println("<div class=\"total\">");
-														out.println("<td><a><td><a><td><a><td><a><td><b>" + "Total: " + total + "$</b></td>");
+														out.println("<td><a><td><a><td><a><td><a><td><b>" + "Total: " + asd + "$</b></td>");
 													out.println("</div>");
 												out.println("</tr>");
 											out.println("</tbody>");

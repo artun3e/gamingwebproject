@@ -8,6 +8,7 @@
 <%@ page import="java.sql.DriverManager"%>
 <%@ page import="java.sql.PreparedStatement"%>
 <%@ page import="java.sql.ResultSet"%>
+<%@page import="java.text.DecimalFormat" %>
 <html>
 <head>
 <style>
@@ -39,9 +40,7 @@ title {
 
 .box {
 	border: 3px solid black;
-	background-color: #E8A2A2;
-	background-image:
-		url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQfbeY07Hj35CsKASs4BAyDuaAGBg-GOxVpws5yqFBILOgaFySW&usqp=CAU");
+	background-color: white;
 	color: white;
 	margin: 20px;
 	padding: 20px;
@@ -493,6 +492,8 @@ title {
 									out.println("<div class=\"container\">");
 									out.println("<div class=\"row bar\">");
 									out.println("<div id=\"customer-order\" class=\"col-lg-9\">");
+									
+									DecimalFormat priceFormatter = new DecimalFormat("#.##");
 
 									int orderid = 1;
 									for (Order o : orderList) {
@@ -531,18 +532,16 @@ title {
 											out.println("<td><a onclick=\"toDetails(this)\" href=\"#\">" + game.getName() + "</a></td>");
 											out.println("<td><a>" + gameList.get(game) + "</a></td>");
 											//out.println("<td><a href=\"#\">" + gameList.get(game)* 0 + "</a></td>");
-											out.println("<td><a>" + prices.get(game) + "$</a></td>");
-											out.println("<td><a>" + prices.get(game) * gameList.get(game) + "$</a></td>");
+											out.println("<td><a>" + priceFormatter.format(prices.get(game)) + "$</a></td>");
+											out.println("<td><a>" + priceFormatter.format(prices.get(game) * gameList.get(game)) + "$</a></td>");
 											out.println("</tr>");
 
 											total = total + (prices.get(game) * gameList.get(game));
-											System.out.println(game.getName());
-											System.out.println(gameList.get(game));
-											System.out.println(prices.get(game));
 
 										}
+										String asd = priceFormatter.format(total);
 										out.println("<div class=\"total\">");
-										out.println("<td><a><td><a><td><a><td><a><td><a>" + "Total: " + total + "$</a></td>");
+										out.println("<td><a><td><a><td><a><td><a><td><b>" + "Total: " + asd + "$</b></td>");
 										out.println("</div>");
 										out.println("</tbody>");
 										out.println("</tr>");
