@@ -177,54 +177,16 @@
 
                         <h3 class="aside-title">Categories</h3>
                         <div class="checkbox-filter">
-                           <div class="input-checkbox">
-                              <input type="checkbox" id="category-1" class="input-checkbox_check" onclick="checkCategory()" value="Action" >
-                              <label for="category-1">
-                                 <span></span>
-                                 Action
-                                 <!-- <small>(120)</small> -->
-                              </label>
-                           </div>
-                           <div class="input-checkbox">
-                              <input type="checkbox" id="category-2" class="input-checkbox_check"onclick="checkCategory()" value="Multiplayer">
-                              <label for="category-2">
-                                 <span></span>
-                                 Multiplayer
-                                 <!-- <small>(740)</small> -->
-                              </label>
-                           </div>
-                           <div class="input-checkbox">
-                              <input type="checkbox" id="category-3" class="input-checkbox_check" onclick="checkCategory()" value="Sports">
-                              <label for="category-3">
-                                 <span></span>
-                                 Sports
-                                 <!-- <small>(1450)</small> -->
-                              </label>
-                           </div>
-                           <div class="input-checkbox">
-                              <input type="checkbox" id="category-4" class="input-checkbox_check" onclick="checkCategory()" value="FPS">
-                              <label for="category-4">
-                                 <span></span>
-                                 FPS
-                                 <!-- <small>(578)</small> -->
-                              </label>
-                           </div>
-                           <div class="input-checkbox">
-                              <input type="checkbox" id="category-5" class="input-checkbox_check" onclick="checkCategory()" value="Strategy">
-                              <label for="category-5">
-                                 <span></span>
-                                 Strategy
-                                 <!-- <small>(120)</small> -->
-                              </label>
-                           </div>
-                           <!-- <div class="input-checkbox">
-                              <input type="checkbox" id="category-6">
-                              <label for="category-6">
-                                  <span></span>
-                                  Smartphones
-                                  <small>(740)</small>
-                              </label>
-                              </div> -->
+<style> 
+.checkbox-container { border:2px solid #ccc; width:250px; height: 200px; overflow-y: scroll; }
+</style>
+
+<div class="checkbox-container">
+    <!-- <input type="checkbox" /> This is checkbox <br /> -->
+</div>
+
+
+
                      </div>
                      <div class="aside">
                         <h3 class="aside-title">RATINGS</h3>
