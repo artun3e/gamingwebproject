@@ -1,6 +1,9 @@
 package cs308.sabanciuniv.edu;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -43,7 +46,8 @@ public class UpdatePaymentServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		
+		Connection conn;
+		PreparedStatement ps;
 		try {
 			
 			 HttpSession session = request.getSession();
@@ -59,27 +63,24 @@ public class UpdatePaymentServlet extends HttpServlet {
 	             String cNumber = request.getParameter("card_number");
 	             String cvc = request.getParameter("cvc");
 	 	    	 String date = request.getParameter("expiration_date");
-	 	    	 
-	 	    	 EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
-				 EntityManager em = emf.createEntityManager();
-				 
-				Payment payment = em.find(Payment.class,id);
-				
-				em.getTransaction().begin();
-				payment.setCardNumber(cNumber);
-				payment.setCVC(cvc);
-				payment.setExpirationDate(date);
-				payment.setID(id);
-				em.getTransaction().commit();
-				em.close();
-				emf.close();
-	 	    	
-	         }
+
+				 conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
+				 ps = conn.prepareStatement("Update Payment set cNumber=?, cvc=?, date=?");
+				 ps.setString(1,cNumber);
+				 ps.setString(2,cvc);
+				 ps.setString(3,date);
+				 ps.executeUpdate();
+
+				 ps.close();
+				 conn.close();
+			 }
 			
 		}catch(Exception e){
 			e.printStackTrace();
 			
 		}
+		conn = null;
+		ps = null;
 	}
 
 }

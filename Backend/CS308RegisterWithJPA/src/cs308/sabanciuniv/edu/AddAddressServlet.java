@@ -1,6 +1,10 @@
 package cs308.sabanciuniv.edu;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -41,7 +45,8 @@ public class AddAddressServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		
+		Connection conn;
+		PreparedStatement ps;
 		try {
 			HttpSession session = request.getSession();
 	         User user = (User) session.getAttribute("user");
@@ -51,32 +56,30 @@ public class AddAddressServlet extends HttpServlet {
 	         else {
 	        	 
 	             System.out.println("You are logged in!!!");
-	             
 	             String email = user.getEmail(); // also you can use request.getParameter for email
-//	             int id = Integer.parseInt(request.getParameter("address_id")); // not necessary since id is created automatically 
+				 conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
+				 ps = conn.prepareStatement("insert into Addresses(email,address,city,phoneNumber) VALUES(?,?,?,?)");
+
+          		 //int id = Integer.parseInt(request.getParameter("address_id")); // not necessary since id is created automatically
 	 	    	 String address = request.getParameter("address");
 	 	    	 String city = request.getParameter("city");
 	 	    	 String phoneNumber = request.getParameter("phone_number");
-	 	    	 //String email;
-	 	    	 
-	 	    	 EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
-				 EntityManager em = emf.createEntityManager();
-				 
-				 //Payment(int id,String cardNumber, String email, String cvc, String expirationDate)
-				Address myaddress = new Address(user);
-				myaddress.setAddress(address);
-				myaddress.setCity(city);
-				myaddress.setPhoneNumber(phoneNumber);
-				//payment.setID(id);
-				em.getTransaction().begin();
-				em.persist(myaddress);
-				em.getTransaction().commit();
-				em.close();
-				emf.close();
+				 ps.setString(1,email);
+				 ps.setString(2,address);
+				 ps.setString(3,city);
+				 ps.setString(4,phoneNumber);
+
+				 ps.execute();
+
+				 conn.close();
+				 ps.close();
+
 	         }
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		conn = null;
+		ps = null;
 	}
 
 }

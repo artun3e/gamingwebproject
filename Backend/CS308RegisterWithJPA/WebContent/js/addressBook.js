@@ -55,6 +55,13 @@ function updateAddress(address){
 					var params = "address_id="+id+"&address="+address+"&city="+city+"&phone_number="+phone;
 					console.log(params);
 					xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+					xhr.addEventListener("readystatechage",function (e) {
+						if(this.readyState===4)
+						{
+							alert("Your address has been updated!");
+							window.location.replace("myAddress.jsp");
+						}
+					})
 					xhr.send(params);
 				}
 				else
@@ -86,6 +93,13 @@ function addAddress(){
 				var params = "address="+address+"&city="+city+"&phone_number="+phone;
 				console.log(params);
 				xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xhr.addEventListener("readystatechange",function (e) {
+					if(this.readyState===4)
+					{
+						alert("Your address has been added!");
+						window.location.replace("myAddress.jsp");
+					}
+				})
 				xhr.send(params);
 			}
 			else
@@ -112,6 +126,13 @@ function deleteAddress(address){
 		var params = "address_id="+id;
 		console.log(params);
 		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xhr.addEventListener("readystatechange",function (e) {
+			if(this.readyState===4)
+			{
+				alert("Your address has been deleted");
+				window.location.replace("myAddress.jsp");
+			}
+		})
 		xhr.send(params);
 		}
 	}

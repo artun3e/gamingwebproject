@@ -1,6 +1,11 @@
 package cs308.sabanciuniv.edu;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -43,7 +48,8 @@ public class AddPaymentServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		
+		Connection conn;
+		PreparedStatement ps;
 		try {
 			HttpSession session = request.getSession();
 	         User user = (User) session.getAttribute("user");
@@ -52,31 +58,28 @@ public class AddPaymentServlet extends HttpServlet {
 	         }
 	         else {
 	             System.out.println("You are logged in!!!");
-	             
 	             String email = user.getEmail(); // also you can use request.getParameter for email
 	             //int id =Integer.parseInt(request.getParameter("user_id")); // get users id
 	             String cardNumber = request.getParameter("card_number");
 	             String cvc = request.getParameter("cvc");
 	 	    	 String expirationDate = request.getParameter("expiration_date");
-	 	    	 
-	 	    	 EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
-				 EntityManager em = emf.createEntityManager();
-				 
-				 //Payment(int id,String cardNumber, String email, String cvc, String expirationDate)
-				Payment payment = new Payment(user);
-				payment.setCardNumber(cardNumber);
-				payment.setCVC(cvc);
-				payment.setExpirationDate(expirationDate);
-				//payment.setID(id);
-				em.getTransaction().begin();
-				em.persist(payment);
-				em.getTransaction().commit();
-				em.close();
-				emf.close();
+				 conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
+				 ps = conn.prepareStatement("insert into Payment(email,cNumber,cvc,date) VALUES(?,?,?,?)");
+				 ps.setString(1,user.getEmail());
+				 ps.setString(2,cardNumber);
+				 ps.setString(3,cvc);
+				 ps.setString(4,expirationDate);
+				 ps.execute();
+
+				 ps.close();
+				 conn.close();
+
 	         }
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		conn = null;
+		ps = null;
 	}
 
 }
