@@ -3,6 +3,10 @@ package cs308.sabanciuniv.edu;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.SecureRandom;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,28 +43,45 @@ public class ForgotPassword extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String useremail = request.getParameter("email");
-		User temp = User.findByEmail(useremail);
-		if(temp == null)
+		Connection conn;
+		PreparedStatement ps;
+		ResultSet rs;
+		try
 		{
-			PrintWriter out = response.getWriter();
-			out.println("<html><meta http-equiv='refresh' content='2;URL=register.html'>"); 
-			out.println("<p style='color:red;'>User with that e-mail could not be found</p></html>");
-		}
-		else
-		{
-			SecureRandom random = new SecureRandom();
-			int num = random.nextInt(1000000);
-			String formatted = String.format("%05d", num); 
-			
-			String message = "Hello, " + temp.getName() + "\n" + "Your code for resetting your password is as follows\n" + formatted;
-			JavaMailUtil.sendMailwithMessage(message, useremail);
-			
+			conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
+			ps = conn.prepareStatement("Select * from User where Email=?");
+			ps.setString(1,useremail);
+			rs = ps.executeQuery();
 			HttpSession session = request.getSession();
-			session.setAttribute("mycode", formatted);
-			session.setAttribute("email", useremail);
-			
-			response.sendRedirect("verify2.jsp");
-		}
-	}
+			if(rs.next()){
+				SecureRandom random = new SecureRandom();
+				int num = random.nextInt(1000000);
+				String formatted = String.format("%05d", num);
 
+				String message = "Hello, " + rs.getString("name") + "\n" + "Your code for resetting your password is as follows\n" + formatted;
+				JavaMailUtil.sendMailwithMessage(message, useremail);
+
+
+				session.setAttribute("forgotPasswordCorrect", "true");
+				session.setAttribute("mycode", formatted);
+				session.setAttribute("email", useremail);
+				response.sendRedirect("verify2.jsp");
+			}
+			else
+			{
+				session.setAttribute("forgotPasswordIncorrect","true");
+				response.sendRedirect("forgotPassword.jsp");
+			}
+			conn.close();
+			ps.close();
+			rs.close();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		conn = null;
+		ps = null;
+		rs = null;
+	}
 }

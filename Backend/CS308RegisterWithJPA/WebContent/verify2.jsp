@@ -73,6 +73,10 @@
                         <div class="dropdown-content">
                         	<% 
                         		session = request.getSession();
+                        		if(session.getAttribute("forgotPasswordCorrect")==null)
+                                {
+                                    response.sendRedirect("index.jsp");
+                                }
                         		if(session.getAttribute("user") != null)
 	                        	{
                         			/* out.println("<a href=\"#account\">Account</a>");
@@ -117,9 +121,38 @@
             <button> confirm </button>
           </form>
         </div>
-        <div class="register-right">
-<p> Yinelenen bir sayfa içeriğinin okuyucunun dikkatini dağıttığı bilinen bir gerçektir. Lorem Ipsum kullanmanın amacı, sürekli 'buraya metin gelecek, buraya metin gelecek' yazmaya kıyasla daha dengeli bir harf dağılımı sağlayarak okunurluğu artırmasıdır. Şu anda birçok masaüstü yayıncılık paketi ve web sayfa düzenleyicisi, varsayılan mıgır metinler olarak Lorem Ipsum kullanmaktadır. Ayrıca arama motorlarında 'lorem ipsum' anahtar sözcükleri ile arama yapıldığında henüz tasarım aşamasında olan çok sayıda site listelenir. Yıllar içinde, bazen kazara, bazen bilinçli olarak (örneğin mizah katılarak), çeşitli sürümleri geliştirilmiştir.</p>
-        </div>
+          <div class="register-right">
+              <div class="row">
+                  <div class="col-6 col-md mt-4 mb-4 footerText">
+                      <i class="fas fa-feather fa-4x"></i>
+                      <p class="mt-3"><b>Easy to Use </b><br><br>
+                          <span class="footerSpan">A simple and useful user interface that helps you to get things done</span>
+                      </p>
+                      <div class="underLine"></div>
+                  </div>
+                  <div class="col-6 col-md mt-4 mb-4 footerText">
+                      <i class="fas fa-shield-alt fa-4x"></i>
+                      <p class="mt-3"><b> Totally Secure </b><br><br>
+                          <span class="footerSpan">All payment methods and technologies consider the data security</span>
+                      </p>
+                      <div class="underLine"></div>
+                  </div>
+                  <div class="col-6 col-md mt-4 mb-4 footerText">
+                      <i class=""></i>
+                      <p class="mt-3"><b> Fastest Delivery </b> <br><br>
+                          <span class="footerSpan">Accounts that you buy will be delivered as soon as possible</span>
+                      </p>
+                      <div class="underLine"></div>
+                  </div>
+                  <div class="col-6 col-md mt-4 mb-4 footerText">
+                      <i class="far fa-handshake fa-4x"></i>
+                      <p class="mt-3"> <b> Customer Happiness </b><br><br>
+                          <span class="footerSpan">We are always here to help you after or before your purchase</span>
+                      </p>
+                      <div class="underLine"></div>
+                  </div>
+              </div>
+          </div>
       </div>
 
     </body>

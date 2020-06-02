@@ -97,7 +97,7 @@ public class RegisterServlet extends HttpServlet {
 				session.setAttribute("name", name);
 				session.setAttribute("email", email);
 				session.setAttribute("password", password);
-
+				session.setAttribute("registerInProgress", "true");
 				response.sendRedirect("verify.jsp");
 
 				//RequestDispatcher rd = request.getRequestDispatcher("verify.html");

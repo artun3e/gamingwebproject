@@ -3,6 +3,7 @@
 <%@ page import="cs308.sabanciuniv.edu.User"%>
 <%@ page import="cs308.sabanciuniv.edu.Games"%>
 <%@ page import="cs308.sabanciuniv.edu.Order"%>
+<%@ page import="java.io.PrintWriter" %>
 <html>
 
   <head>
@@ -93,14 +94,53 @@
           <form action="forgotpassword" method="post">
             <h3> Enter the email address of the associated account</h3>
             <img src="img/logo.png" height="100px" width="100px"> <br>
+              <p style='color: #a94442'>
+              <%
+                  session = request.getSession();
+                  if(session.getAttribute("forgotPasswordIncorrect")!= null)
+                  {
+                      out.println("No such email was found...");
+                      session.removeAttribute("forgotPasswordIncorrect");
+                  }
+              %>
+              </p>
             <input class="register" type="email" id="email" name="email" placeholder="E-mail"><br>
             <h5> Your password should be at least 6 characters.</h5><br>
             <button> Confirm </button>
           </form>
         </div>
-        <div class="register-right">
-<p> Yinelenen bir sayfa iÃ§eriÄinin okuyucunun dikkatini daÄÄ±ttÄ±ÄÄ± bilinen bir gerÃ§ektir. Lorem Ipsum kullanmanÄ±n amacÄ±, sÃ¼rekli 'buraya metin gelecek, buraya metin gelecek' yazmaya kÄ±yasla daha dengeli bir harf daÄÄ±lÄ±mÄ± saÄlayarak okunurluÄu artÄ±rmasÄ±dÄ±r. Åu anda birÃ§ok masaÃ¼stÃ¼ yayÄ±ncÄ±lÄ±k paketi ve web sayfa dÃ¼zenleyicisi, varsayÄ±lan mÄ±gÄ±r metinler olarak Lorem Ipsum kullanmaktadÄ±r. AyrÄ±ca arama motorlarÄ±nda 'lorem ipsum' anahtar sÃ¶zcÃ¼kleri ile arama yapÄ±ldÄ±ÄÄ±nda henÃ¼z tasarÄ±m aÅamasÄ±nda olan Ã§ok sayÄ±da site listelenir. YÄ±llar iÃ§inde, bazen kazara, bazen bilinÃ§li olarak (Ã¶rneÄin mizah katÄ±larak), Ã§eÅitli sÃ¼rÃ¼mleri geliÅtirilmiÅtir.</p>
-        </div>
+          <div class="register-right">
+              <div class="row">
+                  <div class="col-6 col-md mt-4 mb-4 footerText">
+                      <i class="fas fa-feather fa-4x"></i>
+                      <p class="mt-3"><b>Easy to Use </b><br><br>
+                          <span class="footerSpan">A simple and useful user interface that helps you to get things done</span>
+                      </p>
+                      <div class="underLine"></div>
+                  </div>
+                  <div class="col-6 col-md mt-4 mb-4 footerText">
+                      <i class="fas fa-shield-alt fa-4x"></i>
+                      <p class="mt-3"><b> Totally Secure </b><br><br>
+                          <span class="footerSpan">All payment methods and technologies consider the data security</span>
+                      </p>
+                      <div class="underLine"></div>
+                  </div>
+                  <div class="col-6 col-md mt-4 mb-4 footerText">
+                      <i class=""></i>
+                      <p class="mt-3"><b> Fastest Delivery </b> <br><br>
+                          <span class="footerSpan">Accounts that you buy will be delivered as soon as possible</span>
+                      </p>
+                      <div class="underLine"></div>
+                  </div>
+                  <div class="col-6 col-md mt-4 mb-4 footerText">
+                      <i class="far fa-handshake fa-4x"></i>
+                      <p class="mt-3"> <b> Customer Happiness </b><br><br>
+                          <span class="footerSpan">We are always here to help you after or before your purchase</span>
+                      </p>
+                      <div class="underLine"></div>
+                  </div>
+              </div>
+          </div>
       </div>
 
     </body>

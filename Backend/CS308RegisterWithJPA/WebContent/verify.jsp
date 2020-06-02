@@ -73,6 +73,10 @@
                         <div class="dropdown-content">
                         	<% 
                         		session = request.getSession();
+                        		if(session.getAttribute("registerInProgress")==null)
+                                {
+                                    response.sendRedirect("index.jsp");
+                                }
                         		if(session.getAttribute("user") != null)
 	                        	{
                         			/* out.println("<a href=\"#account\">Account</a>");
@@ -101,20 +105,52 @@
           <form action="verify" method="post">
             <h3> Please verify your email address</h3>
             <img src="img/logo.png" height="100px" width="100px"> <br>
-    
+              <%
+                  session = request.getSession();
+                  if(session.getAttribute("verify-error")!=null)
+                  {
+                      String toBeWritten = session.getAttribute("verify-error").toString();
+                      out.println("<p style='color: #a94442'>"+ toBeWritten +"</p>");
+                      session.removeAttribute("verify-error");
+                  }
+              %>
             <input type="text" id="usercode" name="usercode" placeholder="your verification code"><br>
 
             <button> confirm </button>
           </form>
         </div>
-        <div class="register-right">
-<p>  Games Markt website is the virtual supermarket for gaming. 
-If you like shopping the traditional way, our stores offer you the same experience. 
-Products offered online as well as in our stores, include, consoles like PS4, PS3, Xbox One, Nintendo Switch. 
-We also offer the softwares for your consoles and accessories to enhance your gaming. 
-You can also order Playstation Digital Cards & get voucher code immediately delivered on your address.</p>
-		<img src="img/games.png" height="300px" weight="150px">
-        </div>
+          <div class="register-right">
+              <div class="row">
+                  <div class="col-6 col-md mt-4 mb-4 footerText">
+                      <i class="fas fa-feather fa-4x"></i>
+                      <p class="mt-3"><b>Easy to Use </b><br><br>
+                          <span class="footerSpan">A simple and useful user interface that helps you to get things done</span>
+                      </p>
+                      <div class="underLine"></div>
+                  </div>
+                  <div class="col-6 col-md mt-4 mb-4 footerText">
+                      <i class="fas fa-shield-alt fa-4x"></i>
+                      <p class="mt-3"><b> Totally Secure </b><br><br>
+                          <span class="footerSpan">All payment methods and technologies consider the data security</span>
+                      </p>
+                      <div class="underLine"></div>
+                  </div>
+                  <div class="col-6 col-md mt-4 mb-4 footerText">
+                      <i class=""></i>
+                      <p class="mt-3"><b> Fastest Delivery </b> <br><br>
+                          <span class="footerSpan">Accounts that you buy will be delivered as soon as possible</span>
+                      </p>
+                      <div class="underLine"></div>
+                  </div>
+                  <div class="col-6 col-md mt-4 mb-4 footerText">
+                      <i class="far fa-handshake fa-4x"></i>
+                      <p class="mt-3"> <b> Customer Happiness </b><br><br>
+                          <span class="footerSpan">We are always here to help you after or before your purchase</span>
+                      </p>
+                      <div class="underLine"></div>
+                  </div>
+              </div>
+          </div>
         
       </div>
       

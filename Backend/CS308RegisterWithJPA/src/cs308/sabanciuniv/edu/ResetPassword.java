@@ -14,6 +14,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  * Servlet implementation class ResetPassword
@@ -42,6 +46,8 @@ public class ResetPassword extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Connection conn;
+		PreparedStatement ps;
 		try {
 			HttpSession session = request.getSession();
 			String correctCode = session.getAttribute("mycode").toString();
@@ -49,31 +55,28 @@ public class ResetPassword extends HttpServlet {
 			String userCode = request.getParameter("usercode");
 			if(correctCode.contentEquals(userCode))
 			{
-				EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
-				EntityManager em = emf.createEntityManager();
+				conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
+				ps = conn.prepareStatement("UPDATE User set password=? where Email=?");
+
 				MessageDigest digest = MessageDigest.getInstance("SHA-256");
 				byte[] hash = digest.digest(request.getParameter("password").getBytes(StandardCharsets.UTF_8));
-				
-				em.getTransaction().begin();
-				
-				Query query = em.createQuery("UPDATE User SET password = :newpass WHERE EMAIL = :email");
-				query.setParameter("newpass", new String(hash, "UTF-8"));
-				query.setParameter("email", useremail);
-				int number = query.executeUpdate();
+
+				ps.setString(1,new String(hash, "UTF-8"));
+				ps.setString(2,useremail);
+				int number = ps.executeUpdate();
+
 				System.out.println(number + " of rows have been updated...");
-				
-				
-				em.getTransaction().commit();
-				em.close();
-				emf.close();
+
+				conn.close();
+				ps.close();
 				session.setAttribute("order-error", "Password has changed successfully.");
+				session.removeAttribute("forgotPasswordCorrect");
 				response.sendRedirect("login.jsp");
 			}
 			else
 			{
-				PrintWriter out = response.getWriter();
-				out.println("<html><meta http-equiv='refresh' content='3;URL=forgotpassword.jsp'>");
-				out.println("<p style='color:red;'>Verification code is incorrect!!!</p></html>");
+				session.setAttribute("verify-error", "Your verification code is invalid.");
+				response.sendRedirect("verify2.jsp");
 			}
 		} 
 		catch (Exception e) 

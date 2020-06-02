@@ -75,13 +75,13 @@ public class verifyEmail extends HttpServlet {
 				//temp.setUserType(User.userType.User);
 				//entityManager.persist(temp);
 				//entityManager.getTransaction().commit();
+				session.removeAttribute("registerInProgress");
 				response.sendRedirect("index.jsp");
 			}
 			else
 			{
-
 				session.setAttribute("verify-error", "Your verification code is invalid.");
-				response.sendRedirect("verify2.jsp");
+				response.sendRedirect("verify.jsp");
 			}
 		} 
 		catch (Exception e) {
