@@ -58,6 +58,13 @@ function updateCard(card){
 					var params = "payment_id="+id+"&card_number="+number+"&cvc="+cvc+"&expiration_date="+date;
 					console.log(params);
 					xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+					xhr.addEventListener('readystatechange', function (e) {
+						if(this.readyState === 4)
+						{
+							alert("Your payment has been updated!");
+							window.location.replace("myPayment.jsp");
+						}
+					})
 					xhr.send(params);
 				}
 				else
@@ -88,6 +95,13 @@ function addCard(){
 				var params = "card_number="+number+"&cvc="+cvc+"&expiration_date="+date;
 				console.log(params);
 				xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xhr.addEventListener('readystatechange',function (e) {
+					if(this.readyState===4)
+					{
+						alert("Your payment method has been added!");
+						window.location.replace("myPayment.jsp");
+					}
+				})
 				xhr.send(params);
 				}
 				else
@@ -114,6 +128,14 @@ function deleteCard(card){
 			var params = "payment_id="+id;
 			console.log(params);
 			xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xhr.addEventListener('readystatechange',function (e) {
+				if(this.readyState===4)
+				{
+					alert("Your payment method has been deleted!");
+					window.location.replace("myPayment.jsp");
+				}
+
+			})
 			xhr.send(params);
 		}
 		else

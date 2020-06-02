@@ -551,6 +551,8 @@ public class GamesManager {
         ResultSet rs;
         try {
             conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
+
+            //SELECT distinct a.category,(SELECT count(b.categories) FROM Games b WHERE b.categories like concat('%',a.category,'%')) as occurences FROM categories a
             ps = conn.prepareStatement("Select * from categories");
             rs = ps.executeQuery();
             while (rs.next()) {
