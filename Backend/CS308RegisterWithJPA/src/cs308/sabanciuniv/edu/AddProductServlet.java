@@ -41,12 +41,12 @@ public class AddProductServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		EntityManagerFactory emf;
-		EntityManager em;
+		Connection conn;
+		PreparedStatement ps;
 		try {
 
-			Connection conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
-			PreparedStatement ps = conn.prepareStatement("SELECT MAX(appid) appid from Games");
+			conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
+			ps = conn.prepareStatement("SELECT MAX(appid) appid from Games");
 			ResultSet rs = ps.executeQuery();
 			int id = 0;
 			while(rs.next())
@@ -54,15 +54,6 @@ public class AddProductServlet extends HttpServlet {
 				id = rs.getInt("appid") + 1;
 			}
 
-			conn.close();
-			ps.close();
-			rs.close();
-			conn = null;
-			rs = null;
-			ps = null;
-
-			emf = Persistence.createEntityManagerFactory("cs308");
-			em = emf.createEntityManager();
 
 			String gameName = request.getParameter("name");
 			String publisher = request.getParameter("publisher");
@@ -103,39 +94,40 @@ public class AddProductServlet extends HttpServlet {
 
 			String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
 
-			Games game = new Games();
-			game.setAppID(id);
-			game.setName(gameName);
-			game.setPublisher(publisher);
-			game.setCategories(categories);
-			game.setPrice(price);
-			game.setSteampsyTags(steamspyTags);
-			game.setShort_description(shortDescription);
-			game.setDetailed_description(detailedDescription);
-			game.setMinimum(minimum);
-			game.setAbout_the_game(aboutTheGame);
-			game.setBackground(background);
-			game.setScreenshots(screenshots);
-			game.setPlatforms(platforms);
-			game.setHeader_image(headerImage);
-			game.setDeveloper(publisher);
-			game.setReleaseDate(timeStamp);
-			game.setStock(stock);
+			ps = conn.prepareStatement("insert into Games(appid,name,release_date,developer,publisher,platforms,categories,genres,steamspy_tags,price,header_image,screenshots,background,minimum,detailed_description,about_the_game,short_description,onSale,stock,salePrice) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			ps.setInt(1,id);
+			ps.setString(2,gameName);
+			ps.setString(3,timeStamp);
+			ps.setString(4,publisher);
+			ps.setString(5,publisher);
+			ps.setString(6,platforms);
+			ps.setString(7,categories);
+			ps.setString(8,categories);
+			ps.setString(9,categories);
+			ps.setDouble(10,price);
+			ps.setString(11,headerImage);
+			ps.setString(12,screenshots);
+			ps.setString(13,background);
+			ps.setString(14,minimum);
+			ps.setString(15,detailedDescription);
+			ps.setString(16,aboutTheGame);
+			ps.setString(17,shortDescription);
+			ps.setBoolean(18,onSale);
+			ps.setInt(19,stock);
 			if(onSale)
-				game.setSalePrice(salePrice);
+				ps.setDouble(20,salePrice);
 			else
-				game.setSalePrice(price);
-			game.setOnSale(onSale);
+				ps.setDouble(20,price);
 
-			em.getTransaction().begin();
-			em.persist(game);
-			em.getTransaction().commit();
+			ps.execute();
 
-			em.close();
-			emf.close();
+			conn.close();
+			ps.close();
+			rs.close();
+			conn = null;
+			rs = null;
+			ps = null;
 
-			em = null;
-			emf = null;
 			PrintWriter out = response.getWriter();
 
 			out.println("<html><script type=\"text/javascript\">");
