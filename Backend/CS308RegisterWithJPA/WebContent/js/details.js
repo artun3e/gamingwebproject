@@ -82,7 +82,7 @@ function parseURLParams(url) {
 async function getData(value){
 		const query  = value.name[0];
 		console.log("query is equal to" + query);
-		const url = '/CS308RegisterWithJPA/search/fromDB/byName/' + query; 
+		const url = '/CS308RegisterWithJPA/search/fromDB/byName/' + query;
     	const response = await fetch(url);
     	const data = await response.json();
     	const urlR = '/CS308RegisterWithJPA/search/fromDB/byNamee/' + query; 

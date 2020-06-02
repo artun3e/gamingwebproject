@@ -62,7 +62,7 @@ public class GamesManager {
                 resultList.add(obj);
             }
             System.out.println("New Try");
-            
+
             conn.close();
             conn = null;
             ps = null;
@@ -74,6 +74,62 @@ public class GamesManager {
         }
     }
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("bySimilarName/{n}")
+    public List<Games> getDeviceBySimilarName(@PathParam("n") String query) {
+        List<Games> resultList = new ArrayList<Games>();
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
+            PreparedStatement ps = conn.prepareStatement("Select * from Games WHERE name LIKE " + "'%" + query + "%' and deleted=0");
+            //PreparedStatement ps = conn.prepareStatement("Select * from Games where name=? and deleted=0");
+            //ps.setString(1,query);
+            ResultSet rs = ps.executeQuery();
+
+            // attributes for the Games class : name', 'release_date', 'developer', 'publisher', 'platforms',
+            //'required_age', 'categories', 'genres', 'steamspy_tags',
+            //'number_of_players', 'price', 'rating'],
+
+            while (rs.next()) {
+                Games obj = new Games();
+                obj.setAppID(rs.getInt("appid"));
+                obj.setName(rs.getString("name"));
+                obj.setReleaseDate(rs.getString("release_date"));
+                obj.setDeveloper(rs.getString("developer"));
+                obj.setPublisher(rs.getString("publisher"));
+                obj.setPlatforms(rs.getString("platforms"));
+                obj.setRequiredAge(rs.getInt("required_age"));
+                obj.setCategories(rs.getString("categories"));
+                obj.setGenres(rs.getString("genres"));
+                obj.setSteampsyTags(rs.getString("steamspy_tags"));
+                obj.setOwners(rs.getString("owners"));
+                obj.setPrice(rs.getDouble("price"));
+                obj.setRating(rs.getDouble("rating"));
+                obj.setHeader_image(rs.getString("header_image"));
+                obj.setScreenshots(rs.getString("screenshots"));
+                obj.setBackground(rs.getString("background"));
+                obj.setMinimum(rs.getString("minimum"));
+                obj.setDetailed_description(rs.getString("detailed_description"));
+                obj.setAbout_the_game(rs.getString("about_the_game"));
+                obj.setShort_description(rs.getString("short_description"));
+                obj.setSalePrice(rs.getDouble("salePrice"));
+                obj.setOnSale(rs.getBoolean("onSale"));
+                obj.setStock(rs.getInt("stock"));
+                obj.setDeleted(rs.getBoolean("deleted"));
+                resultList.add(obj);
+            }
+            System.out.println("New Try");
+
+            conn.close();
+            conn = null;
+            ps = null;
+            rs = null;
+            return resultList;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return resultList;
+        }
+    }
 
     // return game object with respect to ID
     public static Games getGameByID(int ID) {
