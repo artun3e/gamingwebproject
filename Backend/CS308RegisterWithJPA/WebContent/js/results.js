@@ -221,8 +221,7 @@ async function getData(value){
 //})()
 
 function addToCart(game){	
-	console.log("add to cart butonuna basildi");
-	var child = game.parentElement.parentElement;
+	var child = game.parentElement.parentElement.parentElement;
 
 	var itemName = child.getElementsByClassName("product-name")[0].getElementsByTagName('a')[0].innerText;
 	

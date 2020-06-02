@@ -50,46 +50,47 @@ $(document).ready(function() {
 	    
 	    xhr.send(params);
 	});*/
-	$(".input-checkbox_check").click(function(e){
-		e.stopPropagation();
-		e.stopImmediatePropagation();
-		
-		const checkboxes = document.querySelectorAll(`input[class="input-checkbox_check"]:checked`);
-	    let values = [];
-	    checkboxes.forEach((checkbox) => {
-	        values.push(checkbox.value);
-	    });
-	    console.log(values);
-	    
-	    var url_2 = "/CS308RegisterWithJPA/search/fromDB/byCategory/";
-	    for(var i = 0; i< 5; i++)
-    	{
-	    	if(values[i]){
-	    		url_2 += values[i] + "/"
-	    	}
-	    	else{
-	    		url_2 += "null/"
-	    	}
-    	}
-	    document.getElementById("About_To_Change").innerHTML = "";
-	    async function getData(){
-	    	const response = await fetch(url_2);
-	    	const data = await response.json();
-	       	
-	    	for (var k = 0; k < data.length; k++){
-	    		console.log(data[k]);
-	    		var p = document.getElementById("About_To_Change");
-	    		var newElement = document.createElement('div');
-	            //// newElement.setAttribute('id', elementId);
-	            newElement.innerHTML = data[k];
-	            newElement.setAttribute('class', "col-md-4 col-xs-6");
-	    		p.appendChild(newElement);
-	    	}
-	    }
-
-	    $( ".store-pagination" ).remove();
-	    getData();
-	});
+//	$(".input-checkbox_check").click(function(e){
+//		e.stopPropagation();
+//		e.stopImmediatePropagation();
+//		
+//		const checkboxes = document.querySelectorAll(`input[class="input-checkbox_check"]:checked`);
+//	    let values = [];
+//	    checkboxes.forEach((checkbox) => {
+//	        values.push(checkbox.value);
+//	    });
+//	    console.log(values);
+//	    
+//	    var url_2 = "/CS308RegisterWithJPA/search/fromDB/byCategory/";
+//	    for(var i = 0; i< 5; i++)
+//    	{
+//	    	if(values[i]){
+//	    		url_2 += values[i] + "/"
+//	    	}
+//	    	else{
+//	    		url_2 += "null/"
+//	    	}
+//    	}
+//	    console.log(url_2);
+//	    document.getElementById("About_To_Change").innerHTML = "";
+//	    async function getData(){
+//	    	const response = await fetch(url_2);
+//	    	const data = await response.json();
+//	       	
+//	    	for (var k = 0; k < data.length; k++){
+//	    		console.log(data[k]);
+//	    		var p = document.getElementById("About_To_Change");
+//	    		var newElement = document.createElement('div');
+//	            //// newElement.setAttribute('id', elementId);
+//	            newElement.innerHTML = data[k];
+//	            newElement.setAttribute('class', "col-md-4 col-xs-6");
+//	    		p.appendChild(newElement);
+//	    	}
+//	    }
+//
+//	    $( ".store-pagination" ).remove();
+//	    getData();
+//	});
 //	$('.store-pagination a').click(function(e){
 //		
 //		const checkboxes = document.querySelectorAll(`input[class="input-checkbox_check"]:checked`);

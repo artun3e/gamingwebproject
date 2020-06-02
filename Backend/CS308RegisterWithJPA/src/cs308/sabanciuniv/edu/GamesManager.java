@@ -555,7 +555,7 @@ public class GamesManager {
         try {
             Connection conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
             //PreparedStatement ps = conn.prepareStatement();
-            String sqlQuery = "Select onSale,header_image,steamspy_tags,price,salePrice,name from Games where steamspy_tags like CONCAT( '%',?,'%')";
+            String sqlQuery = "Select * from Games where steamspy_tags like CONCAT( '%',?,'%')";
             String[] categories = category.split(",");
             //ps.setString(1,categories[0]);
             System.out.println("Category 1 is " + categories[0]);
@@ -572,15 +572,25 @@ public class GamesManager {
             }
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                Games game = new Games();
-                game.setPrice(rs.getDouble("price"));
-                game.setOnSale(rs.getBoolean("onSale"));
-                game.setSalePrice(rs.getDouble("salePrice"));
-                game.setName(rs.getString("name"));
-                game.setHeader_image(rs.getString("header_image"));
-                game.setSteampsyTags(rs.getString("steamspy_tags"));
-                game.setCategories(rs.getString("steamspy_tags"));
-                resultArray.add(game);
+            	Games obj = new Games();
+                obj.setAppID(rs.getInt("appid"));
+                obj.setName(rs.getString("name"));
+                obj.setReleaseDate(rs.getString("release_date"));
+                obj.setPublisher(rs.getString("publisher"));
+                obj.setCategories(rs.getString("categories"));
+                obj.setGenres(rs.getString("genres"));
+                obj.setSteampsyTags(rs.getString("steamspy_tags"));
+                obj.setPrice(rs.getDouble("price"));
+                obj.setRating(rs.getDouble("rating"));
+                obj.setHeader_image(rs.getString("header_image"));
+                obj.setScreenshots(rs.getString("screenshots"));
+                obj.setAbout_the_game(rs.getString("about_the_game"));
+                obj.setShort_description(rs.getString("short_description"));
+                obj.setSalePrice(rs.getDouble("salePrice"));
+                obj.setOnSale(rs.getBoolean("onSale"));
+                obj.setStock(rs.getInt("stock"));
+                resultArray.add(obj);
+                
             }
             conn.close();
             ps.close();

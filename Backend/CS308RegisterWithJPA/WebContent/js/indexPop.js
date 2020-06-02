@@ -16,7 +16,8 @@ async function getData() {
     for (var z = 0; z < 9; z++) {
         fillCard(data[z], z);
     }
-    addPages();
+    var pageNum = (Math.ceil(products.length/9));
+    addPages(pageNum);
     firstData = products;
 }
 
@@ -311,115 +312,85 @@ function ratingCheckbox() {
     }
     products = ratingFiltered;
 
-    addPages();
+    var pageNum = (Math.ceil(products.length/9));
+    addPages(pageNum);
     	
     
-    showPage1();
+    showPage(1);
 }
 
-function addPages(){
+function createPageHTML(pageNumber){
+	var page =  '<a onclick="showPage('+pageNumber+')" href="#'+pageNumber+'" class="page_number_'+pageNumber+'" >'+pageNumber+'</a>';
+	return page;
+}
+function addPages(num){
 	var pagination = document.getElementById("store-pagination");
 	pagination.innerHTML = "";
-	var p1 = '<li><a onclick="showPage1()" href="#1" class="page_number_1" >1</a></li>';
-	var p2 = '<li><a onclick="showPage2()" href="#2" class="page_number_2" >2</a></li>';
-	var p3 = '<li><a onclick="showPage3()" href="#3" class="page_number_3" >3</a></li>';
-	var p4 = '<li><a onclick="showPage4()" href="#4" class="page_number_4" >4</a></li>';
-	var p5 = '<li><a onclick="showPage5()" href="#5" class="page_number_5" >5</a></li>';	
+
 	var liElement = document.createElement("li");
-	liElement.innerHTML = p1;
+	liElement.innerHTML = createPageHTML(1);
 	pagination.appendChild(liElement);
-    if(products.length > 9 && products.length <= 18){
-    	var pagination = document.getElementById("store-pagination");
-    	var liElement = document.createElement("li");
-    	liElement.innerHTML = p2;
-    	pagination.appendChild(liElement);
+	var elem = document.createElement("li");
+	for(var i=1; i<num; i++){
+		elem.innerHTML = createPageHTML(i+1);
+		pagination.appendChild(elem.cloneNode(true));
+	}
+    
+   
+}
+function showPage(num) {
+	document.getElementById("About_To_Change").innerHTML = "";
+	var boundary = num*9;
+	if (products.length < boundary)
+		boundary = products.length;
+	var start = (num-1)*9;
+    for (var j = start;  j < boundary; j++) {
+        fillCard(products[j], j - (start));
     }
-    else if(products.length > 18 && products.length <= 27){
-    	var pagination = document.getElementById("store-pagination");
-    	var liElement = document.createElement("li");
-    	liElement.innerHTML = p2;
-    	pagination.appendChild(liElement);
-    	var liElement = document.createElement("li");
-    	liElement.innerHTML = p3;
-    	pagination.appendChild(liElement);
-    }
-    else if(products.length > 27 && products.length <= 36){
-    	var pagination = document.getElementById("store-pagination");
-    	var liElement = document.createElement("li");
-    	liElement.innerHTML = p2;
-    	pagination.appendChild(liElement);
-    	var liElement = document.createElement("li");
-    	liElement.innerHTML = p3;
-    	pagination.appendChild(liElement);
-    	var liElement = document.createElement("li");
-    	liElement.innerHTML = p4;
-    	pagination.appendChild(liElement);
-    }
-    else if(products.length > 36 && products.length <= 45){
-    	var pagination = document.getElementById("store-pagination");
-    	var liElement = document.createElement("li");
-    	liElement.innerHTML = p2;
-    	pagination.appendChild(liElement);
-    	var liElement = document.createElement("li");
-    	liElement.innerHTML = p3;
-    	pagination.appendChild(liElement);
-    	var liElement = document.createElement("li");
-    	liElement.innerHTML = p4;
-    	pagination.appendChild(liElement);
-    	var liElement = document.createElement("li");
-    	liElement.innerHTML = p5;
-    	pagination.appendChild(liElement);
-    }
+    
 }
 
 
-function showPage1() {
-	document.getElementById("About_To_Change").innerHTML = "";
-	var boundary = 9;
-	if (products.length < 9)
-		boundary = products.length;
-    for (var j = 0; j < boundary; j++) {
-        fillCard(products[j], j);
-    }
+
+function checkCategory(){
+	var query = "";
+	if (document.getElementById("category-1").checked == true){
+		query = query + "action,";
+	}
+	if (document.getElementById("category-2").checked == true){
+		query = query + "multiplayer,";
+	}
+	if (document.getElementById("category-3").checked == true){
+		query = query + "sports,";
+	}
+	if (document.getElementById("category-4").checked == true){
+		query = query + "fps,";
+	}
+	if (document.getElementById("category-5").checked == true){
+		query = query + "strategy,";
+	}
+	getCategoricalData(query);
 }
 
-function showPage2() {
-	document.getElementById("About_To_Change").innerHTML = "";
-	var boundary = 18;
-	if (products.length < 18)
-		boundary = products.length;
-    for (var j = 9; j < boundary; j++) {
-    	fillCard(products[j], j - 9);
-    }
-}
+async function getCategoricalData(category) {
+    var vurl = '/CS308RegisterWithJPA/search/fromDB/getByCategory/';
+    //	window.location.href = url;
+    const url = vurl+category;
+    const response = await fetch(url);
+    const catData = await response.json();
+    
 
-function showPage3() {
-	document.getElementById("About_To_Change").innerHTML = "";
-	var boundary = 27;
-	if (products.length < 27)
-		boundary = products.length;
-    for (var j = 18; j < boundary; j++) {
-    	fillCard(products[j], j - 18);
+    products = [];
+    for (var k = 0; k < catData.length; k++) {
+        products.push(catData[k]);
     }
-}
-
-function showPage4() {
-	document.getElementById("About_To_Change").innerHTML = "";
-	var boundary = 36;
-	if (products.length < 36)
-		boundary = products.length;
-    for (var j = 27; j < boundary; j++) {
-    	fillCard(products[j], j - 27);
-    }
-
-}
-
-function showPage5() {
-	document.getElementById("About_To_Change").innerHTML = "";
-	var boundary = 45;
-	if (products.length < 45)
-		boundary = products.length;
-    for (var j = 36; j < boundary; j++) {
-    	fillCard(products[j], j - 36);
-    }
+    var pageNum = (Math.ceil(products.length/9));
+    addPages(pageNum);
+    showPage(1);
+    
+//    for (var z = 0; z < 9; z++) {
+//        fillCard(data[z], z);
+//    }
+//    addPages();
+//    firstData = products;
 }

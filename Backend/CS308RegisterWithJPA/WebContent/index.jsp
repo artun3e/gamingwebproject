@@ -174,11 +174,11 @@
                   <!-- ASIDE -->
                   <div id="aside" class="col-md-3">
                      <!-- aside Widget -->
-                     <div class="aside">
+
                         <h3 class="aside-title">Categories</h3>
                         <div class="checkbox-filter">
                            <div class="input-checkbox">
-                              <input type="checkbox" id="category-1" class="input-checkbox_check" value="Action">
+                              <input type="checkbox" id="category-1" class="input-checkbox_check" onclick="checkCategory()" value="Action" >
                               <label for="category-1">
                                  <span></span>
                                  Action
@@ -186,7 +186,7 @@
                               </label>
                            </div>
                            <div class="input-checkbox">
-                              <input type="checkbox" id="category-2" class="input-checkbox_check" value="Multiplayer">
+                              <input type="checkbox" id="category-2" class="input-checkbox_check"onclick="checkCategory()" value="Multiplayer">
                               <label for="category-2">
                                  <span></span>
                                  Multiplayer
@@ -194,7 +194,7 @@
                               </label>
                            </div>
                            <div class="input-checkbox">
-                              <input type="checkbox" id="category-3" class="input-checkbox_check" value="Sports">
+                              <input type="checkbox" id="category-3" class="input-checkbox_check" onclick="checkCategory()" value="Sports">
                               <label for="category-3">
                                  <span></span>
                                  Sports
@@ -202,7 +202,7 @@
                               </label>
                            </div>
                            <div class="input-checkbox">
-                              <input type="checkbox" id="category-4" class="input-checkbox_check" value="FPS">
+                              <input type="checkbox" id="category-4" class="input-checkbox_check" onclick="checkCategory()" value="FPS">
                               <label for="category-4">
                                  <span></span>
                                  FPS
@@ -210,7 +210,7 @@
                               </label>
                            </div>
                            <div class="input-checkbox">
-                              <input type="checkbox" id="category-5" class="input-checkbox_check" value="Strategy">
+                              <input type="checkbox" id="category-5" class="input-checkbox_check" onclick="checkCategory()" value="Strategy">
                               <label for="category-5">
                                  <span></span>
                                  Strategy
@@ -225,7 +225,6 @@
                                   <small>(740)</small>
                               </label>
                               </div> -->
-                        </div>
                      </div>
                      <div class="aside">
                         <h3 class="aside-title">RATINGS</h3>
