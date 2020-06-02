@@ -24,7 +24,9 @@ public class GamesManager {
         List<Games> resultList = new ArrayList<Games>();
         try {
             Connection conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
-            PreparedStatement ps = conn.prepareStatement("Select * from Games WHERE name LIKE " + "'%" + query + "%'");
+            //PreparedStatement ps = conn.prepareStatement("Select * from Games WHERE name LIKE " + "'%" + query + "%' and deleted=0");
+            PreparedStatement ps = conn.prepareStatement("Select * from Games where name=? and deleted=0");
+            ps.setString(1,query);
             ResultSet rs = ps.executeQuery();
 
             // attributes for the Games class : name', 'release_date', 'developer', 'publisher', 'platforms',
@@ -56,6 +58,7 @@ public class GamesManager {
                 obj.setSalePrice(rs.getDouble("salePrice"));
                 obj.setOnSale(rs.getBoolean("onSale"));
                 obj.setStock(rs.getInt("stock"));
+                obj.setDeleted(rs.getBoolean("deleted"));
                 resultList.add(obj);
             }
             System.out.println("New Try");
@@ -76,7 +79,7 @@ public class GamesManager {
     public static Games getGameByID(int ID) {
         try {
             Connection conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Games WHERE appid = " + ID + "");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Games WHERE appid = " + ID + " and deleted=0");
             ResultSet rs = ps.executeQuery();
             Games obj = new Games();
             if (rs.next()) {
@@ -115,7 +118,7 @@ public class GamesManager {
     public static Games getDeviceByName(String name) {
         try {
             Connection conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
-            PreparedStatement ps = conn.prepareStatement("Select * from Games WHERE name=?");
+            PreparedStatement ps = conn.prepareStatement("Select * from Games WHERE name=? and deleted=0");
             ps.setString(1, name);
             ResultSet rs = ps.executeQuery();
             Games obj = new Games();
@@ -165,7 +168,7 @@ public class GamesManager {
             System.out.println("Cat4 " + category3);
             System.out.println("Cat5 " + category4);
             Connection conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
-            PreparedStatement ps = conn.prepareStatement("Select * from Games where steamspy_tags like CONCAT( '%',?,'%') and steamspy_tags like CONCAT( '%',?,'%') and steamspy_tags like CONCAT( '%',?,'%') and steamspy_tags like CONCAT( '%',?,'%') and steamspy_tags like CONCAT( '%',?,'%')");
+            PreparedStatement ps = conn.prepareStatement("Select * from Games where steamspy_tags like CONCAT( '%',?,'%') and steamspy_tags like CONCAT( '%',?,'%') and steamspy_tags like CONCAT( '%',?,'%') and steamspy_tags like CONCAT( '%',?,'%') and steamspy_tags like CONCAT( '%',?,'%') and deleted=0");
             if (!category0.contentEquals("null")) {
                 ps.setString(1, category0);
                 System.out.println("Cat 1 was not null");
@@ -283,7 +286,7 @@ public class GamesManager {
             List<Games> resultList = new ArrayList<Games>();
 
             Connection conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Games ORDER BY RAND() LIMIT 45");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Games where deleted=0 ORDER BY RAND() LIMIT 45");
             ResultSet rs = ps.executeQuery();
             //Query q1 = em.createQuery("SELECT * FROM Games ORDER BY RAND() LIMIT 1");
             while (rs.next()) {
@@ -331,7 +334,7 @@ public class GamesManager {
             List<Games> resultList = new ArrayList<Games>();
 
             Connection conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Games ORDER BY RAND() LIMIT 45");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Games where deleted=0 ORDER BY RAND() LIMIT 45");
             ResultSet rs = ps.executeQuery();
             //Query q1 = em.createQuery("SELECT * FROM Games ORDER BY RAND() LIMIT 1");
             while (rs.next()) {
@@ -380,7 +383,7 @@ public class GamesManager {
             List<Games> resultList = new ArrayList<Games>();
 
             Connection conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Games");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Games where deleted=0");
             ResultSet rs = ps.executeQuery();
             //Query q1 = em.createQuery("SELECT * FROM Games ORDER BY RAND() LIMIT 1");
             while (rs.next()) {
@@ -427,7 +430,7 @@ public class GamesManager {
         List<String> resultList = new ArrayList<String>();
         try {
             Connection conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Games ORDER BY RAND() LIMIT 9");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Games where deleted=0 ORDER BY RAND() LIMIT 9");
             ResultSet rs = ps.executeQuery();
 
             // attributes for the Games class : name', 'release_date', 'developer', 'publisher', 'platforms',
@@ -517,13 +520,12 @@ public class GamesManager {
     {
         EntityManagerFactory emf;
         EntityManager em;
-
-
         try
         {
+
             emf = Persistence.createEntityManagerFactory("cs308");
             em = emf.createEntityManager();
-
+            em.getTransaction().begin();
             User user = em.find(User.class,oldEmail);
             User user2 = new User(user);
             user2.setEmail(newEmail);
@@ -531,17 +533,29 @@ public class GamesManager {
             {
                 o.setOwner(user2);
             }
-            em.getTransaction().begin();
+            for(Address a : user2.getAddress())
+            {
+                a.setUser(user2);
+            }
+            for(Payment p : user2.getPayment())
+            {
+                p.setUser(user2);
+            }
             System.out.println("Transaction beginning.");
             em.remove(user);
             em.persist(user2);
             em.getTransaction().commit();
-
+            em.close();
+            emf.close();
+            em = null;
+            emf = null;
             return "Successfully changed the email!";
         }
         catch (Exception e) {
             e.printStackTrace();
         }
+        em = null;
+        emf = null;
         return "An error occured! :(";
     }
 
@@ -555,7 +569,7 @@ public class GamesManager {
         try {
             Connection conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
             //PreparedStatement ps = conn.prepareStatement();
-            String sqlQuery = "Select * from Games where steamspy_tags like CONCAT( '%',?,'%')";
+            String sqlQuery = "Select * from Games where deleted=0 and steamspy_tags like CONCAT( '%',?,'%')";
             String[] categories = category.split(",");
             //ps.setString(1,categories[0]);
             System.out.println("Category 1 is " + categories[0]);
@@ -589,6 +603,7 @@ public class GamesManager {
                 obj.setSalePrice(rs.getDouble("salePrice"));
                 obj.setOnSale(rs.getBoolean("onSale"));
                 obj.setStock(rs.getInt("stock"));
+                obj.setDeleted(rs.getBoolean("deleted"));
                 resultArray.add(obj);
                 
             }

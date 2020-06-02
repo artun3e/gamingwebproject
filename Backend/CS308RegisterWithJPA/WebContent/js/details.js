@@ -93,6 +93,11 @@ async function getData(value){
 //    	for (var k = 0; k < data.length; k++){
 //    		fillCard(data[k], k);
 //    	} //
+		if(data[0] == null)
+		{
+			alert("This game no longer exists...");
+			window.location.replace("index.jsp");
+		}
     	 appID = (data[0].appID);
     	 steamRating = data[0].rating;
     	 var name = document.getElementById('detail-name');

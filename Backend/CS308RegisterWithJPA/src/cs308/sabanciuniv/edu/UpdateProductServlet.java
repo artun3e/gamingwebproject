@@ -1,6 +1,10 @@
 package cs308.sabanciuniv.edu;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -39,8 +43,8 @@ public class UpdateProductServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//doGet(request, response);
-		EntityManagerFactory emf;
-		EntityManager em;
+		Connection conn;
+		PreparedStatement ps;
 		try {
 			System.out.println("Edited for new items.");
 			int gameID = Integer.parseInt(request.getParameter("id"));
@@ -76,44 +80,38 @@ public class UpdateProductServlet extends HttpServlet {
 			System.out.println("Price: "+ price);
 			System.out.println("Screenshots: "+ screenshots);
 			System.out.println("______________________________________");
-			emf = Persistence.createEntityManagerFactory("cs308");
-			em = emf.createEntityManager();
+			conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
+			ps = conn.prepareStatement("update Games set name=?, developer=?, publisher=?, platforms=?, categories=?, genres=?, steamspy_tags=?, price=?, header_image=?, screenshots=?, background=?, minimum=?, detailed_description=?, about_the_game=?, short_description=?, onSale=?, stock=?, salePrice=? where appid=?");
 
-
-			Games game = em.find(Games.class, gameID);
-			em.merge(game);
-			em.getTransaction().begin();
-			game.setName(gameName);
-			game.setPublisher(publisher);
-			game.setCategories(categories);
-			game.setPrice(price);
-			game.setSteampsyTags(steamspyTags);
-			game.setShort_description(shortDescription);
-			game.setDetailed_description(detailedDescription);
-			game.setMinimum(minimum);
-			game.setAbout_the_game(aboutTheGame);
-			game.setBackground(background);
-			game.setScreenshots(screenshots);
-			game.setPlatforms(platforms);
-			game.setHeader_image(headerImage);
-			game.setStock(stock);
+			ps.setString(1,gameName);
+			ps.setString(2,publisher);
+			ps.setString(3,publisher);
+			ps.setString(4,platforms);
+			ps.setString(5, categories);
+			ps.setString(6, categories);
+			ps.setString(7,steamspyTags);
+			ps.setDouble(8,price);
+			ps.setString(9,headerImage);
+			ps.setString(10,screenshots);
+			ps.setString(11,background);
+			ps.setString(12,minimum);
+			ps.setString(13,detailedDescription);
+			ps.setString(14,aboutTheGame);
+			ps.setString(15,shortDescription);
+			ps.setBoolean(16,onSale);
+			ps.setInt(17,stock);
 			if(onSale)
-				game.setSalePrice(salePrice);
+				ps.setDouble(18,salePrice);
 			else
-				game.setSalePrice(price);
-			game.setOnSale(onSale);
-			
+				ps.setDouble(18,price);
+
+			ps.setInt(19,gameID);
+			ps.executeUpdate();
 			//game.setOwners(); We shouldn't be able to edit how many people own the game or the rating from the admin panel...
 			//game.setRating();
 
-			em.merge(game);
-			em.getTransaction().commit();
-
-			em.close();
-			emf.close();
-
-			em = null;
-			emf = null;
+			conn.close();
+			ps.close();
 
 			System.out.println("Successfully updated the game...");
 			String url = ((HttpServletRequest)request).getRequestURL().toString();
@@ -125,10 +123,9 @@ public class UpdateProductServlet extends HttpServlet {
 
 		}catch (Exception e){
 			e.printStackTrace();
-			em = null;
-			emf = null;
 		}
-
+		conn = null;
+		ps = null;
 	}
 
 }

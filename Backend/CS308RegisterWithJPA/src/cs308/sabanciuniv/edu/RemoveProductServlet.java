@@ -47,21 +47,21 @@ public class RemoveProductServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("cs308");
-		EntityManager em = emf.createEntityManager();
+		Connection conn;
+		PreparedStatement ps;
 		try {
-			Object obj = em.createQuery("From Games WHERE name LIKE :name").setParameter("name", request.getParameter("gamename")).getSingleResult();
-			Games game = (Games)obj;
-			em.getTransaction().begin();
-			em.merge(game);
-			em.remove(game);
-			em.getTransaction().commit();
-			em.close();
-			emf.close();
+			conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/MnojkxD0Cc", "MnojkxD0Cc", "O44cHM61gZ");
+			ps = conn.prepareStatement("UPDATE Games set deleted=1 where name like CONCAT( '%',?,'%')");
+			ps.setString(1,request.getParameter("gamename").toString());
+			ps.executeUpdate();
+			conn.close();
+			ps.close();
+
 		} catch (Exception e) {
-			em.close();
-			emf.close();
+			e.printStackTrace();
 		}
+		conn = null;
+		ps = null;
 	}
 
 }

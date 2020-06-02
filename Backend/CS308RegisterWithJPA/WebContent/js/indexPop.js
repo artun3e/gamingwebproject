@@ -22,7 +22,7 @@ async function getData() {
 }
 
 getData();
-
+getCategories();
 
 function clearDiv() {
     document.getElementsByClassName("main")[0].innerHTML = "";
@@ -387,6 +387,7 @@ async function getCategoricalData(category) {
     var pageNum = (Math.ceil(products.length/9));
     addPages(pageNum);
     showPage(1);
+
     
 //    for (var z = 0; z < 9; z++) {
 //        fillCard(data[z], z);
@@ -394,3 +395,80 @@ async function getCategoricalData(category) {
 //    addPages();
 //    firstData = products;
 }
+function createCheckBox(elem){
+	var checkboxHTML = '<input type="checkbox" />'+ elem +' This is checkbox <br />';
+	return checkBoxHTML;
+}
+
+async function getCategories() {
+    var vurl = '/CS308RegisterWithJPA/search/fromDB/getAllCategories/';
+
+    //	window.location.href = url;
+    const response = await fetch(vurl);
+    const categories = await response.json();
+    var checkboxList = document.getElementsByClassName("checkbox-container")[0];
+    console.log(checkboxList);
+    var elem = document.createElement('input');
+    var breakElement = document.createElement('br');
+    for(var i=0; i<categories.length ; i++){
+//    	elem.setAttribute('type', 'checkbox');
+//    	var text = document.createTextNode(categories[i]);
+//    	checkboxList.appendChild(elem.cloneNode(true));
+//    	checkboxList.append(text);
+//    	checkboxList.append(breakElement);
+    	var name = (categories[i]);
+    	  var newChild = '<input type="checkbox" id=\''+name +'\' value=\''+name +'\' onClick="getChecked()" />'+ categories[i] +' <br />';
+    	  checkboxList.insertAdjacentHTML('beforeend', newChild);
+    }	
+    
+}
+function getChecked(){
+	var checked = document.querySelectorAll("input[type=checkbox]:checked");
+	var selectedCats = ""
+	for(var i=0; i<checked.length; i++)
+		selectedCats += checked[i].value + ",";
+	getCategoricalData(selectedCats);
+}
+
+//$(".checkbox-container").click(function(e){
+//	console.log("hoooop");
+//	e.stopPropagation();
+//	e.stopImmediatePropagation();
+//	
+//	const checkboxes = document.querySelectorAll(`input[class="input-checkbox_check"]:checked`);
+//    let values = [];
+//    checkboxes.forEach((checkbox) => {
+//        values.push(checkbox.value);
+//    });
+//    console.log(values);
+//    
+//    var url_2 = "/CS308RegisterWithJPA/search/fromDB/byCategory/";
+//    for(var i = 0; i< 5; i++)
+//	{
+//    	if(values[i]){
+//    		url_2 += values[i] + "/"
+//    	}
+//    	else{
+//    		url_2 += "null/"
+//    	}
+//	}
+//    console.log(url_2);
+//    document.getElementById("About_To_Change").innerHTML = "";
+//    async function getData(){
+//    	const response = await fetch(url_2);
+//    	const data = await response.json();
+//       	
+//    	for (var k = 0; k < data.length; k++){
+//    		console.log(data[k]);
+//    		var p = document.getElementById("About_To_Change");
+//    		var newElement = document.createElement('div');
+//            //// newElement.setAttribute('id', elementId);
+//            newElement.innerHTML = data[k];
+//            newElement.setAttribute('class', "col-md-4 col-xs-6");
+//    		p.appendChild(newElement);
+//    	}
+//    }
+//
+//    $( ".store-pagination" ).remove();
+//    getData();
+//});

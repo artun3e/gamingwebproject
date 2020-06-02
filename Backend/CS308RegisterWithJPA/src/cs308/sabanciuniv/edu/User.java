@@ -32,27 +32,21 @@ public class User {
 	@JsonBackReference
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "owner")
 	private List<Order> orders;
-	
-	@Column(name = "payment_method",nullable = true)
-	private String paymentMethod;
-	
-	@Column(nullable = true)
-	private String Address;
-	
-	public void setPaymentMethod(String payment_method) {
-		paymentMethod = payment_method;
+
+	public void setPaymentMethod(List<Payment> payment_method) {
+		paymentList = payment_method;
 	}
 	
-	public String getPaymentMethod() {
-		return paymentMethod;
+	public List<Payment> getPayment() {
+		return this.paymentList;
 	}
 	
-	public void setAddress(String Address){
-		this.Address = Address;
+	public void setAddress(List<Address> Address){
+		this.addressList = Address;
 	}
 	
-	public String getAddress(){
-		return this.Address;
+	public List<Address> getAddress(){
+		return this.addressList;
 	}
 	
 	public void deleteOrder(int orderid) {
@@ -103,9 +97,9 @@ public class User {
 		this.name = temp.getName();
 		this.password = temp.getPassword();
 		this.type = temp.getUserType();
-		this.paymentMethod = temp.getPaymentMethod();
+		this.paymentList = temp.getPayment();
 		this.orders = temp.getOrders();
-		this.Address = temp.getAddress();
+		this.addressList = temp.getAddress();
 		this.email = temp.getEmail();
 	}
 	public String getPassword() {

@@ -48,6 +48,16 @@ public class Games {
 	private String about_the_game;
 	@Column(length = 2097152)
 	private String short_description;
+	@Column(name = "deleted")
+	private Boolean deleted;
+
+	public Boolean getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}
 
 	public int getAppID() {
 		return appID;
