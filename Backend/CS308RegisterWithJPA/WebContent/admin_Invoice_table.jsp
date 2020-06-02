@@ -642,75 +642,81 @@ function filterFunction() {
 
     function updateStatus(order)
     {
-		var $row  = $(order).closest("tr");
-		var $ths = $row.find("th");
-		console.log("ths: " + $ths);
+    	//HttpSession session = request.getSession();
+		//User user = (User)session.getAttribute("user");
+		//if(user.getUserType() == User.userType.Admin || user.getUserType() == User.userType.ProductManager){
+			var $row  = $(order).closest("tr");
+			var $ths = $row.find("th");
+			console.log("ths: " + $ths);
 		
-		var itemName = $ths[0].innerHTML;
-		itemName = itemName.substr(10,2);
-		console.log("id: " + itemName);
+			var itemName = $ths[0].innerHTML;
+			itemName = itemName.substr(10,2);
+			console.log("id: " + itemName);
 
-		var itemName1 = $ths[5].innerHTML;
+			var itemName1 = $ths[5].innerHTML;
 		
-		itemName1 = itemName1.substr(12,itemName1.length-259);
-		console.log(itemName1);
+			itemName1 = itemName1.substr(12,itemName1.length-259);
+			console.log(itemName1);
 		
 
-    	var e = document.getElementById(itemName1);
-    	var strUser = e.options[e.selectedIndex].value;
-    	console.log(strUser);
+    		var e = document.getElementById(itemName1);
+    		var strUser = e.options[e.selectedIndex].value;
+    		console.log(strUser);
+
+  	        var oldstatus = $ths[3].innerHTML;
+ 	        oldstatus = oldstatus.substr(8);
+    		var params = 'order_id='+itemName+'&status='+strUser+'&oldstatus='+oldstatus;
+    		console.log(params);
 
 
-    	var params = 'order_id='+itemName+'&status='+strUser;
-    	console.log(params);
-
-
-    	var xhr = new XMLHttpRequest();
-        var url = "ChangeStatusServlet";
-        xhr.open("POST", url, true);
+    		var xhr = new XMLHttpRequest();
+     	    var url = "ChangeStatusServlet";
+     	    xhr.open("POST", url, true);
+     	    
         
-        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhr.addEventListener('readystatechange', function (e) {
-            if(this.readyState === 4 )
-            {
-                alert("You have successfuly changed the status of the order " + itemName);    // Then Refresh Page
-                window.location = "admin_Invoice_table.jsp";
-            }
-        });
+    	    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+     	    xhr.addEventListener('readystatechange', function (e) {
+     	       if(this.readyState === 4 )
+     	       {
+                   var returnedResponse = xhr.getResponseHeader("aybars");
+                   if(returnedResponse === "Admin"|| returnedResponse ==="ProductManager"){
+						alert("You have successfully changed the status");
+                       }
+                   else{
+                	   alert("You are not authorized to change status");
+                       }
+     	        //      // Then Refresh Page
+     	           window.location = "admin_Invoice_table.jsp";
+     	       }
+    	    });
     	
-        xhr.send(params);
+    	    xhr.send(params);
+    	    /*
+    	    var email = $ths[1].innerHTML;
+ 	        email = email.substr(6);
 
-         var email = $ths[1].innerHTML;
-        email = email.substr(6);
-
-        var oldstatus = $ths[3].innerHTML;
-        oldstatus = oldstatus.substr(8);
 
         
-        console.log("your email: "+ email);
+ 	        console.log("your email: "+ email);
 
-        var emailarray = email.split("@");
-        var recipient = emailarray[0];
+  	        var emailarray = email.split("@");
+   	        var recipient = emailarray[0];
 
-        var newparams = 'messageInput='+'Hello '+recipient+ '\n\nYour order with the order id '+ itemName +' has changed it\'s status from '+ oldstatus+' to '+ strUser+'.\n\nThanks for your purchase!!!&topic=Updated Order Status'+'&RecipientString=' + email;
-    	console.log(newparams);
+   	    	var newparams = 'messageInput='+'Hello '+recipient+ '\n\nYour order with the order id '+ itemName +' has changed it\'s status from '+ oldstatus+' to '+ strUser+'.\n\nThanks for your purchase!!!&topic=Updated Order Status'+'&RecipientString=' + email;
+   	 		console.log(newparams);
 
-    	var xhr2 = new XMLHttpRequest();
-        var url2 = "http://localhost:8080/CS308RegisterWithJPA/SendMailsServlet";
-        xhr2.open("POST", url2, true);
+   		 	var xhr2 = new XMLHttpRequest();
+      	    var url2 = "http://localhost:8080/CS308RegisterWithJPA/SendMailsServlet";
+        	xhr2.open("POST", url2, true);
+        	xhr2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         
-        xhr2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        /* xhr2.addEventListener('readystatechange', function (e) {
-             if(this.readyState === 4 )
-            {
-                alert("You have successfuly changed the status of the order " + itemName);    // Then Refresh Page
-                window.location = "admin_Invoice_table.jsp";
-            } 
-        }); */
     	
         xhr2.send(newparams);
-
-        
+        */
+		//}
+     //   else{
+	//		alert("You are not authorized to update status");
+     //       }
     }
 
   ///////////////////////////////////////////////////Pagination
