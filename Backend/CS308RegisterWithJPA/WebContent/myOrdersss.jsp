@@ -414,9 +414,6 @@ if(session.getAttribute("user") != null)
 	    conn = null;
 	    ps = null;
 	    rs = null;
-	    user.setOrders(orderList);
-	    session.removeAttribute("user");
-	    session.setAttribute("user", user);
     }
 	out.println("<div id=\"all\">");
 	out.println("<div id=\"content\">");
