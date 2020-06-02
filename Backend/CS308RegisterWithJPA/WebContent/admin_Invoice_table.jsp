@@ -417,14 +417,14 @@ title {
 													out.println("<th class=\"border-top-0\">Date: " + o.getDate() + "</th>"); //get order date
 													out.println("<th class=\"border-top-0\">Status: " + o.getStatus() + "</th>");
 													out.println("<th class=\"border-top-0\">Change Status</th>");
-													out.println("<th><select id=\"orderStatus" + orderid + "\">");
+													out.println("<th id=\"todelete\" class=\"todelete\"><select id=\"orderStatus" + orderid + "\">");
 														out.println("<option value=\"Null\">---</option>");
 														out.println("<option value=\"PreparingPackage\">Preparing Package</option>");
 														out.println("<option value=\"Shipped\">Shipped</option>");
 														out.println("<option value=\"OutOnDelivery\">Out on Delivery</option>");
 														out.println("<option value=\"Delivered\">Delivered</option>");
 													out.println("</th>");
-													out.println("<th>");
+													out.println("<th id=\"todelete\" class=\"todelete\">");
 														out.println("<button type=\"button\" onclick=\"updateStatus(this)\">UPDATE</button>");
 													out.println("</th>");
 												out.println("</tr>");
@@ -586,44 +586,20 @@ function filterFunction() {
 	url += '&date=' + date +'&email=' + email+'&price=' + price+'&product=' + product ;
 	window.location.search = url;
 }
-    function downloadPDF(){
-    	console.log("download as pdf"); 
-
-    	var data = document.getElementById('row bar');
-    	var date = new Date();
-    	html2canvas(data).then(canvas => {
-    	var imgWidth = 210;
-    	var pageHeight = 295; //295
-    	var imgHeight = canvas.height * imgWidth / canvas.width;
-    	var heightLeft = imgHeight;
-
-    	  //enter code here
-    	  const imgData = canvas.toDataURL('image/png')
-
-    	  var doc = new jsPDF('p', 'mm');
-    	  var position = 0;
-
-    	  doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight+15);
-    	  heightLeft -= pageHeight;
-
-    	  while (heightLeft >= -5) {
-    	    position = heightLeft - imgHeight;
-    	    doc.addPage();
-    	    doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight + 15);
-    	    heightLeft -= pageHeight;
-    	  }
-    	doc.save ('invoice'+ '_'+date.getTime()+'.pdf')
-
-    	});
-    	
-    }
-
+ 
     function createPDF(){
     	console.log("download as pdf");
     	$(".box").each(function(n) {
 	        if (1 == 1)
 	            $(this).show();
 	    }); 
+
+    	$(".todelete").each(function(n) {
+	        if (1 == 1)
+	            $(this).hide();
+	    }); 
+
+	    
     	var date = new Date();
     	var sTable = document.getElementById('row bar').innerHTML;
 
@@ -647,6 +623,8 @@ function filterFunction() {
         win.document.close(); 	// CLOSE THE CURRENT WINDOW.
 
         win.print();    // PRINT THE CONTENTS.
+
+        window.location = "admin_Invoice_table.jsp";
 
     }
 
@@ -701,32 +679,6 @@ function filterFunction() {
     	    });
     	
     	    xhr.send(params);
-    	    /*
-    	    var email = $ths[1].innerHTML;
- 	        email = email.substr(6);
-
-
-        
- 	        console.log("your email: "+ email);
-
-  	        var emailarray = email.split("@");
-   	        var recipient = emailarray[0];
-
-   	    	var newparams = 'messageInput='+'Hello '+recipient+ '\n\nYour order with the order id '+ itemName +' has changed it\'s status from '+ oldstatus+' to '+ strUser+'.\n\nThanks for your purchase!!!&topic=Updated Order Status'+'&RecipientString=' + email;
-   	 		console.log(newparams);
-
-   		 	var xhr2 = new XMLHttpRequest();
-      	    var url2 = "http://localhost:8080/CS308RegisterWithJPA/SendMailsServlet";
-        	xhr2.open("POST", url2, true);
-        	xhr2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        
-    	
-        xhr2.send(newparams);
-        */
-		//}
-     //   else{
-	//		alert("You are not authorized to update status");
-     //       }
     }
 
   ///////////////////////////////////////////////////Pagination

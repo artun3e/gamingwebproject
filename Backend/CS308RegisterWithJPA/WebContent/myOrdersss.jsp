@@ -507,7 +507,9 @@ title {
 										Map<Games, Double> prices = o.getPricesAtThatTime();
 
 										out.println("<div class=\"box\">");
+										out.println("<div class=\"todelete\" id=\"todelete\">");
 										out.println("<button id=\"newbtn\" class=\"accordion\">Order " + orderid + "</button>");
+										out.println("</div>");
 										out.println("<div class=\"table-responsive\">");
 										out.println("<table class=\"table\">");
 
@@ -630,6 +632,11 @@ title {
 					$(".box").each(function(n) {
 				        if (1 == 1)
 				            $(this).show();
+				    }); 
+
+					$(".todelete").each(function(n) {
+				        if (1 == 1)
+				            $(this).hide();
 				    }); 
 					var date = new Date();
 					var sTable = document.getElementById('customer-order').innerHTML;
