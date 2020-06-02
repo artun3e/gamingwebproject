@@ -85,7 +85,7 @@
                         <a href="adminPanel.jsp"><img src="img/logo.png" alt="" width="50" height="50"/></a>
                     </div>
                 </div>
-                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <div class="header-top-menu" style="margin-top:24px; ">
                         
                         <%
@@ -114,7 +114,13 @@
 							        window.location = "index.jsp";</script><%
 							    }
 							    %>
-                    </div>
+							    
+                    	</div>
+                    	
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                    <a class="fa fa-shield" href="index.jsp" style="font-size: 34px; color: grey; float:right; margin-top:24px;"></a>
+                    	
                 </div>
             </div>
         </div>
@@ -166,8 +172,10 @@
 							        else if(user.getUserType() == User.userType.ProductManager){
 							        	out.println("<li><a href=\"admin_Cats_table.jsp\">Category Table</a></li>");	//Category
 							        	out.println("<li><a href=\"admin_Games_table.jsp\">Games Table</a></li>");	//Game
+							        	out.println("<li><a href=\"admin_Invoice_table.jsp\">Invoice Table</a></li>");	//Orders
 							        }
 									else if(user.getUserType() == User.userType.SalesManager){
+							        	out.println("<li><a href=\"admin_Games_table.jsp\">Games Table</a></li>");	//Game
 							        	out.println("<li><a href=\"admin_Invoice_table.jsp\">Invoice Table</a></li>");	//Orders
 							        }
 							        else {
@@ -227,10 +235,24 @@
                     <div class="data-table-list">
                         <div class="basic-tb-hd">
                             <h2>Games</h2>
-                            <p>This panel is for Admin to insert, update and delete games.</p>
+                            <p>This panel is for Managers to insert, update and delete games.</p>
                         </div>
-                         <a class='btn btn-success btn-block btn-lg' href="admin_Game_add.jsp"
-										style="margin-left: auto; margin-right: auto; display: block; margin-top: 10px; margin-bottom: 10px">ADD GAME</a>
+                        <% 
+	                    if(session.getAttribute("user") != null)
+					    {
+					        Object temp = session.getAttribute("user");
+					        User user = (User) temp;
+					        if(user.getUserType() == User.userType.Admin || user.getUserType() == User.userType.ProductManager){
+					        	out.println("<a class='btn btn-success btn-block btn-lg' href=\"admin_Game_add.jsp\" style=\"margin-left: auto; margin-right: auto; display: block; margin-top: 10px; margin-bottom: 10px\">ADD GAME</a>");
+					        }
+					    }
+					    else
+					    {
+					          %><script> alert("you are not authourized to see this page");
+					        window.location = "index.jsp";</script><%
+					    }
+					    %>
+                         
                         <div class="table-responsive">
                             <table id="data-table-basic" class="table table-striped">
                                 <thead>
@@ -239,8 +261,29 @@
                                         <th>Publisher</th>
                                         <th>Categories</th>
                                         <th>Price</th>
-                                        <th>Update</th>
-                                        <th>Delete</th>
+                                        <% 
+                                        if(session.getAttribute("user") != null)
+        							    {
+        							        Object temp = session.getAttribute("user");
+        							        User user = (User) temp;
+        							        if(user.getUserType() == User.userType.Admin || user.getUserType() == User.userType.ProductManager){
+        							        	out.println("<th>Update</th>");
+	              								out.println("<th>Delete</th>");
+        							        }
+        									else if(user.getUserType() == User.userType.SalesManager){
+        							        	out.println("<th>Update</th>");
+        							        }
+        							        else {
+        							            %><script> alert("you are not authourized to see this page");
+        							            window.location = "index.jsp";</script><% 
+        							        }
+        							    }
+        							    else
+        							    {
+        							          %><script> alert("you are not authourized to see this page");
+        							        window.location = "index.jsp";</script><%
+        							    }
+        							    %>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -253,8 +296,28 @@
 	               								out.println("<td>"+ game.getPublisher() +"</td>");
 		               							out.println("<td>"+ game.getCategories() +"</td>");
 		               							out.println("<td>"+ game.getPrice() +"</td>");
-		               							out.println("<td class=\"update\"> <a type='button' class='btn btn-success' onclick=\"toUpdate(this)\"> Update </a > </td>");
-	              								out.println("<td class=\"delete\"> <a type='button' class='btn btn-danger'  onclick=\"toDelete(this)\"> Delete </a > </td>");
+		               							if(session.getAttribute("user") != null)
+		        							    {
+		        							        Object temp = session.getAttribute("user");
+		        							        User user = (User) temp;
+		        							        if(user.getUserType() == User.userType.Admin || user.getUserType() == User.userType.ProductManager){
+		        							        	out.println("<td class=\"update\"> <a type='button' class='btn btn-success' onclick=\"toUpdate(this)\"> Update </a > </td>");
+			              								out.println("<td class=\"delete\"> <a type='button' class='btn btn-danger'  onclick=\"toDelete(this)\"> Delete </a > </td>");
+		        							        }
+		        									else if(user.getUserType() == User.userType.SalesManager){
+		        							        	out.println("<td class=\"update\"> <a type='button' class='btn btn-success' onclick=\"toUpdate(this)\"> Update </a > </td>");
+		        							        }
+		        							        else {
+		        							            %><script> alert("you are not authourized to see this page");
+		        							            window.location = "index.jsp";</script><% 
+		        							        }
+		        							    }
+		        							    else
+		        							    {
+		        							          %><script> alert("you are not authourized to see this page");
+		        							        window.location = "index.jsp";</script><%
+		        							    }
+		               							
                								out.println("</tr>");	
 		                                }
 	                                %>
@@ -266,8 +329,29 @@
                                         <th>Publisher</th>
                                         <th>Categories</th>
                                         <th>Price</th>
-                                        <th>Update</th>
-                                        <th>Delete</th>
+                                        <% 
+                                        if(session.getAttribute("user") != null)
+        							    {
+        							        Object temp = session.getAttribute("user");
+        							        User user = (User) temp;
+        							        if(user.getUserType() == User.userType.Admin || user.getUserType() == User.userType.ProductManager){
+        							        	out.println("<th>Update</th>");
+	              								out.println("<th>Delete</th>");
+        							        }
+        									else if(user.getUserType() == User.userType.SalesManager){
+        							        	out.println("<th>Update</th>");
+        							        }
+        							        else {
+        							            %><script> alert("you are not authourized to see this page");
+        							            window.location = "index.jsp";</script><% 
+        							        }
+        							    }
+        							    else
+        							    {
+        							          %><script> alert("you are not authourized to see this page");
+        							        window.location = "index.jsp";</script><%
+        							    }
+        							    %>
                                     </tr>
                                 </tfoot>
                             </table>

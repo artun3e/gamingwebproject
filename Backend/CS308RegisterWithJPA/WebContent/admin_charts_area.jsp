@@ -82,7 +82,7 @@
                         <a href="adminPanel.jsp"><img src="img/logo.png" alt="" width="50" height="50"/></a>
                     </div>
                 </div>
-                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <div class="header-top-menu" style="margin-top:24px; ">
                         
                         <%
@@ -111,7 +111,13 @@
 							        window.location = "index.jsp";</script><%
 							    }
 							    %>
-                    </div>
+							    
+                    	</div>
+                    	
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                    <a class="fa fa-shield" href="index.jsp" style="font-size: 34px; color: grey; float:right; margin-top:24px;"></a>
+                    	
                 </div>
             </div>
         </div>
@@ -163,8 +169,10 @@
 							        else if(user.getUserType() == User.userType.ProductManager){
 							        	out.println("<li><a href=\"admin_Cats_table.jsp\">Category Table</a></li>");	//Category
 							        	out.println("<li><a href=\"admin_Games_table.jsp\">Games Table</a></li>");	//Game
+							        	out.println("<li><a href=\"admin_Invoice_table.jsp\">Invoice Table</a></li>");	//Orders
 							        }
 									else if(user.getUserType() == User.userType.SalesManager){
+							        	out.println("<li><a href=\"admin_Games_table.jsp\">Games Table</a></li>");	//Game
 							        	out.println("<li><a href=\"admin_Invoice_table.jsp\">Invoice Table</a></li>");	//Orders
 							        }
 							        else {
@@ -204,22 +212,34 @@
 	                        
 	                        
 	                        Calendar cal = Calendar.getInstance();
-                            cal.add(Calendar.DATE, -1);
+                            cal.add(Calendar.DATE, -1);    		
                             Date day_ago = cal.getTime();
-	                        cal.add(Calendar.DATE, -29);
+	                        cal.add(Calendar.DATE, -30);
 	                        Date month_ago = cal.getTime();
 	                        
-	                        out.println("<label for=\"start\">Start date:</label>");
-	                        out.println("<input id=\"start\" type=\"date\" value=" + sdf.format(month_ago) +" >");
-	                        out.println("<label for=\"start\" style=\"margin-left: 30px;\">End date:</label>");
-	                        out.println("<input id=\"end\" type=\"date\" value=" + sdf.format(day_ago) +" max= "+ sdf.format(day_ago) +" >");
+	                        
+	                        
+	                        
+	                        if(session.getAttribute("user") != null)
+						    {
+						        Object temp = session.getAttribute("user");
+						        User user = (User) temp;
+						        if(user.getUserType() == User.userType.Admin || user.getUserType() == User.userType.SalesManager){
+						        	out.println("<label for=\"start\">Start date:</label>");
+			                        out.println("<input id=\"start\" type=\"date\" value=" + sdf.format(month_ago) +" >");
+			                        out.println("<label for=\"start\" style=\"margin-left: 30px;\">End date:</label>");
+			                        out.println("<input id=\"end\" type=\"date\" value=" + sdf.format(day_ago) +" max= "+ sdf.format(day_ago) +" >");
+			                        out.println("<a class='btn btn-success btn-block' onclick=\"toUpdate()\"	id='interval'style=\"width:410px; margin-left: 500px; margin-right: auto; display: block; margin-top: -34px;\">Get Margin Interval</a>");
+						        }
+						    }
                         %>
-                        <a class='btn btn-success btn-block'
-										id='interval'style="width:410px; margin-left: 500px; margin-right: auto; display: block; margin-top: -34px;">Get Margin Interval</a>
 										
 						</div>
                         <div class="area-chart-wp">
-	                        <canvas height="300px;" width="auto;" id="areachartfalse"></canvas>
+                        	<div class="example">
+                        	
+	                        	<canvas height="300px;" width="auto;" id="areachartfalse"></canvas>
+                        	</div>
 	                    </div>
                     </div>
                 </div>

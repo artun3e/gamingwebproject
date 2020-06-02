@@ -82,37 +82,43 @@
 							width="50" height="50" /></a>
 					</div>
 				</div>
-				<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-					<div class="header-top-menu" style="margin-top: 24px;">
-
-						<%
-							session = request.getSession();
-							if (session.getAttribute("user") != null) {
-								Object temp = session.getAttribute("user");
-								User user = (User) temp;
-								if (user.getUserType() == User.userType.Admin) {
-									out.println("<h2>Administrator</h2>"); //Admin
-								} else if (user.getUserType() == User.userType.ProductManager) {
-									out.println("<h2>Product Manager</h2>"); //ProductManager
-								} else if (user.getUserType() == User.userType.SalesManager) {
-									out.println("<h2>Sales Manager</h2>"); //SalesManager
-								} else {
-						%><script>
-																				alert("you are not authourized to see this page");
-																				window.location = "index.jsp";
-																			</script>
-						<%
-							}
-							} else {
-						%><script>
-																		alert("you are not authourized to see this page");
-																		window.location = "index.jsp";
-																	</script>
-						<%
-							}
-						%>
-					</div>
-				</div>
+				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="header-top-menu" style="margin-top:24px; ">
+                        
+                        <%
+                            	session = request.getSession();
+							    if(session.getAttribute("user") != null)
+							    {
+							        Object temp = session.getAttribute("user");
+							        User user = (User) temp;
+							        if(user.getUserType() == User.userType.Admin){
+							        	out.println("<h2>Welcome, Administrator</h2>");	//Admin
+							        }
+							        else if(user.getUserType() == User.userType.ProductManager){
+							        	out.println("<h2>Welcome, Product Manager</h2>");	//ProductManager
+							        }
+									else if(user.getUserType() == User.userType.SalesManager){
+							        	out.println("<h2>Welcome, Sales Manager</h2>");	//SalesManager
+							        }
+							        else {
+							            %><script> alert("you are not authourized to see this page");
+							            window.location = "index.jsp";</script><% 
+							        }
+							    }
+							    else
+							    {
+							          %><script> alert("you are not authourized to see this page");
+							        window.location = "index.jsp";</script><%
+							    }
+							    %>
+							    
+                    	</div>
+                    	
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                    <a class="fa fa-shield" href="index.jsp" style="font-size: 34px; color: grey; float:right; margin-top:24px;"></a>
+                    	
+                </div>
 			</div>
 		</div>
 	</div>
@@ -156,34 +162,36 @@
 							class="tab-pane notika-tab-menu-bg animated flipInX">
 							<ul class="notika-main-menu-dropdown">
 								<%
-									session = request.getSession();
-									if (session.getAttribute("user") != null) {
-										Object temp = session.getAttribute("user");
-										User user = (User) temp;
-										if (user.getUserType() == User.userType.Admin) {
-											out.println("<li><a href=\"admin_Cats_table.jsp\">Category Table</a></li>"); //Category
-											out.println("<li><a href=\"admin_Games_table.jsp\">Games Table</a></li>"); //Game
-											out.println("<li><a href=\"admin_Invoice_table.jsp\">Invoice Table</a></li>"); //Orders
-										} else if (user.getUserType() == User.userType.ProductManager) {
-											out.println("<li><a href=\"admin_Cats_table.jsp\">Category Table</a></li>"); //Category
-											out.println("<li><a href=\"admin_Games_table.jsp\">Games Table</a></li>"); //Game
-										} else if (user.getUserType() == User.userType.SalesManager) {
-											out.println("<li><a href=\"admin_Invoice_table.jsp\">Invoice Table</a></li>"); //Orders
-										} else {
-								%><script>
-																				alert("you are not authourized to see this page");
-																				window.location = "index.jsp";
-																			</script>
-								<%
-									}
-									} else {
-								%><script>
-																		alert("you are not authourized to see this page");
-																		window.location = "index.jsp";
-																	</script>
-								<%
-									}
-								%>
+                            	session = request.getSession();
+							    if(session.getAttribute("user") != null)
+							    {
+							        Object temp = session.getAttribute("user");
+							        User user = (User) temp;
+							        if(user.getUserType() == User.userType.Admin){
+							        	out.println("<li><a href=\"admin_Cats_table.jsp\">Category Table</a></li>");	//Category
+							        	out.println("<li><a href=\"admin_Games_table.jsp\">Games Table</a></li>");	//Game
+							        	out.println("<li><a href=\"admin_Invoice_table.jsp\">Invoice Table</a></li>");	//Orders
+							        }
+							        else if(user.getUserType() == User.userType.ProductManager){
+							        	out.println("<li><a href=\"admin_Cats_table.jsp\">Category Table</a></li>");	//Category
+							        	out.println("<li><a href=\"admin_Games_table.jsp\">Games Table</a></li>");	//Game
+							        	out.println("<li><a href=\"admin_Invoice_table.jsp\">Invoice Table</a></li>");	//Orders
+							        }
+									else if(user.getUserType() == User.userType.SalesManager){
+							        	out.println("<li><a href=\"admin_Games_table.jsp\">Games Table</a></li>");	//Game
+							        	out.println("<li><a href=\"admin_Invoice_table.jsp\">Invoice Table</a></li>");	//Orders
+							        }
+							        else {
+							            %><script> alert("you are not authourized to see this page");
+							            window.location = "index.jsp";</script><% 
+							        }
+							    }
+							    else
+							    {
+							          %><script> alert("you are not authourized to see this page");
+							        window.location = "index.jsp";</script><%
+							    }
+							    %>
 							</ul>
 						</div>
 					</div>

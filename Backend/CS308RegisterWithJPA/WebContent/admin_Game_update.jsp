@@ -94,7 +94,7 @@
                         <a href="adminPanel.jsp"><img src="img/logo.png" alt="" width="50" height="50"/></a>
                     </div>
                 </div>
-                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <div class="header-top-menu" style="margin-top:24px; ">
                         
                         <%
@@ -119,10 +119,17 @@
 							    }
 							    else
 							    {
-							          %><script> alert("you are not authourized to see this page"); window.location = "index.jsp";</script><%
+							          %><script> alert("you are not authourized to see this page");
+							        window.location = "index.jsp";</script><%
 							    }
 							    %>
-                    </div>
+							    
+                    	</div>
+                    	
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                    <a class="fa fa-shield" href="index.jsp" style="font-size: 34px; color: grey; float:right; margin-top:24px;"></a>
+                    	
                 </div>
             </div>
         </div>
@@ -174,8 +181,10 @@
 							        else if(user.getUserType() == User.userType.ProductManager){
 							        	out.println("<li><a href=\"admin_Cats_table.jsp\">Category Table</a></li>");	//Category
 							        	out.println("<li><a href=\"admin_Games_table.jsp\">Games Table</a></li>");	//Game
+							        	out.println("<li><a href=\"admin_Invoice_table.jsp\">Invoice Table</a></li>");	//Orders
 							        }
 									else if(user.getUserType() == User.userType.SalesManager){
+							        	out.println("<li><a href=\"admin_Games_table.jsp\">Games Table</a></li>");	//Game
 							        	out.println("<li><a href=\"admin_Invoice_table.jsp\">Invoice Table</a></li>");	//Orders
 							        }
 							        else {
@@ -248,46 +257,233 @@
 										<input type="text" class="form-control" name="id" id="id" value="" placeholder="Game ID" readonly/>
 									</div>
 								</div>
-								<div class="form-group row" style="margin-left: 14px;">
-									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">Game Name:</label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control" name="name" id="name"  placeholder="Game Name"/>
-									</div>
-								</div>
-								<div class="form-group row" style="margin-left: 14px;">
-									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">Publisher: </label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control" name="publisher" id="publisher" placeholder="Publisher"/>
-									</div>
-								</div>
-								<div class="form-group row" width="700px;" style="margin-left: 14px;">
-									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">Categories: </label>
-									<div class="col-sm-10">
-										
-										<div class="selectRow" >
-										    <select class="" id="multipleSelectExample" data-placeholder="Select an option" multiple="" style="width: 910px;">
-										        <option selected=1 value="1">Option 1</option>
-										        <option value="2">Option 2</option>
-										        <option value="3">Option 3</option>
-										        <option value="4">Option 4</option>
-										        <option value="5">Option 5</option>
-										    </select>
-										</div>
-									</div>
-									
-								</div>
-								<div class="form-group row" style="margin-left: 14px;">
-									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">Price: </label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control" name="price" id="price" placeholder="Price"/>
-									</div>
-								</div>
-								<div class="form-group row" style="margin-left: 14px;">
-									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">Sale Price: </label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control" name="sale_price" id="sale_price" placeholder="Sale Price"/>
-									</div>
-								</div>
+								<% 
+								if(session.getAttribute("user") != null)
+							    {
+							        Object temp = session.getAttribute("user");
+							        User user = (User) temp;
+							        if(user.getUserType() == User.userType.Admin || user.getUserType() == User.userType.ProductManager){
+							        	out.println("<div class=\"form-group row\" style=\"margin-left: 14px;\">");
+							        		out.println("<label style=\"margin-top: 7px;\"class=\"col-sm-2 col-form-label\">Game Name:</label>");
+							        		out.println("<div class=\"col-sm-10\">");
+							        			out.println("<input type=\"text\" class=\"form-control\" name=\"name\" id=\"name\" value=\"\" placeholder=\"Game Name\"/>");
+							        		out.println("</div>");
+							        	out.println("</div>");
+							        	
+							        	out.println("<div class=\"form-group row\" style=\"margin-left: 14px;\">");
+						        			out.println("<label style=\"margin-top: 7px;\"class=\"col-sm-2 col-form-label\">Publisher:</label>");
+						        			out.println("<div class=\"col-sm-10\">");
+						        				out.println("<input type=\"text\" class=\"form-control\" name=\"publisher\" id=\"publisher\" value=\"\" placeholder=\"Publisher\"/>");
+						        			out.println("</div>");
+						        		out.println("</div>");
+						        		
+						        		out.println("<div class=\"form-group row\" width=\"700px;\" style=\"margin-left: 14px;\">");
+						        			out.println("<label style=\"margin-top: 7px;\"class=\"col-sm-2 col-form-label\">Categories:</label>");
+						        			out.println("<div class=\"col-sm-10\">");
+							        			out.println("<div class=\"selectRow\">");
+							        				out.println("<select class=\"\" id=\"multipleSelectExample\" data-placeholder=\"Select an option\" multiple=\"\" style=\"width: 910px;\">");
+							        					out.println("<option selected=1 value=\"1\">Option 1</option>");
+							        					out.println("<option value=\"2\">Option 2</option>");
+							        				out.println("</select>");
+							        			out.println("</div>");
+							        		out.println("</div>");
+						        		out.println("</div>");
+						        		
+						        		out.println("<div class=\"form-group row\" style=\"margin-left: 14px;\">");
+						        			out.println("<label style=\"margin-top: 7px;\"class=\"col-sm-2 col-form-label\">Price:</label>");
+						        			out.println("<div class=\"col-sm-10\">");
+						        				out.println("<input type=\"text\" class=\"form-control\" name=\"price\" id=\"price\" value=\"\" placeholder=\"Price\"/>");
+						        			out.println("</div>");
+						        		out.println("</div>");
+						        		
+						        		out.println("<div class=\"form-group row\" style=\"margin-left: 14px;\">");
+						        			out.println("<label style=\"margin-top: 7px;\"class=\"col-sm-2 col-form-label\">Sale Price:</label>");
+						        			out.println("<div class=\"col-sm-10\">");
+						        				out.println("<input type=\"text\" class=\"form-control\" name=\"sale_price\" id=\"sale_price\" value=\"\" placeholder=\"Sale Price\"/>");
+						        			out.println("</div>");
+						        		out.println("</div>");
+						        		
+						        		out.println("<div class=\"form-group row\" style=\"margin-left: 14px;\">");
+						        			out.println("<label style=\"margin-top: 7px;\"class=\"col-sm-2 col-form-label\">Stock:</label>");
+						        			out.println("<div class=\"input-group number-spinner\">");
+						        				out.println("<span class=\"input-group-btn\">");
+						        					out.println("<button class=\"btn btn-default\" data-dir=\"dwn\"  style=\"margin-left: 15px ;\"><span class=\"glyphicon glyphicon-minus\"></span></button>");
+						        				out.println("</span>");
+						        				out.println("<input type=\"text\" class=\"form-control text-center\" value=\"1\" name=\"stock\" id=\"stock\" placeholder=\"Stock\">");
+						        				out.println("<span class=\"input-group-btn\">");
+						        					out.println("<button class=\"btn btn-default\" data-dir=\"up\"  style=\"margin-right: 15px ;\"><span class=\"glyphicon glyphicon-plus\"></span></button>");
+						        				out.println("</span>");
+						        			out.println("</div>");
+						        		out.println("</div>");
+						        		
+						        		out.println("<div class=\"form-group row\" style=\"margin-left: 14px;\">");
+						        			out.println("<label style=\"margin-top: 7px;\"class=\"col-sm-2 col-form-label\">Short Description:</label>");
+						        			out.println("<div class=\"col-sm-10\">");
+						        				out.println("<input type=\"text\" class=\"form-control\" name=\"shortdescription\" id=\"shortdescription\" value=\"\" placeholder=\"Short Description\"/>");
+						        			out.println("</div>");
+						        		out.println("</div>");
+						        		
+						        		out.println("<div class=\"form-group row\" style=\"margin-left: 14px;\">");
+						        			out.println("<label style=\"margin-top: 7px;\"class=\"col-sm-2 col-form-label\">Detailed Description: </label>");
+						        			out.println("<div class=\"col-sm-10\">");
+						        				out.println("<input type=\"text\" class=\"form-control\" name=\"detaileddescription\" id=\"detaileddescription\" value=\"\" placeholder=\"Detailed Description\"/>");
+						        			out.println("</div>");
+						        		out.println("</div>");
+						        		
+						        		out.println("<div class=\"form-group row\" style=\"margin-left: 14px;\">");
+						        			out.println("<label style=\"margin-top: 7px;\"class=\"col-sm-2 col-form-label\">Minimum Requirements: </label>");
+						        			out.println("<div class=\"col-sm-10\">");
+						        				out.println("<input type=\"text\" class=\"form-control\" name=\"minimum\" id=\"minimum\" value=\"\" placeholder=\"Minimum Requirements\"/>");
+						        			out.println("</div>");
+						        		out.println("</div>");
+						        		
+						        		out.println("<div class=\"form-group row\" style=\"margin-left: 14px;\">");
+						        			out.println("<label style=\"margin-top: 7px;\"class=\"col-sm-2 col-form-label\">About the game: </label>");
+						        			out.println("<div class=\"col-sm-10\">");
+						        				out.println("<input type=\"text\" class=\"form-control\" name=\"aboutthegame\" id=\"aboutthegame\" value=\"\" placeholder=\"About the game\"/>");
+						        			out.println("</div>");
+						        		out.println("</div>");
+						        		
+						        		out.println("<div class=\"form-group row\" style=\"margin-left: 14px;\">");
+						        			out.println("<label style=\"margin-top: 7px;\"class=\"col-sm-2 col-form-label\">Background: </label>");
+						        			out.println("<div class=\"col-sm-10\">");
+						        				out.println("<input type=\"text\" class=\"form-control\" name=\"background\" id=\"background\" value=\"\" placeholder=\"Background\"/>");
+						        			out.println("</div>");
+						        		out.println("</div>");
+						        		
+						        		out.println("<div class=\"form-group row\" style=\"margin-left: 14px;\">");
+						        			out.println("<label style=\"margin-top: 7px;\"class=\"col-sm-2 col-form-label\">Screenshots: </label>");
+						        			out.println("<div class=\"col-sm-10\">");
+						        				out.println("<textarea style=\"rows='2'\" type=\"text\" class=\"form-control\" name=\"screenshots\" id=\"screenshots\" placeholder=\"Screenshots\"></textarea>");
+						        			out.println("</div>");
+						        		out.println("</div>");
+						        		
+						        		out.println("<div class=\"form-group row\" style=\"margin-left: 14px;\">");
+						        			out.println("<label style=\"margin-top: 7px;\"class=\"col-sm-2 col-form-label\">Header Image: </label>");
+						        			out.println("<div class=\"col-sm-10\">");
+						        				out.println("<input type=\"text\" class=\"form-control\" name=\"headerimage\" id=\"headerimage\" value=\"\" placeholder=\"Header Image\"/>");
+						        			out.println("</div>");
+						        		out.println("</div>");
+						        		
+						        		out.println("<div class=\"form-group row\" style=\"margin-left: 14px;\">");
+						        			out.println("<label style=\"margin-top: 7px;\"class=\"col-sm-2 col-form-label\">Platforms: </label>");
+						        			out.println("<div class=\"col-sm-10\">");
+						        				out.println("<input type=\"text\" class=\"form-control\" name=\"platforms\" id=\"platforms\" value=\"\" placeholder=\"Platforms\"/>");
+						        			out.println("</div>");
+						        		out.println("</div>");
+							        }
+									else if(user.getUserType() == User.userType.SalesManager){
+										out.println("<div class=\"form-group row\" style=\"margin-left: 14px;\">");
+						        		out.println("<label style=\"margin-top: 7px;\"class=\"col-sm-2 col-form-label\">Game Name:</label>");
+						        		out.println("<div class=\"col-sm-10\">");
+						        			out.println("<input type=\"text\" class=\"form-control\" name=\"name\" id=\"name\" value=\"\" placeholder=\"Game Name\"readonly/>");
+						        		out.println("</div>");
+						        	out.println("</div>");
+						        	
+						        	out.println("<div class=\"form-group row\" style=\"margin-left: 14px;\">");
+					        			out.println("<label style=\"margin-top: 7px;\"class=\"col-sm-2 col-form-label\">Publisher:</label>");
+					        			out.println("<div class=\"col-sm-10\">");
+					        				out.println("<input type=\"text\" class=\"form-control\" name=\"publisher\" id=\"publisher\" value=\"\" placeholder=\"Publisher\"readonly/>");
+					        			out.println("</div>");
+					        		out.println("</div>");
+					        		
+					        		out.println("<div class=\"form-group row\" width=\"700px;\" style=\"margin-left: 14px;\">");
+					        			out.println("<label style=\"margin-top: 7px;\"class=\"col-sm-2 col-form-label\">Categories:</label>");
+					        			out.println("<div class=\"col-sm-10\">");
+						        			out.println("<div class=\"selectRow\">");
+						        				out.println("<select class=\"\" id=\"multipleSelectExample\" data-placeholder=\"Select an option\" multiple=\"\" style=\"width: 910px;\" disabled>");
+						        					out.println("<option selected=1 value=\"1\">Option 1</option>");
+						        					out.println("<option value=\"2\">Option 2</option>");
+						        				out.println("</select>");
+						        			out.println("</div>");
+						        		out.println("</div>");
+					        		out.println("</div>");
+					        		
+					        		out.println("<div class=\"form-group row\" style=\"margin-left: 14px;\">");
+					        			out.println("<label style=\"margin-top: 7px;\"class=\"col-sm-2 col-form-label\">Price:</label>");
+					        			out.println("<div class=\"col-sm-10\">");
+					        				out.println("<input type=\"text\" class=\"form-control\" name=\"price\" id=\"price\" value=\"\" placeholder=\"Price\"/>");
+					        			out.println("</div>");
+					        		out.println("</div>");
+					        		
+					        		out.println("<div class=\"form-group row\" style=\"margin-left: 14px;\">");
+					        			out.println("<label style=\"margin-top: 7px;\"class=\"col-sm-2 col-form-label\">Sale Price:</label>");
+					        			out.println("<div class=\"col-sm-10\">");
+					        				out.println("<input type=\"text\" class=\"form-control\" name=\"sale_price\" id=\"sale_price\" value=\"\" placeholder=\"Sale Price\"/>");
+					        			out.println("</div>");
+					        		out.println("</div>");
+					        		
+					        		out.println("<div class=\"form-group row\" style=\"margin-left: 14px;\">");
+					        			out.println("<label style=\"margin-top: 7px;\"class=\"col-sm-2 col-form-label\">Stock:</label>");
+					        			out.println("<div class=\"input-group number-spinner\">");
+					        				out.println("<span class=\"input-group-btn\">");
+					        					out.println("<button class=\"btn btn-default\" data-dir=\"dwn\"  style=\"margin-left: 15px ;\"><span class=\"glyphicon glyphicon-minus\"></span></button>");
+					        				out.println("</span>");
+					        				out.println("<input type=\"text\" class=\"form-control text-center\" value=\"1\" name=\"stock\" id=\"stock\" placeholder=\"Stock\">");
+					        				out.println("<span class=\"input-group-btn\">");
+					        					out.println("<button class=\"btn btn-default\" data-dir=\"up\"  style=\"margin-right: 15px ;\"><span class=\"glyphicon glyphicon-plus\"></span></button>");
+					        				out.println("</span>");
+					        			out.println("</div>");
+					        		out.println("</div>");
+					        		
+					        		out.println("<div class=\"form-group row\" style=\"margin-left: 14px;\">");
+					        			out.println("<label style=\"margin-top: 7px;\"class=\"col-sm-2 col-form-label\">Short Description:</label>");
+					        			out.println("<div class=\"col-sm-10\">");
+					        				out.println("<input type=\"text\" class=\"form-control\" name=\"shortdescription\" id=\"shortdescription\" value=\"\" placeholder=\"Short Description\"readonly/>");
+					        			out.println("</div>");
+					        		out.println("</div>");
+					        		
+					        		out.println("<div class=\"form-group row\" style=\"margin-left: 14px;\">");
+					        			out.println("<label style=\"margin-top: 7px;\"class=\"col-sm-2 col-form-label\">Detailed Description: </label>");
+					        			out.println("<div class=\"col-sm-10\">");
+					        				out.println("<input type=\"text\" class=\"form-control\" name=\"detaileddescription\" id=\"detaileddescription\" value=\"\" placeholder=\"Detailed Description\"readonly/>");
+					        			out.println("</div>");
+					        		out.println("</div>");
+					        		
+					        		out.println("<div class=\"form-group row\" style=\"margin-left: 14px;\">");
+					        			out.println("<label style=\"margin-top: 7px;\"class=\"col-sm-2 col-form-label\">Minimum Requirements: </label>");
+					        			out.println("<div class=\"col-sm-10\">");
+					        				out.println("<input type=\"text\" class=\"form-control\" name=\"minimum\" id=\"minimum\" value=\"\" placeholder=\"Minimum Requirements\"readonly/>");
+					        			out.println("</div>");
+					        		out.println("</div>");
+					        		
+					        		out.println("<div class=\"form-group row\" style=\"margin-left: 14px;\">");
+					        			out.println("<label style=\"margin-top: 7px;\"class=\"col-sm-2 col-form-label\">About the game: </label>");
+					        			out.println("<div class=\"col-sm-10\">");
+					        				out.println("<input type=\"text\" class=\"form-control\" name=\"aboutthegame\" id=\"aboutthegame\" value=\"\" placeholder=\"About the game\"readonly/>");
+					        			out.println("</div>");
+					        		out.println("</div>");
+					        		
+					        		out.println("<div class=\"form-group row\" style=\"margin-left: 14px;\">");
+					        			out.println("<label style=\"margin-top: 7px;\"class=\"col-sm-2 col-form-label\">Background: </label>");
+					        			out.println("<div class=\"col-sm-10\">");
+					        				out.println("<input type=\"text\" class=\"form-control\" name=\"background\" id=\"background\" value=\"\" placeholder=\"Background\"readonly/>");
+					        			out.println("</div>");
+					        		out.println("</div>");
+					        		
+					        		out.println("<div class=\"form-group row\" style=\"margin-left: 14px;\">");
+					        			out.println("<label style=\"margin-top: 7px;\"class=\"col-sm-2 col-form-label\">Screenshots: </label>");
+					        			out.println("<div class=\"col-sm-10\">");
+					        				out.println("<textarea style=\"rows='2'\" type=\"text\" class=\"form-control\" name=\"screenshots\" id=\"screenshots\" placeholder=\"Screenshots\"readonly></textarea>");
+					        			out.println("</div>");
+					        		out.println("</div>");
+					        		
+					        		out.println("<div class=\"form-group row\" style=\"margin-left: 14px;\">");
+					        			out.println("<label style=\"margin-top: 7px;\"class=\"col-sm-2 col-form-label\">Header Image: </label>");
+					        			out.println("<div class=\"col-sm-10\">");
+					        				out.println("<input type=\"text\" class=\"form-control\" name=\"headerimage\" id=\"headerimage\" value=\"\" placeholder=\"Header Image\"readonly/>");
+					        			out.println("</div>");
+					        		out.println("</div>");
+					        		
+					        		out.println("<div class=\"form-group row\" style=\"margin-left: 14px;\">");
+					        			out.println("<label style=\"margin-top: 7px;\"class=\"col-sm-2 col-form-label\">Platforms: </label>");
+					        			out.println("<div class=\"col-sm-10\">");
+					        				out.println("<input type=\"text\" class=\"form-control\" name=\"platforms\" id=\"platforms\" value=\"\" placeholder=\"Platforms\"readonly/>");
+					        			out.println("</div>");
+					        		out.println("</div>");
+							        }
+							    }
+								%>
 								<script type="text/javascript">
 								$(document).on('click', '.number-spinner button', function () {    
 									var btn = $(this),
@@ -306,70 +502,6 @@
 									btn.closest('.number-spinner').find('input').val(newVal);
 								});
 								</script>
-								
-								<div class="form-group row" style="margin-left: 14px;">
-									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">Stock: </label>
-									<!-- <div class="col-sm-10">
-										<input type="text" class="form-control" name="stock" id="stock" placeholder="Stock"/>
-									</div> -->
-									<div class="input-group number-spinner" >
-										<span class="input-group-btn">
-											<button class="btn btn-default" data-dir="dwn"  style="margin-left: 15px ;"><span class="glyphicon glyphicon-minus"></span></button>
-										</span>
-										<input type="text" class="form-control text-center" value="1" name="stock" id="stock" placeholder="Stock">
-										<span class="input-group-btn">
-											<button class="btn btn-default" data-dir="up"  style="margin-right: 15px ;"><span class="glyphicon glyphicon-plus"></span></button>
-										</span>
-									</div>
-								</div>
-								<div class="form-group row" style="margin-left: 14px;">
-									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">Short Description: </label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control" name="shortdescription" id="shortdescription" placeholder="Short Description"/>
-									</div>
-								</div>
-								<div class="form-group row" style="margin-left: 14px;">
-									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">Detailed Description: </label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control" name="detaileddescription" id="detaileddescription" placeholder="Detailed Description"/>
-									</div>
-								</div>
-								<div class="form-group row" style="margin-left: 14px;">
-									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">Minimum Requirements: </label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control" name="minimum" id="minimum" placeholder="Minimum Requirements"/>
-									</div>
-								</div>
-								<div class="form-group row" style="margin-left: 14px;">
-									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">About the game: </label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control" name="aboutthegame" id="aboutthegame" placeholder="About the game"/>
-									</div>
-								</div>
-								<div class="form-group row" style="margin-left: 14px;">
-									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">Background </label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control" name="background" id="background" placeholder="Background"/>
-									</div>
-								</div>
-								<div class="form-group row" style="margin-left: 14px;">
-									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">Screenshots: </label>
-									<div class="col-sm-10">
-										<textarea style="rows='2'" type="text" class="form-control" name="screenshots" id="screenshots" placeholder="Screenshots"></textarea>
-									</div>
-								</div>
-								<div class="form-group row" style="margin-left: 14px;">
-									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">Header Image: </label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control" name="headerimage" id="headerimage" placeholder="Header Image"/>
-									</div>
-								</div>
-								<div class="form-group row" style="margin-left: 14px;">
-									<label style="margin-top: 7px;"class="col-sm-2 col-form-label">Platforms: </label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control" name="platforms" id="platforms" placeholder="Platforms"/>
-									</div>
-								</div>
 								<div class="form-group row" style="margin-left: 28px;">
 								
 									<div class="checkbox_2">
