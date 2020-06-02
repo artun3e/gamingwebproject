@@ -187,6 +187,7 @@ public class OrderServlet extends HttpServlet {
 					countTime++;
 				}*/
 				session.removeAttribute("cart");
+				htmlText += "<H2>Total Cost: " + totalCost + "</H2>";
 				htmlText += "<H3>Thank you for your purchase! You can always check your order status from our website. We will also e-mail you when your order status changes<H3>";
 				JavaMailUtil.sendHTMLMail(htmlText,user.getEmail());
 			}
