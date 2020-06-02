@@ -121,7 +121,10 @@ public class AddProductServlet extends HttpServlet {
 			game.setDeveloper(publisher);
 			game.setReleaseDate(timeStamp);
 			game.setStock(stock);
-			game.setSalePrice(salePrice);
+			if(onSale)
+				game.setSalePrice(salePrice);
+			else
+				game.setSalePrice(price);
 			game.setOnSale(onSale);
 
 			em.getTransaction().begin();

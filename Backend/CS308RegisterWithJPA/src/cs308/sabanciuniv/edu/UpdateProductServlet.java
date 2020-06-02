@@ -97,7 +97,10 @@ public class UpdateProductServlet extends HttpServlet {
 			game.setPlatforms(platforms);
 			game.setHeader_image(headerImage);
 			game.setStock(stock);
-			game.setSalePrice(salePrice);
+			if(onSale)
+				game.setSalePrice(salePrice);
+			else
+				game.setSalePrice(price);
 			game.setOnSale(onSale);
 			
 			//game.setOwners(); We shouldn't be able to edit how many people own the game or the rating from the admin panel...
