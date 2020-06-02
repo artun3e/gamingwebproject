@@ -627,6 +627,11 @@ title {
 
 				function createPDF() {
 					console.log("download as pdf");
+
+					$(".box").each(function(n) {
+				        if (1 == 1)
+				            $(this).show();
+				    }); 
 					var date = new Date();
 					var sTable = document.getElementById('customer-order').innerHTML;
 
